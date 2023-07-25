@@ -1,4 +1,4 @@
-# vueserver
+# wavecinema
 
 ## Project setup
 ```

@@ -78,7 +78,7 @@ export default {
 
 .header{
   position: relative;
-  left: 500px;
+  left: 1000px;
   font-size: 35px;
   color: white;
   font-family: 'Dokdo', cursive;
@@ -100,7 +100,7 @@ export default {
   font-family: 'Black Han Sans', sans-serif;
   color: white;
   background-color: #3742FA;
-}
+  }
 
 .infotext{
   color:white;
