@@ -1,16 +1,16 @@
 .logtitle {
   width: 1500px;
   height: 800px;
-  background-color: #ffff;
-  opacity: 0.5;
+  background-color: #ffffff5b;
   margin: 0 auto;
   padding: 150px;
+  border-radius: 1em;
 }
 
 .form {
-  width: 400px;
   height: 400px;
   margin: 0 auto;
+  border-radius: 1em;
 }
 
 .form1 {
@@ -18,16 +18,41 @@
   height: 200px;
   background-color: gray;
   margin: 0 auto;
+  padding: 15px;
+  border-radius: 1em;
+}
+
+.form2 {
+  width: 500px;
+  height: 200px;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 .input {
-    font-size: 16px;
-    color: white;
-    line-height: 1.2;
-    display: block;
-    width: 80%;
-    height: 55px;
-    background: transparent;
-    background-color: white;
-    margin: 0 auto;
+  font-size: 16px;
+  color: white;
+  line-height: 1.2;
+  display: block;
+  width: 80%;
+  height: 55px;
+  background: transparent;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 1em;
+}
+
+.infotext {
+  color:white;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size:25px;
+  text-align: center;
+  }
+
+.label {
+  margin-left: 50px;
+}
+
+ul {
+  list-style:none;
 }

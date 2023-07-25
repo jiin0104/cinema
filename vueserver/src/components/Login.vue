@@ -10,20 +10,25 @@
           <div class="form">
             <div class="form1">
               <div class="logid">
-                <span class="idlabel">아이디</span>
+                <span class="label">아이디</span>
                 <input class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
               </div>
               <div class="logpw">
-                <span class="pwlabel">비밀번호</span>
-                <input class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off"
-                  required />
+                <span class="label">비밀번호</span>
+                <input class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off" required />
               </div>
             </div>
-            <ul class="form2">
-              <li>아이디 찾기</li>
-              <li>비밀번호 찾기</li>
-              <li>회원가입</li>
-            </ul>
+            <div class="form2">
+              <v-btn class="infotext" variant="text" style="color: white;">
+                아이디찾기
+              </v-btn>
+              <v-btn class="infotext" variant="text" style="color: white;">
+                비밀번호찾기
+              </v-btn>
+              <v-btn class="infotext" variant="text" style="color: white;">
+                회원가입
+              </v-btn>
+            </div>
           </div>
         </div>
       </form>
