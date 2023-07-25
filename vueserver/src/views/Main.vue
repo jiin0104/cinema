@@ -8,8 +8,8 @@
     <div class="maintext">당신을 위한<br>영화를 찾아드립니다</div><br>
     <button class="click">click !</button>
     <br><br><br>
- <div class="infotext">지금 상영중인 추천 영화</div>   
- <!--이미지슬라이더-->   
+ <div class="infotext">지금 상영중인 추천 영화</div>
+ <!--이미지슬라이더-->
  <div class="slider">
  <v-carousel
     cycle
@@ -39,12 +39,13 @@
 </template>
 <script>
 export default {
-
-  data() { 
+  name: '',
+  components: {},
+  data() {
     return {
       img: [
           'al.jpg',
-          
+
         ],
         slides: [
           '스타이즈본',
@@ -53,10 +54,10 @@ export default {
           '바빌론',
           '바비',
         ],
-      
+
     };
   },
-  
+
 }
 </script>
 <style>
@@ -66,7 +67,7 @@ export default {
 
 .background{
   background-size:cover;
-  background-image:url("./main.jpg");
+  background-image:url("../assets/main.jpg");
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
@@ -109,7 +110,7 @@ export default {
 
 .slider{
 margin:0 auto;
-  width: 300px; 
+  width: 300px;
   height: 500;
 }
 
