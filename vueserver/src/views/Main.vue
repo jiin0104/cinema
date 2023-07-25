@@ -1,6 +1,6 @@
 <template>
-  <div style="overflow:auto" >
-    <div class="background">
+  <div>
+    <div class="background" style="overflow:auto;">
       <br>
       <v-container class="header">
         wavecinema
