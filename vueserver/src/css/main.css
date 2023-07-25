@@ -1,0 +1,50 @@
+.background{
+  background-size:cover;
+  background-image:url("../assets/main.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  overflow: hidden;
+  margin:0;
+}
+
+
+.header{
+  position: relative;
+  left: 1000px;
+  font-size: 35px;
+  color: white;
+  font-family: 'Dokdo', cursive;
+}
+
+.maintext{
+  font-size:75px;
+  text-align: center;
+  color:white;
+  font-family:'Noto Serif KR', serif;
+}
+
+.click{
+  height: 70px;
+  width: 350px;
+  box-shadow: 0px 0px 7px -2px #fff;
+  border-radius: 9px;
+  font-size: 38px;
+  font-family: 'Black Han Sans', sans-serif;
+  color: white;
+  background-color: #3742FA;
+  margin: 0 auto;
+  }
+
+.infotext{
+  color:white;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size:25px;
+  text-align: center;
+}
+
+.slider{
+margin:0 auto;
+  width: 300px;
+  height: 500;
+}
