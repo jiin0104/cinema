@@ -1,6 +1,33 @@
 .logtitle {
-  width: 1000px;
-  height: 600px;
+  width: 1500px;
+  height: 800px;
   background-color: #ffff;
   opacity: 0.5;
+  margin: 0 auto;
+  padding: 150px;
+}
+
+.form {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.form1 {
+  width: 500px;
+  height: 200px;
+  background-color: gray;
+  margin: 0 auto;
+}
+
+.input {
+    font-size: 16px;
+    color: white;
+    line-height: 1.2;
+    display: block;
+    width: 80%;
+    height: 55px;
+    background: transparent;
+    background-color: white;
+    margin: 0 auto;
 }

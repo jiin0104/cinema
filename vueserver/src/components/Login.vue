@@ -9,13 +9,13 @@
         <div class="logtitle">
           <div class="form">
             <div class="form1">
-              <div>
+              <div class="logid">
                 <span class="idlabel">아이디</span>
-                <input class="idinput" type="email" name="username" placeholder="이메일을 입력하세요" required />
+                <input class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
               </div>
-              <div>
+              <div class="logpw">
                 <span class="pwlabel">비밀번호</span>
-                <input class="pwinput" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off"
+                <input class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off"
                   required />
               </div>
             </div>
