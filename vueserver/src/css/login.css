@@ -10,13 +10,14 @@
 .form {
   height: 400px;
   margin: 0 auto;
+  padding: 70px;
   border-radius: 1em;
 }
 
 .form1 {
   width: 500px;
   height: 200px;
-  background-color: gray;
+  background-color: rgb(233, 166, 166);
   margin: 0 auto;
   padding: 15px;
   border-radius: 1em;
@@ -34,12 +35,22 @@
   color: white;
   line-height: 1.2;
   display: block;
-  width: 80%;
+  width: 350px;
   height: 55px;
   background: transparent;
   background-color: white;
   margin: 0 auto;
   border-radius: 1em;
+}
+
+.inputid {
+  float: left;
+  margin-top: -5px;
+}
+
+.inputpw {
+  float: left;
+  margin-top: 5px;
 }
 
 .infotext {
@@ -50,7 +61,7 @@
   }
 
 .label {
-  margin-left: 50px;
+  margin-left: 5px;
 }
 
 ul {

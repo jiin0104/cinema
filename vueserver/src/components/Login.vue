@@ -9,13 +9,22 @@
         <div class="logtitle">
           <div class="form">
             <div class="form1">
-              <div class="logid">
-                <span class="label">아이디</span>
-                <input class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
-              </div>
-              <div class="logpw">
-                <span class="label">비밀번호</span>
-                <input class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off" required />
+              <div style="margin-top: 6px;">
+                <div class="inputid">
+                  <span class="label">아이디</span>
+                  <input class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
+                </div>
+                <div class="inputpw">
+                  <span class="label">비밀번호</span>
+                  <input class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off"
+                    required />
+                </div>
+                <div style="margin-left: 365px;">
+                  <v-btn class="infotext" variant="tonal"
+                    style="color: white; background-color: rgb(57, 103, 255); height: 160px; width: 105px;">
+                    확인
+                  </v-btn>
+                </div>
               </div>
             </div>
             <div class="form2">
@@ -43,5 +52,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap');
 
-@import "../css/login.css";
-</style>
+@import "../css/login.css";</style>
