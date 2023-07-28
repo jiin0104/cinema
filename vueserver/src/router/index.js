@@ -5,6 +5,7 @@ import Filtering2 from "../views/Filtering2.vue";
 import Filtering3 from "../views/Filtering3.vue";
 import Filtering4 from "../views/Filtering4.vue";
 import Login from "../components/Login.vue";
+import Signup from "../views/Signup.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/Filtering4",
     name: "Filtering4",
     component: Filtering4,
+  },
+  {
+    path: "/Signup",
+    name: "Signup",
+    component: Signup,
   },
 ];
 
