@@ -3,6 +3,7 @@ import Main from "../views/Main.vue";
 import Filtering from "../views/Filtering.vue";
 import Filtering2 from "../views/Filtering2.vue";
 import Login from "../components/Login.vue";
+import Signup from "../views/Signup.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/Filtering2",
     name: "Filtering2",
     component: Filtering2,
+  },
+  {
+    path: "/Signup",
+    name: "Signup",
+    component: Signup,
   },
 ];
 
