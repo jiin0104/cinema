@@ -7,6 +7,7 @@
       </v-container><br>
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
+          <div class="formtitle">로그인 후 추천받은 목록을 기록해보세요!</div>
           <div class="form">
             <div class="form1">
               <div style="margin-top: 6px;">
