@@ -1,0 +1,33 @@
+.signtitle {
+  width: 1500px;
+  height: 900px;
+  background-color: #ffffff5b;
+  margin: 0 auto;
+  
+  border-radius: 1em;
+}
+
+.signform {
+  height: 400px;
+  margin: 0 auto;
+  
+  border-radius: 1em;
+}
+
+.signform1 {
+  width: 500px;
+  height: 700px;
+  background-color: #c8bdbd;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 1em;
+}
+
+b {
+  font-family: 'Black Han Sans', sans-serif;
+  font-weight: 100;
+}
+
+ul {
+  list-style:none;
+}
