@@ -65,7 +65,6 @@
 .button1 {
   width: 100px;
   height: 100px;
-  background-color: white;
   border-radius: 50px;
   margin: 8px;
   float: left;
@@ -74,7 +73,6 @@
 .button2 {
   width: 100px;
   height: 100px;
-  background-color: white;
   border-radius: 50px;
   margin: 8px;
   float: left;
