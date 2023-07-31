@@ -11,6 +11,7 @@ import Find_Id from "../components/Find_Id.vue";
 import Find_Pw from "../components/Find_Pw.vue";
 import Find_Result_Id from "../components/Find_Result_Id.vue";
 import Find_Result_Pw from "../components/Find_Result_Pw.vue";
+import MovieList from "../components/MovieList";
 
 import Login from "../components/Login.vue";
 import Signup from "../components/Signup.vue";
@@ -86,6 +87,11 @@ const routes = [
     name: "Find_Result_Pw",
     component: Find_Result_Pw,
   },
+  {
+    path: "/Movie_List",
+    name: "Movie_List",
+    component: MovieList,
+  }
 ];
 
 const router = createRouter({
