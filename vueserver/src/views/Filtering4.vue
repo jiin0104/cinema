@@ -63,7 +63,9 @@
             <button type="button" class="button5">
               <img :src="emoji9" style="width: 90px; height: 90px" />
             </button>
-            <div class="s-text">힐링이<br />필요해요&nbsp;&nbsp;&nbsp;</div>
+            <div class="s-text">
+              힐링이<br />필요해요&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
             <div>
               <button type="button" class="button5">
                 <img :src="emoji10" style="width: 90px; height: 90px" />
