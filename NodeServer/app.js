@@ -41,12 +41,12 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
 // const 엔드포인트로직의메소드명 = require("./Routers/라우터폴더의js파일명");
 // app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
 
-// 영화 목록 조회 API
-app.get("/api/movies", (req, res) => {
+// 영화 목록 조회 API (테스트 중)
+app.get("/movies", (req, res) => {
   dbQueries.getAllMovies(connection, (err, movies) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "서버 에러" });
     } else {
       res.json(movies);
     }

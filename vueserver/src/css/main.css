@@ -1,49 +1,52 @@
-.background{
-  background-size:cover;
-  background-image:url("../assets/main.jpg");
+.background {
+  background-size: cover;
+  background-image: url("../assets/main.jpg");
   background-repeat: no-repeat;
   background-position: center;
   height: 1100px;
-  margin:0;
+  margin: 0;
 }
 
-
-.header{
+.header {
   position: relative;
   left: 1300px;
   font-size: 35px;
   color: white;
-  font-family: 'Dokdo', cursive;
+  font-family: "Dokdo", cursive;
 }
 
-.maintext{
-  font-size:75px;
+.maintext {
+  font-size: 75px;
   text-align: center;
-  color:white;
-  font-family:'Noto Serif KR', serif;
+  color: white;
+  font-family: "Noto Serif KR", serif;
 }
 
-.click{
+.click {
   height: 70px;
   width: 350px;
   box-shadow: 0px 0px 7px -2px #fff;
   border-radius: 9px;
   font-size: 38px;
-  font-family: 'Black Han Sans', sans-serif;
+  font-family: "Black Han Sans", sans-serif;
   color: white;
-  background-color: #3742FA;
+  background-color: #3742fa;
   margin: 0 auto;
-  }
+}
 
-.infotext{
-  color:white;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size:25px;
+.infotext {
+  color: white;
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 25px;
   text-align: center;
 }
 
-.slider{
-margin:0 auto;
-  width: 300px;
-  height: 500;
+.slider {
+  margin: 0 auto;
+  width: 1000px;
+  height: 700;
+}
+
+.v-carousel__controls {
+  opacity: 0;
 }

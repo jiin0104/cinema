@@ -90,10 +90,10 @@ const routes = [
     component: Find_Result_Pw,
   },
   {
-    path: "/Movie_List",
-    name: "Movie_List",
+    path: "/movies",
+    name: "MovieList",
     component: MovieList,
-  }
+  },
 ];
 
 const router = createRouter({
