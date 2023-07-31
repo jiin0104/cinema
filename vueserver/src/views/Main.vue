@@ -2,7 +2,10 @@
   <div>
     <div class="background">
       <br />
-      <v-container class="header"> wavecinema </v-container><br />
+      <v-container class="header"
+        >wavecinema
+        <img :src="logo" style="width: 40px; height: 40px" /> </v-container
+      ><br />
       <div class="maintext">당신을 위한<br />영화를 찾아드립니다</div>
       <br />
       <div style="width: 370px; margin: 0 auto">
@@ -12,23 +15,36 @@
       <div class="infotext">지금 상영중인 추천 영화</div>
       <!--이미지슬라이더-->
       <div class="slider">
-        <v-carousel
-          cycle
-          height="400"
-          hide-delimiter-background
-          show-arrows="hover"
-        >
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <v-sheet img :src="img[i]" height="100%">
-              <div class="d-flex fill-height justify-center align-center">
-                <div class="text-h2">
-                  {{ slide }}
-                </div>
-              </div>
-            </v-sheet>
-          </v-carousel-item>
-        </v-carousel>
+        <v-container>
+          <v-col cols="10">
+            <v-carousel v-model="model">
+              <v-carousel-item>
+                <v-row>
+                  <v-col cols="3" v-for="(slide, i) in slides" :key="i">
+                    <img
+                      class="movie-img"
+                      :src="slide.imgSrc"
+                      style="width: 180px; height: 200px"
+                    />
+                  </v-col>
+                </v-row>
+              </v-carousel-item>
+              <v-carousel-item>
+                <v-row>
+                  <v-col cols="3" v-for="(slid, j) in slides2" :key="j">
+                    <img
+                      class="movie-img"
+                      :src="slid.imgSrc"
+                      style="width: 180px; height: 200px"
+                    />
+                  </v-col>
+                </v-row>
+              </v-carousel-item>
+            </v-carousel>
+          </v-col>
+        </v-container>
       </div>
+      <!--슬라이더 끝-->
     </div>
   </div>
 </template>
@@ -38,8 +54,20 @@ export default {
   components: {},
   data() {
     return {
-      img: ["../assets/al.jpg"],
-      slides: ["스타이즈본", "알라딘", "라라랜드", "바빌론", "바비"],
+      logo: "logo.png",
+      model: 0,
+      slides: [
+        { name: "부산행", imgSrc: "/pu.jpg" },
+        { name: "라라랜드", imgSrc: "/lalaland.jpg" },
+        { name: "알라딘", imgSrc: "/al.jpg" },
+        { name: "바빌론", imgSrc: "/va.jpg" },
+      ],
+      slides2: [
+        { name: "알라딘", imgSrc: "/al.jpg" },
+        { name: "바빌론", imgSrc: "/va.jpg" },
+        { name: "부산행", imgSrc: "/pu.jpg" },
+        { name: "라라랜드", imgSrc: "/lalaland.jpg" },
+      ],
     };
   },
   methods: {
@@ -50,6 +78,5 @@ export default {
 };
 </script>
 <style>
-
 @import "../css/main.css";
 </style>
