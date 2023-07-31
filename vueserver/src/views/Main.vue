@@ -16,7 +16,7 @@
       <!--이미지슬라이더-->
       <div class="slider">
         <v-container>
-          <v-col cols="10">
+          <v-col>
             <v-carousel v-model="model">
               <v-carousel-item>
                 <v-row>
