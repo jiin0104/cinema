@@ -13,11 +13,11 @@
               <div style="margin-top: 6px;">
                 <div class="inputid">
                   <span class="label">아이디</span>
-                  <input class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
+                  <input v-model="id" class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
                 </div>
                 <div class="inputpw">
                   <span class="label">비밀번호</span>
-                  <input class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off"
+                  <input v-model="password" class="input" type="password" name="pass" placeholder="비밀번호를 입력하세요" autocomplete="off"
                     required />
                 </div>
                 <div style="margin-left: 365px;">
@@ -46,8 +46,18 @@
   </div>
 </template>
 
-
-
 <style>
 @import "../css/login.css";
 </style>
+
+<script>
+
+export default {
+  name: 'Login',
+  data: () => ({
+    id: '',
+    password: '',
+  })
+}
+
+</script>
