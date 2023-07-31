@@ -22,7 +22,7 @@ export default {
   methods: {
     fetchMovies() {
       // Node.js 서버에서 영화 목록을 가져옴
-      fetch("/api/movies")
+      fetch("/movies")
         .then((response) => response.json())
         .then((data) => {
           this.movies = data;
