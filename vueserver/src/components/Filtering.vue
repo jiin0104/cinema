@@ -8,7 +8,6 @@
         <br /><br />
         <!--1차 선택창-->
         <div class="select">
-          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
           <div class="buttonlocation">
             <button type="button" class="button1">
               <img :src="buttonImage1" style="width: 100px; height: 100px" />
