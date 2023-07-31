@@ -95,8 +95,8 @@
 export default {
   data() {
     return {
-      buttonImage1: "../asset/woman.png",
-      buttonImage2: "../asset/man.png",
+      buttonImage1: "woman.png",
+      buttonImage2: "man.png",
     };
   },
 };

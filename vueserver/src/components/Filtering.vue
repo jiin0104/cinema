@@ -65,7 +65,6 @@
 .button1 {
   width: 100px;
   height: 100px;
-  background-color: white;
   border-radius: 50px;
   margin: 8px;
   float: left;
@@ -74,19 +73,17 @@
 .button2 {
   width: 100px;
   height: 100px;
-  background-color: white;
   border-radius: 50px;
   margin: 8px;
   float: left;
 }
 </style>
-
 <script>
 export default {
   data() {
     return {
-      buttonImage1: "../asset/woman.png",
-      buttonImage2: "../asset/man.png",
+      buttonImage1: "woman.png",
+      buttonImage2: "man.png",
     };
   },
 };

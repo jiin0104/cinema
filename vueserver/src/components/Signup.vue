@@ -1,8 +1,3 @@
-<style>
-
-
-@import "../css/signup.css";
-</style>
 <template>
   <body class="background">
     <!-- 좌상단 로고 -->
@@ -90,8 +85,14 @@
   </body>
 </template>
 
+<style>
+
+
+@import "../css/signup.css";
+</style>
+
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
 

@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Main from "../views/Main.vue";
-import Filtering from "../views/Filtering.vue";
-import Filtering2 from "../views/Filtering2.vue";
-import Filtering3 from "../views/Filtering3.vue";
-import Filtering4 from "../views/Filtering4.vue";
-import FinalFilter from "../views/FinalFilter.vue";
-import Recommend from "../views/Recommend.vue";
-import UserRecommend from "../views/UserRecommend.vue";
-import Find_Id from "../views/Find_Id.vue";
-import Find_Pw from "../views/Find_Pw.vue";
-import Find_Result_Id from "../views/Find_Result_Id.vue";
-import Find_Result_Pw from "../views/Find_Result_Pw.vue";
+import Filtering from "../components/Filtering.vue";
+import Filtering2 from "../components/Filtering2.vue";
+import Filtering3 from "../components/Filtering3.vue";
+import Filtering4 from "../components/Filtering4.vue";
+import FinalFilter from "../components/FinalFilter.vue";
+import Recommend from "../components/Recommend.vue";
+import UserRecommend from "../components/UserRecommend.vue";
+import Find_Id from "../components/Find_Id.vue";
+import Find_Pw from "../components/Find_Pw.vue";
+import Find_Result_Id from "../components/Find_Result_Id.vue";
+import Find_Result_Pw from "../components/Find_Result_Pw.vue";
 
 import Login from "../components/Login.vue";
-import Signup from "../views/Signup.vue";
+import Signup from "../components/Signup.vue";
 
 const routes = [
   {
