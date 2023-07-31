@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
-import store from '@/store/index.js'
+import mixins from "./mixins";
 
 loadFonts()
 
 createApp(App)
   .use(router)
+  .mixin(mixins)
   .use(vuetify)
-  .use(store)
   .mount('#app')
+  

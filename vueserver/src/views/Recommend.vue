@@ -9,33 +9,95 @@
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
-          <div class="form"></div>
-          <v-btn
-            class="infotext"
-            variant="tonal"
-            style="
-              color: white;
-              background-color: rgb(57, 103, 255);
-              height: 50px;
-              width: 210px;
-              margin: 20px;
-            "
-          >
-            다시 추천받기
-          </v-btn>
-          <v-btn
-            class="infotext"
-            variant="tonal"
-            style="
-              color: white;
-              background-color: rgb(57, 103, 255);
-              height: 50px;
-              width: 210px;
-              margin: 20px;
-            "
-          >
-            추천받은 목록보기
-          </v-btn>
+          <!--카드-->
+          <div style="position: relative; left: 100px">
+            <v-layout>
+              <v-card>
+                <v-img src="al.jpg" height="250px" width="200px"> </v-img>
+
+                <v-card-title primary-title>
+                  <div>
+                    <div class="headline">movie.name</div>
+                  </div>
+                </v-card-title>
+
+                <v-card-actions>
+                  <v-btn flat color="purple" @click="handle_toggle()"
+                    >상세보기</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-layout>
+          </div>
+          <!--카드 끝-->
+
+          <!--모달창-->
+          <div v-show="is_show" class="modal">
+            <div style="display: flex; align-items: center">
+              <v-img src="al.jpg" height="200px" width="190px"> </v-img>
+              <div>
+                <div style="font-size: 40px; margin-left: 20px">
+                  <strong>알라딘</strong>
+                </div>
+                <div style="margin: 5px">
+                  <p>장르: 판타지, 로맨스</p>
+                  <p>러닝타임: 128분</p>
+                  <p>감독: 가이 리치</p>
+                  <p>주연: 미나 마수드, 나오미 스콧, 윌 스미스</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <form>한줄리뷰</form>
+              <button
+                type="button"
+                @click="handle_toggle()"
+                style="
+                  color: white;
+                  background-color: rgb(57, 103, 255);
+                  height: 40px;
+                  width: 70px;
+                  font-size: 23px;
+                  border-radius: 8px;
+                  float: right;
+                  margin-right: 5px;
+                "
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+          <!--모달창 끝-->
+
+          <div class="rec" style="position: relative; left: 350px">
+            <v-btn
+              class="infotext"
+              variant="tonal"
+              style="
+                color: white;
+                background-color: rgb(57, 103, 255);
+                height: 50px;
+                width: 210px;
+                margin: 20px;
+              "
+              @click="pageLink"
+            >
+              다시 추천받기
+            </v-btn>
+            <v-btn
+              class="infotext"
+              variant="tonal"
+              style="
+                color: white;
+                background-color: rgb(57, 103, 255);
+                height: 50px;
+                width: 210px;
+                margin: 20px;
+              "
+            >
+              추천받은 목록보기
+            </v-btn>
+          </div>
         </div>
       </form>
     </div>
@@ -43,14 +105,37 @@
 </template>
 <script>
 export default {
+  el: "#app",
   data() {
     return {
       logo: "logo.png",
+      is_show: false,
     };
+  },
+  methods: {
+    pageLink() {
+      this.$router.push({ path: "/" });
+    },
+
+    handle_toggle() {
+      this.is_show = !this.is_show;
+    },
   },
 };
 </script>
 
 <style>
 @import "../css/recommend.css";
+
+.modal {
+  background-color: #d9d9d9;
+  width: 400px;
+  height: 450px;
+  margin: 0 auto;
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 22px;
+  position: relative;
+  bottom: 450px;
+  border-radius: 10px;
+}
 </style>
