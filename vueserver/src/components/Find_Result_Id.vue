@@ -44,18 +44,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 
 @import "../css/login.css";
-
-.findidform {
-  width: 500px;
-  height: 300px;
-  background-color: #c8bdbd;
-  margin: 0 auto;
-  padding: 15px;
-  border-radius: 1em;
-}
-.findid {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 25px;
-  text-align: center;
-}
 </style>

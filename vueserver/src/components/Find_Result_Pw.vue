@@ -63,13 +63,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 
 @import "../css/login.css";
-
-.findpwform {
-  width: 500px;
-  height: 300px;
-  background-color: #c8bdbd;
-  margin: 0 auto;
-  padding: 15px;
-  border-radius: 1em;
-}
 </style>

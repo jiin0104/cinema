@@ -44,22 +44,5 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 
-.form {
-  height: 400px;
-  margin: 0 auto;
-  border-radius: 1em;
-}
-
-.logtitle {
-  width: 1500px;
-  height: 800px;
-  background-color: #ffffff5b;
-  border-radius: 1em;
-}
-
-.Recommendtitle {
-  color: white;
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 50px;
-}
+@import "../css/userecommend.css"
 </style>
