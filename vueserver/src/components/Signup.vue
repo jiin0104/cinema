@@ -86,8 +86,6 @@
 </template>
 
 <style>
-
-
 @import "../css/signup.css";
 </style>
 

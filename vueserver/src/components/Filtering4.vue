@@ -79,12 +79,9 @@
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
-
 @import "../css/filtering.css";
 </style>
+
 <script>
 export default {
   data() {
