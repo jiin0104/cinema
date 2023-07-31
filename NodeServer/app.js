@@ -42,7 +42,7 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
 // app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
 
 // 영화 목록 조회 API
-app.get("/api/movies", (req, res) => {
+app.get("/movies", (req, res) => {
   dbQueries.getAllMovies(connection, (err, movies) => {
     if (err) {
       console.error(err);
