@@ -1,6 +1,6 @@
 .signtitle {
   width: 1500px;
-  height: 900px;
+  min-height: 950px;
   background-color: #ffffff5b;
   margin: 0 auto;
   
@@ -8,7 +8,7 @@
 }
 
 .signform {
-  height: 400px;
+  min-height: 400px;
   margin: 0 auto;
   
   border-radius: 1em;
@@ -16,18 +16,69 @@
 
 .signform1 {
   width: 500px;
-  height: 700px;
+  min-height: 870px;
   background-color: #c8bdbd;
   margin: 0 auto;
   padding: 15px;
   border-radius: 1em;
 }
 
-b {
+span {
   font-family: 'Black Han Sans', sans-serif;
   font-weight: 100;
 }
 
 ul {
   list-style:none;
+}
+
+.email, .nickname, .userpw, .userpw-confirm, .phone1, .zonecode, .roadAddress, .detailAddress {
+  font-size: 14px;
+  color: black;
+  line-height: 1.2;
+  
+  width: 185px;
+  height: 30px;
+  
+  background-color: white;
+  margin-right: 15px;
+  
+  border-radius: 1em;
+  padding-left: 10px;
+}
+
+.zonecode, .roadAddress, .detailAddress {
+  margin-bottom: 10px;
+}
+
+#addallow {
+  
+    align-items: center;
+    border-radius: 4px;
+    display: inline-grid;
+    grid-template-areas: "prepend content append";
+    grid-template-columns: max-content auto max-content;
+    font-weight: 500;
+    justify-content: center;
+    letter-spacing: 0.0892857143em;
+    line-height: normal;
+    max-width: 100%;
+    outline: none;
+    position: relative;
+    text-decoration: none;
+    text-indent: 0.0892857143em;
+    text-transform: uppercase;
+    transition-property: box-shadow, transform, opacity, background;
+    transition-duration: 0.28s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    flex-shrink: 0;
+    border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+    border-style: solid;
+    border-width: 0;
+    font-family: 'Black Han Sans', sans-serif;
+  
 }

@@ -5,7 +5,7 @@ const dbPool = mysql.createPool({
   host: "43.201.30.169",
   user: "wavecinema",
   password: "zipwave02",
-  database: "project",
+  database: "wavecinema",
   connectionLimit: 100, //연결할 수 있는 최대 수 100
 });
 
