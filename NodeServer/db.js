@@ -25,5 +25,4 @@ dbPool.getConnection((err, connection) => {
   connection.release(); //사용 완료된 연결 반납
 });
 
-
 module.exports = dbPool;
