@@ -83,43 +83,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 
-.title {
-  text-align: center;
-  font-size: 50px;
-  color: white;
-  font-family: "Black Han Sans", sans-serif;
-}
-
-.select {
-  width: 500px;
-  height: 600px;
-  background-color: #ffffff5b;
-  margin: 0 auto;
-  border-radius: 1em;
-}
-
-.buttonlocation4 {
-  position: relative;
-  left: 10px;
-  display: flex;
-}
-
-.s-text {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
-  float: left;
-  position: relative;
-  top: 30px;
-  color: white;
-}
-
-.button5 {
-  width: 90px;
-  height: 90px;
-  border-radius: 50px;
-  margin: 8px;
-  float: left;
-}
+@import "../css/filtering.css";
 </style>
 <script>
 export default {

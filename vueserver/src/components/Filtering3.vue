@@ -55,45 +55,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dokdo&display=swap");
 
-.title {
-  text-align: center;
-  font-size: 50px;
-  color: white;
-  font-family: "Black Han Sans", sans-serif;
-}
-
-.select {
-  width: 500px;
-  height: 600px;
-  background-color: #ffffff5b;
-  margin: 0 auto;
-  border-radius: 1em;
-}
-
-.buttonlocation3 {
-  display: inline;
-}
-
-.s-text {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
-  float: left;
-  position: relative;
-  top: 30px;
-  color: white;
-}
-
-/* 3차 장르 선택창 */
-.button4 {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
-  width: 120px;
-  height: 120px;
-  background-color: #e22baf;
-  border-radius: 60px;
-  margin: 8px;
-  float: left;
-}
+@import "../css/filtering.css";
 </style>
 <script>
 export default {
