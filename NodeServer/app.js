@@ -38,8 +38,20 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
 //라우터 목록
 // 예시 const mypageRouter = require('./Routers/mypage');
 //app.use('/mypage', mypageRouter);
-const 엔드포인트로직의메소드명 = require("./Routers/라우터폴더의js파일명");
-app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
+// const 엔드포인트로직의메소드명 = require("./Routers/라우터폴더의js파일명");
+// app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
+
+// 영화 목록 조회 API
+app.get("/api/movies", (req, res) => {
+  dbQueries.getAllMovies(connection, (err, movies) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal server error" });
+    } else {
+      res.json(movies);
+    }
+  });
+});
 
 // 서버 실행
 app.listen(3000, () => {
