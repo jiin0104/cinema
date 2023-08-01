@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const options = {
   method: "GET",
-  url: "https://api.themoviedb.org/3/discover/movie",
+  url: "https://api.themoviedb.org/3/genre/movie/list?api_key=49ba50092811928efb84febb9d68823f&language=ko",
   headers: {
     accept: "application/json",
     Authorization:
