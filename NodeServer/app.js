@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
-const db = require("./db.js")
+const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
 const axios = require("axios");
+
 //익스프레스 객체
 const app = express();
-const mysql = require("mysql2");
 
 //콜스 설정
 let corsOption = {
@@ -30,7 +30,6 @@ app.use(cors(corsOption)); //CORS 미들웨어
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
 
-
 //우리가 쿼리 수정했을 때 바로바로 내역 볼 수 있게.
 let sql = require("./sql.js");
 
@@ -40,17 +39,21 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
   sql = require("./sql.js");
 });
 
-
 //라우터 목록
 // 예시 const mypageRouter = require('./Routers/mypage');
 //app.use('/mypage', mypageRouter);
 // const 엔드포인트로직의메소드명 = require("./Routers/라우터폴더의js파일명");
 // app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
 
+//우리가 작성할 엔드포인트 기본틀을 제시. 다른 엔드포인트 작성할 때 /api를 써도 되고 생략해도 됨.
 app.post("/api/:alias", async (request, res) => {
   try {
     res.send(
-      await req.db(request.params.alias, request.body.param, request.body.where)
+      await req.dbPool(
+        request.params.alias,
+        request.body.param,
+        request.body.where
+      )
     );
   } catch (err) {
     res.status(500).send({
@@ -58,7 +61,6 @@ app.post("/api/:alias", async (request, res) => {
     });
   }
 });
-
 
 // 영화 목록 조회 API (테스트 중)
 app.get("/movies", (req, res) => {
@@ -71,13 +73,6 @@ app.get("/movies", (req, res) => {
     }
   });
 });
-const dbPool = mysql.createPool({
-  host: "43.201.30.169",
-  user: "wavecinema",
-  password: "zipwave02",
-  database: "wavecinema",
-  connectionLimit: 100, //연결할 수 있는 최대 수 100
-});
 
 // 회원 가입 API 엔드포인트
 app.post("/signup", (req, res) => {
@@ -88,12 +83,32 @@ app.post("/signup", (req, res) => {
       return res.status(500).json({ error: "db연결에 실패했습니다." });
     }
 
-    const { email, nickname, password, age, phone, address1, address2, sex, genre } = req.body;
+    const {
+      email,
+      nickname,
+      password,
+      age,
+      phone,
+      address1,
+      address2,
+      sex,
+      genre,
+    } = req.body;
 
     // 중복된 이메일이 없을 경우 회원 정보 저장
     const insertUserSql =
       "INSERT INTO user (USER_ID, USER_PW, USER_NICKNAME, USER_AGE, USER_TEL, USER_ADDRESS1, USER_ADDRESS2, SEX, GENRE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    const values = [email, password, nickname, age, phone, address1, address2, sex, genre];
+    const values = [
+      email,
+      password,
+      nickname,
+      age,
+      phone,
+      address1,
+      address2,
+      sex,
+      genre,
+    ];
     connection.query(insertUserSql, values, (err, result) => {
       connection.release(); // 사용이 완료된 연결 반환
 
@@ -161,10 +176,6 @@ app.post("/checkNickname", (req, res) => {
     }
   });
 });
-
-
-
-
 
 // 서버 실행
 app.listen(3000, () => {
