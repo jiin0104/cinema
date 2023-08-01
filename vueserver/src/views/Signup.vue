@@ -1,12 +1,12 @@
 <template>
-  <body class="background">
+  <body class="background" style="height: 1400px;">
     <!-- 좌상단 로고 -->
     <v-container class="header">
       wavecinema
     </v-container><br>
     <form id="app2" @submit="checkForm" action="/signup" method="post" novalidate="true">
       <div class="signtitle">
-        <div class="signform" style="padding-top: 3%; max-width: 465px;">
+        <div class="signform" style="padding-top: 3%; padding-bottom: 3%; max-width: 465px;">
           <div class="signform1">
             <div class="contact-text">
               <div class="title">회원 가입</div>
@@ -73,20 +73,32 @@
 
               <div class="field2">
                 <span label for="sex">성별</span><br>
-                <label><input class="sex" id="sex1" type="radio" value="male" name="sex" v-model="sex" checked>남</label>&nbsp;
-                <label><input class="sex" id="sex2" type="radio" value="female" name="sex" v-model="sex">여</label>&nbsp;
+                <label><input class="sex" id="sex1" type="radio" value="M" name="sex" v-model="sex" checked>남</label>&nbsp;
+                <label><input class="sex" id="sex2" type="radio" value="F" name="sex" v-model="sex">여</label><br><br>
+              </div>
+
+              <div class="field2">
+                <span label for="genre">선호하는 장르</span><br />
+                <label><input class="genre" id="genre1" type="radio" value="애니메이션" name="genre" v-model="genre" checked>애니메이션</label>&nbsp;
+                <label><input class="genre" id="genre2" type="radio" value="액션" name="genre" v-model="genre">액션</label>&nbsp;
+                <label><input class="genre" id="genre3" type="radio" value="로맨스" name="genre"  v-model="genre">로맨스</label>&nbsp;
+                <label><input class="genre" id="genre4" type="radio" value="코미디" name="genre" v-model="genre">코미디</label>&nbsp;<br>
+                <label><input class="genre" id="genre5" type="radio" value="SF" name="genre" v-model="genre">SF</label>&nbsp;
+                <label><input class="genre" id="genre6" type="radio" value="판타지" name="genre" v-model="genre">판타지</label>&nbsp;
+                <label><input class="genre" id="genre7" type="radio" value="스릴러" name="genre" v-model="genre">스릴러</label>&nbsp;
+                <label><input class="genre" id="genre8" type="radio" value="다큐멘터리" name="genre" v-model="genre">다큐멘터리</label><br><br>
               </div>
 
               <p v-if="errors.length">
                 
-                <br>
+                
                 <b>아래 항목을 확인해주세요</b>
               <ul>
                 <li v-for="error in errors" v-bind:key="error" style="color: red;">{{ error }}</li>
               </ul>
               </p>
 
-              <div style="position: relative; text-align: center; top: 30px" class="signUp">
+              <div style="position: relative; text-align: center;" class="signUp">
                 <input type="submit" id="addallow" value="가입하기" variant="tonal"
                   style="color: white; background-color: rgb(57, 103, 255); min-height: 30px; min-width: 75px;">
               </div>
@@ -122,7 +134,8 @@ export default {
       roadAddress: null,
       detailAddress: null,
       age: null,
-      sex: null
+      sex: null,
+      genre: null
     }
   },
 
@@ -214,8 +227,9 @@ export default {
         phone: this.phone,
         address1: this.roadAddress,
         address2: this.detailAddress,
-        age: this.age,
-        sex: this.sex
+        age: document.querySelector('input[name="age"]:checked').value,
+        sex: document.querySelector('input[name="sex"]:checked').value,
+        genre: document.querySelector('input[name="genre"]:checked').value,
       };
 
 
