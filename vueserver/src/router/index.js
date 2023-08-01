@@ -13,7 +13,7 @@ import Find_Pw from "../views/Find_Pw.vue";
 import Find_Result_Id from "../views/Find_Result_Id.vue";
 import Find_Result_Pw from "../views/Find_Result_Pw.vue";
 import MovieList from "../views/MovieList";
-
+import FilteringR from "../views/FilteringR.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 //#endregion
@@ -28,6 +28,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+  },
+  {
+    path: "/FilteringR",
+    name: "FilteringR",
+    component: FilteringR,
   },
   {
     path: "/Filtering",

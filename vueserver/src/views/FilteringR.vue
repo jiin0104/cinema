@@ -408,7 +408,7 @@ export default {
 
     // 필터 종합
     filtercancel(){
-      location.href = "/Filtering";
+      location.href = "/FilteringR";
     },
     filterconfirm(){
       this.$router.push({ path: "/FinalFilter"});
