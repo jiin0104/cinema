@@ -44,13 +44,13 @@ body {
     rgba(255, 254, 234, 1) 35%,
     #b7e8eb 100%
   );
-  overflow: hidden;
+  
 }
 
 .ocean {
   height: 5%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   background: #015871;
