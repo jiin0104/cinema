@@ -17,7 +17,7 @@
                     required />
                 </div>
                 <div style="margin-left: 365px;">
-                  <v-btn class="infotext" variant="tonal"
+                  <v-btn @click="login" class="infotext" variant="tonal"
                     style="color: white; background-color: rgb(57, 103, 255); height: 160px; width: 105px;">
                     확인
                   </v-btn>
@@ -47,6 +47,7 @@
 </style>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'Login',
@@ -55,6 +56,38 @@ export default {
     password: '',
   }),
   methods: {
+    login(){
+      axios ({
+        url: "/api/login",
+        method: "POST",
+        data: {
+          id: this.id,
+          password: this.password
+        }
+      })
+      .then(res => {
+      console.log(res.data.message);
+      // 서버에서 받아오는 로그인 정보
+      if(res.data.message == 'undefined_id') {
+        this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
+      }
+      else if (res.data.message == 'incorrect_pw') {
+        this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
+      }
+      else {
+        // store로 유저 정보 넘김
+        this.$store.commit("localUser", { userId: this.userId, userNo: res.data.message })
+        this.$swal("로그인 성공!")
+          this.$router.push({path:'/'}); // 메인 컴포넌트 이동
+          this.$store.commit('loginSuccess') // isLogin 상태 변환
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      this.$swal("아이디 및 비밀번호를 입력해주세요.")
+    })
+
+    },
     findid(){
       location.href = "/Find_Id";
     },
