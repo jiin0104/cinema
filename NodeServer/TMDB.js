@@ -22,28 +22,28 @@
 //     console.error(error);
 //   });
 
-장르 번호들
-  {"genres":[
-  {"id":28,"name":"Action"},
-  {"id":12,"name":"Adventure"},
-  {"id":16,"name":"Animation"},
-  {"id":35,"name":"Comedy"},
-  {"id":80,"name":"Crime"},
-  {"id":99,"name":"Documentary"},
-  {"id":18,"name":"Drama"},
-  {"id":10751,"name":"Family"},
-  {"id":14,"name":"Fantasy"},
-  {"id":36,"name":"History"},
-  {"id":27,"name":"Horror"},
-  {"id":10402,"name":"Music"},
-  {"id":9648,"name":"Mystery"},
-  {"id":10749,"name":"Romance"},
-  {"id":878,"name":"Science Fiction"},
-  {"id":10770,"name":"TV Movie"},
-  {"id":53,"name":"Thriller"},
-  {"id":10752,"name":"War"},
-  {"id":37,"name":"Western"}
-]}
+// 장르 번호들
+//   {"genres":[
+//   {"id":28,"name":"Action"},
+//   {"id":12,"name":"Adventure"},
+//   {"id":16,"name":"Animation"},
+//   {"id":35,"name":"Comedy"},
+//   {"id":80,"name":"Crime"},
+//   {"id":99,"name":"Documentary"},
+//   {"id":18,"name":"Drama"},
+//   {"id":10751,"name":"Family"},
+//   {"id":14,"name":"Fantasy"},
+//   {"id":36,"name":"History"},
+//   {"id":27,"name":"Horror"},
+//   {"id":10402,"name":"Music"},
+//   {"id":9648,"name":"Mystery"},
+//   {"id":10749,"name":"Romance"},
+//   {"id":878,"name":"Science Fiction"},
+//   {"id":10770,"name":"TV Movie"},
+//   {"id":53,"name":"Thriller"},
+//   {"id":10752,"name":"War"},
+//   {"id":37,"name":"Western"}
+// ]}
 
 //뽑아온 영화 디테일 가져오기
 // const axios = require('axios');
@@ -67,3 +67,34 @@
 //   .catch(function (error) {
 //     console.error(error);
 //   });
+
+const dbPool = require("/db.js");
+const json = require("jsonwebtoken");
+
+// JSON 데이터를 MySQL 데이터베이스에 저장하는 함수
+function saveJSONDataToDatabase(jsonData) {
+  const connection = dbPool.getConnection((err, connection) => {
+    const query = "INSERT INTO movie_info (data) VALUES (?)";
+    const jsonDataString = JSON.stringify(jsonData);
+
+    connection.query(query, [jsonDataString], (err, results) => {
+      if (err) {
+        console.error("데이터 삽입 중 에러가 발생했습니다:", err);
+      } else {
+        console.log("데이터 삽입이 성공적으로 완료되었습니다.");
+      }
+      connection.release();
+    });
+  });
+}
+
+// 예시: JSON 데이터를 받아와서 데이터베이스에 저장하기
+const jsonURL =
+  "https://api.themoviedb.org/3/discover/movie?api_key=49ba50092811928efb84febb9d68823f";
+json
+  .fetch(jsonURL)
+  .then((response) => response.json())
+  .then((jsonData) => saveJSONDataToDatabase(jsonData))
+  .catch((err) =>
+    console.error("JSON 데이터를 가져오는 도중 에러가 발생했습니다:", err)
+  );
