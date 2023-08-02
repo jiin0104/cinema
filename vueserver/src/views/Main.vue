@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="background">
-
       <div class="maintext">당신을 위한<br />영화를 찾아드립니다</div>
       <br />
       <div style="width: 370px; margin: 0 auto">
@@ -68,7 +67,7 @@ export default {
   },
   methods: {
     pageLink() {
-      this.$router.push({ path: "Filtering" });
+      this.$router.push({ path: "FilteringR" });
     },
   },
 };
