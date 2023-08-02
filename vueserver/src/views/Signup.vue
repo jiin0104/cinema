@@ -153,6 +153,12 @@ export default {
         this.errors.push("닉네임은 필수입니다.");
       }
 
+      // if (!this.password) {
+      //   this.errors.push("비밀번호는 4~12자리, 대문자, 소문자, 숫자, 특수문자를 입력해주세요");
+      // } else if (!this.validPassword(this.password)) {
+      //   this.errors.push("비밀번호 형식을 확인하세요.");
+      // }
+
       if (!this.password) {
         this.errors.push("비밀번호는 4~12자리를 입력해주세요");
       } else if (!this.validPassword(this.password)) {
@@ -185,6 +191,16 @@ export default {
       var re1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
       return re1.test(email);
     },
+
+
+
+    
+    // validPassword(password) {// 비밀번호 형식 유효성 검사, 4~12자리, 숫자,대문자,소문자,특수문자 다 넣어야함
+    //   var re3 = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~?!@#$%^&*_-]).{4,12}$/
+    //   return re3.test(password);
+    // },
+
+
 
 
     validPassword(password) {// 비밀번호 형식 유효성 검사 로직
