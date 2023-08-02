@@ -12,7 +12,6 @@ import Find_Id from "../views/Find_Id.vue";
 import Find_Pw from "../views/Find_Pw.vue";
 import Find_Result_Id from "../views/Find_Result_Id.vue";
 import Find_Result_Pw from "../views/Find_Result_Pw.vue";
-import MovieList from "../views/MovieList";
 import FilteringR from "../views/FilteringR.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
@@ -93,11 +92,6 @@ const routes = [
     path: "/Find_Result_Pw",
     name: "Find_Result_Pw",
     component: Find_Result_Pw,
-  },
-  {
-    path: "/movies",
-    name: "MovieList",
-    component: MovieList,
   },
 ];
 
