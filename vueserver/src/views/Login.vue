@@ -25,13 +25,13 @@
               </div>
             </div>
             <div class="form2">
-              <v-btn class="infotext" variant="text" style="color: white;">
+              <v-btn class="infotext" variant="text" style="color: white;" @click="findid">
                 아이디찾기
               </v-btn>
-              <v-btn class="infotext" variant="text" style="color: white;">
+              <v-btn class="infotext" variant="text" style="color: white;" @click="findpw">
                 비밀번호찾기
               </v-btn>
-              <v-btn class="infotext" variant="text" style="color: white;">
+              <v-btn class="infotext" variant="text" style="color: white;" @click="signup">
                 회원가입
               </v-btn>
             </div>
@@ -55,7 +55,15 @@ export default {
     password: '',
   }),
   methods: {
-
+    findid(){
+      location.href = "/Find_Id";
+    },
+    findpw(){
+      location.href = "/Find_Pw";
+    },
+    signup(){
+      location.href = "/Signup";
+    },
   }
 }
 
