@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <!-- 좌상단 로고 -->
-      <v-container class="header"> wavecinema </v-container><br />
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
           <div class="formtitle">비밀번호 찾기</div>

@@ -7,13 +7,7 @@
   margin: 0;
 }
 
-.header {
-  position: relative;
-  left: 1300px;
-  font-size: 35px;
-  color: white;
-  font-family: "Dokdo", cursive;
-}
+
 
 .maintext {
   font-size: 75px;

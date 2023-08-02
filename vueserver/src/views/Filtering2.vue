@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <!-- 좌상단 로고 -->
-      <v-container class="header"> wavecinema </v-container><br />
       <div class="filter">
         <div class="title">연령대는?</div>
         <br /><br />

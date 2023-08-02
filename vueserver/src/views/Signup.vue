@@ -1,9 +1,6 @@
 <template>
   <body class="background" style="height: 1400px;">
     <!-- 좌상단 로고 -->
-    <v-container class="header">
-      wavecinema
-    </v-container><br>
     <form id="app2" @submit="checkForm" action="/signup" method="post" novalidate="true">
       <div class="signtitle">
         <div class="signform" style="padding-top: 3%; padding-bottom: 3%; max-width: 465px;">
@@ -90,8 +87,8 @@
               </div>
 
               <p v-if="errors.length">
-                
-                
+
+
                 <b>아래 항목을 확인해주세요</b>
               <ul>
                 <li v-for="error in errors" v-bind:key="error" style="color: red;">{{ error }}</li>

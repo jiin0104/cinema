@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <!-- 좌상단 로고 -->
-      <v-container class="header"> wavecinema </v-container><br />
       <div class="filter" v-if="type == 'A'">
         <div class="title">당신의 성별을 알려주세요!</div>
         <br /><br />
