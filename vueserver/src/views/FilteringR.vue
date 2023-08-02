@@ -369,81 +369,81 @@ export default {
 
     //3차 필터
     genre1() {
-      this.selectarray.push("애니메이션");
+      this.selectarray.push("애니메이션"); //"genres":[{"id":16,"name":"Animation"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre2() {
-      this.selectarray.push("액션");
+      this.selectarray.push("액션"); //"genres":[{"id":28,"name":"Action"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre3() {
-      this.selectarray.push("로맨스");
+      this.selectarray.push("로맨스"); //"genres":[{"id":10749,"name":"Romance"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre4() {
-      this.selectarray.push("코미디");
+      this.selectarray.push("코미디"); //"genres":[{"id":35,"name":"Comedy"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre5() {
-      this.selectarray.push("SF");
+      this.selectarray.push("SF"); //"genres":[ {"id":878,"name":"Science Fiction"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre6() {
-      this.selectarray.push("판타지");
+      this.selectarray.push("판타지"); //"genres":[{"id":14,"name":"Fantasy"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre7() {
-      this.selectarray.push("스릴러");
+      this.selectarray.push("스릴러"); //"genres":[{"id":53,"name":"Thriller"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre8() {
-      this.selectarray.push("다큐멘터리");
+      this.selectarray.push("다큐멘터리"); //"genres":[{"id":99,"name":"Documentary"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre9() {
-      this.selectarray.push("전쟁");
+      this.selectarray.push("전쟁"); //"genres":[{"id":10752,"name":"War"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
 
     //4차 필터
     feel1() {
-      this.selectarray.push("사랑중이에요");
+      this.selectarray.push("사랑중이에요"); //"genres":[{"id":18,"name":"Drama"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel2() {
-      this.selectarray.push("우울해요");
+      this.selectarray.push("우울해요"); //"genres":[{"id":10751,"name":"Family"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel3() {
-      this.selectarray.push("이별했어요");
+      this.selectarray.push("이별했어요"); //"genres":[{"id":18,"name":"Drama"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel4() {
-      this.selectarray.push("고민있어요");
+      this.selectarray.push("고민있어요"); //"genres":[{"id":36,"name":"History"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel5() {
-      this.selectarray.push("행복해요");
+      this.selectarray.push("행복해요"); //"genres":[{"id":10402,"name":"Music"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel6() {
-      this.selectarray.push("심심해요");
+      this.selectarray.push("심심해요"); //"genres":[ {"id":35,"name":"Comedy"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel7() {
-      this.selectarray.push("떠나고싶어요");
+      this.selectarray.push("떠나고싶어요"); //"genres":[{"id":12,"name":"Adventure"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel8() {
-      this.selectarray.push("화나요");
+      this.selectarray.push("화나요"); //"genres":[{"id":80,"name":"Crime"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel9() {
-      this.selectarray.push("힐링이필요해요");
+      this.selectarray.push("힐링이필요해요"); //"genres":[{"id":10770,"name":"TV Movie"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel10() {
-      this.selectarray.push("배고파요");
+      this.selectarray.push("배고파요"); //"genres":[{"id":9648,"name":"Mystery"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
 

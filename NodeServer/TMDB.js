@@ -69,7 +69,6 @@
 //   });
 
 const dbPool = require("/db.js");
-const json = require("jsonwebtoken");
 
 // JSON 데이터를 MySQL 데이터베이스에 저장하는 함수
 function saveJSONDataToDatabase(jsonData) {
@@ -88,13 +87,13 @@ function saveJSONDataToDatabase(jsonData) {
   });
 }
 
-// 예시: JSON 데이터를 받아와서 데이터베이스에 저장하기
-const jsonURL =
-  "https://api.themoviedb.org/3/discover/movie?api_key=49ba50092811928efb84febb9d68823f";
-json
-  .fetch(jsonURL)
-  .then((response) => response.json())
+// 예시: JSON 데이터를 받아와서 데이터베이스에 저장하기 const jsonURL = "https://api.themoviedb.org/3/discover/movie?api_key=49ba50092811928efb84febb9d68823f";
+
+axios
+  .get(jsonURL)
+  .then((response) => response.data)
   .then((jsonData) => saveJSONDataToDatabase(jsonData))
+  .then(console.log)
   .catch((err) =>
-    console.error("JSON 데이터를 가져오는 도중 에러가 발생했습니다:", err)
+    console.error("JSON 데이터를 가져오는 도중 에러가 발생:", err)
   );
