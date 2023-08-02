@@ -17,8 +17,8 @@
       </v-navigation-drawer>
       <v-main style="height: 100px; background-color: black;">
         <div class="d-flex justify-center align-center h-100" style="margin-right: 400px;">
-          <div class="d-flex justify-center align-center h-100 header"> <img :src="logo"
-              style="width: 40px; height: 40px" />wavecinema
+          <div class="d-flex justify-center align-center h-100 header"><img src="logo.png"
+              style="width: 200px; height: 50px" />
           </div>
           <v-btn color="primary" @click.stop="drawer = !drawer">
             더보기
@@ -46,7 +46,7 @@
       <v-main style="height: 100px; background-color: black;">
         <div class="d-flex justify-center align-center h-100" style="float: right; margin-right: 45%;">
           <div class="d-flex justify-center align-center h-100 header"><img src="logo.png"
-              style="width: 40px; height: 40px" />wavecinema
+              style="width: 200px; height: 50px" />
           </div>
           <v-btn color="primary" @click.stop="drawer = !drawer">
             더보기
@@ -74,8 +74,5 @@ export default {
 .header {
   position: relative;
   margin-right: 300%;
-  font-size: 35px;
-  color: white;
-  font-family: "Dokdo", cursive;
 }
 </style>

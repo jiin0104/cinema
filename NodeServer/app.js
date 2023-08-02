@@ -3,7 +3,7 @@ const cors = require("cors");
 const fs = require("fs");
 const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
 const axios = require("axios");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"); // 단방향 암호화
 
 //익스프레스 객체
 const app = express();
