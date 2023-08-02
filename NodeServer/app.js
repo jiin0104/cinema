@@ -96,12 +96,14 @@ app.post("/signup", (req, res) => {
       genre,
     } = req.body;
 
+    const encryptedPW = bcrypt.hashSync(password, 10); // 비밀번호 암호화
+
     // 중복된 이메일이 없을 경우 회원 정보 저장
     const insertUserSql =
       "INSERT INTO user (USER_ID, USER_PW, USER_NICKNAME, USER_AGE, USER_TEL, USER_ADDRESS1, USER_ADDRESS2, SEX, GENRE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const values = [
       email,
-      password,
+      encryptedPW,
       nickname,
       age,
       phone,
