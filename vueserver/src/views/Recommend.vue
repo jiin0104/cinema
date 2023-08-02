@@ -5,14 +5,18 @@
         <div class="logtitle">
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
           <!--카드-->
-          <div style="position: relative; left: 100px">
+          <div
+            v-for="movielist in 5"
+            :key="movielist"
+            style="position: relative; left: 100px; display: inline-block"
+          >
             <v-layout>
               <v-card>
                 <v-img src="al.jpg" height="250px" width="200px"> </v-img>
 
                 <v-card-title primary-title>
                   <div>
-                    <div class="headline">movie.name</div>
+                    <div class="headline">movielist.title</div>
                   </div>
                 </v-card-title>
 
@@ -43,7 +47,7 @@
               </div>
             </div>
             <div>
-              <div>별점</div>
+              <div style="margin: 10px">평점</div>
               <div style="margin: 10px">
                 <form>
                   한줄리뷰
@@ -108,6 +112,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   el: "#app",
@@ -115,6 +120,14 @@ export default {
     return {
       logo: "logo.png",
       is_show: false,
+      movielist: [
+        { title: "알라딘" },
+        { title: "부산행" },
+        { title: "바빌론" },
+        { title: "부산행" },
+        { title: "알라딘" },
+        { title: "알라딘" },
+      ],
     };
   },
   methods: {

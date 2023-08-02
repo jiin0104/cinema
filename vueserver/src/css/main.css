@@ -7,8 +7,6 @@
   margin: 0;
 }
 
-
-
 .maintext {
   font-size: 75px;
   text-align: center;
@@ -43,4 +41,11 @@
 
 .v-carousel__controls {
   opacity: 0;
+}
+
+.v-btn--icon {
+  border-radius: 0;
+  position: relative;
+  top: -150px;
+  background-color: grey;
 }
