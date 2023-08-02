@@ -6,35 +6,38 @@
         <br /><br />
         <!--2차 선택창-->
         <div class="select">
-          <br /><br />
-          <div class="buttonlocation1">
-            <button type="button" class="button3">어린이</button>
-            <div>
-              <button type="button" class="button3">10대</button>
+          <br />
+          <div style="display: grid; position: relative; left: 100px">
+            <div class="buttonlocation1">
+              <button type="button" class="button3">어린이</button>
+              <div>
+                <button type="button" class="button3">10대</button>
+              </div>
             </div>
-          </div>
-          <div class="buttonlocation1">
-            <div>
-              <button type="button" class="button3">20대</button>
+
+            <div class="buttonlocation1">
+              <div>
+                <button type="button" class="button3">20대</button>
+              </div>
+              <div>
+                <button type="button" class="button3">30대</button>
+              </div>
             </div>
-            <div>
-              <button type="button" class="button3">30대</button>
+            <div class="buttonlocation1">
+              <div>
+                <button type="button" class="button3">40대</button>
+              </div>
+              <div>
+                <button type="button" class="button3">50대</button>
+              </div>
             </div>
-          </div>
-          <div class="buttonlocation1">
-            <div>
-              <button type="button" class="button3">40대</button>
-            </div>
-            <div>
-              <button type="button" class="button3">50대</button>
-            </div>
-          </div>
-          <div class="buttonlocation1">
-            <div>
-              <button type="button" class="button3">60대</button>
-            </div>
-            <div>
-              <button type="button" class="button3">70대+</button>
+            <div class="buttonlocation1">
+              <div>
+                <button type="button" class="button3">60대</button>
+              </div>
+              <div>
+                <button type="button" class="button3">70대+</button>
+              </div>
             </div>
           </div>
         </div>

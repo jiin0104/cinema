@@ -27,35 +27,53 @@
         <br /><br />
         <!--2차 선택창-->
         <div class="select">
-          <br /><br />
-          <div class="buttonlocation1">
-            <button type="button" class="button3" @click="age0">어린이</button>
-            <div>
-              <button type="button" class="button3" @click="age1">10대</button>
+          <br />
+          <div style="display: grid; position: relative; left: 100px">
+            <div class="buttonlocation1">
+              <button type="button" class="button3" @click="age0">
+                어린이
+              </button>
+              <div>
+                <button type="button" class="button3" @click="age1">
+                  10대
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="buttonlocation1">
-            <div>
-              <button type="button" class="button3" @click="age2">20대</button>
+            <div class="buttonlocation1">
+              <div>
+                <button type="button" class="button3" @click="age2">
+                  20대
+                </button>
+              </div>
+              <div>
+                <button type="button" class="button3" @click="age3">
+                  30대
+                </button>
+              </div>
             </div>
-            <div>
-              <button type="button" class="button3" @click="age3">30대</button>
+            <div class="buttonlocation1">
+              <div>
+                <button type="button" class="button3" @click="age4">
+                  40대
+                </button>
+              </div>
+              <div>
+                <button type="button" class="button3" @click="age5">
+                  50대
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="buttonlocation1">
-            <div>
-              <button type="button" class="button3" @click="age4">40대</button>
-            </div>
-            <div>
-              <button type="button" class="button3" @click="age5">50대</button>
-            </div>
-          </div>
-          <div class="buttonlocation1">
-            <div>
-              <button type="button" class="button3" @click="age6">60대</button>
-            </div>
-            <div>
-              <button type="button" class="button3" @click="age7">70대+</button>
+            <div class="buttonlocation1">
+              <div>
+                <button type="button" class="button3" @click="age6">
+                  60대
+                </button>
+              </div>
+              <div>
+                <button type="button" class="button3" @click="age7">
+                  70대+
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -64,23 +82,34 @@
       <div class="filter" v-else-if="type == 'C'">
         <div class="title">선호하는 장르는?</div>
         <br /><br />
-        <!--2차 선택창-->
+        <!--3차 선택창-->
         <div class="select">
-          <br /><br />
+          <br />
           <div class="buttonlocation3">
-            <button type="button" class="button4" style="font-size: 27px" @click="genre1">
+            <button
+              type="button"
+              class="button4"
+              style="font-size: 27px"
+              @click="genre1"
+            >
               애니메이션
             </button>
             <div>
-              <button type="button" class="button4" @click="genre2">액션</button>
+              <button type="button" class="button4" @click="genre2">
+                액션
+              </button>
             </div>
           </div>
           <div class="buttonlocation3">
             <div>
-              <button type="button" class="button4" @click="genre3">로맨스</button>
+              <button type="button" class="button4" @click="genre3">
+                로맨스
+              </button>
             </div>
             <div>
-              <button type="button" class="button4" @click="genre4">코미디</button>
+              <button type="button" class="button4" @click="genre4">
+                코미디
+              </button>
             </div>
           </div>
           <div class="buttonlocation3">
@@ -88,16 +117,33 @@
               <button type="button" class="button4" @click="genre5">SF</button>
             </div>
             <div>
-              <button type="button" class="button4" @click="genre6">판타지</button>
+              <button type="button" class="button4" @click="genre6">
+                판타지
+              </button>
             </div>
           </div>
           <div class="buttonlocation3">
             <div>
-              <button type="button" class="button4" @click="genre7">스릴러</button>
+              <button type="button" class="button4" @click="genre7">
+                스릴러
+              </button>
             </div>
             <div>
-              <button type="button" class="button4" style="font-size: 27px" @click="genre8">
+              <button
+                type="button"
+                class="button4"
+                style="font-size: 27px"
+                @click="genre8"
+              >
                 다큐멘터리
+              </button>
+              <button
+                type="button"
+                class="button4"
+                @click="genre9"
+                style="font-size: 27px"
+              >
+                전쟁
               </button>
             </div>
           </div>
@@ -210,19 +256,40 @@
             </button>
             <div class="s-text">{{ this.selectarray[3] }}</div>
           </div>
-          <br><br>
-          <div class="filterselected" style="text-align: center;">
-            <v-btn type="button" id="filtercancel" variant="tonal" @click="filtercancel"
-              style="color: white; background-color: rgb(255, 57, 57); height: 50px; width: 125px; font-size: 30px; margin-right: 10%;">처음으로</v-btn>
-            <v-btn type="button" id="filterconfirm" variant="tonal" @click="filterconfirm"
-              style="color: white; background-color: rgb(57, 60, 255); height: 50px; width: 125px; font-size: 30px;">확인</v-btn>
+          <br /><br />
+          <div class="filterselected" style="text-align: center">
+            <v-btn
+              type="button"
+              id="filtercancel"
+              variant="tonal"
+              @click="filtercancel"
+              style="
+                color: white;
+                background-color: rgb(255, 57, 57);
+                height: 50px;
+                width: 125px;
+                font-size: 30px;
+                margin-right: 10%;
+              "
+              >처음으로</v-btn
+            >
+            <v-btn
+              type="button"
+              id="filterconfirm"
+              variant="tonal"
+              @click="filterconfirm"
+              style="
+                color: white;
+                background-color: rgb(57, 60, 255);
+                height: 50px;
+                width: 125px;
+                font-size: 30px;
+              "
+              >확인</v-btn
+            >
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   </div>
 </template>
@@ -251,166 +318,142 @@ export default {
       select2: "2.png",
       select3: "3.png",
       select4: "4.png",
-      type: 'A',
+      type: "A",
       selectarray: [],
     };
   },
   methods: {
     //1차 필터
     female() {
-      this.selectarray.push('여성');
-      return this.type = 'B', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("여성");
+      return (this.type = "B"), this.selectarray, console.log(this.selectarray);
     },
     male() {
-      this.selectarray.push('남성');
-      return this.type = 'B', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("남성");
+      return (this.type = "B"), this.selectarray, console.log(this.selectarray);
     },
 
     //2차 필터
     age0() {
-      this.selectarray.push('10대미만');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("10대미만");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age1() {
-      this.selectarray.push('10대');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("10대");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age2() {
-      this.selectarray.push('20대');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("20대");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age3() {
-      this.selectarray.push('30대');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("30대");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age4() {
-      this.selectarray.push('40대');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("40대");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age5() {
-      this.selectarray.push('50대');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("50대");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age6() {
-      this.selectarray.push('60대');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("60대");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age7() {
-      this.selectarray.push('70대이상');
-      return this.type = 'C', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("70대이상");
+      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
 
     //3차 필터
     genre1() {
-      this.selectarray.push('애니메이션');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("애니메이션");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre2() {
-      this.selectarray.push('액션');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("액션");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre3() {
-      this.selectarray.push('로맨스');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("로맨스");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre4() {
-      this.selectarray.push('코미디');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("코미디");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre5() {
-      this.selectarray.push('SF');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("SF");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre6() {
-      this.selectarray.push('판타지');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("판타지");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre7() {
-      this.selectarray.push('스릴러');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("스릴러");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre8() {
-      this.selectarray.push('다큐멘터리');
-      return this.type = 'D', this.selectarray,
-        console.log(this.selectarray);
+      this.selectarray.push("다큐멘터리");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
+    },
+    genre9() {
+      this.selectarray.push("전쟁");
+      return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
 
     //4차 필터
     feel1() {
-      this.selectarray.push('사랑중이에요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("사랑중이에요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel2() {
-      this.selectarray.push('우울해요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("우울해요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel3() {
-      this.selectarray.push('이별했어요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("이별했어요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel4() {
-      this.selectarray.push('고민있어요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("고민있어요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel5() {
-      this.selectarray.push('행복해요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("행복해요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel6() {
-      this.selectarray.push('심심해요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("심심해요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel7() {
-      this.selectarray.push('떠나고싶어요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("떠나고싶어요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel8() {
-      this.selectarray.push('화나요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("화나요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel9() {
-      this.selectarray.push('힐링이필요해요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("힐링이필요해요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel10() {
-      this.selectarray.push('배고파요');
-      return this.type = 'E', this.selectarray,
-        console.log(this.selectarray)
+      this.selectarray.push("배고파요");
+      return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
 
     // 필터 종합
-    filtercancel(){
+    filtercancel() {
       location.href = "/FilteringR";
     },
-    filterconfirm(){
-      this.$router.push({ path: "/FinalFilter"});
-    }
-  }
+    filterconfirm() {
+      this.$router.push({ path: "/FinalFilter" });
+    },
+  },
 };
 </script>

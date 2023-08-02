@@ -6,7 +6,7 @@
         <br /><br />
         <!--2차 선택창-->
         <div class="select">
-          <br /><br />
+          <br />
           <div class="buttonlocation3">
             <button type="button" class="button4" style="font-size: 27px">
               애니메이션
@@ -38,6 +38,9 @@
             <div>
               <button type="button" class="button4" style="font-size: 27px">
                 다큐멘터리
+              </button>
+              <button type="button" class="button4" style="font-size: 27px">
+                전쟁
               </button>
             </div>
           </div>
