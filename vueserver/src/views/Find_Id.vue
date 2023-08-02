@@ -28,7 +28,7 @@
                       height: 50px;
                       width: 80px;
                       margin-top: 23px;
-                    "
+                    " @click="findId()"
                   >
                     확인
                   </v-btn>
@@ -41,6 +41,47 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data(){
+    return {
+      phoneNumber: "",
+      id: "",
+      errorMessage: "", // 경고 메시지를 담을 변수
+      email: "",
+    }
+  },
+  methods: {
+    async findId() {
+      // 서버에 아이디 찾기 요청 보내기
+      try {
+        const response = await axios.post("/Find_Id", {
+          phoneNumber: this.phoneNumber,
+        });
+        const { id } = response.data;
+
+        if (id) {
+          this.id = id;
+          this.errorMessage = "";
+          this.$router.push({ name: "Find_Result_Id", params: { id } }); // 아이디가 있는 경우 find_id_result 페이지로 리다이렉트
+          console.log(id); //정상적으로 서버에서 id값 받아오고 있는 거 확인 했음.
+        } else {
+          this.id = "";
+          this.errorMessage = "가입된 아이디가 없습니다.";
+          alert("가입된 아이디가 없습니다.");
+          console.log(id); //정상적으로 서버에서 id값 받아오고 있는 거 확인
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  }
+}
+
+</script>
 
 <style>
 @import "../css/login.css";
