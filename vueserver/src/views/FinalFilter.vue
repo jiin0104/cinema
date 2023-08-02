@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <!-- 좌상단 로고 -->
-      <v-container class="header">
-        wavecinema
-        <img :src="logo" style="width: 40px; height: 40px" /> </v-container
-      ><br />
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
           <div class="formtitle">당신을 분석중입니다</div>
@@ -44,7 +39,7 @@ body {
     rgba(255, 254, 234, 1) 35%,
     #b7e8eb 100%
   );
-  
+
 }
 
 .ocean {

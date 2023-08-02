@@ -1,10 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <!-- 좌상단 로고 -->
-      <v-container class="header">
-        wavecinema
-      </v-container><br>
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
           <div class="formtitle">로그인 후 추천받은 목록을 기록해보세요!</div>

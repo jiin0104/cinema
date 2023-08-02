@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="background">
-      <!-- 좌상단 로고 -->
-      <v-container class="header">
-        wavecinema
-        <img :src="logo" style="width: 40px; height: 40px" /> </v-container
-      ><br />
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
