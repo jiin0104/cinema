@@ -58,7 +58,7 @@
 
               <div class="field2">
                 <span label for="age">연령대</span><br />
-                <label><input class="age" id="age0" type="radio" value="0대" name="age" v-model="age">10세 미만</label>&nbsp;
+                <label><input class="age" id="age0" type="radio" value="0대" name="age" v-model="age">10대 미만</label>&nbsp;
                 <label><input class="age" id="age1" type="radio" value="10대" name="age" v-model="age">10대</label>&nbsp;
                 <label><input class="age" id="age2" type="radio" value="20대" name="age"  v-model="age" checked>20대</label>&nbsp;
                 <label><input class="age" id="age3" type="radio" value="30대" name="age" v-model="age">30대</label>&nbsp;<br>
@@ -84,6 +84,7 @@
                 <label><input class="genre" id="genre6" type="radio" value="판타지" name="genre" v-model="genre">판타지</label>&nbsp;
                 <label><input class="genre" id="genre7" type="radio" value="스릴러" name="genre" v-model="genre">스릴러</label>&nbsp;
                 <label><input class="genre" id="genre8" type="radio" value="다큐멘터리" name="genre" v-model="genre">다큐멘터리</label><br><br>
+                <label><input class="genre" id="genre9" type="radio" value="전쟁" name="genre" v-model="genre">전쟁</label><br><br>
               </div>
 
               <p v-if="errors.length">
