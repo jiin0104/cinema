@@ -1,5 +1,4 @@
 <template>
-  <meta http-equiv='refresh' content='3; url=http://localhost:8080/Recommend'>
   <div>
     <div class="background">
       <form class="bg2" @submit.prevent="">
@@ -23,6 +22,17 @@ export default {
       logo: "logo.png",
     };
   },
+  methods: {
+    //분석페이지 자동페이징전환
+    delayRedirect() {
+      setTimeout(() => {
+        this.$router.push("/Recommend");
+      }, 3000); // 3000ms = 3s
+    },
+  },
+  mounted() {
+    this.delayRedirect();
+  },
 };
 </script>
 
@@ -40,14 +50,13 @@ body {
     rgba(255, 254, 234, 1) 35%,
     #b7e8eb 100%
   );
-
 }
 
 .ocean {
   height: 5%;
   width: 100%;
   position: fixed;
-  bottom: 0;
+  bottom: 18px;
   left: 0;
   background: #015871;
 }
@@ -58,7 +67,7 @@ body {
   position: absolute;
   top: -198px;
   width: 6400px;
-  height: 198px;
+  height: 250px;
   animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
 }
