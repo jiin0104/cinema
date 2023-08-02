@@ -57,7 +57,10 @@ export default {
   data: () => ({
     id: '',
     password: '',
-  })
+  }),
+  methods: {
+
+  }
 }
 
 </script>

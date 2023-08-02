@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
+const axios = require("axios");
+const bcrypt = require("bcrypt");
 
 //익스프레스 객체
 const app = express();
@@ -25,10 +28,12 @@ app.use(cors(corsOption)); //CORS 미들웨어
 //express 서버로 POST 요청을 할 때 input 태그의 value를 전달하기 위해 사용
 //post 방식으로 클라이언트가 요청하는 본문에 있는 value를 넘겨받고 req.body 객체로 만들어주는 미들웨어.
 //넘겨받은 value들은 DB로 전송
-app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "50mb" }));
 
 //우리가 쿼리 수정했을 때 바로바로 내역 볼 수 있게.
+let sql = require("./sql.js");
+
 fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
   console.log("sql 변경시 재시작 없이 반영되도록 함.");
   delete require.cache[require.resolve("./sql.js")];
@@ -41,6 +46,23 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
 // const 엔드포인트로직의메소드명 = require("./Routers/라우터폴더의js파일명");
 // app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
 
+//우리가 작성할 엔드포인트 기본틀을 제시. 다른 엔드포인트 작성할 때 /api를 써도 되고 생략해도 됨.
+app.post("/api/:alias", async (request, res) => {
+  try {
+    res.send(
+      await req.dbPool(
+        request.params.alias,
+        request.body.param,
+        request.body.where
+      )
+    );
+  } catch (err) {
+    res.status(500).send({
+      error: err,
+    });
+  }
+});
+
 // 영화 목록 조회 API (테스트 중)
 app.get("/movies", (req, res) => {
   dbQueries.getAllMovies(connection, (err, movies) => {
@@ -49,6 +71,109 @@ app.get("/movies", (req, res) => {
       res.status(500).json({ error: "서버 에러" });
     } else {
       res.json(movies);
+    }
+  });
+});
+
+// 회원 가입 API 엔드포인트
+app.post("/signup", (req, res) => {
+  //db연결을 사용해서 작업
+  dbPool.getConnection((err, connection) => {
+    if (err) {
+      console.error("db연결에 문제가 있음", err);
+      return res.status(500).json({ error: "db연결에 실패했습니다." });
+    }
+
+    const {
+      email,
+      nickname,
+      password,
+      age,
+      phone,
+      address1,
+      address2,
+      sex,
+      genre,
+    } = req.body;
+
+    // 중복된 이메일이 없을 경우 회원 정보 저장
+    const insertUserSql =
+      "INSERT INTO user (USER_ID, USER_PW, USER_NICKNAME, USER_AGE, USER_TEL, USER_ADDRESS1, USER_ADDRESS2, SEX, GENRE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const values = [
+      email,
+      password,
+      nickname,
+      age,
+      phone,
+      address1,
+      address2,
+      sex,
+      genre,
+    ];
+    connection.query(insertUserSql, values, (err, result) => {
+      connection.release(); // 사용이 완료된 연결 반환
+
+      if (err) {
+        console.error("회원 정보 인서트 실패:", err);
+        return res
+          .status(500)
+          .json({ error: "회원 정보 인서트에 실패했습니다." });
+      }
+
+      // 회원 가입 성공 응답
+      res.json({ message: "가입 되셨습니다." });
+    });
+  });
+});
+
+// 이메일 중복 확인
+app.post("/checkEmail", (req, res) => {
+  //db 연결을 사용해서 작업
+  dbPool.getConnection((err, connection) => {
+    if (err) {
+      console.error("db 연결에 문제가 있습니다:", err);
+      return res.status(500).json({ error: "DB 연결에 실패했습니다." });
+    }
+
+    const { email } = req.body;
+
+    const checkDuplicateEmailSql = "SELECT * FROM user WHERE USER_ID = ?";
+    connection.query(checkDuplicateEmailSql, [email], (error, results) => {
+      connection.release(); // 사용이 완료된 연결 반납
+
+      if (error) {
+        console.error("이메일 중복검사 에러:", error);
+        return res.status(500).json({ error: "이메일 중복검사 실패." });
+      }
+
+      if (results.length > 0) {
+        res.json({ exists: true });
+      } else {
+        // 이미 존재하는 이메일인 경우 false
+        res.json({ exists: false });
+      }
+    });
+  });
+});
+
+//닉네임 중복 확인
+app.post("/checkNickname", (req, res) => {
+  const { nickname } = req.body;
+
+  const checkDuplicateNicknameSql =
+    "SELECT * FROM user WHERE USER_NICKNAME = ?";
+  dbPool.query(checkDuplicateNicknameSql, [nickname], (error, results) => {
+    if (error) {
+      console.error("닉네임 중복 확인 에러:", error);
+      return res
+        .status(500)
+        .json({ error: "닉네임 중복 확인에 실패했습니다." });
+    }
+
+    if (results.length > 0) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
     }
   });
 });

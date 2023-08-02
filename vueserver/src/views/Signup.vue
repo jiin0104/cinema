@@ -1,27 +1,27 @@
 <template>
-  <body class="background">
+  <body class="background" style="height: 1400px;">
     <!-- 좌상단 로고 -->
     <v-container class="header">
       wavecinema
     </v-container><br>
     <form id="app2" @submit="checkForm" action="/signup" method="post" novalidate="true">
       <div class="signtitle">
-        <div class="signform" style="padding-top: 6%; max-width: 465px;">
+        <div class="signform" style="padding-top: 3%; padding-bottom: 3%; max-width: 465px;">
           <div class="signform1">
             <div class="contact-text">
               <div class="title">회원 가입</div>
 
               <div class="field2" id="sign">
-                <b label for="email">이메일(아이디)</b><br>
-                <input id="email" type="text" role="textbox" placeholder="이메일을 입력해 주세요." name="email" v-model="email" />
-                <v-btn id="crosscheck" @click="validateEmail" variant="tonal"
+                <span label for="email">이메일(아이디)</span><br>
+                <input id="email" class="email" type="text" role="textbox" placeholder="이메일을 입력해 주세요." name="email" v-model="email" />
+                <v-btn type="button" id="crosscheck" @click="validateEmail" variant="tonal"
                   style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 75px;">중복 확인</v-btn>
                 <br /><br />
               </div>
 
               <div class="field2" id="sign">
-                <b label for="nickname">닉네임</b><br />
-                <input type="text" id="nickname" role="textbox" placeholder="닉네임을 입력해 주세요." name="nickname"
+                <span label for="nickname">닉네임</span><br />
+                <input type="text" class="nickname" id="nickname" role="textbox" placeholder="닉네임을 입력해 주세요." name="nickname"
                   v-model="nickname" />
                 <v-btn id="crosscheck" @click="validateNickname" variant="tonal"
                   style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 75px;">중복
@@ -29,52 +29,78 @@
               </div>
 
               <div class="field2">
-                <b label for="password">비밀번호</b><br />
+                <span label for="password">비밀번호</span><br />
                 <input class="userpw" id="password" type="password" role="textbox" placeholder="비밀번호를 입력해 주세요."
                   name="password" v-model="password" /><br /><br />
               </div>
 
               <div class="field2">
-                <b label for="passwordCheck">비밀번호 재확인</b><br />
+                <span label for="passwordCheck">비밀번호 재확인</span><br />
                 <input class="userpw-confirm" id="passwordCheck" type="password" role="textbox" name="passwordCheck"
                   v-model="passwordCheck" placeholder="비밀번호를 입력해 주세요." /><br /><br />
               </div>
 
               <div class="field2 tel-number">
-                <b label for="phone">휴대전화(-제외)</b>
+                <span label for="phone">휴대전화(-제외)</span>
                 <div>
-                  <input id="phone1" type="text" role="textbox" name="phone" placeholder="ex)00012345678"
+                  <input id="phone1" class="phone1" type="text" role="textbox" name="phone" placeholder="ex)00012345678"
                     v-model="phone" /><br /><br />
                 </div>
               </div>
 
               <div class="field2">
-                <b label for="address">주소</b><br />
-                <input type="text" id="zonecode" placeholder="우편번호" role="textbox" v-model="zonecode" readonly />
+                <span label for="address">주소</span><br />
+                <input type="text" class="zonecode" id="zonecode" placeholder="우편번호" role="textbox" v-model="zonecode" readonly />
                 <v-btn @click="openPostcode" id="postcode" variant="tonal"
                   style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 105px;">우편번호 찾기</v-btn><br />
-                <input type="text" placeholder="주소" role="textbox" v-model="roadAddress" readonly
-                  style="width: 67%;" /><br />
-                <input type="text" id="addressdetail" placeholder="상세주소" role="textbox" v-model="detailAddress"
-                  style="width: 67%;" /><br /><br />
+                <input type="text" class="roadAddress" placeholder="주소" role="textbox" v-model="roadAddress" readonly
+                  style="width: 67%;" /><br>
+                <input type="text" class="detailAddress" id="addressdetail" placeholder="상세주소" role="textbox" v-model="detailAddress"
+                  style="width: 67%;" /><br /><br>
               </div>
 
               <div class="field2">
-                <b label for="age">연령대</b><br />
-                <input class="age" id="age" type="radio">
+                <span label for="age">연령대</span><br />
+                <label><input class="age" id="age0" type="radio" value="0대" name="age" v-model="age">10세 미만</label>&nbsp;
+                <label><input class="age" id="age1" type="radio" value="10대" name="age" v-model="age">10대</label>&nbsp;
+                <label><input class="age" id="age2" type="radio" value="20대" name="age"  v-model="age" checked>20대</label>&nbsp;
+                <label><input class="age" id="age3" type="radio" value="30대" name="age" v-model="age">30대</label>&nbsp;<br>
+                <label><input class="age" id="age4" type="radio" value="40대" name="age" v-model="age">40대</label>&nbsp;
+                <label><input class="age" id="age5" type="radio" value="50대" name="age" v-model="age">50대</label>&nbsp;
+                <label><input class="age" id="age6" type="radio" value="60대" name="age" v-model="age">60대</label>&nbsp;
+                <label><input class="age" id="age7" type="radio" value="70대" name="age" v-model="age">70대 이상</label><br><br>
+              </div>
+
+              <div class="field2">
+                <span label for="sex">성별</span><br>
+                <label><input class="sex" id="sex1" type="radio" value="M" name="sex" v-model="sex" checked>남</label>&nbsp;
+                <label><input class="sex" id="sex2" type="radio" value="F" name="sex" v-model="sex">여</label><br><br>
+              </div>
+
+              <div class="field2">
+                <span label for="genre">선호하는 장르</span><br />
+                <label><input class="genre" id="genre1" type="radio" value="애니메이션" name="genre" v-model="genre" checked>애니메이션</label>&nbsp;
+                <label><input class="genre" id="genre2" type="radio" value="액션" name="genre" v-model="genre">액션</label>&nbsp;
+                <label><input class="genre" id="genre3" type="radio" value="로맨스" name="genre"  v-model="genre">로맨스</label>&nbsp;
+                <label><input class="genre" id="genre4" type="radio" value="코미디" name="genre" v-model="genre">코미디</label>&nbsp;<br>
+                <label><input class="genre" id="genre5" type="radio" value="SF" name="genre" v-model="genre">SF</label>&nbsp;
+                <label><input class="genre" id="genre6" type="radio" value="판타지" name="genre" v-model="genre">판타지</label>&nbsp;
+                <label><input class="genre" id="genre7" type="radio" value="스릴러" name="genre" v-model="genre">스릴러</label>&nbsp;
+                <label><input class="genre" id="genre8" type="radio" value="다큐멘터리" name="genre" v-model="genre">다큐멘터리</label><br><br>
               </div>
 
               <p v-if="errors.length">
-                <br>
+                
+                
                 <b>아래 항목을 확인해주세요</b>
               <ul>
                 <li v-for="error in errors" v-bind:key="error" style="color: red;">{{ error }}</li>
               </ul>
               </p>
 
-              <div style="position: relative; left: 125px; top: 30px" class="signUp">
+              <div style="position: relative; text-align: center;" class="signUp">
                 <input type="submit" id="addallow" value="가입하기" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 75px;">
+                  style="color: white; background-color: rgb(57, 103, 255); min-height: 30px; min-width: 75px;">
               </div>
             </div>
             </div>
@@ -90,7 +116,7 @@
 </style>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 
 export default {
 
@@ -106,7 +132,10 @@ export default {
       passwordCheck: null,
       zonecode: null,
       roadAddress: null,
-      detailAddress: null
+      detailAddress: null,
+      age: null,
+      sex: null,
+      genre: null
     }
   },
 
@@ -197,7 +226,10 @@ export default {
         password: this.password,
         phone: this.phone,
         address1: this.roadAddress,
-        address2: this.detailAddress
+        address2: this.detailAddress,
+        age: document.querySelector('input[name="age"]:checked').value,
+        sex: document.querySelector('input[name="sex"]:checked').value,
+        genre: document.querySelector('input[name="genre"]:checked').value,
       };
 
 
