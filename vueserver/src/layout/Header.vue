@@ -38,7 +38,7 @@
         </v-list>
       </v-navigation-drawer>
       <v-main style="height: 100px; background-color: black;">
-        <div class="d-flex justify-center align-center h-100" style="float: right; margin-right: 400px;">
+        <div class="d-flex justify-center align-center h-100" style="float: right; margin-right: 45%;">
           <div class="d-flex justify-center align-center h-100 header"><img src="logo.png"
               style="width: 40px; height: 40px" />wavecinema
           </div>
@@ -64,7 +64,7 @@ export default {
 <style scoped>
 .header {
   position: relative;
-  left: -320%;
+  margin-right: 300%;
   font-size: 35px;
   color: white;
   font-family: "Dokdo", cursive;
