@@ -31,7 +31,7 @@
             <div style="display: flex; align-items: center">
               <v-img src="al.jpg" height="200px" width="190px"> </v-img>
               <div>
-                <div style="font-size: 40px; margin-left: 20px">
+                <div style="font-size: 40px; margin-left: 50px">
                   <strong>알라딘</strong>
                 </div>
                 <div style="margin: 5px">
@@ -43,23 +43,33 @@
               </div>
             </div>
             <div>
-              <form>한줄리뷰</form>
-              <button
-                type="button"
-                @click="handle_toggle()"
-                style="
-                  color: white;
-                  background-color: rgb(57, 103, 255);
-                  height: 40px;
-                  width: 70px;
-                  font-size: 23px;
-                  border-radius: 8px;
-                  float: right;
-                  margin-right: 5px;
-                "
-              >
-                닫기
-              </button>
+              <div>별점</div>
+              <div style="margin: 10px">
+                <form>
+                  한줄리뷰
+                  <div class="review">
+                    이름: 재밌어요<br />이름2: 주인공 예뻐요
+                    테스테스트세트세트세트테스트세트스테스트
+                  </div>
+                </form>
+                <button
+                  type="button"
+                  @click="handle_toggle()"
+                  style="
+                    color: white;
+                    background-color: rgb(57, 103, 255);
+                    height: 40px;
+                    width: 70px;
+                    font-size: 23px;
+                    border-radius: 8px;
+                    float: right;
+                    margin-right: 5px;
+                    margin-top: 5px;
+                  "
+                >
+                  닫기
+                </button>
+              </div>
             </div>
           </div>
           <!--모달창 끝-->
@@ -125,12 +135,20 @@ export default {
 .modal {
   background-color: #d9d9d9;
   width: 400px;
-  height: 450px;
+  height: 470px;
   margin: 0 auto;
   font-family: "Black Han Sans", sans-serif;
   font-size: 22px;
   position: relative;
   bottom: 450px;
   border-radius: 10px;
+}
+
+.review {
+  font-size: 18px;
+  border: 1px solid #c8bdbd;
+  border-radius: 5px;
+  background-color: #ffa9a9;
+  padding: 5px;
 }
 </style>
