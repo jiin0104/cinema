@@ -9,9 +9,10 @@
               <div style="margin-top: 45px; margin-left: 10px">
                 <div class="inputid">
                   <span class="label">휴대폰번호</span>
-                  <input
+                  <input id="user"
+                  v-model="phoneNumber"
                     class="input"
-                    type="email"
+                    type="text"
                     name="username"
                     placeholder="휴대폰 번호를 입력하세요"
                     required
@@ -19,8 +20,9 @@
                 </div>
 
                 <div style="margin-left: 365px">
-                  <v-btn
-                    class="infotext"
+                  <input type="submit"
+                  id="addallow2"
+                    class="button"
                     variant="tonal"
                     style="
                       color: white;
@@ -29,9 +31,10 @@
                       width: 80px;
                       margin-top: 23px;
                     " @click="findId()"
+                    value="확인"
                   >
-                    확인
-                  </v-btn>
+                    
+                  
                 </div>
               </div>
             </div>
@@ -66,7 +69,7 @@ export default {
         if (id) {
           this.id = id;
           this.errorMessage = "";
-          this.$router.push({ name: "Find_Result_Id", params: { id } }); // 아이디가 있는 경우 find_id_result 페이지로 리다이렉트
+          this.$router.push({ name: "find_result_id", params: { id } }); // 아이디가 있는 경우 find_id_result 페이지로 리다이렉트
           console.log(id); //정상적으로 서버에서 id값 받아오고 있는 거 확인 했음.
         } else {
           this.id = "";
