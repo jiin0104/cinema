@@ -84,8 +84,8 @@ const routes = [
     component: Find_Pw,
   },
   {
-    path: "/Find_Result_Id",
-    name: "Find_Result_Id",
+    path: "/Find_Result_Id:id",
+    name: "find_result_id",
     component: Find_Result_Id,
   },
   {
