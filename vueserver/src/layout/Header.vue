@@ -2,7 +2,7 @@
 
   <!-- 로그인 상태일 경우 -->
 
-  <v-card v-if="isLogin">
+  <v-card v-if="isLogin === true">
     <v-layout>
       <v-navigation-drawer v-model="drawer" temporary>
         <v-list-item prepend-icon="mdi-menu" title="더보기 메뉴"></v-list-item>
@@ -12,7 +12,7 @@
         <v-list density="compact" nav>
           <v-list-item @click="$router.push('/')" prepend-icon="mdi-home" title="홈" value="/"></v-list-item>
           <v-list-item @click="$router.push('/mypage')" prepend-icon="mdi-account" title="내정보" value="mypage"></v-list-item>
-          <v-list-item @click="$router.push('/')" prepend-icon="mdi-logout" title="로그아웃" value="logout"></v-list-item>
+          <v-list-item @click=Logout prepend-icon="mdi-logout" title="로그아웃" value="logout"></v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-main style="height: 100px; background-color: black;">
@@ -40,6 +40,7 @@
         <v-list density="compact" nav>
           <v-list-item @click="$router.push('/')" prepend-icon="mdi-home" title="홈" value="/"></v-list-item>
           <v-list-item @click="$router.push('/login')" prepend-icon="mdi-login" title="로그인" value="login"></v-list-item>
+          <v-list-item @click=Logout prepend-icon="mdi-logout" title="로그아웃" value="logout"></v-list-item>
         </v-list>
 
       </v-navigation-drawer>
@@ -58,16 +59,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
+  name: 'Header',
   data() {
     return {
       drawer: null,
     }
   },
-  methods: {
-
+  computed: {
+    ...mapState(['isLogin', 'userId'])
   },
-}
+  methods: {
+    Logout() {
+        // store에 담긴 유저 정보의 data를 null값으로 만듦
+        this.$store.commit("localUser", {});
+        this.$swal("로그아웃 되었습니다.");
+        this.$router.push({path:'/'}); // 로그아웃 이후 메인 페이지로 라우팅
+        this.$store.commit('logOut') // 로그아웃 이후 헤더 게스트로 변환
+      }
+    }
+  }
+
+
 </script>
 
 <style scoped>
