@@ -6,25 +6,28 @@
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
           <!--카드-->
           <div
-            v-for="movielist in 5"
-            :key="movielist"
-            style="position: relative; left: 100px; display: inline-block"
+            v-for="rec in slides"
+            :key="rec.id"
+            style="
+              position: relative;
+              left: 140px;
+              margin: 5px;
+              display: inline-block;
+            "
           >
             <v-layout>
               <v-card>
-                <v-img src="al.jpg" height="250px" width="200px"> </v-img>
+                <v-img :src="rec.url" height="250px" width="220px"> </v-img>
 
-                <v-card-title primary-title>
+                <div class="r_title">
                   <div>
-                    <div class="headline">movielist.title</div>
+                    <div class="headline">{{ rec.title }}</div>
                   </div>
-                </v-card-title>
+                </div>
 
-                <v-card-actions>
-                  <v-btn flat color="purple" @click="handle_toggle()"
-                    >상세보기</v-btn
-                  >
-                </v-card-actions>
+                <div class="detail">
+                  <button @click="handle_toggle()">상세보기</button>
+                </div>
               </v-card>
             </v-layout>
           </div>
@@ -78,13 +81,13 @@
           </div>
           <!--모달창 끝-->
 
-          <div class="rec" style="position: relative; left: 350px">
+          <div class="rec" style="position: relative; left: 350px; top: 50px">
             <v-btn
               class="infotext"
               variant="tonal"
               style="
                 color: white;
-                background-color: rgb(57, 103, 255);
+                background-color: #3742fa;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
@@ -98,7 +101,7 @@
               variant="tonal"
               style="
                 color: white;
-                background-color: rgb(57, 103, 255);
+                background-color: #3742fa;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
@@ -120,13 +123,12 @@ export default {
     return {
       logo: "logo.png",
       is_show: false,
-      movielist: [
-        { title: "알라딘" },
-        { title: "부산행" },
-        { title: "바빌론" },
-        { title: "부산행" },
-        { title: "알라딘" },
-        { title: "알라딘" },
+      model: 0,
+      slides: [
+        { id: 1, title: "알라딘", url: "/al.jpg" },
+        { id: 2, title: "바빌론", url: "/va.jpg" },
+        { id: 3, title: "라라랜드", url: "/lalaland.jpg" },
+        { id: 4, title: "바빌론", url: "/va.jpg" },
       ],
     };
   },
@@ -163,5 +165,28 @@ export default {
   border-radius: 5px;
   background-color: #ffa9a9;
   padding: 5px;
+}
+
+.r_title {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 30px;
+  text-align: center;
+  margin: 10px;
+}
+
+.detail {
+  font-family: "Black Han Sans", sans-serif;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 23px;
+  background-color: #3742fa;
+  color: white;
+  width: 150px;
+  height: 30px;
+}
+
+.v-img__img--contain {
+  object-fit: fill;
 }
 </style>
