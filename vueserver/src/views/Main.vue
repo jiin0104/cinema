@@ -9,7 +9,36 @@
       <br /><br /><br />
       <div class="infotext">지금 상영중인 추천 영화</div>
       <!--이미지슬라이더-->
-      <div class="slider">
+      <div>
+        <swiper
+          :modules="modules"
+          :slidesPerView="3"
+          :centeredSlides="true"
+          :spaceBetween="30"
+          :pagination="{
+            type: 'fraction',
+          }"
+          :autoplay="{
+            delay: 2000,
+            disableOnInteraction: false,
+          }"
+          :navigation="true"
+          :virtual="true"
+          class="mySwiper"
+          @swiper="setSwiperRef"
+        >
+          <swiper-slide
+            v-for="(po, index) in slides"
+            :key="po.id"
+            :virtualIndex="index"
+            ><img :src="po.url"
+          /></swiper-slide>
+        </swiper>
+        <p class="append-buttons">
+          <button @click="prepend()" class="prepend-2-slides"></button>
+        </p>
+      </div>
+      <!-- <div class="slider">
         <v-container>
           <v-col>
             <v-carousel v-model="model">
@@ -38,30 +67,52 @@
             </v-carousel>
           </v-col>
         </v-container>
-      </div>
+      </div> -->
       <!--슬라이더 끝-->
     </div>
   </div>
 </template>
 <script>
+import { ref } from "vue";
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import Swiper styles
+import "swiper/css";
+
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/virtual";
+
+import "./style.css";
+
+// import Swiper core and required modules
+import { Autoplay, Pagination, Navigation, Virtual } from "swiper/modules";
 export default {
   name: "",
-  components: {},
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   data() {
     return {
       logo: "logo.png",
-      model: 0,
+      // model: 0,
+      // slides: [
+      //   { name: "부산행", imgSrc: "/pu.jpg" },
+      //   { name: "라라랜드", imgSrc: "/lalaland.jpg" },
+      //   { name: "알라딘", imgSrc: "/al.jpg" },
+      //   { name: "바빌론", imgSrc: "/va.jpg" },
+      // ],
+      // slides2: [
+      //   { name: "알라딘", imgSrc: "/al.jpg" },
+      //   { name: "바빌론", imgSrc: "/va.jpg" },
+      //   { name: "부산행", imgSrc: "/pu.jpg" },
+      //   { name: "라라랜드", imgSrc: "/lalaland.jpg" },
+      // ],
       slides: [
-        { name: "부산행", imgSrc: "/pu.jpg" },
-        { name: "라라랜드", imgSrc: "/lalaland.jpg" },
-        { name: "알라딘", imgSrc: "/al.jpg" },
-        { name: "바빌론", imgSrc: "/va.jpg" },
-      ],
-      slides2: [
-        { name: "알라딘", imgSrc: "/al.jpg" },
-        { name: "바빌론", imgSrc: "/va.jpg" },
-        { name: "부산행", imgSrc: "/pu.jpg" },
-        { name: "라라랜드", imgSrc: "/lalaland.jpg" },
+        { po: 1, url: "/al.jpg" },
+        { po: 2, url: require("../assets/lalaland.jpg") },
       ],
     };
   },
@@ -69,6 +120,45 @@ export default {
     pageLink() {
       this.$router.push({ path: "FilteringR" });
     },
+  },
+  setup() {
+    // Create array with 10 slides
+    const slides = ref(
+      Array.from({ length: 10 }).map((_, index) => `Slide ${index + 1}`)
+    );
+    let swiperRef = null;
+    let appendNumber = 10;
+    let prependNumber = 1;
+
+    const setSwiperRef = (swiper) => {
+      swiperRef = swiper;
+    };
+    const slideTo = (index) => {
+      swiperRef.slideTo(index - 1, 0);
+    };
+    const append = () => {
+      slides.value = [...slides.value, "Slide " + ++appendNumber];
+    };
+    const prepend = () => {
+      slides.value = [
+        `Slide ${prependNumber - 2}`,
+        `Slide ${prependNumber - 1}`,
+        ...slides.value,
+      ];
+      prependNumber -= 2;
+      swiperRef.slideTo(swiperRef.activeIndex + 2, 0);
+    };
+    return {
+      slides,
+      swiperRef: null,
+      appendNumber,
+      prependNumber,
+      setSwiperRef,
+      slideTo,
+      append,
+      prepend,
+      modules: [Autoplay, Pagination, Navigation, Virtual],
+    };
   },
 };
 </script>
