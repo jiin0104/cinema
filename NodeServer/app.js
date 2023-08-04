@@ -4,7 +4,10 @@ const fs = require("fs");
 const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
 const axios = require("axios");
 const bcrypt = require("bcrypt"); // 단방향 암호화
+let sql = require("./sql.js");
+
 const crypto = require("crypto");
+
 
 //익스프레스 객체
 const app = express();
@@ -33,8 +36,6 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
 
 //우리가 쿼리 수정했을 때 바로바로 내역 볼 수 있게.
-let sql = require("./sql.js");
-
 fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
   console.log("sql 변경시 재시작 없이 반영되도록 함.");
   delete require.cache[require.resolve("./sql.js")];
@@ -62,18 +63,6 @@ app.post("/api/:alias", async (request, res) => {
       error: err,
     });
   }
-});
-
-// 영화 목록 조회 API (테스트 중)
-app.get("/movies", (req, res) => {
-  dbQueries.getAllMovies(connection, (err, movies) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: "서버 에러" });
-    } else {
-      res.json(movies);
-    }
-  });
 });
 
 // 회원 가입 API 엔드포인트
@@ -153,7 +142,7 @@ app.post("/login", function (request, response) {
           if (same) {
             // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우
             return response.status(200).json({
-              message: results[0].USER_NO
+              message: results[0].USER_NO,
             });
           } else {
             // 비밀번호 불일치
