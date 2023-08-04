@@ -45,8 +45,8 @@
       </v-navigation-drawer>
       <v-main style="height: 100px; background-color: black;">
         <div class="d-flex justify-center align-center h-100" style="float: right; margin-right: 45%;">
-          <div class="d-flex justify-center align-center h-100 header"><img src="logo.png"
-              style="width: 200px; height: 50px" />
+          <div class="d-flex justify-center align-center h-100 header"><a href="/"><img src="logo.png"
+              style="width: 200px; height: 50px" /></a>
           </div>
           <v-btn color="primary" @click.stop="drawer = !drawer">
             더보기
