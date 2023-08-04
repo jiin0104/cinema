@@ -451,8 +451,47 @@ export default {
     filtercancel() {
       location.href = "/FilteringR";
     },
-    filterconfirm() {
-      this.$router.push({ path: "/FinalFilter" });
+    // 필터 확인 버튼 클릭 시 처리
+    async filterconfirm() {
+      // 선택한 장르 정보 가져오기
+      const selectedGenres = this.selectarray.map((genre) => {
+        return this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+      });
+
+      // 선택한 이미지 경로 가져오기
+      const selectedImage = "image_path_here"; // 이미지 경로 적절하게 수정
+
+      // API 호출을 위한 데이터 준비
+      const data = {
+        selectedGenres,
+        selectedImage,
+      };
+
+      try {
+        // API 요청 보내기
+        const response = await this.$axios.get("/fetch-movies", {
+          params: data,
+        });
+
+        // 필요한 작업 수행
+
+        // 결과 페이지로 이동
+        this.$router.push({ path: "/FinalFilter" });
+      } catch (error) {
+        console.error("Error fetching and processing movies:", error);
+        // 에러 처리
+      }
+    },
+
+    // 장르 이름을 장르 ID로 매핑
+    mapGenreNameToId(genreName) {
+      const genreMap = {
+        애니메이션: 16,
+        액션: 28,
+        로맨스: 10749,
+        // 나머지 장르도 추가
+      };
+      return genreMap[genreName] || null;
     },
   },
 };
