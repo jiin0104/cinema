@@ -124,7 +124,7 @@ export default {
           console.log(this.password);
 
           // Find_Pw_Result.vue로 리다이렉트하면서 params로 비밀번호 전달
-          this.$router.push({ name: "Find_Result_Pw" });
+          this.$router.push({ name: "Find_Result_Pw", params: { pw: this.password}});
         } catch (error) {
           console.error("비밀번호 요청에 실패했습니다.", error);
           this.errorMessage = "비밀번호 요청에 실패했습니다.";
