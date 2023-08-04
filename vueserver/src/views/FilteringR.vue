@@ -228,34 +228,34 @@
         <br /><br />
 
         <!--필터 선택 결과-->
-        <div class="select">
+        <div class="select" >
           <br />
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select1" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[0] }}</div>
+            <div class="r-text">{{ this.selectarray[0] }}</div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select2" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[1] }}</div>
+            <div class="r-text">{{ this.selectarray[1] }}</div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select3" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[2] }}</div>
+            <div class="r-text">{{ this.selectarray[2] }}</div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select4" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[3] }}</div>
+            <div class="r-text">{{ this.selectarray[3] }}</div>
           </div>
           <br /><br />
           <div class="filterselected" style="text-align: center">

@@ -15,6 +15,15 @@
 
 .s-text {
   font-family: "Black Han Sans", sans-serif;
+  font-size: 30px;
+  float: left;
+  position: relative;
+  top: 30px;
+  color: white;
+}
+
+.r-text {
+  font-family: "Black Han Sans", sans-serif;
   font-size: 37px;
   float: left;
   position: relative;
