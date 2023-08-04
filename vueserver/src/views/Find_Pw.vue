@@ -18,7 +18,7 @@
                   />
                 </div>
                 <div class="findinputpw">
-                  <span class="label">휴대폰번호</span>
+                  <span class="label">휴대폰번호</span><br>
                   <input
                     class="findtel"
                     type="text"
@@ -30,10 +30,12 @@
                   />
                   <input type="submit" class="findinfotext2" id="subscribe" value="인증번호 받기" variant="tonal" href="#" style="text-align: center; color: white;
                       background-color: rgb(84, 97, 139);
-                      height: 40px;
-                      width: 125px;"
+                      height: 53px;
+                      width: 125px;
+                      margin-left: 15px;
+                      "
                 @click="sendNumber()" />
-                <div class="group">
+                <div class="group" style="margin-top: 5px;">
               <label for="pass" class="label">인증번호</label>
               <input id="pass" type="password" class="findinput" data-type="password" v-model="userInputVerificationCode" />
             </div>
@@ -46,7 +48,7 @@
                     style="
                       color: white;
                       background-color: rgb(57, 103, 255);
-                      height: 160px;
+                      height: 237px;
                       width: 105px;
                     " @click="findPw()"
                   >
