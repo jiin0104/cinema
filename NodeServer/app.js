@@ -121,13 +121,10 @@ app.post("/signup", (req, res) => {
 //로그인 라우터. 웹페이지'/login'에서 인증로직 처리.
 app.post("/login", function (request, response) {
   const loginUser = request.body;
-  console.log(loginUser.userId);
-  console.log(loginUser.userPw);
 
   const query = "SELECT * FROM user WHERE USER_ID = ?";
 
   dbPool.query(query, [loginUser.userId], function (error, results, fields) {
-    console.log(results.length);
     if (results.length <= 0) {
       return response.status(200).json({
         message: "undefined_id",
