@@ -80,8 +80,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/virtual";
 
-import "./style.css";
-
 // import Swiper core and required modules
 import { Autoplay, Pagination, Navigation, Virtual } from "swiper/modules";
 export default {
@@ -160,4 +158,5 @@ export default {
 </script>
 <style>
 @import "../css/main.css";
+@import "../css/swiper.css";
 </style>

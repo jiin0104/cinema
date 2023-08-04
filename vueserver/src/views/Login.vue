@@ -74,14 +74,14 @@ export default {
         .then(res => {
           console.log(res.data.message);
           // 서버에서 받아오는 로그인 정보
-          if (res.data.message == 'undefined_id') {
-            this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
-          }
-          else if (res.data.message == 'incorrect_pw') {
-            this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
-          }
-          else if (res.data.message == 'not_null') {
+          if (!this.userId || !this.userPw) {
             this.$swal("계정 정보를 입력해주세요.")
+          }
+          else if (res.data.message == 'incorrect_id') {
+            this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
+          }
+          else if (res.data.message == 'undefined_pw') {
+            this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
           }
           else {
             // store로 유저 정보 넘김
