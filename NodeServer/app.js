@@ -408,9 +408,9 @@ app.post("/pw_update", (req, res) => {
 app.get("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
-    const { selectedGenres, selectedImage } = req.query;
-
-    const apiKey = "YOUR_TMDB_API_KEY";
+    const { selectedGenres } = req.query;
+    //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
+    const apiKey = "49ba50092811928efb84febb9d68823f";
     const genreQueryString = selectedGenres.join(",");
 
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}`;
@@ -423,7 +423,7 @@ app.get("/fetch-movies", async (req, res) => {
         Authorization: `Bearer ${apiKey}`,
       },
     };
-
+    //url에서 받아온 json데이터
     const response = await axios.request(options);
     const movies = response.data.results;
 

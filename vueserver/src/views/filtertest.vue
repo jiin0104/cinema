@@ -458,19 +458,10 @@ export default {
         return this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
       });
 
-      // 선택한 이미지 경로 가져오기
-      const selectedImage = "image_path_here"; // 이미지 경로 적절하게 수정
-
-      // API 호출을 위한 데이터 준비
-      const data = {
-        selectedGenres,
-        selectedImage,
-      };
-
       try {
         // API 요청 보내기
         const response = await this.$axios.get("/fetch-movies", {
-          params: data,
+          params: selectedGenres,
         });
 
         // 필요한 작업 수행
@@ -495,7 +486,16 @@ export default {
         스릴러: 53,
         다큐멘터리: 99,
         전쟁: 10752,
-        // 나머지 장르도 추가
+        사랑중이에요: 18,
+        우울해요: 10751,
+        이별했어요: 18,
+        고민있어요: 36,
+        행복해요: 10402,
+        심심해요: 35,
+        떠나고싶어요: 12,
+        화나요: 80,
+        힐링이필요해요: 10770,
+        배고파요: 9648,
       };
       return genreMap[genreName] || null;
     },
