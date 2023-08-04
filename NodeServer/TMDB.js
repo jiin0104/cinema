@@ -98,48 +98,50 @@ axios
     console.error("JSON 데이터를 가져오는 도중 에러가 발생:", err)
   );
 
-
-  
 //
-  const express = require('express');
-const axios = require('axios');
+const express = require("express");
+const axios = require("axios");
 const app = express();
 
 // 다른 설정과 미들웨어 등을 정의...
 
-app.get('/fetch-movies', async (req, res) => {
+app.get("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
     const { selectedGenres, selectedImage } = req.query;
 
-    const apiKey = 'YOUR_TMDB_API_KEY';
-    const genreQueryString = selectedGenres.join(',');
-    
+    const apiKey = "YOUR_TMDB_API_KEY";
+    const genreQueryString = selectedGenres.join(",");
+
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}`;
 
     const options = {
-      method: 'GET',
+      method: "GET",
       url: apiUrl,
       headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      }
+        accept: "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
     };
-    
+
     const response = await axios.request(options);
     const movies = response.data.results;
 
     // 가져온 영화 정보를 활용하여 다음 작업 수행
 
-    res.json({ message: 'Movies fetched and processed.' });
+    res.json({ message: "Movies fetched and processed." });
   } catch (error) {
-    console.error('Error fetching and processing movies:', error.message);
-    res.status(500).json({ error: 'An error occurred while fetching and processing movies.' });
+    console.error("Error fetching and processing movies:", error.message);
+    res
+      .status(500)
+      .json({
+        error: "An error occurred while fetching and processing movies.",
+      });
   }
 });
 
 // 다른 라우트 및 설정 등 추가...
 
 app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+  console.log("Server is running on port 3000");
 });

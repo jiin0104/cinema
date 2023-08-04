@@ -8,7 +8,6 @@ let sql = require("./sql.js");
 
 const crypto = require("crypto");
 
-
 //익스프레스 객체
 const app = express();
 
@@ -189,7 +188,6 @@ app.post("/Find_Id", async (req, res) => {
     console.error(err);
   }
 });
-
 
 // 이메일 중복 확인
 app.post("/checkEmail", (req, res) => {
@@ -376,7 +374,6 @@ app.post("/Find_PW", async (req, res) => {
   }
 });
 
-
 // 정보 수정 API 엔드포인트
 app.post("/pw_update", (req, res) => {
   //db연결을 사용해서 작업
@@ -390,18 +387,15 @@ app.post("/pw_update", (req, res) => {
 
     const encryptedPW2 = bcrypt.hashSync(password, 10);
     console.log(stpw);
-    
-    const updateUserSql =
-      "UPDATE user SET USER_PW=? where USER_PW=?";
+
+    const updateUserSql = "UPDATE user SET USER_PW=? where USER_PW=?";
     const values = [encryptedPW2, stpw];
     connection.query(updateUserSql, values, (err, result) => {
       connection.release(); // 사용이 완료된 연결 반환
 
       if (err) {
         console.error("비밀번호 업데이트 실패:", err);
-        return res
-          .status(500)
-          .json({ error: "비밀번호 수정에 실패했습니다." });
+        return res.status(500).json({ error: "비밀번호 수정에 실패했습니다." });
       }
 
       // 정보 수정 성공 응답
@@ -409,6 +403,42 @@ app.post("/pw_update", (req, res) => {
     });
   });
 });
+
+//테스트 중
+app.get("/fetch-movies", async (req, res) => {
+  try {
+    // FilteringR.vue에서 전달한 데이터 받기
+    const { selectedGenres, selectedImage } = req.query;
+
+    const apiKey = "YOUR_TMDB_API_KEY";
+    const genreQueryString = selectedGenres.join(",");
+
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}`;
+
+    const options = {
+      method: "GET",
+      url: apiUrl,
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+    };
+
+    const response = await axios.request(options);
+    const movies = response.data.results;
+
+    // 가져온 영화 정보를 활용하여 다음 작업 수행
+
+    res.json({ message: "Movies fetched and processed." });
+  } catch (error) {
+    console.error("Error fetching and processing movies:", error.message);
+    res.status(500).json({
+      error: "An error occurred while fetching and processing movies.",
+    });
+  }
+});
+
+// 다른 라우트 및 설정 등 추가
 
 // 서버 실행
 app.listen(3000, () => {
