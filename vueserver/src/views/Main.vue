@@ -13,7 +13,7 @@
         <swiper
           :modules="modules"
           :slidesPerView="3"
-          :centeredSlides="true"
+          :centeredSlides="false"
           :spaceBetween="30"
           :pagination="{
             type: 'fraction',

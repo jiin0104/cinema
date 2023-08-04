@@ -15,6 +15,7 @@ import Find_Result_Pw from "../views/Find_Result_Pw.vue";
 import FilteringR from "../views/FilteringR.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
+import filtertest from "../views/filtertest.vue";
 //#endregion
 
 const routes = [
@@ -92,6 +93,11 @@ const routes = [
     path: "/Find_Result_Pw:pw",
     name: "Find_Result_Pw",
     component: Find_Result_Pw,
+  },
+  {
+    path: "/filtertest",
+    name: "filtertest",
+    component: filtertest,
   },
 ];
 
