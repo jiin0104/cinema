@@ -438,7 +438,7 @@ app.get("/fetch-movies", async (req, res) => {
   }
 });
 
-// 다른 라우트 및 설정 등 추가...
+// 다른 라우트 및 설정 등 추가
 
 // 서버 실행
 app.listen(3000, () => {
