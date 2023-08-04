@@ -426,8 +426,15 @@ app.get("/fetch-movies", async (req, res) => {
     //url에서 받아온 json데이터
     const response = await axios.request(options);
     const movies = response.data.results;
-
-    // 가져온 영화 정보를 활용하여 다음 작업 수행
+    // 가져온 영화 정보를 db에 저장
+    for (const movie of movies) {
+      const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
+      const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
+      await connection.query(
+        "INSERT INTO jsontest (movie_num, movie_info) VALUES (?, ?)",
+        [movieNum, movieInfo]
+      );
+    }
 
     res.json({ message: "Movies fetched and processed." });
   } catch (error) {
