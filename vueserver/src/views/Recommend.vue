@@ -17,7 +17,7 @@
           >
             <v-layout>
               <v-card>
-                <v-img :src="rec.url" height="250px" width="220px"> </v-img>
+                <v-img :src="rec.url" height="250px" width="220px" />
 
                 <div class="r_title">
                   <div>
@@ -35,28 +35,37 @@
 
           <!--모달창-->
           <div v-show="is_show" class="modal">
-            <div style="display: flex; align-items: center">
-              <v-img src="al.jpg" height="200px" width="190px"> </v-img>
+            <div style="align-items: center; margin: 10px">
               <div>
-                <div style="font-size: 40px; margin-left: 50px">
-                  <strong>알라딘</strong>
+                <div style="position: relative; left: 150px">
+                  <v-img src="al.jpg" height="200px" width="170px"> </v-img>
                 </div>
-                <div style="margin: 5px">
-                  <p>장르: 판타지, 로맨스</p>
-                  <p>러닝타임: 128분</p>
-                  <p>감독: 가이 리치</p>
-                  <p>주연: 미나 마수드, 나오미 스콧, 윌 스미스</p>
+                <div
+                  style="
+                    font-size: 35px;
+                    margin-left: 30px;
+                    width: 00px;
+                    height: 50px;
+                  "
+                >
+                  movies.MOVIE_TITLE
                 </div>
+              </div>
+              <div class="modalcontent">
+                <p>장르: movies.GENRE</p>
+                <p>개봉일: movies.MOVIE_RELEASE</p>
+                <p>감독: movies.MOVIE_DIRECTOR</p>
+                <p>주연: movies.MOVIE_ACTORS</p>
+                <p>평점: movies.MOVIE_SCORE</p>
               </div>
             </div>
             <div>
-              <div style="margin: 10px">평점</div>
               <div style="margin: 10px">
                 <form>
                   한줄리뷰
                   <div class="review">
-                    이름: 재밌어요<br />이름2: 주인공 예뻐요
-                    테스테스트세트세트세트테스트세트스테스트
+                    review.USER_ID: review.REVIEW_COMMENT<br />review.USER_ID:
+                    review.REVIEW_COMMENT
                   </div>
                 </form>
                 <button
@@ -125,7 +134,7 @@ export default {
       is_show: false,
       model: 0,
       slides: [
-        { id: 1, title: "알라딘", url: "/al.jpg" },
+        { id: 1, title: "알라딘", url: "/al.jpg" }, //require("../assets/al.jpg")
         { id: 2, title: "바빌론", url: "/va.jpg" },
         { id: 3, title: "라라랜드", url: "/lalaland.jpg" },
         { id: 4, title: "바빌론", url: "/va.jpg" },
@@ -149,8 +158,8 @@ export default {
 
 .modal {
   background-color: #d9d9d9;
-  width: 400px;
-  height: 470px;
+  width: 500px;
+  height: 600px;
   margin: 0 auto;
   font-family: "Black Han Sans", sans-serif;
   font-size: 22px;
@@ -188,5 +197,16 @@ export default {
 
 .v-img__img--contain {
   object-fit: fill;
+}
+
+.modalcontent {
+  font-size: 22px;
+  border: 1px solid #c8bdbd;
+  border-radius: 5px;
+  background-color: #ffa9a9;
+  margin-top: 5px;
+  padding: 5px;
+  width: 475px;
+  height: 170px;
 }
 </style>
