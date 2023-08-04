@@ -19,7 +19,7 @@
                 <div style="margin-left: 365px;">
                   <v-btn type="submit" @click="login" class="infotext" variant="tonal"
                     style="color: white; background-color: rgb(57, 103, 255); height: 160px; width: 105px;">
-                    확인
+                    로그인
                   </v-btn>
                 </div>
               </div>
@@ -48,6 +48,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 axios.defaults.baseURL = 'http://localhost:3000'; //서버주소
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -75,18 +76,24 @@ export default {
           console.log(res.data.message);
           // 서버에서 받아오는 로그인 정보
           if (res.data.message == 'undefined_id') {
-            this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
+            Swal.fire({
+              icon: 'warning',
+              title: '아이디 혹은 비밀번호를 \n 확인해주세요.',
+            });
           }
           else if (res.data.message == 'incorrect_pw') {
-            this.$swal("아이디 혹은 비밀번호가 맞지 않습니다.")
-          }
-          else if (res.data.message == 'not_null') {
-            this.$swal("계정 정보를 입력해주세요.")
+            Swal.fire({
+              icon: 'warning',
+              title: '아이디 혹은 비밀번호를 \n 확인해주세요.',
+            });
           }
           else {
             // store로 유저 정보 넘김
             this.$store.commit("localUser", { userId: this.userId, userNo: res.data.message })
-            this.$swal("로그인 성공!")
+            Swal.fire({
+              icon: 'success',
+              title: '로그인 성공!',
+            });
             this.$router.push({ path: '/' }); // 메인 컴포넌트 이동
             this.$store.commit('loginSuccess') // isLogin 상태 변환
           }
