@@ -102,7 +102,6 @@ export default {
   height: 20px;
   background-color: #1e90ff;
   margin-bottom: 80px;
-  position: relative;
 }
 
 .container {

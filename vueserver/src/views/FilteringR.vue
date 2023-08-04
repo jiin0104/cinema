@@ -226,33 +226,34 @@
       <div class="filter" v-else-if="type == 'E'">
         <div class="title">선택하신 사항이 맞나요?</div>
         <br /><br />
+
         <!--필터 선택 결과-->
         <div class="select">
           <br />
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select1" style="width: 90px; height: 90px" />
+              <img :src="select1" style="width: 70px; height: 70px" />
             </button>
             <div class="s-text">{{ this.selectarray[0] }}</div>
           </div>
 
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select2" style="width: 90px; height: 90px" />
+              <img :src="select2" style="width: 70px; height: 70px" />
             </button>
             <div class="s-text">{{ this.selectarray[1] }}</div>
           </div>
 
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select3" style="width: 90px; height: 90px" />
+              <img :src="select3" style="width: 70px; height: 70px" />
             </button>
             <div class="s-text">{{ this.selectarray[2] }}</div>
           </div>
 
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select4" style="width: 90px; height: 90px" />
+              <img :src="select4" style="width: 70px; height: 70px" />
             </button>
             <div class="s-text">{{ this.selectarray[3] }}</div>
           </div>
