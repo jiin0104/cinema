@@ -20,6 +20,10 @@ const store = createStore({
     state.isLogin = false
     state.isLoginError = false
   },
+  loginError(state) {
+    state.isLogin = false
+    state.isLoginError = true
+  },
   },
   modules: {
     loginStore: loginStore
