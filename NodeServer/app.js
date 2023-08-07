@@ -147,6 +147,7 @@ app.post("/login", function (request, response) {
         query,
         [loginUser.userId],
         function (error, results, fields) {
+          // bcrypt 검증
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
           console.log(results);
           if (same) {
