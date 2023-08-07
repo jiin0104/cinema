@@ -16,6 +16,7 @@ import FilteringR from "../views/FilteringR.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import filtertest from "../views/filtertest.vue";
+import mypage from "../views/MyPage.vue"
 //#endregion
 
 const routes = [
@@ -98,6 +99,11 @@ const routes = [
     path: "/filtertest",
     name: "filtertest",
     component: filtertest,
+  },
+  {
+    path: "/mypage",
+    name: "mypage",
+    component: mypage,
   },
 ];
 
