@@ -165,7 +165,7 @@ app.post("/login", function (request, response) {
           console.log(results);
           if (same) {
             // access 토큰, refresh 토큰 생성
-            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NO }, 'SECRETKEY', { expiresIn: '1m' });
+            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NO }, 'SECRETKEY', { expiresIn: '30s' });
             const refresh_token = jwt.sign({ userNo: results[0].USER_NO }, 'REFRESHKEY', { expiresIn: '3d' });
 
             // DB에 refresh 토큰 저장
