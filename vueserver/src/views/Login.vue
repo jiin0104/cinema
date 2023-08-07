@@ -48,7 +48,6 @@
 
 <script>
 import axios from 'axios';
-import Vuekookies from 'vue-cookies';
 import Swal from 'sweetalert2';
 
 axios.defaults.baseURL = 'http://localhost:3000'; //서버주소

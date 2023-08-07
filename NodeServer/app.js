@@ -6,7 +6,10 @@ const axios = require("axios");
 const bcrypt = require("bcrypt"); // 단방향 암호화
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 let sql = require("./sql.js");
+
+dotenv.config();
 
 //익스프레스 객체
 const app = express();
@@ -165,8 +168,8 @@ app.post("/login", function (request, response) {
           console.log(results);
           if (same) {
             // access 토큰, refresh 토큰 생성
-            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NO }, 'SECRETKEY', { expiresIn: '30s' });
-            const refresh_token = jwt.sign({ userNo: results[0].USER_NO }, 'REFRESHKEY', { expiresIn: '3d' });
+            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NO }, process.env.SECRETKEY, { expiresIn: '30s' });
+            const refresh_token = jwt.sign({ userNo: results[0].USER_NO }, process.env.SECRETKEY2, { algorithm: "HS256", expiresIn: '3d' });
 
             // DB에 refresh 토큰 저장
             dbPool.query("UPDATE user SET REFRESH_TOKEN = ? WHERE USER_ID = ?", [ refresh_token, loginUser.userId ], function ( error, results, fields ) {

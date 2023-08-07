@@ -14,11 +14,13 @@ const store = createStore({
    // 저장된 유저 정보와 불러온 유저 정보가 일치하는지 확인
   loginSuccess(state) {
     state.isLogin = true
+    state.access_token = true
     state.isLoginError = false
   },
   logOut(state) {
     state.isLogin = false
     state.isLoginError = false
+    state.access_token = false
   },
   loginError(state) {
     state.isLogin = false
