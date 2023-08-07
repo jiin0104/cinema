@@ -83,7 +83,7 @@
                 <label><input class="genre" id="genre5" type="radio" value="SF" name="genre" v-model="genre">SF</label>&nbsp;
                 <label><input class="genre" id="genre6" type="radio" value="판타지" name="genre" v-model="genre">판타지</label>&nbsp;
                 <label><input class="genre" id="genre7" type="radio" value="스릴러" name="genre" v-model="genre">스릴러</label>&nbsp;
-                <label><input class="genre" id="genre8" type="radio" value="다큐멘터리" name="genre" v-model="genre">다큐멘터리</label><br><br>
+                <label><input class="genre" id="genre8" type="radio" value="다큐멘터리" name="genre" v-model="genre">다큐멘터리</label><br>
                 <label><input class="genre" id="genre9" type="radio" value="전쟁" name="genre" v-model="genre">전쟁</label><br><br>
               </div>
 

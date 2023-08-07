@@ -4,7 +4,7 @@ const fs = require("fs");
 const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
 const axios = require("axios");
 const bcrypt = require("bcrypt"); // 단방향 암호화
-let sql = require("./sql.js");
+
 
 const crypto = require("crypto");
 
@@ -31,9 +31,9 @@ app.use(cors(corsOption)); //CORS 미들웨어
 //express 서버로 POST 요청을 할 때 input 태그의 value를 전달하기 위해 사용
 //post 방식으로 클라이언트가 요청하는 본문에 있는 value를 넘겨받고 req.body 객체로 만들어주는 미들웨어.
 //넘겨받은 value들은 DB로 전송
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json({ limit: "50mb" }));
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+let sql = require("./sql.js");
 //우리가 쿼리 수정했을 때 바로바로 내역 볼 수 있게.
 fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
   console.log("sql 변경시 재시작 없이 반영되도록 함.");
@@ -51,11 +51,7 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
 app.post("/api/:alias", async (request, res) => {
   try {
     res.send(
-      await req.dbPool(
-        request.params.alias,
-        request.body.param,
-        request.body.where
-      )
+      await req.db(request.params.alias, request.body.param, request.body.where)
     );
   } catch (err) {
     res.status(500).send({
@@ -452,3 +448,5 @@ app.get("/fetch-movies", async (req, res) => {
 app.listen(3000, () => {
   console.log("port 3000에서 서버구동");
 });
+
+module.exports = dbPool;
