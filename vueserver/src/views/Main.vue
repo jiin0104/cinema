@@ -13,11 +13,8 @@
         <swiper
           :modules="modules"
           :slidesPerView="3"
-          :centeredSlides="true"
+          :centeredSlides="false"
           :spaceBetween="30"
-          :pagination="{
-            type: 'fraction',
-          }"
           :autoplay="{
             delay: 2000,
             disableOnInteraction: false,
@@ -80,11 +77,8 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 // Import Swiper styles
 import "swiper/css";
 
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/virtual";
-
-import "./style.css";
 
 // import Swiper core and required modules
 import { Autoplay, Pagination, Navigation, Virtual } from "swiper/modules";
@@ -111,7 +105,7 @@ export default {
       //   { name: "라라랜드", imgSrc: "/lalaland.jpg" },
       // ],
       slides: [
-        { po: 1, url: "/al.jpg" },
+        { po: "1", url: "/al.jpg" },
         { po: 2, url: require("../assets/lalaland.jpg") },
       ],
     };
@@ -164,4 +158,5 @@ export default {
 </script>
 <style>
 @import "../css/main.css";
+@import "../css/swiper.css";
 </style>

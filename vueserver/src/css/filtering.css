@@ -22,6 +22,15 @@
   color: white;
 }
 
+.r-text {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 37px;
+  float: left;
+  position: relative;
+  top: 30px;
+  color: white;
+}
+
 .buttonlocation {
   position: absolute;
   top: 50%;
@@ -45,6 +54,12 @@
 .buttonlocation4 {
   position: relative;
   left: 10px;
+  display: flex;
+}
+
+.buttonlocation5 {
+  position: relative;
+  left: 120px;
   display: flex;
 }
 

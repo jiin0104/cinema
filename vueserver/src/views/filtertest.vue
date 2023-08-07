@@ -226,36 +226,35 @@
       <div class="filter" v-else-if="type == 'E'">
         <div class="title">선택하신 사항이 맞나요?</div>
         <br /><br />
-
         <!--필터 선택 결과-->
-        <div class="select" >
+        <div class="select">
           <br />
-          <div class="buttonlocation5">
+          <div class="buttonlocation4">
             <button type="button" class="button5">
-              <img :src="select1" style="width: 70px; height: 70px" />
+              <img :src="select1" style="width: 90px; height: 90px" />
             </button>
-            <div class="r-text">{{ this.selectarray[0] }}</div>
+            <div class="s-text">{{ this.selectarray[0] }}</div>
           </div>
 
-          <div class="buttonlocation5">
+          <div class="buttonlocation4">
             <button type="button" class="button5">
-              <img :src="select2" style="width: 70px; height: 70px" />
+              <img :src="select2" style="width: 90px; height: 90px" />
             </button>
-            <div class="r-text">{{ this.selectarray[1] }}</div>
+            <div class="s-text">{{ this.selectarray[1] }}</div>
           </div>
 
-          <div class="buttonlocation5">
+          <div class="buttonlocation4">
             <button type="button" class="button5">
-              <img :src="select3" style="width: 70px; height: 70px" />
+              <img :src="select3" style="width: 90px; height: 90px" />
             </button>
-            <div class="r-text">{{ this.selectarray[2] }}</div>
+            <div class="s-text">{{ this.selectarray[2] }}</div>
           </div>
 
-          <div class="buttonlocation5">
+          <div class="buttonlocation4">
             <button type="button" class="button5">
-              <img :src="select4" style="width: 70px; height: 70px" />
+              <img :src="select4" style="width: 90px; height: 90px" />
             </button>
-            <div class="r-text">{{ this.selectarray[3] }}</div>
+            <div class="s-text">{{ this.selectarray[3] }}</div>
           </div>
           <br /><br />
           <div class="filterselected" style="text-align: center">
@@ -452,8 +451,53 @@ export default {
     filtercancel() {
       location.href = "/FilteringR";
     },
-    filterconfirm() {
-      this.$router.push({ path: "/FinalFilter" });
+    // 필터 확인 버튼 클릭 시 처리
+    async filterconfirm() {
+      // 선택한 장르 정보 가져오기
+      const selectedGenres = this.selectarray.map((genre) => {
+        return this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+      });
+
+      try {
+        // API 요청 보내기
+        const response = await this.$axios.get("/fetch-movies", {
+          params: selectedGenres,
+        });
+
+        // 필요한 작업 수행
+
+        // 결과 페이지로 이동
+        this.$router.push({ path: "/FinalFilter" });
+      } catch (error) {
+        console.error("Error fetching and processing movies:", error);
+        // 에러 처리
+      }
+    },
+
+    // 장르 이름을 장르 ID로 매핑
+    mapGenreNameToId(genreName) {
+      const genreMap = {
+        애니메이션: 16,
+        액션: 28,
+        로맨스: 10749,
+        코미디: 35,
+        SF: 878,
+        판타지: 14,
+        스릴러: 53,
+        다큐멘터리: 99,
+        전쟁: 10752,
+        사랑중이에요: 18,
+        우울해요: 10751,
+        이별했어요: 18,
+        고민있어요: 36,
+        행복해요: 10402,
+        심심해요: 35,
+        떠나고싶어요: 12,
+        화나요: 80,
+        힐링이필요해요: 10770,
+        배고파요: 9648,
+      };
+      return genreMap[genreName] || null;
     },
   },
 };

@@ -22,7 +22,7 @@
 //     console.error(error);
 //   });
 
-// 장르 번호들
+// // 장르 번호들
 //   {"genres":[
 //   {"id":28,"name":"Action"},
 //   {"id":12,"name":"Adventure"},
@@ -43,7 +43,7 @@
 //   {"id":53,"name":"Thriller"},
 //   {"id":10752,"name":"War"},
 //   {"id":37,"name":"Western"}
-// ]}
+// // ]}
 
 //뽑아온 영화 디테일 가져오기
 // const axios = require('axios');
@@ -68,32 +68,3 @@
 //     console.error(error);
 //   });
 
-const dbPool = require("/db.js");
-
-// JSON 데이터를 MySQL 데이터베이스에 저장하는 함수
-function saveJSONDataToDatabase(jsonData) {
-  const connection = dbPool.getConnection((err, connection) => {
-    const query = "INSERT INTO movie_info (data) VALUES (?)";
-    const jsonDataString = JSON.stringify(jsonData);
-
-    connection.query(query, [jsonDataString], (err, results) => {
-      if (err) {
-        console.error("데이터 삽입 중 에러가 발생했습니다:", err);
-      } else {
-        console.log("데이터 삽입이 성공적으로 완료되었습니다.");
-      }
-      connection.release();
-    });
-  });
-}
-
-// 예시: JSON 데이터를 받아와서 데이터베이스에 저장하기 const jsonURL = "https://api.themoviedb.org/3/discover/movie?api_key=49ba50092811928efb84febb9d68823f";
-
-axios
-  .get(jsonURL)
-  .then((response) => response.data)
-  .then((jsonData) => saveJSONDataToDatabase(jsonData))
-  .then(console.log)
-  .catch((err) =>
-    console.error("JSON 데이터를 가져오는 도중 에러가 발생:", err)
-  );

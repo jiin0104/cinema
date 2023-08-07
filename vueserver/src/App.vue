@@ -1,7 +1,8 @@
 <template>
+  <div style="background-color: black;">
   <Header/>
     <router-view/>
-
+  </div>
 </template>
 
 <script>
