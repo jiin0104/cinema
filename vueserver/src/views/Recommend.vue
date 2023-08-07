@@ -6,8 +6,8 @@
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
           <!--카드-->
           <div
-            v-for="rec in slides"
-            :key="rec.id"
+            v-for="rec in recList"
+            :key="rec.MOVIE_NUM"
             style="
               position: relative;
               left: 140px;
@@ -17,11 +17,11 @@
           >
             <v-layout>
               <v-card>
-                <v-img :src="rec.url" height="250px" width="220px" />
+                <v-img :src="rec.POSTER" height="250px" width="220px" />
 
                 <div class="r_title">
                   <div>
-                    <div class="headline">{{ rec.title }}</div>
+                    <div class="headline">{{ rec.MOVIE_TITLE }}</div>
                   </div>
                 </div>
 
@@ -133,14 +133,21 @@ export default {
       logo: "logo.png",
       is_show: false,
       model: 0,
-      slides: [
-        { id: 1, title: "알라딘", url: "/al.jpg" }, //require("../assets/al.jpg")
-        { id: 2, title: "바빌론", url: "/va.jpg" },
-        { id: 3, title: "라라랜드", url: "/lalaland.jpg" },
-        { id: 4, title: "바빌론", url: "/va.jpg" },
-      ],
+      // slides: [
+      //   { id: 1, title: "알라딘", url: "/al.jpg" }, //require("../assets/al.jpg")
+      //   { id: 2, title: "바빌론", url: "/va.jpg" },
+      //   { id: 3, title: "라라랜드", url: "/lalaland.jpg" },
+      //   { id: 4, title: "바빌론", url: "/va.jpg" },
+      // ],
+      MOVIE_NUM: 1,
+      recList: [],
     };
   },
+  mounted() {
+    //페이지가 실행되자마자 작동시킬함수 정의
+    this.Get_Movie_List();
+  },
+
   methods: {
     pageLink() {
       this.$router.push({ path: "/" });
@@ -148,6 +155,12 @@ export default {
 
     handle_toggle() {
       this.is_show = !this.is_show;
+    },
+
+    async Get_Movie_List() {
+      this.recList = await this.$api("/api/recList", {
+        param: [this.MOVIE_NUM],
+      });
     },
   },
 };
