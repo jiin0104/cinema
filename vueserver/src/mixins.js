@@ -9,20 +9,22 @@ axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 //서버와의 데이터 통신을 위한 메소드
 export default {
   methods: {
-    // async와 await을 기반으로 서로 데이터를 주고 받을 수 있게 공통(모든 vue 컨포넌트에서 사용 가능한 모듈) 메소드 선언
-    async $api(url, data) {
+    // url을 받고, data를 파라미터로 주고 받음.$api의 3 번쨰 인자로 메소드를 받도록하고 post를 기본값으로 함.
+      //추가로 이제 post말고도 get도 그냥 쓸 수 있음.
+    async $api(url, data, method = "post") {
       // url을 받고, data를 파라미터로 주고 받음
-      return (
-        await axios({
+      try {
+        const response = await axios({
           // axios로 서버를 호출하고, 그 결과를 return하는 방식
-          method: "post", // 전부 post 방식으로 호출
+          method, // 전달된 메소드를 사용하도록 변경
           url, // url 호출
           data, // data 받음
-        }).catch((e) => {
-          // 예외처리
-          console.log(e); // 일단 console.log로 에러 표현
-        })
-      ).data; // data retrun
+        });
+        return response.data; // data return
+      } catch (e) {
+        console.log(e); // 일단 console.log로 에러 표현
+        throw e; // 에러를 다시 던져서 상위 컴포넌트에서 처리하도록 함
+      }
     },
   },
 };
