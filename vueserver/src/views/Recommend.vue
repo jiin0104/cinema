@@ -17,7 +17,7 @@
           >
             <v-layout>
               <v-card>
-                <v-img :src="rec.POSTER" height="250px" width="220px" />
+                <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
 
                 <div class="r_title">
                   <div>
