@@ -1,7 +1,7 @@
 <template>
     <body class="background" style="height: 1400px;">
         <!-- 좌상단 로고 -->
-        <form id="app2" @submit="checkForm" action="/signup" method="post" novalidate="true">
+        
             <div class="signtitle">
                 <div class="signform" style="padding-top: 3%; padding-bottom: 3%; max-width: 465px;">
                     <div class="signform1">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="main" style="width: 20%"></div>
-        </form>
+        
     </body>
 </template>
   
@@ -79,13 +79,14 @@ export default {
     },
 
     created() {
-        this.Get_User_Info();
+        this.Get_user();
     },
 
     methods: {
-        async Get_User_Info() {
-            let userinfo = await this.$api("/api/userinfo", { param: [this.$store.state.userId] });
+        async Get_user() {
+            let userinfo = await this.$api("/api/userin", { param: [this.$store.state.userId] });
             this.userinfo = userinfo[0];
+            console.log(this.userinfo);
         }
     }
 
