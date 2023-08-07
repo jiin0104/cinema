@@ -452,8 +452,61 @@ export default {
     filtercancel() {
       location.href = "/FilteringR";
     },
-    filterconfirm() {
-      this.$router.push({ path: "/FinalFilter" });
+    // 필터 확인 버튼 클릭 시 처리
+    async filterconfirm() {
+      // 선택한 장르 정보 가져오기
+      const selectedGenres = this.selectarray.map((genre) => {
+        const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+        return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
+      });
+      //매핑된 장르id가 제대로 배열에 들어갔는지 확인
+      console.log(selectedGenres);
+
+      try {
+        // API 요청 보내기
+        const response = await this.$api(
+          "/fetch-movies",
+          {
+            selectedGenres: this.selectarray,
+          },
+          "get"
+        );
+        // 필요한 작업 수행
+        console.log(response); // 오류 알림 없애는 용(쓸데없는거임)
+        // 결과 페이지로 이동
+        this.$router.push({
+          path: "/FinalFilter",
+        });
+      } catch (error) {
+        console.error("Error fetching and processing movies:", error);
+        // 에러 처리
+      }
+    },
+
+    // 장르 이름을 장르 ID로 매핑
+    mapGenreNameToId(genreName) {
+      const genreMap = {
+        애니메이션: 16,
+        액션: 28,
+        로맨스: 10749,
+        코미디: 35,
+        SF: 878,
+        판타지: 14,
+        스릴러: 53,
+        다큐멘터리: 99,
+        전쟁: 10752,
+        사랑중이에요: 18,
+        우울해요: 10751,
+        이별했어요: 18,
+        고민있어요: 36,
+        행복해요: 10402,
+        심심해요: 35,
+        떠나고싶어요: 12,
+        화나요: 80,
+        힐링이필요해요: 10770,
+        배고파요: 9648,
+      };
+      return genreMap[genreName] || null;
     },
   },
 };

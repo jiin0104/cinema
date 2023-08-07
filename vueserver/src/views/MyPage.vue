@@ -87,6 +87,8 @@ export default {
             let userinfo = await this.$api("/api/userin", { param: [this.$store.state.userId] });
             this.userinfo = userinfo[0];
             console.log(this.userinfo);
+            console.log(this.$store.state.access_token)
+            console.log(this.$store.state.userId)
         }
     }
 
