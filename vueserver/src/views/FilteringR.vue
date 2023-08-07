@@ -472,7 +472,7 @@ export default {
           "get"
         );
         // 필요한 작업 수행
-
+        console.log(response); // 오류 알림 없애는 용(쓸데없는거임)
         // 결과 페이지로 이동
         this.$router.push({
           path: "/FinalFilter",
