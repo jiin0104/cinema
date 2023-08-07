@@ -4,9 +4,9 @@ const fs = require("fs");
 const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
 const axios = require("axios");
 const bcrypt = require("bcrypt"); // 단방향 암호화
-
-
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+let sql = require("./sql.js");
 
 //익스프레스 객체
 const app = express();
@@ -33,7 +33,7 @@ app.use(cors(corsOption)); //CORS 미들웨어
 //넘겨받은 value들은 DB로 전송
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-let sql = require("./sql.js");
+
 //우리가 쿼리 수정했을 때 바로바로 내역 볼 수 있게.
 fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
   console.log("sql 변경시 재시작 없이 반영되도록 함.");
@@ -47,7 +47,38 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
 // const 엔드포인트로직의메소드명 = require("./Routers/라우터폴더의js파일명");
 // app.use("/우리가쓸엔드포인트", 엔드포인트로직의메소드명);
 
+const req = {
+  async db(alias, param = [], where = "") {
+    return new Promise((resolve, reject) =>
+      dbPool.query(sql[alias].query + where, param, (error, rows) => {
+        if (error) {
+          if (error.code != "ER_DUP_ENTRY") console.log(error);
+          resolve({
+            error,
+          });
+        } else resolve(rows);
+      })
+    );
+  },
+};
+
 //우리가 작성할 엔드포인트 기본틀을 제시. 다른 엔드포인트 작성할 때 /api를 써도 되고 생략해도 됨.
+app.post("/apirole/:alias", async (request, res) => {
+  if (!request.session.email) {
+    return res.status(401).send({
+      error: "You need to login.",
+    });
+  }
+
+  try {
+    res.send(await req.db(request.params.alias));
+  } catch (err) {
+    res.status(500).send({
+      error: err,
+    });
+  }
+});
+
 app.post("/api/:alias", async (request, res) => {
   try {
     res.send(
@@ -129,13 +160,23 @@ app.post("/login", function (request, response) {
         query,
         [loginUser.userId],
         function (error, results, fields) {
-          // bcrypt 검증
+          // bcrypt 암호화 된 비밀번호 검증
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
           console.log(results);
           if (same) {
+            // access 토큰, refresh 토큰 생성
+            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NO }, 'SECRETKEY', { expiresIn: '30s' });
+            const refresh_token = jwt.sign({ userNo: results[0].USER_NO }, 'REFRESHKEY', { expiresIn: '3d' });
+
+            // DB에 refresh 토큰 저장
+            dbPool.query("UPDATE user SET REFRESH_TOKEN = ? WHERE USER_ID = ?", [ refresh_token, loginUser.userId ], function ( error, results, fields ) {
+              if (error) return res.status(500).json({ results: error });
+            });
+
             // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우
             return response.status(200).json({
-              message: results[0].USER_NO,
+              access_token: access_token,
+              refresh_token: refresh_token
             });
           } else {
             // 비밀번호 불일치
@@ -147,12 +188,6 @@ app.post("/login", function (request, response) {
       );
     }
   });
-});
-
-app.post("/logout", async (request, res) => {
-  // client에서 server쪽으로 axios post()방식으로 logout api가져오기
-  request.session.destroy(); // session 없애기
-  res.send("ok");
 });
 
 //전화번호를 받아서 아이디 찾기.
@@ -406,11 +441,18 @@ app.get("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
     const { selectedGenres } = req.query;
+    console.log({ selectedGenres });
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
-    const genreQueryString = selectedGenres.join(",");
+    //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
+    const genreQueryString = Array.isArray(selectedGenres)
+      ? selectedGenres.join(",")
+      : selectedGenres;
 
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}`;
+    // console.log를 사용하여 데이터 확인
+    console.log("Selected genres:", selectedGenres);
+
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
 
     const options = {
       method: "GET",
@@ -420,17 +462,24 @@ app.get("/fetch-movies", async (req, res) => {
         Authorization: `Bearer ${apiKey}`,
       },
     };
+
     //url에서 받아온 json데이터
     const response = await axios.request(options);
+
+    //json 받아오는지 확인
+    console.log({ response });
+
     const movies = response.data.results;
     // 가져온 영화 정보를 db에 저장
     for (const movie of movies) {
-      const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
+      // const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
       const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
-      await connection.query(
-        "INSERT INTO jsontest (movie_num, movie_info) VALUES (?, ?)",
-        [movieNum, movieInfo]
-      );
+      const [rows, fields] = await dbPool
+        .promise()
+        .query("INSERT INTO jsontest (movie_info) VALUES (?)", [
+          // movieNum,
+          [movieInfo],
+        ]);
     }
 
     res.json({ message: "Movies fetched and processed." });

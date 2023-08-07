@@ -1,9 +1,8 @@
 const loginStore = {
   state: {
     userId: '',
-    userNo: '',
-    isLogin: '',
-    isLoginError: ''
+    access_token: '',
+    refresh_token: '',
   },
   getters: {},
   mutations: {
@@ -11,19 +10,8 @@ const loginStore = {
    // 저장된 유저 정보와 불러온 유저 정보가 일치하는지 확인
   localUser(state, payload) {
     state.userId = payload.userId;
-    state.userNo = payload.userNo;
-  },
-  loginSuccess(state) {
-    state.isLogin = true
-    state.isLoginError = false
-  },
-  logOut(state) {
-    state.isLogin = false
-    state.isLoginError = false
-  },
-  loginError(state) {
-    state.isLogin = false
-    state.isLoginError = true
+    state.access_token = payload.access_token;
+    state.refresh_token = payload.refresh_token;
   },
 },
   actions: {},
