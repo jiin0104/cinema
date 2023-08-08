@@ -17,6 +17,7 @@ import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import filtertest from "../views/filtertest.vue";
 import mypage from "../views/MyPage.vue"
+import mypage_update from "../views/Mypage_Update.vue"
 //#endregion
 
 const routes = [
@@ -107,6 +108,11 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: mypage,
+  },
+  {
+    path: "/mypage_update",
+    name: "mypage_update",
+    component: mypage_update,
   },
 ];
 
