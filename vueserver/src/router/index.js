@@ -34,6 +34,9 @@ const routes = [
     path: "/FilteringR",
     name: "FilteringR",
     component: FilteringR,
+    meta: {
+
+    }
   },
   {
     path: "/Filtering",
@@ -106,6 +109,8 @@ const routes = [
     component: mypage,
   },
 ];
+
+import store from '../store/'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
