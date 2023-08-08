@@ -507,7 +507,7 @@ app.post("/mypage_update", (req, res) => {
     }
 
     const {
-      email,
+      
       nickname,
       password,
       age,
@@ -523,9 +523,9 @@ app.post("/mypage_update", (req, res) => {
 
     // 중복된 이메일이 없을 경우 회원 정보 저장
     const insertUserSql =
-      "UPDATE user SET USER_ID=?, USER_PW=?, USER_NICKNAME=?, USER_AGE=?, USER_TEL=?, USER_ADDRESS1=?, USER_ADDRESS2=?, SEX=?, GENRE=? where USER_ID=?";
+      "UPDATE user SET USER_PW=?, USER_NICKNAME=?, USER_AGE=?, USER_TEL=?, USER_ADDRESS1=?, USER_ADDRESS2=?, SEX=?, GENRE=? where USER_ID=?";
     const values = [
-      email,
+      
       encryptedPW,
       nickname,
       age,

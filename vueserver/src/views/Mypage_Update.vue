@@ -8,7 +8,7 @@
                         <div class="contact-text">
                             <div class="title">내 정보 수정하기</div>
 
-                            <div class="field2" id="myup">
+                            <!-- <div class="field2" id="myup">
                                 <span label for="email">이메일(아이디)</span><br>
                                 <input id="email" class="email" type="text" role="textbox" placeholder="이메일을 입력해 주세요."
                                     name="email" v-model="email" />
@@ -16,7 +16,7 @@
                                     style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 75px;">중복
                                     확인</v-btn>
                                 <br /><br />
-                            </div>
+                            </div> -->
 
                             <div class="field2" id="sign">
                                 <span label for="nickname">닉네임</span><br />
@@ -146,7 +146,7 @@ export default {
     data() {//인풋에서 받을 값들.
         return {
             errors: [],
-            email: null,
+            // email: null,
             phone: null,
             nickname: null,
             password: null,
@@ -157,7 +157,7 @@ export default {
             age: null,
             sex: null,
             genre: null,
-            userid: this.$store.state.loginStore.userId,
+            userid: this.$store.state.userId,
         }
     },
 
@@ -168,7 +168,7 @@ export default {
 
     methods: {
         async get_user() {
-      let userget = await this.$api("/api/userin", { param: [this.$store.state.loginStore.userId] });
+      let userget = await this.$api("/api/userin", { param: [this.$store.state.userId] });
       this.userget = userget[0];
       this.nickname = this.userget.USER_NICKNAME;
       this.password = this.userget.USER_PASSWORD;
@@ -186,11 +186,11 @@ export default {
             e.preventDefault();
             this.errors = [];
 
-            if (!this.email) {
-                this.errors.push("이메일은 필수입니다.");
-            } else if (!this.validEmail(this.email)) {
-                this.errors.push("이메일 형식을 확인하세요.");
-            }
+            // if (!this.email) {
+            //     this.errors.push("이메일은 필수입니다.");
+            // } else if (!this.validEmail(this.email)) {
+            //     this.errors.push("이메일 형식을 확인하세요.");
+            // }
 
             if (!this.nickname) {
                 this.errors.push("닉네임은 필수입니다.");
@@ -230,10 +230,10 @@ export default {
         },
 
 
-        validEmail(email) {// 이메일 형식 유효성 검사 로직
-            var re1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-            return re1.test(email);
-        },
+        // validEmail(email) {// 이메일 형식 유효성 검사 로직
+        //     var re1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        //     return re1.test(email);
+        // },
 
 
 
@@ -278,7 +278,7 @@ export default {
 
         submitForm() {//입력한 값들 서브밋.
             const formData = {
-                email: this.email,
+                // email: this.email,
                 nickname: this.nickname,
                 password: this.password,
                 phone: this.phone,
@@ -287,7 +287,7 @@ export default {
                 age: document.querySelector('input[name="age"]:checked').value,
                 sex: document.querySelector('input[name="sex"]:checked').value,
                 genre: document.querySelector('input[name="genre"]:checked').value,
-                userid: this.$store.state.loginStore.userId
+                userid: this.$store.state.userId
             };
 
 

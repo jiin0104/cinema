@@ -90,12 +90,12 @@ export default {
 
     methods: {
         async Get_user() {
-            let userinfo = await this.$api("/api/userin", { param: [this.$store.state.loginStore.userId] });
+            let userinfo = await this.$api("/api/userin", { param: [this.$store.state.userId] });
             this.userinfo = userinfo[0];
             console.log(this.$store.state.isLogin);
-            console.log(this.$store.state.loginStore.access_token)
-            console.log(this.$store.state.loginStore.refresh_token)
-            console.log(this.$store.state.loginStore.userId)
+            console.log(this.$store.state.access_token)
+            console.log(this.$store.state.refresh_token)
+            console.log(this.$store.state.userId)
         },
         mypage_update() {
       this.$router.push({ path: "/mypage_update" });
