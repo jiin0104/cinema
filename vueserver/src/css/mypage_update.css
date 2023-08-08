@@ -1,33 +1,22 @@
-.mybackground {
-  background-size: cover;
-  background-image: url("../assets/main.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 900px;
-  margin: 0;
-}
-
-.mytitle {
+.myuptitle {
     width: 900px;
-    min-height: 800px;
+    min-height: 900px;
     background-color: #ffffff5b;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
     border-radius: 1em;
   }
   
-  .myform {
+  .myupform {
     min-height: 400px;
     margin: 0 auto;
     
     border-radius: 1em;
   }
   
-  .myform1 {
+  .myupform1 {
     width: 500px;
-    min-height: 650px;
+    min-height: 900px;
     background-color: #c8bdbd;
     margin: 0 auto;
     padding: 15px;
@@ -43,10 +32,24 @@
     list-style:none;
   }
   
-  .myfield {
-    font-size: 17px;
+  .email, .nickname, .userpw, .userpw-confirm, .phone1, .zonecode, .roadAddress, .detailAddress {
+    font-size: 14px;
+    color: black;
+    line-height: 1.2;
+    
+    width: 185px;
+    height: 30px;
+    
+    background-color: white;
+    margin-right: 15px;
+    
+    border-radius: 1em;
+    padding-left: 10px;
   }
   
+  .zonecode, .roadAddress, .detailAddress {
+    margin-bottom: 10px;
+  }
   
   #addallow {
     

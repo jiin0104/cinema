@@ -167,9 +167,10 @@ app.post("/login", function (request, response) {
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
           console.log(results);
           if (same) {
-            // access 토큰, refresh 토큰 생성
-            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NO }, process.env.SECRETKEY, { expiresIn: '30s' });
-            const refresh_token = jwt.sign({ userNo: results[0].USER_NO }, process.env.SECRETKEY2, { algorithm: "HS256", expiresIn: '3d' });
+            // access 토큰
+            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NUM }, process.env.SECRETKEY, { expiresIn: '10s' });
+            // refresh 토큰 생성
+            const refresh_token = jwt.sign({ userNo: results[0].USER_NUM }, process.env.SECRETKEY2, { algorithm: "HS256", expiresIn: '3d' });
 
             // DB에 refresh 토큰 저장
             dbPool.query("UPDATE user SET REFRESH_TOKEN = ? WHERE USER_ID = ?", [ refresh_token, loginUser.userId ], function ( error, results, fields ) {
@@ -495,6 +496,62 @@ app.get("/fetch-movies", async (req, res) => {
 });
 
 // 다른 라우트 및 설정 등 추가
+
+// 정보 수정 API 엔드포인트
+app.post("/mypage_update", (req, res) => {
+  //db연결을 사용해서 작업
+  dbPool.getConnection((err, connection) => {
+    if (err) {
+      console.error("db연결에 문제가 있음", err);
+      return res.status(500).json({ error: "db연결에 실패했습니다." });
+    }
+
+    const {
+      
+      nickname,
+      password,
+      age,
+      phone,
+      address1,
+      address2,
+      sex,
+      genre,
+      userid
+    } = req.body;
+
+    const encryptedPW = bcrypt.hashSync(password, 10); // 비밀번호 암호화
+
+    // 중복된 이메일이 없을 경우 회원 정보 저장
+    const insertUserSql =
+      "UPDATE user SET USER_PW=?, USER_NICKNAME=?, USER_AGE=?, USER_TEL=?, USER_ADDRESS1=?, USER_ADDRESS2=?, SEX=?, GENRE=? where USER_ID=?";
+    const values = [
+      
+      encryptedPW,
+      nickname,
+      age,
+      phone,
+      address1,
+      address2,
+      sex,
+      genre,
+      userid
+    ];
+    connection.query(insertUserSql, values, (err, result) => {
+      connection.release(); // 사용이 완료된 연결 반환
+
+      if (err) {
+        console.error("회원 정보 수정 실패:", err);
+        return res
+          .status(500)
+          .json({ error: "회원 정보 수정에 실패했습니다." });
+      }
+
+      // 수정 성공 응답
+      res.json({ message: "수정 완료" });
+    });
+  });
+});
+
 
 // 서버 실행
 app.listen(3000, () => {

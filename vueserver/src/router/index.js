@@ -17,6 +17,7 @@ import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import filtertest from "../views/filtertest.vue";
 import mypage from "../views/MyPage.vue"
+import mypage_update from "../views/Mypage_Update.vue"
 //#endregion
 
 const routes = [
@@ -34,6 +35,9 @@ const routes = [
     path: "/FilteringR",
     name: "FilteringR",
     component: FilteringR,
+    meta: {
+
+    }
   },
   {
     path: "/Filtering",
@@ -105,7 +109,14 @@ const routes = [
     name: "mypage",
     component: mypage,
   },
+  {
+    path: "/mypage_update",
+    name: "mypage_update",
+    component: mypage_update,
+  },
 ];
+
+import store from '../store/'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

@@ -58,7 +58,7 @@
 
               <div class="field2">
                 <span label for="age">연령대</span><br />
-                <label><input class="age" id="age0" type="radio" value="0대" name="age" v-model="age">10대 미만</label>&nbsp;
+                <label><input class="age" id="age0" type="radio" value="10대 미만" name="age" v-model="age">10대 미만</label>&nbsp;
                 <label><input class="age" id="age1" type="radio" value="10대" name="age" v-model="age">10대</label>&nbsp;
                 <label><input class="age" id="age2" type="radio" value="20대" name="age"  v-model="age" checked>20대</label>&nbsp;
                 <label><input class="age" id="age3" type="radio" value="30대" name="age" v-model="age">30대</label>&nbsp;<br>

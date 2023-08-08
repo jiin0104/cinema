@@ -1,7 +1,7 @@
 <template>
   <!-- 로그인 상태일 경우 -->
 
-  <v-card v-if="isLogin">
+  <v-card v-if="isLogin" style="z-index: auto;">
     <v-layout>
       <v-navigation-drawer v-model="drawer" temporary>
         <v-list-item prepend-icon="mdi-menu" title="더보기 메뉴"></v-list-item>
@@ -30,7 +30,7 @@
 
   <!-- 비회원 상태일 경우 -->
 
-  <v-card v-else>
+  <v-card v-else style="z-index: auto;">
     <v-layout>
       <v-navigation-drawer v-model="drawer" temporary>
         <v-list-item prepend-icon="mdi-menu" title="더보기 메뉴"></v-list-item>
