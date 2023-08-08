@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="detail">
-                  <button @click="handle_toggle()">상세보기</button>
+                  <button @click="handle_toggle(rec)">상세보기</button>
                 </div>
               </v-card>
             </v-layout>
@@ -35,28 +35,37 @@
 
           <!--모달창-->
           <div v-show="is_show" class="modal">
-            <div style="align-items: center; margin: 10px">
+            <div
+              class="list"
+              v-for="(modL, i) in modList"
+              :key="i"
+              style="align-items: center; margin: 10px"
+            >
               <div>
                 <div style="position: relative; left: 150px">
-                  <v-img src="al.jpg" height="200px" width="170px"> </v-img>
+                  <v-img
+                    :src="`/download/${modL.MOVIE_NUM}/${modL.MOVIE_POSTER}`"
+                    height="200px"
+                    width="170px"
+                  ></v-img>
                 </div>
                 <div
                   style="
                     font-size: 35px;
-                    margin-left: 30px;
-                    width: 00px;
+                    text-align: center;
+                    width: 500px;
                     height: 50px;
                   "
                 >
-                  movies.MOVIE_TITLE
+                  {{ modL.MOVIE_TITLE }}
                 </div>
               </div>
               <div class="modalcontent">
-                <p>장르: movies.GENRE</p>
-                <p>개봉일: movies.MOVIE_RELEASE</p>
-                <p>감독: movies.MOVIE_DIRECTOR</p>
-                <p>주연: movies.MOVIE_ACTORS</p>
-                <p>평점: movies.MOVIE_SCORE</p>
+                <p>장르: {{ modL.GENRE }}</p>
+                <p>개봉일: {{ modL.MOVIE_RELEASE }}</p>
+                <p>감독: {{ modL.MOVIE_DIRECTOR }}</p>
+                <p>주연: {{ modL.MOVIE_ACTORS }}</p>
+                <p>평점: {{ modL.MOVIE_SCORE }}</p>
               </div>
             </div>
             <div>
@@ -64,8 +73,8 @@
                 <form>
                   한줄리뷰
                   <div class="review">
-                    review.USER_ID: review.REVIEW_COMMENT<br />review.USER_ID:
-                    review.REVIEW_COMMENT
+                    modL.USER_ID : modL.REVIEW_COMMENT <br />
+                    modL.USER_ID : modL.REVIEW_COMMENT
                   </div>
                 </form>
                 <button
@@ -132,33 +141,41 @@ export default {
     return {
       logo: "logo.png",
       is_show: false,
-      model: 0,
-      // slides: [
-      //   { id: 1, title: "알라딘", url: "/al.jpg" }, //require("../assets/al.jpg")
-      //   { id: 2, title: "바빌론", url: "/va.jpg" },
-      //   { id: 3, title: "라라랜드", url: "/lalaland.jpg" },
-      //   { id: 4, title: "바빌론", url: "/va.jpg" },
-      // ],
-      MOVIE_NUM: 1,
+      MOVIE_NUM: 0,
       recList: [],
+      modList: [],
     };
   },
   mounted() {
     //페이지가 실행되자마자 작동시킬함수 정의
     this.Get_Movie_List();
   },
+  created() {
+    this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
+  },
 
   methods: {
     pageLink() {
+      //클릭시 메인으로 이동
       this.$router.push({ path: "/" });
     },
 
-    handle_toggle() {
+    handle_toggle(rec) {
+      //모달창
       this.is_show = !this.is_show;
+      this.MOVIE_NUM = rec.MOVIE_NUM;
+      this.Get_Modal_Info();
     },
 
     async Get_Movie_List() {
+      //추천 영화 리스트 가져오는 쿼리
       this.recList = await this.$api("/api/recList", {
+        param: [this.$store.state.MOVIE_NUM],
+      });
+    },
+    async Get_Modal_Info() {
+      //모달창의 영화 정보
+      this.modList = await this.$api("/api/modList", {
         param: [this.MOVIE_NUM],
       });
     },
