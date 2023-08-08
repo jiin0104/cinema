@@ -89,7 +89,7 @@ export default {
           }
           else {
             // store로 유저 정보 넘김
-            this.$store.commit("localUser", { userId: this.userId, access_token: res.data.access_token, refresh_token: res.data.refresh_token })
+            this.$store.commit("localUser", { userId: this.userId, userNo: res.data.message1 })
             Swal.fire({
               icon: 'success',
               title: '로그인 성공!',

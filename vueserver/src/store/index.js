@@ -6,8 +6,7 @@ const store = createStore({
     //공통으로 참조하기 위한 변수를 정의. State에 접근하는 것은 Component의 computed 영역내에서 가능. 기본 접근 방법: this.$store.state.items
     return {
       userId: '',
-      access_token: '',
-      refresh_token: '',
+      userNo: ''
     };
   },
   mutations: {
@@ -15,9 +14,7 @@ const store = createStore({
    // 저장된 유저 정보와 불러온 유저 정보가 일치하는지 확인
   localUser(state, payload) {
     state.userId = payload.userId;
-    state.access_token = payload.access_token;
-    state.refresh_token = payload.refresh_token;
-    localStorage.access_token = payload.access_token;
+    state.userNo = payload.userNo;
   },
   loginSuccess(state) {
     state.isLogin = true
@@ -31,10 +28,6 @@ const store = createStore({
     state.isLogin = false
     state.isLoginError = true
   },
-  },
-
-  getters: {
-    isAuthenticated: state => state.access_token !== null
   },
   plugins: [
     createPersistedState()

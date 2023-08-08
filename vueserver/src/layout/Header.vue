@@ -81,7 +81,7 @@ export default {
       });
       this.$router.push({ path: '/' }); // 로그아웃 이후 메인 페이지로 라우팅
       this.$store.commit('logOut') // 로그아웃 이후 헤더 게스트로 변환
-    }
+    },
   }
 }
 

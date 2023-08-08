@@ -167,20 +167,10 @@ app.post("/login", function (request, response) {
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
           console.log(results);
           if (same) {
-            // access 토큰
-            const access_token = jwt.sign({ userId: results[0].USER_ID, userNo: results[0].USER_NUM }, process.env.SECRETKEY, { expiresIn: '10s' });
-            // refresh 토큰 생성
-            const refresh_token = jwt.sign({ userNo: results[0].USER_NUM }, process.env.SECRETKEY2, { algorithm: "HS256", expiresIn: '3d' });
-
-            // DB에 refresh 토큰 저장
-            dbPool.query("UPDATE user SET REFRESH_TOKEN = ? WHERE USER_ID = ?", [ refresh_token, loginUser.userId ], function ( error, results, fields ) {
-              if (error) return res.status(500).json({ results: error });
-            });
-
             // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우
             return response.status(200).json({
-              access_token: access_token,
-              refresh_token: refresh_token
+              message: results[0].USER_ID,
+              message1: results[0].USER_NUM
             });
           } else {
             // 비밀번호 불일치
