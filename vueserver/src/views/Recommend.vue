@@ -4,33 +4,36 @@
       <form class="bg2" @submit.prevent="">
         <div class="logtitle">
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
+
           <!--카드-->
-          <div
-            v-for="rec in recList"
-            :key="rec.MOVIE_NUM"
-            style="
-              position: relative;
-              left: 140px;
-              margin: 5px;
-              display: inline-block;
-            "
-          >
-            <v-layout>
-              <v-card>
-                <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
+          <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM">
+            <div
+              v-if="index < 4"
+              style="
+                position: relative;
+                left: 140px;
+                margin: 5px;
+                display: inline-block;
+              "
+            >
+              <v-layout>
+                <v-card>
+                  <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
 
-                <div class="r_title">
-                  <div>
-                    <div class="headline">{{ rec.MOVIE_TITLE }}</div>
+                  <div class="r_title">
+                    <div>
+                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
+                    </div>
                   </div>
-                </div>
 
-                <div class="detail">
-                  <button @click="handle_toggle(rec)">상세보기</button>
-                </div>
-              </v-card>
-            </v-layout>
+                  <div class="detail">
+                    <button @click="handle_toggle(rec)">상세보기</button>
+                  </div>
+                </v-card>
+              </v-layout>
+            </div>
           </div>
+
           <!--카드 끝-->
 
           <!--모달창-->
@@ -124,6 +127,7 @@
                 width: 210px;
                 margin: 20px;
               "
+              @click="URLink"
             >
               추천받은 목록보기
             </v-btn>
@@ -159,6 +163,9 @@ export default {
       //클릭시 메인으로 이동
       this.$router.push({ path: "/" });
     },
+    URLink() {
+      this.$router.push({ path: "/UserRecommend" });
+    },
 
     handle_toggle(rec) {
       //모달창
@@ -170,7 +177,7 @@ export default {
     async Get_Movie_List() {
       //추천 영화 리스트 가져오는 쿼리
       this.recList = await this.$api("/api/recList", {
-        param: [this.$store.state.MOVIE_NUM],
+        param: [this.MOVIE_NUM],
       });
     },
     async Get_Modal_Info() {
