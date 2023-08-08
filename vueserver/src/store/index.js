@@ -33,6 +33,9 @@ const store = createStore({
   },
   },
 
+  getters: {
+    isAuthenticated: state => state.access_token !== null
+  },
   plugins: [
     createPersistedState()
   ]

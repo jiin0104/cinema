@@ -497,62 +497,6 @@ app.get("/fetch-movies", async (req, res) => {
 
 // 다른 라우트 및 설정 등 추가
 
-// 정보 수정 API 엔드포인트
-app.post("/mypage_update", (req, res) => {
-  //db연결을 사용해서 작업
-  dbPool.getConnection((err, connection) => {
-    if (err) {
-      console.error("db연결에 문제가 있음", err);
-      return res.status(500).json({ error: "db연결에 실패했습니다." });
-    }
-
-    const {
-      
-      nickname,
-      password,
-      age,
-      phone,
-      address1,
-      address2,
-      sex,
-      genre,
-      userid
-    } = req.body;
-
-    const encryptedPW = bcrypt.hashSync(password, 10); // 비밀번호 암호화
-
-    // 중복된 이메일이 없을 경우 회원 정보 저장
-    const insertUserSql =
-      "UPDATE user SET USER_PW=?, USER_NICKNAME=?, USER_AGE=?, USER_TEL=?, USER_ADDRESS1=?, USER_ADDRESS2=?, SEX=?, GENRE=? where USER_ID=?";
-    const values = [
-      
-      encryptedPW,
-      nickname,
-      age,
-      phone,
-      address1,
-      address2,
-      sex,
-      genre,
-      userid
-    ];
-    connection.query(insertUserSql, values, (err, result) => {
-      connection.release(); // 사용이 완료된 연결 반환
-
-      if (err) {
-        console.error("회원 정보 수정 실패:", err);
-        return res
-          .status(500)
-          .json({ error: "회원 정보 수정에 실패했습니다." });
-      }
-
-      // 수정 성공 응답
-      res.json({ message: "수정 완료" });
-    });
-  });
-});
-
-
 // 서버 실행
 app.listen(3000, () => {
   console.log("port 3000에서 서버구동");
