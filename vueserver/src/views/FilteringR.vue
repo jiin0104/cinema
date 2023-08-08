@@ -228,7 +228,7 @@
         <br /><br />
 
         <!--필터 선택 결과-->
-        <div class="select" >
+        <div class="select">
           <br />
           <div class="buttonlocation5">
             <button type="button" class="button5">

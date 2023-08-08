@@ -68,3 +68,4 @@
 //     console.error(error);
 //   });
 
+// `SELECT movie_num, json_extract(movie_info, '$.poster_path') FROM jsontest;`

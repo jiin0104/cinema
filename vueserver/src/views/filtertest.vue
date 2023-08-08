@@ -226,35 +226,36 @@
       <div class="filter" v-else-if="type == 'E'">
         <div class="title">선택하신 사항이 맞나요?</div>
         <br /><br />
+
         <!--필터 선택 결과-->
         <div class="select">
           <br />
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select1" style="width: 90px; height: 90px" />
+              <img :src="select1" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[0] }}</div>
+            <div class="r-text">{{ this.selectarray[0] }}</div>
           </div>
 
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select2" style="width: 90px; height: 90px" />
+              <img :src="select2" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[1] }}</div>
+            <div class="r-text">{{ this.selectarray[1] }}</div>
           </div>
 
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select3" style="width: 90px; height: 90px" />
+              <img :src="select3" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[2] }}</div>
+            <div class="r-text">{{ this.selectarray[2] }}</div>
           </div>
 
-          <div class="buttonlocation4">
+          <div class="buttonlocation5">
             <button type="button" class="button5">
-              <img :src="select4" style="width: 90px; height: 90px" />
+              <img :src="select4" style="width: 70px; height: 70px" />
             </button>
-            <div class="s-text">{{ this.selectarray[3] }}</div>
+            <div class="r-text">{{ this.selectarray[3] }}</div>
           </div>
           <br /><br />
           <div class="filterselected" style="text-align: center">
@@ -455,19 +456,27 @@ export default {
     async filterconfirm() {
       // 선택한 장르 정보 가져오기
       const selectedGenres = this.selectarray.map((genre) => {
-        return this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+        const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+        return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
       });
+      //매핑된 장르id가 제대로 배열에 들어갔는지 확인
+      console.log(selectedGenres);
 
       try {
         // API 요청 보내기
-        const response = await this.$axios.get("/fetch-movies", {
-          params: selectedGenres,
-        });
-
+        const response = await this.$api(
+          "/fetch-movies",
+          {
+            selectedGenres: this.selectarray,
+          },
+          "get"
+        );
         // 필요한 작업 수행
-
+        console.log(response); // 오류 알림 없애는 용(쓸데없는거임)
         // 결과 페이지로 이동
-        this.$router.push({ path: "/FinalFilter" });
+        this.$router.push({
+          path: "/FinalFilter",
+        });
       } catch (error) {
         console.error("Error fetching and processing movies:", error);
         // 에러 처리
