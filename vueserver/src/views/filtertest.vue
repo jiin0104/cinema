@@ -455,10 +455,13 @@ export default {
     // 필터 확인 버튼 클릭 시 처리
     async filterconfirm() {
       // 선택한 장르 정보 가져오기
-      const selectedGenres = this.selectarray.map((genre) => {
-        const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
-        return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
-      });
+      const selectedGenres = this.selectarray
+        .map((genre) => {
+          const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+          return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
+        })
+        .filter((genreId) => genreId !== undefined); // undefined 값 제거
+
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
       console.log(selectedGenres);
 

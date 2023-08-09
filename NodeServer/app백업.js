@@ -440,7 +440,7 @@ app.get("/fetch-movies", async (req, res) => {
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
     const genreQueryString = Array.isArray(selectedGenres)
       ? selectedGenres.join(",")
-      : selectedGenres || ""; // undefined인 경우 빈 문자열로 설정
+      : selectedGenres || "";
 
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
