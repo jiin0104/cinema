@@ -14,7 +14,8 @@
 
 .rec {
   display: inline-block;
-  float: left;
   position: relative;
-  left: 350px;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
