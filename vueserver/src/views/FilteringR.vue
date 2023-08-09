@@ -300,6 +300,8 @@
 </style>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -460,27 +462,32 @@ export default {
           const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
           return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
         })
-        .filter((genreId) => genreId !== ""); // 빈 문자열 값 제거
+        .filter((genreId) => genreId !== undefined); // undefined 값 제거
 
       const queryParams = {
         selectedGenres: selectedGenres.join(","), // 배열을 쉼표로 구분된 문자열로 변환
         // 나머지 필터 데이터 추가
-      }; //테스트중
+      };
 
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
       console.log(selectedGenres);
-
+      //장르 id가 문자열로 변환되서 서버로 쏴지는지 확인.
+      console.log(queryParams);
+      //선택한 배열이 어떻게 되는지
+      console.log(this.selectarray);
+      // try {
+      //   // API 요청 보내기
+      //   const response = await this.$api.post("/fetch-movies", {
+      //     selectedGenres: this.selectarray.join(","),
+      //   });
       try {
         // API 요청 보내기
-        const response = await this.$api(
-          "/fetch-movies",
-          {
-            selectedGenres: this.selectarray.join(","), //테스트중
-          },
-          "get"
-        );
+        const response = await axios.post("/fetch-movies", {
+          selectedGenres: this.selectarray.join(","),
+        });
         // 필요한 작업 수행
         console.log(response); // 오류 알림 없애는 용(쓸데없는거임)
+        console.log(response.data);
         // 결과 페이지로 이동
         this.$router.push({
           path: "/FinalFilter",
