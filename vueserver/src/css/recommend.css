@@ -13,8 +13,9 @@
 }
 
 .rec {
-    position: absolute;
+    position: relative;
+    height: 10px;
     top: 80%;
-    left: 50%;
+    left: 20%;
     transform: translate(-50%, -50%);
 }
