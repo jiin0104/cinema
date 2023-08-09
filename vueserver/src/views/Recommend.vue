@@ -65,12 +65,12 @@
                     {{ selectedMovie.MOVIE_TITLE }}
                   </div>
                 </div>
-                <div class="modalcontent">
-                  <p>장르: {{ modList2.GENRE }}</p>
-                  <p>개봉일: {{ modList2.MOVIE_RELEASE }}</p>
-                  <p>감독: {{ modList2.MOVIE_DIRECTOR }}</p>
+                <div class="modalcontent" v-if="modList2[0]">
+                  <p>장르: {{ modList2[0].GENRE }}</p>
+                  <p>개봉일: {{ modList2[0].MOVIE_RELEASE }}</p>
+                  <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
                   <p>주연:</p>
-                  <p>평점: {{ modList2.MOVIE_SCORE }}</p>
+                  <p>평점: {{ modList2[0].MOVIE_SCORE }}</p>
                 </div>
               </div>
               <div>
@@ -166,13 +166,16 @@ export default {
       //클릭시 메인으로 이동
       this.$router.push({ path: "/" });
     },
-    URLink() {
+    async URLink() {
+      await this.Get_Modal_Info();
       this.$router.push({ path: "/UserRecommend" });
     },
 
-    openModal(rec) {
-      this.selectedMovie = rec;
-      this.Get_Modal_Info();
+    async openModal(rec) {
+      console.log("Clicked Movie Object:", rec);
+      console.log("Clicked Movie Number:", rec.MOVIE_NUM);
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
+      await this.Get_Modal_Info();
     },
     close_toggle() {
       this.selectedMovie = null;
@@ -183,9 +186,11 @@ export default {
       });
     },
     async Get_Modal_Info() {
+      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM);
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE_NUM],
       });
+      console.log("modList2 Data:", this.modList2);
     },
   },
 };
