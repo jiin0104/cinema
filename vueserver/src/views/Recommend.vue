@@ -6,18 +6,15 @@
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
 
           <!--카드-->
-          
+
           <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM" style="margin: auto;">
-            <div
-              v-if="index < 4"
-              style="
+            <div v-if="index < 4" style="
                 position: relative;
                 left: 140px;
                 margin: 5px;
                 display: inline-block;
                 float: left;
-              "
-            >
+              ">
               <v-layout>
                 <v-card>
                   <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
@@ -35,33 +32,22 @@
               </v-layout>
             </div>
           </div>
-        
+
           <!--카드 끝-->
 
           <!--모달창-->
           <div v-show="is_show" class="modal">
-            <div
-              class="list"
-              v-for="(modL, i) in modList"
-              :key="i.MOVIE_NUM"
-              style="align-items: center; margin: 10px"
-            >
+            <div class="list" v-for="(modL, i) in modList" :key="i.MOVIE_NUM" style="align-items: center; margin: 10px">
               <div>
                 <div style="position: relative; left: 150px">
-                  <v-img
-                    :src="modL.MOVIE_POSTER"
-                    height="200px"
-                    width="170px"
-                  ></v-img>
+                  <v-img :src="modL.MOVIE_POSTER" height="200px" width="170px"></v-img>
                 </div>
-                <div
-                  style="
+                <div style="
                     font-size: 35px;
                     text-align: center;
                     width: 500px;
                     height: 50px;
-                  "
-                >
+                  ">
                   {{ modL.MOVIE_TITLE }}
                 </div>
               </div>
@@ -82,10 +68,7 @@
                     modL.USER_ID : modL.REVIEW_COMMENT
                   </div>
                 </form>
-                <button
-                  type="button"
-                  @click="handle_toggle()"
-                  style="
+                <button type="button" @click="handle_toggle()" style="
                     color: white;
                     background-color: rgb(57, 103, 255);
                     height: 40px;
@@ -95,8 +78,7 @@
                     float: right;
                     margin-right: 5px;
                     margin-top: 5px;
-                  "
-                >
+                  ">
                   닫기
                 </button>
               </div>
@@ -104,33 +86,23 @@
           </div>
           <!--모달창 끝-->
 
-          <div class="rec" style="position: relative; left: 350px; top: 50px">
-            <v-btn
-              class="infotext"
-              variant="tonal"
-              style="
+          <div class="rec">
+            <v-btn class="infotext" variant="tonal" style="
                 color: white;
                 background-color: #3742fa;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
-              "
-              @click="pageLink"
-            >
+              " @click="pageLink">
               다시 추천받기
             </v-btn>
-            <v-btn
-              class="infotext"
-              variant="tonal"
-              style="
+            <v-btn class="infotext" variant="tonal" style="
                 color: white;
                 background-color: #3742fa;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
-              "
-              @click="URLink"
-            >
+              " @click="URLink">
               추천받은 목록보기
             </v-btn>
           </div>
@@ -150,7 +122,7 @@ export default {
       MOVIE_NUM: 0,
       recList: [],
       modList: [],
-      
+
     };
   },
   mounted() {
