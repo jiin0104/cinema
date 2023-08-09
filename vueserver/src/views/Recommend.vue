@@ -67,7 +67,7 @@
                 <p>장르: {{ modL.GENRE }}</p>
                 <p>개봉일: {{ modL.MOVIE_RELEASE }}</p>
                 <p>감독: {{ modL.MOVIE_DIRECTOR }}</p>
-                <p>주연: {{ modL.json_extract(MOVIE_ACTORS, '$.actor1') }}</p>
+                <p>주연: {{ modL.MOVIE_ACTORS.actor1 }}, {{ modL.MOVIE_ACTORS.actor2 }}</p>
                 <p>평점: {{ modL.MOVIE_SCORE }}</p>
               </div>
             </div>
@@ -148,6 +148,7 @@ export default {
       MOVIE_NUM: 0,
       recList: [],
       modList: [],
+      
     };
   },
   mounted() {
@@ -167,10 +168,10 @@ export default {
       this.$router.push({ path: "/UserRecommend" });
     },
 
-    handle_toggle(rec) {
+    handle_toggle() {
       //모달창
       this.is_show = !this.is_show;
-      this.MOVIE_NUM = rec.MOVIE_NUM;
+      
       this.Get_Modal_Info();
     },
 
