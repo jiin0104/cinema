@@ -475,7 +475,7 @@ export default {
         const response = await this.$api(
           "/fetch-movies",
           {
-            selectedGenres: this.selectarray,
+            selectedGenres: this.selectarray.join(","),
           },
           "get"
         );
