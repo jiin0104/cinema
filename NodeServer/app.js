@@ -494,7 +494,6 @@ app.post("/mypage_update", (req, res) => {
     }
 
     const {
-      
       nickname,
       password,
       age,
@@ -503,7 +502,7 @@ app.post("/mypage_update", (req, res) => {
       address2,
       sex,
       genre,
-      userid
+      userid,
     } = req.body;
 
     const encryptedPW = bcrypt.hashSync(password, 10); // 비밀번호 암호화
@@ -512,7 +511,6 @@ app.post("/mypage_update", (req, res) => {
     const insertUserSql =
       "UPDATE user SET USER_PW=?, USER_NICKNAME=?, USER_AGE=?, USER_TEL=?, USER_ADDRESS1=?, USER_ADDRESS2=?, SEX=?, GENRE=? where USER_ID=?";
     const values = [
-      
       encryptedPW,
       nickname,
       age,
@@ -521,7 +519,7 @@ app.post("/mypage_update", (req, res) => {
       address2,
       sex,
       genre,
-      userid
+      userid,
     ];
     connection.query(insertUserSql, values, (err, result) => {
       connection.release(); // 사용이 완료된 연결 반환
@@ -538,7 +536,6 @@ app.post("/mypage_update", (req, res) => {
     });
   });
 });
-
 
 // 서버 실행
 app.listen(3000, () => {
