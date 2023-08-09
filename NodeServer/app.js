@@ -434,7 +434,7 @@ app.post("/pw_update", (req, res) => {
 app.get("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
-    const selectedGenres = req.query.selectedGenres.split(",");
+    const { selectedGenres } = req.query;
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.

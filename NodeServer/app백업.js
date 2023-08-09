@@ -440,13 +440,14 @@ app.get("/fetch-movies", async (req, res) => {
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
     const genreQueryString = Array.isArray(selectedGenres)
       ? selectedGenres.join(",")
-      : selectedGenres || "";
+      : selectedGenres || ""; // undefined인 경우 빈 문자열로 설정
 
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
     console.log("장르쿼리스트링", { genreQueryString });
+    console.log("오류확인", req.query.selectedGenres);
 
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
 
     const options = {
       method: "GET",

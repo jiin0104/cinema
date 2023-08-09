@@ -465,7 +465,7 @@ export default {
       const queryParams = {
         selectedGenres: selectedGenres.join(","), // 배열을 쉼표로 구분된 문자열로 변환
         // 나머지 필터 데이터 추가
-      };
+      }; //테스트중
 
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
       console.log(selectedGenres);
@@ -475,7 +475,7 @@ export default {
         const response = await this.$api(
           "/fetch-movies",
           {
-            selectedGenres: this.selectarray.join(","),
+            selectedGenres: this.selectarray.join(","), //테스트중
           },
           "get"
         );
