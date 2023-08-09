@@ -431,21 +431,17 @@ app.post("/pw_update", (req, res) => {
 });
 
 //TMDB api 이용해서 db에 영화 json데이터 넣기
-app.get("/fetch-movies", async (req, res) => {
+app.post("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
-    const { selectedGenres } = req.query;
+    const { selectedGenres } = req.body;
+    // const { selectedGenres } = req.query;
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
     const genreQueryString = Array.isArray(selectedGenres)
       ? selectedGenres.join(",")
       : selectedGenres || ""; // undefined인 경우 빈 문자열로 설정
-
-    // console.log를 사용하여 데이터 확인
-    console.log("Selected genres:", selectedGenres);
-    console.log("장르쿼리스트링", { genreQueryString });
-    console.log("오류확인", req.query.selectedGenres);
 
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
 
@@ -473,6 +469,12 @@ app.get("/fetch-movies", async (req, res) => {
         .promise()
         .query("INSERT INTO jsontest (movie_info) VALUES (?)", [[movieInfo]]);
     }
+
+    // console.log를 사용하여 데이터 확인
+    console.log("Selected genres:", selectedGenres);
+    console.log("장르쿼리스트링:", genreQueryString);
+    console.log("오류확인", req.query.selectedGenres);
+    console.log(apiUrl);
 
     res.json({ message: "Movies fetched and processed." });
   } catch (error) {
