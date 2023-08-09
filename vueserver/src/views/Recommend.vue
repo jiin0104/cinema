@@ -26,7 +26,7 @@
                   </div>
 
                   <div class="detail">
-                    <button @click="handle_toggle(index)">상세보기</button>
+                    <button @click="handle_toggle(rec)">상세보기</button>
                   </div>
                 </v-card>
               </v-layout>
@@ -36,8 +36,8 @@
           <!--카드 끝-->
 
           <!--모달창-->
-          <div v-show="is_show" class="modal">
-            <div class="list" v-for="(modL, i) in modList" :key="i.MOVIE_NUM" style="align-items: center; margin: 10px">
+          <div v-show="is_show" class="modal" id="modal">
+            <div class="list" v-for="(modL, i) in modList2" :key="i" style="align-items: center; margin: 10px">
               <div>
                 <div style="position: relative; left: 150px">
                   <v-img :src="modL.MOVIE_POSTER" height="200px" width="170px"></v-img>
@@ -68,7 +68,7 @@
                     modL.USER_ID : modL.REVIEW_COMMENT
                   </div>
                 </form>
-                <button type="button" @click="handle_toggle()" style="
+                <button type="button" @click="close_toggle()" style="
                     color: white;
                     background-color: rgb(57, 103, 255);
                     height: 40px;
@@ -121,7 +121,7 @@ export default {
       is_show: false,
       MOVIE_NUM: 0,
       recList: [],
-      modList: [],
+      modList2: [],
 
     };
   },
@@ -142,11 +142,18 @@ export default {
       this.$router.push({ path: "/UserRecommend" });
     },
 
-    handle_toggle(index) {
+    handle_toggle(rec) {
       //모달창
-      this.is_show = !this.is_show;
-      this.MOVIE_NUM = index.MOVIE_NUM
+      var modal = document.getElementById("modal");
+      this.MOVIE_NUM = rec.MOVIE_NUM;
       this.Get_Modal_Info();
+      modal.style.display = "flow-root";
+      modal.style.zIndex = 1;
+    },
+
+    close_toggle(){
+      var modal = document.getElementById("modal");
+      modal.style.display = "none";
     },
 
     async Get_Movie_List() {
@@ -157,7 +164,7 @@ export default {
     },
     async Get_Modal_Info() {
       //모달창의 영화 정보
-      this.modList = await this.$api("/api/modList2", {
+      this.modList2 = await this.$api("/api/modList2", {
         param: [this.MOVIE_NUM],
       });
     },

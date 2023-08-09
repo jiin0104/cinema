@@ -10,8 +10,8 @@
 
         <v-list density="compact" nav>
           <v-list-item @click="$router.push('/')" prepend-icon="mdi-home" title="홈" value="/"></v-list-item>
-          <v-list-item @click="$router.push('/mypage')" prepend-icon="mdi-account" title="내정보"
-            value="mypage"></v-list-item>
+          <v-list-item @click="$router.push('/mypage')" prepend-icon="mdi-account" title="내정보" value="mypage"></v-list-item>
+          <v-list-item @click="$router.push('/UserRecommend')" prepend-icon="mdi-account" title="추천받은 목록" value="my_recommend"></v-list-item>
           <v-list-item @click=Logout prepend-icon="mdi-logout" title="로그아웃" value="logout"></v-list-item>
         </v-list>
       </v-navigation-drawer>
