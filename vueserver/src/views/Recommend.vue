@@ -69,7 +69,7 @@
                   <p>장르: {{ modList2[0].GENRE }}</p>
                   <p>개봉일: {{ modList2[0].MOVIE_RELEASE }}</p>
                   <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
-                  <p>주연:</p>
+                  <p>주연: {{ modList2[0].MOVIE_ACTORS.actor1 }}, {{ modList2[0].MOVIE_ACTORS.actor2 }}</p>
                   <p>평점: {{ modList2[0].MOVIE_SCORE }}</p>
                 </div>
               </div>
@@ -167,7 +167,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     async URLink() {
-      await this.Get_Modal_Info();
+      
       this.$router.push({ path: "/UserRecommend" });
     },
 

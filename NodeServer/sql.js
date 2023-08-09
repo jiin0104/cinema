@@ -23,4 +23,7 @@ module.exports = {
   WHERE
     MOVIE_NUM = ?`,
   },
+  getmain: {
+    query: `select * from jsontest`
+  }
 };

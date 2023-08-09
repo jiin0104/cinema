@@ -26,9 +26,9 @@
         >
           <swiper-slide
             v-for="(po, index) in slides"
-            :key="po.id"
+            :key="po"
             :virtualIndex="index"
-            ><img :src="po.url"
+            ><img src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
           /></swiper-slide>
         </swiper>
         <p class="append-buttons">
@@ -104,13 +104,18 @@ export default {
       //   { name: "부산행", imgSrc: "/pu.jpg" },
       //   { name: "라라랜드", imgSrc: "/lalaland.jpg" },
       // ],
-      slides: [
-        { po: "1", url: "/al.jpg" },
-        { po: 2, url: require("../assets/lalaland.jpg") },
-      ],
+      slides: [],
     };
   },
+
+  created() {
+    this.getmain();
+  },
   methods: {
+    async getmain(){
+      this.slides = await this.$api("/api/getmain", {});
+      console.log(this.slides);
+    },
     pageLink() {
       this.$router.push({ path: "FilteringR" });
     },
