@@ -67,7 +67,7 @@
                 <p>장르: {{ modL.GENRE }}</p>
                 <p>개봉일: {{ modL.MOVIE_RELEASE }}</p>
                 <p>감독: {{ modL.MOVIE_DIRECTOR }}</p>
-                <p>주연: {{ modL.MOVIE_ACTORS }}</p>
+                <p>주연: {{ modL.json_extract(MOVIE_ACTORS, '$.actor1') }}</p>
                 <p>평점: {{ modL.MOVIE_SCORE }}</p>
               </div>
             </div>
@@ -182,7 +182,7 @@ export default {
     },
     async Get_Modal_Info() {
       //모달창의 영화 정보
-      this.modList = await this.$api("/api/modList", {
+      this.modList = await this.$api("/api/modList2", {
         param: [this.MOVIE_NUM],
       });
     },
