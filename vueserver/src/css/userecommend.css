@@ -1,6 +1,7 @@
-.form {
+.formlist {
     height: 400px;
     margin: 0 auto;
+    padding: 40px;
     border-radius: 1em;
 }
 
@@ -15,4 +16,5 @@
     color: white;
     font-family: "Black Han Sans", sans-serif;
     font-size: 50px;
+    text-align: center;
 }

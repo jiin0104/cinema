@@ -148,7 +148,7 @@ export default {
       MOVIE_NUM: 0,
       recList: [],
       modList: [],
-      
+
     };
   },
   mounted() {
@@ -171,7 +171,7 @@ export default {
     handle_toggle() {
       //모달창
       this.is_show = !this.is_show;
-      
+
       this.Get_Modal_Info();
     },
 

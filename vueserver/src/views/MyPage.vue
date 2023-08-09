@@ -1,7 +1,7 @@
 <template>
     <body class="mybackground">
         <!-- 좌상단 로고 -->
-        
+
             <div class="mytitle">
                 <div class="myform" style="padding-top: 3%; padding-bottom: 3%;">
                     <div class="myform1">
@@ -50,7 +50,7 @@
                                 <span label for="genre">선호하는 장르</span><br />
                                 {{ userinfo.GENRE }}
                                 <br /><br />
-                                
+
                             </div>
 
 
@@ -63,14 +63,14 @@
                 </div>
             </div>
             <div class="main" style="width: 20%"></div>
-        
+
     </body>
 </template>
-  
+
 <style>
 @import "../css/mypage.css";
 </style>
-  
+
 <script>
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3000"; //프록시 서버
@@ -93,8 +93,6 @@ export default {
             let userinfo = await this.$api("/api/userin", { param: [this.$store.state.userId] });
             this.userinfo = userinfo[0];
             console.log(this.$store.state.isLogin);
-            console.log(this.$store.state.access_token)
-            console.log(this.$store.state.refresh_token)
             console.log(this.$store.state.userId)
         },
         mypage_update() {
@@ -106,4 +104,3 @@ export default {
 
 }
 </script>
-  
