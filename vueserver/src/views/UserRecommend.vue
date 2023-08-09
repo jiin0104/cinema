@@ -41,6 +41,10 @@ export default {
     return {
       userinfo: {},
       logo: "logo.png",
+      is_show: false,
+      MOVIE_NUM: 0,
+      recList: [],
+      modList2: [],
     };
   },
   created() {
