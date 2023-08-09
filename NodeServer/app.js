@@ -170,7 +170,7 @@ app.post("/login", function (request, response) {
             // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우
             return response.status(200).json({
               message: results[0].USER_ID,
-              message1: results[0].USER_NUM
+              message1: results[0].USER_NUM,
             });
           } else {
             // 비밀번호 불일치
@@ -430,7 +430,7 @@ app.post("/pw_update", (req, res) => {
   });
 });
 
-//테스트 중
+//TMDB api 이용해서 db에 영화 json데이터 넣기
 app.get("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
@@ -441,12 +441,12 @@ app.get("/fetch-movies", async (req, res) => {
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
     const genreQueryString = Array.isArray(selectedGenres)
       ? selectedGenres.join(",")
-      : selectedGenres;
+      : selectedGenres || "";
 
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
 
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?page=1&sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
 
     const options = {
       method: "GET",
@@ -470,10 +470,7 @@ app.get("/fetch-movies", async (req, res) => {
       const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
       const [rows, fields] = await dbPool
         .promise()
-        .query("INSERT INTO jsontest (movie_info) VALUES (?)", [
-          // movieNum,
-          [movieInfo],
-        ]);
+        .query("INSERT INTO jsontest (movie_info) VALUES (?)", [[movieInfo]]);
     }
 
     res.json({ message: "Movies fetched and processed." });
