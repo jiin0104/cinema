@@ -6,7 +6,8 @@
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
 
           <!--카드-->
-          <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM">
+          
+          <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM" style="margin: auto;">
             <div
               v-if="index < 4"
               style="
@@ -14,6 +15,7 @@
                 left: 140px;
                 margin: 5px;
                 display: inline-block;
+                float: left;
               "
             >
               <v-layout>
@@ -27,13 +29,13 @@
                   </div>
 
                   <div class="detail">
-                    <button @click="handle_toggle(rec)">상세보기</button>
+                    <button @click="handle_toggle(index)">상세보기</button>
                   </div>
                 </v-card>
               </v-layout>
             </div>
           </div>
-
+        
           <!--카드 끝-->
 
           <!--모달창-->
@@ -41,13 +43,13 @@
             <div
               class="list"
               v-for="(modL, i) in modList"
-              :key="i"
+              :key="i.MOVIE_NUM"
               style="align-items: center; margin: 10px"
             >
               <div>
                 <div style="position: relative; left: 150px">
                   <v-img
-                    :src="`/download/${modL.MOVIE_NUM}/${modL.MOVIE_POSTER}`"
+                    :src="modL.MOVIE_POSTER"
                     height="200px"
                     width="170px"
                   ></v-img>
@@ -148,7 +150,7 @@ export default {
       MOVIE_NUM: 0,
       recList: [],
       modList: [],
-
+      
     };
   },
   mounted() {
@@ -168,10 +170,10 @@ export default {
       this.$router.push({ path: "/UserRecommend" });
     },
 
-    handle_toggle() {
+    handle_toggle(index) {
       //모달창
       this.is_show = !this.is_show;
-
+      this.MOVIE_NUM = index.MOVIE_NUM
       this.Get_Modal_Info();
     },
 

@@ -3,12 +3,12 @@ module.exports = {
     query: `SELECT * from user where USER_ID=?`,
   },
   recList: {
-    query: `SELECT MOVIE_TITLE, MOVIE_POSTER FROM movies WHERE MOVIE_NUM=2`,
+    query: `SELECT MOVIE_TITLE, MOVIE_POSTER FROM movies`,
   },
   modList: {
     query: `SELECT * FROM movies WHERE MOVIE_NUM=2`,
   },
   modList2: {
-    query: `SELECT MOVIE_TITLE, MOVIE_RELEASE, MOVIE_DIRECTOR, MOVIE_SCORE, GENRE, MOVIE_ACTORS FROM movies where MOVIE_NUM=2`,
+    query: `SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_RELEASE, MOVIE_DIRECTOR, MOVIE_SCORE, GENRE, MOVIE_ACTORS FROM movies where MOVIE_NUM=?`,
   }
 };
