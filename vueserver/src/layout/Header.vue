@@ -58,6 +58,7 @@
 </template>
 
 <script>
+// store의 state 값을 불러오기 위한 vuex import
 import { mapState } from 'vuex';
 import Swal from 'sweetalert2';
 
@@ -65,10 +66,12 @@ export default {
   name: 'Header',
   data() {
     return {
+      // 헤더 더보기 메뉴 상태 데이터
       drawer: null,
     }
   },
   computed: {
+    // header 상태 유지를 위해서 store에 저장된 state 값을 불러옴 / isLogin을 true상태로 바꾸고 유지해야하기 때문에 꼭 필요함
     ...mapState(['isLogin', 'userId'])
   },
   methods: {
