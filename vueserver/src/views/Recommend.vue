@@ -69,7 +69,10 @@
                   <p>장르: {{ modList2[0].GENRE }}</p>
                   <p>개봉일: {{ modList2[0].MOVIE_RELEASE }}</p>
                   <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
-                  <p>주연: {{ modList2[0].MOVIE_ACTORS.actor1 }}, {{ modList2[0].MOVIE_ACTORS.actor2 }}</p>
+                  <p>
+                    주연: {{ modList2[0].MOVIE_ACTORS.actor1 }},
+                    {{ modList2[0].MOVIE_ACTORS.actor2 }}
+                  </p>
                   <p>평점: {{ modList2[0].MOVIE_SCORE }}</p>
                 </div>
               </div>
@@ -148,16 +151,17 @@ export default {
   data() {
     return {
       logo: "logo.png",
-      selectedMovie: null,
-      recList: [],
-      modList2: [],
+      selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
+      recList: [], //영화 리스트
+      modList2: [], //모달 리스트
     };
   },
   mounted() {
-    //페이지가 실행되자마자 작동시킬함수 정의
+    //페이지가 실행되자마자 영화 리스트 데이터 보여주기
     this.Get_Movie_List();
   },
   created() {
+    //영화코드=쿼리의 영화코드
     this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
   },
 
@@ -167,30 +171,35 @@ export default {
       this.$router.push({ path: "/" });
     },
     async URLink() {
-      
+      //내가 추천받은 목록 페이지로 이동
       this.$router.push({ path: "/UserRecommend" });
     },
 
     async openModal(rec) {
-      console.log("Clicked Movie Object:", rec);
-      console.log("Clicked Movie Number:", rec.MOVIE_NUM);
+      //모달창 띄우기
+      console.log("Clicked Movie Object:", rec); //삭제해도됨
+      console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제해도됨
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
-      await this.Get_Modal_Info();
+      //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
+      await this.Get_Modal_Info(); //모달 내용 가져오기
     },
     close_toggle() {
+      //모달 닫기
       this.selectedMovie = null;
     },
     async Get_Movie_List() {
+      //추천 영화 리스트 파라미터값 가져오는 함수
       this.recList = await this.$api("/api/recList", {
         param: [this.MOVIE_NUM],
       });
     },
     async Get_Modal_Info() {
-      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM);
+      //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
+      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE_NUM],
       });
-      console.log("modList2 Data:", this.modList2);
+      console.log("modList2 Data:", this.modList2); //삭제해도됨
     },
   },
 };
@@ -200,18 +209,18 @@ export default {
 @import "../css/recommend.css";
 
 .modal {
-  background-color: #fff; /* 수정: 배경색을 변경합니다 */
+  background-color: #fff;
   width: 500px;
-  max-width: 90%; /* 수정: 모달 창의 최대 너비를 90%로 설정합니다 */
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* 수정: 그림자 효과를 추가합니다 */
+  max-width: 90%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   font-family: "Black Han Sans", sans-serif;
   font-size: 22px;
-  position: fixed; /* 수정: 모달을 화면에 고정시킵니다 */
-  top: 50%; /* 수정: 화면 세로 중앙 정렬 */
-  left: 50%; /* 수정: 화면 가로 중앙 정렬 */
-  transform: translate(-50%, -50%); /* 수정: 모달을 화면 중앙으로 이동 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 10px;
-  z-index: 1000; /* 수정: 더 높은 z-index 값으로 설정합니다 */
+  z-index: 1000;
 }
 
 .review {
