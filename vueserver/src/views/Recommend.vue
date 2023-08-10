@@ -167,7 +167,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     async URLink() {
-      
+
       this.$router.push({ path: "/UserRecommend" });
     },
 

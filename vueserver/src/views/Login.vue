@@ -50,6 +50,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+// cors 정책 관련
 axios.defaults.baseURL = 'http://localhost:3000'; //서버주소
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
@@ -58,6 +59,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      // 유저 입력 데이터
       userId: '',
       userPw: '',
     };
@@ -68,6 +70,7 @@ export default {
         url: "/login",
         method: 'POST',
         data: {
+          // post 방식으로 서버에 유저 입력 데이터 전송
           userId: this.userId,
           userPw: this.userPw
         }

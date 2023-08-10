@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate"; // 새로고침 시에도 로그인을 상태 정보를 초기화하지 않게 해주는 모듈
 
 const store = createStore({
   state() {
@@ -16,10 +16,12 @@ const store = createStore({
     state.userId = payload.userId;
     state.userNo = payload.userNo;
   },
+  // 로그인 성공 시 상태 변화
   loginSuccess(state) {
     state.isLogin = true
     state.isLoginError = false
   },
+  // 로그아웃 시 상태 변화
   logOut(state) {
     state.isLogin = false
     state.isLoginError = false
