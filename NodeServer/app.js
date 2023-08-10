@@ -434,8 +434,9 @@ app.post("/pw_update", (req, res) => {
 app.post("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
-    const { selectedGenres } = req.body;
-    // const { selectedGenres } = req.query;
+    const selectedGenres = req.query.selectedGenres;
+    // const { selectedGenres } = req.body;
+    // const selectedGenres = req.query;
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
@@ -457,9 +458,6 @@ app.post("/fetch-movies", async (req, res) => {
     //url에서 받아온 json데이터
     const response = await axios.request(options);
 
-    //json 받아오는지 확인
-    // console.log({ response });
-
     const movies = response.data.results;
     // 가져온 영화 정보를 db에 저장
     for (const movie of movies) {
@@ -474,6 +472,7 @@ app.post("/fetch-movies", async (req, res) => {
     console.log("Selected genres:", selectedGenres);
     console.log("장르쿼리스트링:", genreQueryString);
     console.log(apiUrl);
+    console.log(req.query.selectedGenres);
 
     res.json({ message: "Movies fetched and processed." });
   } catch (error) {

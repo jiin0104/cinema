@@ -29,7 +29,7 @@
             :key="po"
             :virtualIndex="index"
             ><img
-              src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+              :src="image(po.movie_info)"
           /></swiper-slide>
         </swiper>
         <p class="append-buttons">
@@ -69,10 +69,14 @@ export default {
     this.getmain();
   },
   methods: {
+    image(img) {
+      return `https://image.tmdb.org/t/p/w300${img}`;
+    },
     async getmain() {
       //슬라이드 정보 가져오는 api
       this.slides = await this.$api("/api/getmain", {});
       console.log(this.slides);
+      console.log()
     },
     pageLink() {
       //필터링 페이지로 이동
