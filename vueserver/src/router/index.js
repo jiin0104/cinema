@@ -25,13 +25,16 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    meta: {
+      roles: [ false ],
+    }
   },
   {
     path: "/FilteringR",
     name: "FilteringR",
     component: FilteringR,
     meta: {
-
+      roles: [ true ],
     }
   },
   {
@@ -43,50 +46,78 @@ const routes = [
     path: "/FinalFilter",
     name: "FinalFilter",
     component: FinalFilter,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/Recommend",
     name: "Recommend",
     component: Recommend,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/UserRecommend",
     name: "UserRecommend",
     component: UserRecommend,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/Find_Id",
     name: "Find_Id",
     component: Find_Id,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/Find_Pw",
     name: "Find_Pw",
     component: Find_Pw,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/Find_Result_Id:id",
     name: "find_result_id",
     component: Find_Result_Id,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/Find_Result_Pw:pw",
     name: "Find_Result_Pw",
     component: Find_Result_Pw,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/mypage",
     name: "mypage",
     component: mypage,
+    meta: {
+      roles: [ true ],
+    }
   },
   {
     path: "/mypage_update",
     name: "mypage_update",
     component: mypage_update,
+    meta: {
+      roles: [ true ],
+    }
   },
 ];
 
 import store from '../store/'
+import Swal from 'sweetalert2';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -95,15 +126,27 @@ const router = createRouter({
 
 // 유저 접근 권한 설정
 router.beforeEach((to, from, next) => {
-  let roleStatus = store.state.userGd // 현 접속 계정 권한 상태
-  // 라우터 권한, 접속 계정 권한 비교
+  let roleStatus = store.state.isLogin // 현재 로그인 상태를 가져옴
+
+  // 라우터에 메타 필드로 정의된 권한이 있는지 확인하고, 해당 권한을 가지지 않는 경우
   if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
-    alert('로컬 로그인이 필요합니다.')
-    // 권한 비교 후 다르면 로그인 페이지로 이동
-    next({path: "/"})
+    // SweetAlert2를 사용하여 로그인이 필요한 메시지를 표시
+    Swal.fire({
+      icon: 'warning',
+      title: '로그인이 필요합니다.',
+      text: '회원가입하시겠습니까?',
+      showCancelButton: true,
+      confirmButtonText: '승인',
+      cancelButtonText: '취소',
+    }).then(result => {
+      if (result.isConfirmed) {
+        next({ path: "/Signup" }) // 승인을 클릭하면 회원가입 페이지로 이동
+      } else {
+        next({ path: "/" }) // 취소를 클릭하거나 권한이 없으면 메인 페이지로 이동
+      }
+    })
   } else {
-    // 권한 비교 후 같으면 그대로 페이지 정상 이동
-    next()
+    next() // 권한이 맞으면 그대로 페이지로 이동
   }
 })
 
