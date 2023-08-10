@@ -11,7 +11,6 @@ import Find_Result_Pw from "../views/Find_Result_Pw.vue";
 import FilteringR from "../views/FilteringR.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
-import filtertest from "../views/filtertest.vue";
 import mypage from "../views/MyPage.vue"
 import mypage_update from "../views/Mypage_Update.vue"
 //#endregion
@@ -35,7 +34,6 @@ const routes = [
 
     }
   },
-  
   {
     path: "/Signup",
     name: "Signup",
@@ -77,11 +75,6 @@ const routes = [
     component: Find_Result_Pw,
   },
   {
-    path: "/filtertest",
-    name: "filtertest",
-    component: filtertest,
-  },
-  {
     path: "/mypage",
     name: "mypage",
     component: mypage,
@@ -99,5 +92,19 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+// 유저 접근 권한 설정
+router.beforeEach((to, from, next) => {
+  let roleStatus = store.state.userGd // 현 접속 계정 권한 상태
+  // 라우터 권한, 접속 계정 권한 비교
+  if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
+    alert('로컬 로그인이 필요합니다.')
+    // 권한 비교 후 다르면 로그인 페이지로 이동
+    next({path: "/"})
+  } else {
+    // 권한 비교 후 같으면 그대로 페이지 정상 이동
+    next()
+  }
+})
 
 export default router;
