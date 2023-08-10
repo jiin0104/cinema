@@ -28,60 +28,29 @@
             v-for="(po, index) in slides"
             :key="po"
             :virtualIndex="index"
-            ><img src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+            ><img
+              src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
           /></swiper-slide>
         </swiper>
         <p class="append-buttons">
           <button @click="prepend()" class="prepend-2-slides"></button>
         </p>
       </div>
-      <!-- <div class="slider">
-        <v-container>
-          <v-col>
-            <v-carousel v-model="model">
-              <v-carousel-item>
-                <v-row>
-                  <v-col cols="3" v-for="(slide, i) in slides" :key="i">
-                    <img
-                      class="movie-img"
-                      :src="slide.imgSrc"
-                      style="width: 180px; height: 200px"
-                    />
-                  </v-col>
-                </v-row>
-              </v-carousel-item>
-              <v-carousel-item>
-                <v-row>
-                  <v-col cols="3" v-for="(slid, j) in slides2" :key="j">
-                    <img
-                      class="movie-img"
-                      :src="slid.imgSrc"
-                      style="width: 180px; height: 200px"
-                    />
-                  </v-col>
-                </v-row>
-              </v-carousel-item>
-            </v-carousel>
-          </v-col>
-        </v-container>
-      </div> -->
-      <!--슬라이더 끝-->
     </div>
   </div>
 </template>
 <script>
 import { ref } from "vue";
-// Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
+import { Swiper, SwiperSlide } from "swiper/vue"; //스와이퍼 불러오기
 
-// Import Swiper styles
-import "swiper/css";
+import "swiper/css"; //스와이퍼 css
 
 import "swiper/css/navigation";
 import "swiper/css/virtual";
 
-// import Swiper core and required modules
+// 스와이퍼 핵심모듈 물러오기
 import { Autoplay, Pagination, Navigation, Virtual } from "swiper/modules";
+
 export default {
   name: "",
   components: {
@@ -91,54 +60,48 @@ export default {
   data() {
     return {
       logo: "logo.png",
-      // model: 0,
-      // slides: [
-      //   { name: "부산행", imgSrc: "/pu.jpg" },
-      //   { name: "라라랜드", imgSrc: "/lalaland.jpg" },
-      //   { name: "알라딘", imgSrc: "/al.jpg" },
-      //   { name: "바빌론", imgSrc: "/va.jpg" },
-      // ],
-      // slides2: [
-      //   { name: "알라딘", imgSrc: "/al.jpg" },
-      //   { name: "바빌론", imgSrc: "/va.jpg" },
-      //   { name: "부산행", imgSrc: "/pu.jpg" },
-      //   { name: "라라랜드", imgSrc: "/lalaland.jpg" },
-      // ],
       slides: [],
     };
   },
 
   created() {
+    //페이지 로딩 되자마자 메인 슬라이드 정보 가져오는 함수 호출
     this.getmain();
   },
   methods: {
-    async getmain(){
+    async getmain() {
+      //슬라이드 정보 가져오는 api
       this.slides = await this.$api("/api/getmain", {});
       console.log(this.slides);
     },
     pageLink() {
+      //필터링 페이지로 이동
       this.$router.push({ path: "FilteringR" });
     },
   },
   setup() {
-    // Create array with 10 slides
+    //슬라이드 데이터 배열 생성
     const slides = ref(
       Array.from({ length: 10 }).map((_, index) => `Slide ${index + 1}`)
     );
-    let swiperRef = null;
+    let swiperRef = null; //데이터 초기화
     let appendNumber = 10;
     let prependNumber = 1;
 
+    //스와이퍼 참조 설정 함수
     const setSwiperRef = (swiper) => {
       swiperRef = swiper;
     };
+    //슬라이더 이동 함수
     const slideTo = (index) => {
       swiperRef.slideTo(index - 1, 0);
     };
     const append = () => {
+      //슬라이드 추가 함수
       slides.value = [...slides.value, "Slide " + ++appendNumber];
     };
     const prepend = () => {
+      //슬라이드 앞에 추가하는 함수
       slides.value = [
         `Slide ${prependNumber - 2}`,
         `Slide ${prependNumber - 1}`,
@@ -148,6 +111,7 @@ export default {
       swiperRef.slideTo(swiperRef.activeIndex + 2, 0);
     };
     return {
+      //스와이퍼 모듈 설정
       slides,
       swiperRef: null,
       appendNumber,
