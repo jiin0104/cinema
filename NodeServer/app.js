@@ -149,12 +149,11 @@ app.post("/signup", (req, res) => {
 
 //로그인 라우터. 웹페이지'/login'에서 인증로직 처리.
 app.post("/login", function (request, response) {
-  const loginUser = request.body; // 불러온 데이터 변수 선언
+  const loginUser = request.body;
 
   const query = "SELECT * FROM user WHERE USER_ID = ?";
 
   dbPool.query(query, [loginUser.userId], function (error, results, fields) {
-    // DB데이터와 프론트에서 불러온 ID입력값을 비교 후 틀렸으면 json 타입으로 undefined_id 리턴
     if (results.length <= 0) {
       return response.status(200).json({
         message: "undefined_id",
@@ -164,18 +163,17 @@ app.post("/login", function (request, response) {
         query,
         [loginUser.userId],
         function (error, results, fields) {
-          // DB데이터와 ID 입력값이 같으면 암호화 비밀번호 검증 후 PASSWORD값 비교
           // bcrypt 암호화 된 비밀번호 검증
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
           console.log(results);
           if (same) {
-            // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우 프론트로 유저 ID와 유저 NUM 리턴
+            // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우
             return response.status(200).json({
               message: results[0].USER_ID,
               message1: results[0].USER_NUM,
             });
           } else {
-            // 비밀번호 불일치 incorrect_pw 리턴
+            // 비밀번호 불일치
             return response.status(200).json({
               message: "incorrect_pw",
             });
