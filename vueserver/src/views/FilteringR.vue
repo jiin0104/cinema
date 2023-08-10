@@ -469,28 +469,24 @@ export default {
       };
 
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
-      console.log(selectedGenres);
+      console.log("selectedGenres:", selectedGenres);
       //장르 id가 문자열로 변환되서 서버로 쏴지는지 확인.
-      console.log(queryParams);
-      //선택한 배열이 어떻게 되는지
-      console.log(this.selectarray);
-      // try {
-      //   // API 요청 보내기
-      //   const response = await this.$api.post("/fetch-movies", {
-      //     selectedGenres: this.selectarray.join(","),
-      //   });
+      console.log("queryParams:", queryParams);
+
       try {
         // API 요청 보내기
         const response = await axios.post("/fetch-movies", {
-          selectedGenres: this.selectarray.join(","),
+          // selectedGenres: this.selectarray.join(","),
+          selectedGenres: this.selectarray
+            .map((genre) => this.mapGenreNameToId(genre))
+            .join(","),
         });
         // 필요한 작업 수행
-        console.log(response); // 오류 알림 없애는 용(쓸데없는거임)
-        console.log(response.data);
+        console.log(response); // 성공한 경우 응답 확인
         // 결과 페이지로 이동
-        this.$router.push({
-          path: "/FinalFilter",
-        });
+        // this.$router.push({
+        //   path: "/FinalFilter",
+        // });
       } catch (error) {
         console.error("Error fetching and processing movies:", error);
         // 에러 처리
