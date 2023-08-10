@@ -153,13 +153,18 @@ app.post("/login", function (request, response) {
 
   const query = "SELECT * FROM user WHERE USER_ID = ?";
 
-  dbPool.query(query, [loginUser.userId], function (error, results, fields) { // DB데이터와 프론트에서 불러온 ID입력값을 비교 후 틀렸으면 json 타입으로 undefined_id 리턴
+  dbPool.query(query, [loginUser.userId], function (error, results, fields) {
+    // DB데이터와 프론트에서 불러온 ID입력값을 비교 후 틀렸으면 json 타입으로 undefined_id 리턴
     if (results.length <= 0) {
       return response.status(200).json({
         message: "undefined_id",
       });
     } else {
-      dbPool.query(query, [loginUser.userId], function (error, results, fields) { // DB데이터와 ID 입력값이 같으면 암호화 비밀번호 검증 후 PASSWORD값 비교
+      dbPool.query(
+        query,
+        [loginUser.userId],
+        function (error, results, fields) {
+          // DB데이터와 ID 입력값이 같으면 암호화 비밀번호 검증 후 PASSWORD값 비교
           // bcrypt 암호화 된 비밀번호 검증
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
           console.log(results);
@@ -470,7 +475,6 @@ app.post("/fetch-movies", async (req, res) => {
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
     console.log("장르쿼리스트링:", genreQueryString);
-    console.log("오류확인", req.query.selectedGenres);
     console.log(apiUrl);
 
     res.json({ message: "Movies fetched and processed." });
