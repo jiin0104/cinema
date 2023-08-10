@@ -12,7 +12,7 @@
       <div>
         <swiper
           :modules="modules"
-          :slidesPerView="3"
+          :slidesPerView="4"
           :centeredSlides="false"
           :spaceBetween="30"
           :autoplay="{

@@ -65,6 +65,7 @@ export default {
     };
   },
   methods: {
+    // 로그인 함수
     login() {
       axios({
         url: "/login",
