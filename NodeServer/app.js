@@ -434,17 +434,19 @@ app.post("/pw_update", (req, res) => {
 app.post("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
-    const selectedGenres = req.query.selectedGenres;
+    const selectedGenres = req.body.selectedGenres;
     // const { selectedGenres } = req.body;
     // const selectedGenres = req.query;
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
     //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
-    const genreQueryString = Array.isArray(selectedGenres)
-      ? selectedGenres.join(",")
-      : selectedGenres || ""; // undefined인 경우 빈 문자열로 설정
+    // const genreQueryString = Array.isArray(selectedGenres)
+    //   ? selectedGenres.join(",")
+    //   : selectedGenres || ""; // undefined인 경우 빈 문자열로 설정
 
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${genreQueryString}&api_key=${apiKey}`;
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${selectedGenres.join(
+      ","
+    )}&api_key=${apiKey}`;
 
     const options = {
       method: "GET",
@@ -460,6 +462,20 @@ app.post("/fetch-movies", async (req, res) => {
 
     const movies = response.data.results;
     // 가져온 영화 정보를 db에 저장
+    // movie_info 객체에 id 추가
+    // const movieInfo = {
+    //   id: movieInfo.id,
+    // };
+    // for (const movie of movies) {
+    //   // const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
+    //   const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
+    //   const [rows, fields] = await dbPool
+    //     .promise()
+    //     .query("INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)", [
+    //       movieInfo.id,
+    //       JSON.stringify(movieInfo),
+    //     ]);
+    // }
     for (const movie of movies) {
       // const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
       const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
@@ -470,7 +486,6 @@ app.post("/fetch-movies", async (req, res) => {
 
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
-    console.log("장르쿼리스트링:", genreQueryString);
     console.log(apiUrl);
     console.log(req.query.selectedGenres);
 

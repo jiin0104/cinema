@@ -464,22 +464,14 @@ export default {
         })
         .filter((genreId) => genreId !== undefined); // undefined 값 제거
 
-      const queryParams = {
-        selectedGenres: selectedGenres.join(","), // 배열을 쉼표로 구분된 문자열로 변환
-      };
-
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
       console.log("selectedGenres:", selectedGenres);
-      //장르 id가 문자열로 변환되서 서버로 쏴지는지 확인.
-      console.log("queryParams:", queryParams);
 
       try {
         // API 요청 보내기
         const response = await axios.post("/fetch-movies", {
           // selectedGenres: this.selectarray.join(","),
-          selectedGenres: this.selectarray
-            .map((genre) => this.mapGenreNameToId(genre))
-            .join(","),
+          selectedGenres: selectedGenres,
         });
         // 필요한 작업 수행
         console.log(response); // 성공한 경우 응답 확인
