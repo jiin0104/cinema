@@ -25,7 +25,7 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
-    meta1: {
+    meta: {
       roles: [false],
     },
   },
@@ -128,7 +128,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   let roleStatus = store.state.isLogin; // 현재 로그인 상태를 가져옴
 
-  if (to.path === "/login") {
+  if (to.path === "/login" && to.meta.roles && !to.meta.roles.includes(roleStatus)) {
     // 특정 라우터에 대한 알림 표시
     Swal.fire({
       icon: "warning",
