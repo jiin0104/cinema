@@ -155,7 +155,7 @@ export default {
       logo: "logo.png",
       selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
       recList: [], //영화 리스트
-      modList: [], //모달 리스트
+      modList: [], //모달 리스트채워넣기
     };
   },
   mounted() {
@@ -168,6 +168,9 @@ export default {
         // 서버로부터 moviePosters 데이터 가져오기
         const response = await axios.get("/recommend-movies");
         const moviePosters = response.data;
+
+        //콘솔로 데이터 확인
+        console.log("서버가 보내준 4개영화 배열확인", moviePosters);
 
         // moviePosters 데이터를 recList배열에 채워넣기
         this.recList = moviePosters;
@@ -191,6 +194,10 @@ export default {
         movieid: rec.movieid,
         posterUrl: rec.posterUrl,
       };
+
+      //콘솔로 데이터확인
+      console.log(this.selectedMovie);
+
       // 선택한 영화 정보(영화 코드와 포스터 URL로 불러옴) selectedMovie에 저장
       await this.Get_Modal_Info(); // 모달 내용 가져오기
     },
@@ -209,10 +216,16 @@ export default {
       const detailsResponse = await axios.get(detailsUrl);
       const movieDetails = detailsResponse.data;
 
+      //콘솔로 데이터 확인
+      console.log(movieDetails);
+
       // 감독 및 주연 배우 정보 요청
       const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
       const creditsResponse = await axios.get(creditsUrl);
       const creditsData = creditsResponse.data;
+
+      //콘솔로 데이터 확인
+      console.log(creditsData);
 
       // 필요한 정보 추출 후 modList에 저장
       this.modList[0] = {
@@ -227,6 +240,12 @@ export default {
         },
         MOVIE_SCORE: movieDetails.vote_average,
       };
+
+      //콘솔로 데이터 확인
+      console.log(this.modList[0]);
+      console.log(this.modList[1]);
+      console.log(this.modList[2]);
+      console.log(this.modList[3]);
     } catch (error) {
       console.error("Error fetching movie details:", error);
     }
