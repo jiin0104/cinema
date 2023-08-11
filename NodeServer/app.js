@@ -504,7 +504,7 @@ app.post("/recommend-movies", async (req, res) => {
     const query = `
       SELECT movieid
       FROM movies_db
-      WHERE JSON_CONTAINS(movieinfo->'$.genres', ?)
+      WHERE JSON_CONTAINS(movieinfo->'$.genre_ids', ?)
       ORDER BY RAND()
       LIMIT 4;
     `;
