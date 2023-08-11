@@ -499,11 +499,40 @@ app.post("/recommend-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
     const selectedGenres = req.body.selectedGenres;
+
+    // db에서 해당 장르에 맞는 영화를 랜덤하게 4개 선택
+    const query = `
+      SELECT movieid
+      FROM movies_db
+      WHERE JSON_CONTAINS(movieinfo->'$.genres', ?)
+      ORDER BY RAND()
+      LIMIT 4;
+    `;
+
+    const [rows, fields] = await dbPool
+      .promise()
+      .query(query, [selectedGenres]);
+
+    // TODO: 해당 장르에 맞는 영화 데이터를 랜덤하게 가져오는 로직 작성
+
+    const recommendedMovies = [
+      // TODO: 추천 영화 데이터를 구성하는 로직 작성
+    ];
+
+    for (const row of rows) {
+      recommendedMovies.push(row.movieid);
+    }
+
+    // 추천된 영화의 id값을 TMDB API를 호출하여 영화 정보와 포스터 URL을 가져오는 작업 수행
+    // 이 부분은 TMDB API 사용 방법에 따라 구현되어야 합니다.
+
+    // 이후 recommendedMovies에 TMDB API에서 가져온 영화 정보를 추가하는 작업을 수행해주세요.
+
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
-    // const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${selectedGenres.join(
-    //   ","
-    // )}&api_key=${apiKey}`;
+    const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${selectedGenres.join(
+      ","
+    )}&api_key=${apiKey}`;
 
     const options = {
       method: "GET",
@@ -514,11 +543,10 @@ app.post("/recommend-movies", async (req, res) => {
       },
     };
 
-    // TODO: 해당 장르에 맞는 영화 데이터를 랜덤하게 가져오는 로직 작성
-
-    const recommendedMovies = [
-      // TODO: 추천 영화 데이터를 구성하는 로직 작성
-    ];
+    // console.log를 사용하여 데이터 확인
+    console.log("Selected genres:", selectedGenres);
+    console.log(apiUrl);
+    console.log(query);
 
     res.json({ recommendedMovies });
   } catch (error) {
