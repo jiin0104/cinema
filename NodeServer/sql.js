@@ -2,9 +2,9 @@ module.exports = {
   userin: {
     query: `SELECT * from user where USER_ID=?`,
   },
-  recList: {
-    query: `SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_NUM FROM movies`,
-  },
+  // recList: {
+  //   query: `SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_NUM FROM movies_db`,
+  // },
   modList: {
     query: `SELECT * FROM movies WHERE MOVIE_NUM=2`,
   },
@@ -24,6 +24,6 @@ module.exports = {
     MOVIE_NUM = ?`,
   },
   getmain: {
-    query: `select * from jsontest`
+    query: `select * from movies_db`
   }
 };

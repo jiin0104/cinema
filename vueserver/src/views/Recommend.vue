@@ -160,7 +160,7 @@ export default {
   },
   mounted() {
     //페이지가 실행되자마자 영화 리스트 데이터 보여주기
-    this.Get_Movie_List();
+    // this.Get_Movie_List();
   },
   created() {
     //영화코드=쿼리의 영화코드
@@ -189,12 +189,12 @@ export default {
       //모달 닫기
       this.selectedMovie = null;
     },
-    async Get_Movie_List() {
-      //추천 영화 리스트 파라미터값 가져오는 함수
-      this.recList = await this.$api("/api/recList", {
-        param: [this.MOVIE_NUM],
-      });
-    },
+    // async Get_Movie_List() {
+    //   //추천 영화 리스트 파라미터값 가져오는 함수
+    //   this.recList = await this.$api("/api/recList", {
+    //     param: [this.MOVIE_NUM],
+    //   });
+    // },
     async Get_Modal_Info() {
       //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
       console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
