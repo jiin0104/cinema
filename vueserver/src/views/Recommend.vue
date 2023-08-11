@@ -199,27 +199,31 @@ export default {
     //모달 닫기
     this.selectedMovie = null;
   },
-  async Get_Movie_List() {
-    //추천 영화 리스트 파라미터값 가져오는 함수
-    this.recList = await this.$api("/api/recList", {
-      param: [this.MOVIE_NUM],
-    });
-  },
   async Get_Modal_Info() {
     try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${this.selectedMovie.movieid}?api_key=YOUR_API_KEY`
-      );
-      const movieDetails = response.data;
+      const apiKey = "49ba50092811928efb84febb9d68823f";
+      const movieId = this.selectedMovie.movieid;
 
-      // 필요한 영화 상세 정보 추출 후 modList에 저장
+      // 영화 상세 정보 요청
+      const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+      const detailsResponse = await axios.get(detailsUrl);
+      const movieDetails = detailsResponse.data;
+
+      // 감독 및 주연 배우 정보 요청
+      const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
+      const creditsResponse = await axios.get(creditsUrl);
+      const creditsData = creditsResponse.data;
+
+      // 필요한 정보 추출 후 modList에 저장
       this.modList[0] = {
         GENRE: movieDetails.genres.map((genre) => genre.name).join(", "),
         MOVIE_RELEASE: movieDetails.release_date,
-        MOVIE_DIRECTOR: "영화 감독 정보", // 여기에 실제 감독 정보를 넣어주세요
+        MOVIE_DIRECTOR: creditsData.crew.find(
+          (member) => member.job === "Director"
+        ).name,
         MOVIE_ACTORS: {
-          actor1: "주연 배우 1", // 여기에 주연 배우 정보를 넣어주세요
-          actor2: "주연 배우 2",
+          actor1: creditsData.cast[0].name,
+          actor2: creditsData.cast[1].name,
         },
         MOVIE_SCORE: movieDetails.vote_average,
       };
