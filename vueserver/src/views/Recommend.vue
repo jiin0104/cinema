@@ -28,12 +28,12 @@
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
+                      <div class="headline">{{}}</div>
                     </div>
                   </div>
 
                   <div class="detail">
-                    <button @click="openModal(rec)">상세보기</button>
+                    <button @click="openModal()">상세보기</button>
                   </div>
                 </v-card>
               </v-layout>
@@ -203,8 +203,6 @@ export default {
       });
       console.log("modList2 Data:", this.modList2); //삭제해도됨
     },
-
-
   },
 };
 </script>

@@ -5,7 +5,11 @@ const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 
 const axios = require("axios");
 const bcrypt = require("bcrypt"); // 단방향 암호화
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 let sql = require("./sql.js");
+
+dotenv.config();
 
 //익스프레스 객체
 const app = express();
@@ -487,6 +491,71 @@ app.post("/fetch-movies", async (req, res) => {
     res.status(500).json({
       error: "An error occurred while fetching and processing movies.",
     });
+  }
+});
+
+//db에 저장된 포스터패스를 TMDB api이용해서 url받고 프론트로 쏴줌
+app.post("/recommend-movies", async (req, res) => {
+  try {
+    // FilteringR.vue에서 전달한 데이터 받기
+    const selectedGenres = req.body.selectedGenres;
+
+    // db에서 해당 장르에 맞는 영화를 랜덤하게 4개 선택
+    const query = `
+      SELECT movieid
+      FROM movies_db
+      WHERE JSON_CONTAINS(movieinfo->'$.genre_ids', ?)
+      ORDER BY RAND()
+      LIMIT 4;
+    `;
+
+    const [rows, fields] = await dbPool
+      .promise()
+      .query(query, [JSON.stringify(selectedGenres)]);
+
+    // 선택된 영화들의 id값 배열
+    const selectedMovieIds = rows.map((row) => row.movieid);
+
+    // 각 영화의 포스터 URL 가져오기
+    const apiKey = "49ba50092811928efb84febb9d68823f";
+    const baseImageUrl = "https://image.tmdb.org/t/p/";
+    const posterSize = "w500"; // 원하는 이미지 크기
+    //랜덤으로 뽑아온 4개 영화id로 영화 json정보 뽑아오기
+    const movieDetailsPromises = selectedMovieIds.map(async (movieId) => {
+      const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+      //뽑아온 json에서 이미지뽑기
+      try {
+        const response = await axios.get(apiUrl);
+        const movieData = response.data;
+
+        // 영화 포스터 이미지 URL 생성
+        const posterPath = movieData.poster_path;
+        const posterUrl = `${baseImageUrl}${posterSize}${posterPath}`;
+
+        return {
+          movieid: movieId,
+          posterUrl: posterUrl,
+        };
+      } catch (error) {
+        console.error("Error fetching movie details from TMDB:", error);
+        return null;
+      }
+    });
+
+    //추천된 영화의 상세 정보 배열
+    const moviePosters = await Promise.all(movieDetailsPromises);
+    // console.log를 사용하여 데이터 확인
+    console.log("포스터엔드포인트에서 받은 장르값:", selectedGenres);
+    console.log("선택된 영화들의 id값 배열", selectedMovieIds);
+    console.log("포스터엔드포인트에서 생성한 4개 랜덤영화 뽑기 쿼리", query);
+    console.log("포스터엔드포인트에서 뽑아온 4개 랜덤영화 정보", moviePosters);
+
+    res.status(200).json(moviePosters);
+  } catch (error) {
+    console.error("Error recommending movies:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while recommending movies" });
   }
 });
 

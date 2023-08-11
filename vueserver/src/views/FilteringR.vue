@@ -30,9 +30,7 @@
           <br />
           <div style="display: grid; position: relative; left: 100px">
             <div class="buttonlocation1">
-              <button type="button" class="button3" @click="age0">
-                10대-
-              </button>
+              <button type="button" class="button3" @click="age0">10대-</button>
               <div>
                 <button type="button" class="button3" @click="age1">
                   10대
@@ -86,7 +84,12 @@
         <div class="select">
           <br />
           <div class="buttonlocation3">
-            <button type="button" class="button4" style="font-size: 27px" @click="genre1">
+            <button
+              type="button"
+              class="button4"
+              style="font-size: 27px"
+              @click="genre1"
+            >
               애니메이션
             </button>
             <div>
@@ -124,10 +127,20 @@
               </button>
             </div>
             <div>
-              <button type="button" class="button4" style="font-size: 27px" @click="genre8">
+              <button
+                type="button"
+                class="button4"
+                style="font-size: 27px"
+                @click="genre8"
+              >
                 다큐멘터리
               </button>
-              <button type="button" class="button4" @click="genre9" style="font-size: 27px">
+              <button
+                type="button"
+                class="button4"
+                @click="genre9"
+                style="font-size: 27px"
+              >
                 전쟁
               </button>
             </div>
@@ -219,74 +232,146 @@
             <button type="button" class="button5">
               <img :src="select1" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text" v-if="this.selectarray[0] == 'man.png'">남자</div>
-            <div class="r-text" v-else-if="this.selectarray[0] == 'woman.png'">여자</div>
+            <div class="r-text" v-if="this.selectarray[0] == 'man.png'">
+              남자
+            </div>
+            <div class="r-text" v-else-if="this.selectarray[0] == 'woman.png'">
+              여자
+            </div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select2" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text" v-if="this.selectarray[1] == 'age0.png'">10대 미만</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age1.png'">10대</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age2.png'">20대</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age3.png'">30대</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age4.png'">40대</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age5.png'">50대</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age6.png'">60대</div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age7.png'">70대 이상</div>
-            
+            <div class="r-text" v-if="this.selectarray[1] == 'age0.png'">
+              10대 미만
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age1.png'">
+              10대
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age2.png'">
+              20대
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age3.png'">
+              30대
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age4.png'">
+              40대
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age5.png'">
+              50대
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age6.png'">
+              60대
+            </div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age7.png'">
+              70대 이상
+            </div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select3" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre1.png'">애니메이션</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre2.png'">액션</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre3.png'">로맨스</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre4.png'">코미디</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre5.png'">SF</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre6.png'">판타지</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre7.png'">스릴러</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre8.png'">다큐멘터리</div>
-            <div class="r-text" v-if="this.selectarray[2] == 'genre9.png'">전쟁</div>
-
+            <div class="r-text" v-if="this.selectarray[2] == 'genre1.png'">
+              애니메이션
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre2.png'">
+              액션
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre3.png'">
+              로맨스
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre4.png'">
+              코미디
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre5.png'">
+              SF
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre6.png'">
+              판타지
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre7.png'">
+              스릴러
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre8.png'">
+              다큐멘터리
+            </div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre9.png'">
+              전쟁
+            </div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select4" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text" v-if="this.selectarray[3] == 'love.png'">사랑중이에요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'sad.png'">우울해요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'crying.png'">이별했어요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'thinking.png'">고민있어요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'smiling.png'">행복해요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'musical-note.png'">심심해요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'plane.png'">떠나고 싶어요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'angry.png'">화나요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'cat.png'">힐링이 필요해요</div>
-            <div class="r-text" v-if="this.selectarray[3] == 'tongue.png'">배고파요</div>
-
+            <div class="r-text" v-if="this.selectarray[3] == 'love.png'">
+              사랑중이에요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'sad.png'">
+              우울해요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'crying.png'">
+              이별했어요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'thinking.png'">
+              고민있어요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'smiling.png'">
+              행복해요
+            </div>
+            <div
+              class="r-text"
+              v-if="this.selectarray[3] == 'musical-note.png'"
+            >
+              심심해요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'plane.png'">
+              떠나고 싶어요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'angry.png'">
+              화나요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'cat.png'">
+              힐링이 필요해요
+            </div>
+            <div class="r-text" v-if="this.selectarray[3] == 'tongue.png'">
+              배고파요
+            </div>
           </div>
           <br /><br />
           <div class="filterselected" style="text-align: center">
-            <v-btn type="button" id="filtercancel" variant="tonal" @click="filtercancel" style="
+            <v-btn
+              type="button"
+              id="filtercancel"
+              variant="tonal"
+              @click="filtercancel"
+              style="
                 color: white;
                 background-color: rgb(255, 57, 57);
                 height: 50px;
                 width: 125px;
                 font-size: 30px;
                 margin-right: 10%;
-              ">처음으로</v-btn>
-            <v-btn type="button" id="filterconfirm" variant="tonal" @click="filterconfirm" style="
+              "
+              >처음으로</v-btn
+            >
+            <v-btn
+              type="button"
+              id="filterconfirm"
+              variant="tonal"
+              @click="filterconfirm"
+              style="
                 color: white;
                 background-color: rgb(57, 60, 255);
                 height: 50px;
                 width: 125px;
                 font-size: 30px;
-              ">확인</v-btn>
+              "
+              >확인</v-btn
+            >
           </div>
         </div>
       </div>
@@ -473,21 +558,22 @@ export default {
         ne2: "emoji2",
         ne3: "emoji3",
         ne4: "emoji4",
-        userNo: this.userNo
+        userNo: this.userNo,
       };
 
-      axios.post('/rcinsert', formData)
-        .then(response => {
+      axios
+        .post("/rcinsert", formData)
+        .then((response) => {
           if (response.data.message) {
             alert(response.data.message);
           } else {
-            alert('등록에 실패했습니다.');
+            alert("등록에 실패했습니다.");
             console.log(formData);
           }
         })
-        .catch(error => {
-          console.error('등록 실패', error);
-          alert('등록 실패. 확인 후 다시 시도해 주세요');
+        .catch((error) => {
+          console.error("등록 실패", error);
+          alert("등록 실패. 확인 후 다시 시도해 주세요");
         });
 
       // 선택한 장르 정보 가져오기
@@ -511,7 +597,6 @@ export default {
           selectedGenres: selectedGenres,
         });
 
-
         // 필요한 작업 수행
         console.log(response); // 성공한 경우 응답 확인
         console.log(poster); // 성공한 경우 응답 확인
@@ -528,25 +613,25 @@ export default {
     // 장르 이름을 장르 ID로 매핑
     mapGenreNameToId(genreName) {
       const genreMap = {
-        'genre1.png': 16,
-        'genre2.png': 28,
-        'genre3.png': 10749,
-        'genre4.png': 35,
-        'genre5.png': 878,
-        'genre6.png': 14,
-        'genre7.png': 53,
-        'genre8.png': 99,
-        'genre9.png': 10752,
-        'love.png': 18,
-        'sad.png': 10751,
-        'crying.png': 18,
-        'thinking.png': 36,
-        'smiling.png': 10402,
-        'musical-note.png': 35,
-        'plane.png': 12,
-        'angry.png': 80,
-        'cat.png': 10770,
-        'tongue.png': 9648,
+        "genre1.png": 16,
+        "genre2.png": 28,
+        "genre3.png": 10749,
+        "genre4.png": 35,
+        "genre5.png": 878,
+        "genre6.png": 14,
+        "genre7.png": 53,
+        "genre8.png": 99,
+        "genre9.png": 10752,
+        "love.png": 18,
+        "sad.png": 10751,
+        "crying.png": 18,
+        "thinking.png": 36,
+        "smiling.png": 10402,
+        "musical-note.png": 35,
+        "plane.png": 12,
+        "angry.png": 80,
+        "cat.png": 10770,
+        "tongue.png": 9648,
       };
       return genreMap[genreName] || null;
     },
