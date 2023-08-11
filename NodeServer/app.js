@@ -514,23 +514,21 @@ app.post("/recommend-movies", async (req, res) => {
       },
     };
 
-    //url에서 받아온 json데이터
-    const response = await axios.request(options);
+    // TODO: 해당 장르에 맞는 영화 데이터를 랜덤하게 가져오는 로직 작성
 
-    const movies = response.data.results;
+    const recommendedMovies = [
+      // TODO: 추천 영화 데이터를 구성하는 로직 작성
+    ];
 
-    for (const movie of movies) {
-    }
-
-    // console.log를 사용하여 데이터 확인
-    console.log("Selected genres:", selectedGenres);
-    console.log(apiUrl);
-
-    res.json({ message: "Movies fetched and processed." });
+    res.json({ recommendedMovies });
   } catch (error) {
-    console.error("Error fetching and processing movies:", error.message);
+    console.error(
+      "Error fetching and processing recommended movies:",
+      error.message
+    );
     res.status(500).json({
-      error: "An error occurred while fetching and processing movies.",
+      error:
+        "An error occurred while fetching and processing recommended movies.",
     });
   }
 });
