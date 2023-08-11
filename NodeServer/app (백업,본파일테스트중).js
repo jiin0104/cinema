@@ -5,11 +5,7 @@ const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 
 const axios = require("axios");
 const bcrypt = require("bcrypt"); // 단방향 암호화
 const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 let sql = require("./sql.js");
-
-dotenv.config();
 
 //익스프레스 객체
 const app = express();
