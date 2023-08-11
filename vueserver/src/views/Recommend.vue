@@ -145,67 +145,7 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
-
-export default {
-  el: "#app",
-  data() {
-    return {
-      logo: "logo.png",
-      selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
-      recList: [], //영화 리스트
-      modList2: [], //모달 리스트
-    };
-  },
-  mounted() {
-    //페이지가 실행되자마자 영화 리스트 데이터 보여주기
-    // this.Get_Movie_List();
-  },
-  created() {
-    //영화코드=쿼리의 영화코드
-    this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
-  },
-
-  methods: {
-    pageLink() {
-      //클릭시 메인으로 이동
-      this.$router.push({ path: "/" });
-    },
-    async URLink() {
-      //내가 추천받은 목록 페이지로 이동
-      this.$router.push({ path: "/UserRecommend" });
-    },
-
-    async openModal(rec) {
-      //모달창 띄우기
-      console.log("Clicked Movie Object:", rec); //삭제해도됨
-      console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제해도됨
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
-      //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
-      await this.Get_Modal_Info(); //모달 내용 가져오기
-    },
-    close_toggle() {
-      //모달 닫기
-      this.selectedMovie = null;
-    },
-    // async Get_Movie_List() {
-    //   //추천 영화 리스트 파라미터값 가져오는 함수
-    //   this.recList = await this.$api("/api/recList", {
-    //     param: [this.MOVIE_NUM],
-    //   });
-    // },
-    async Get_Modal_Info() {
-      //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
-      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE_NUM],
-      });
-      console.log("modList2 Data:", this.modList2); //삭제해도됨
-    },
-  },
-};
-</script>
+<script></script>
 
 <style>
 @import "../css/recommend.css";
