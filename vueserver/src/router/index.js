@@ -25,9 +25,9 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
-    // meta: {
-    //   roles: [ false ],
-    // }
+    meta1: {
+      roles: [false],
+    },
   },
   {
     path: "/FilteringR",
@@ -128,8 +128,18 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   let roleStatus = store.state.isLogin; // 현재 로그인 상태를 가져옴
 
+  if (to.path === "/login") {
+    // 특정 라우터에 대한 알림 표시
+    Swal.fire({
+      icon: "warning",
+      title: "권한이 없습니다.",
+      confirmButtonText: "확인",
+    }).then(() => {
+      next({ path: "/" }); // 알림을 표시하고 나면 페이지로 이동
+    });
+  }
   // 라우터에 메타 필드로 정의된 권한이 있는지 확인하고, 해당 권한을 가지지 않는 경우
-  if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
+  else if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
     // SweetAlert2를 사용하여 로그인이 필요한 메시지를 표시
     Swal.fire({
       icon: "warning",
