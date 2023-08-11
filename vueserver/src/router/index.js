@@ -144,13 +144,13 @@ router.beforeEach((to, from, next) => {
     Swal.fire({
       icon: "warning",
       title: "로그인이 필요합니다.",
-      text: "회원가입하시겠습니까?",
+      text: "로그인하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "승인",
       cancelButtonText: "취소",
     }).then((result) => {
       if (result.isConfirmed) {
-        next({ path: "/Signup" }); // 승인을 클릭하면 회원가입 페이지로 이동
+        next({ path: "/login" }); // 승인을 클릭하면 회원가입 페이지로 이동
       } else {
         next({ path: "/" }); // 취소를 클릭하거나 권한이 없으면 메인 페이지로 이동
       }
