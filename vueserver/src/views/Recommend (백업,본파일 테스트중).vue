@@ -65,15 +65,15 @@
                     {{ movieid }}
                   </div>
                 </div>
-                <div class="modalcontent" v-if="modList2[0]">
-                  <p>장르: {{ modList2[0].GENRE }}</p>
-                  <p>개봉일: {{ modList2[0].MOVIE_RELEASE }}</p>
-                  <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
+                <div class="modalcontent" v-if="modList[0]">
+                  <p>장르: {{ modList[0].GENRE }}</p>
+                  <p>개봉일: {{ modList[0].MOVIE_RELEASE }}</p>
+                  <p>감독: {{ modList[0].MOVIE_DIRECTOR }}</p>
                   <p>
-                    주연: {{ modList2[0].MOVIE_ACTORS.actor1 }},
-                    {{ modList2[0].MOVIE_ACTORS.actor2 }}
+                    주연: {{ modList[0].MOVIE_ACTORS.actor1 }},
+                    {{ modList[0].MOVIE_ACTORS.actor2 }}
                   </p>
-                  <p>평점: {{ modList2[0].MOVIE_SCORE }}</p>
+                  <p>평점: {{ modList[0].MOVIE_SCORE }}</p>
                 </div>
               </div>
               <div>
@@ -81,9 +81,9 @@
                   <form>
                     한줄리뷰
                     <div class="review">
-                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
+                      {{ modList.USER_ID }} : {{ modList.REVIEW_COMMENT }}
                       <br />
-                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
+                      {{ modList.USER_ID }} : {{ modList.REVIEW_COMMENT }}
                     </div>
                   </form>
                   <button
@@ -155,7 +155,7 @@ export default {
       logo: "logo.png",
       selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
       recList: [], //영화 리스트
-      modList2: [], //모달 리스트
+      modList: [], //모달 리스트
     };
   },
   mounted() {
@@ -208,10 +208,10 @@ export default {
   async Get_Modal_Info() {
     //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
     console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
-    this.modList2 = await this.$api("/api/modList2", {
+    this.modList = await this.$api("/api/modList", {
       param: [this.selectedMovie.MOVIE_NUM],
     });
-    console.log("modList2 Data:", this.modList2); //삭제해도됨
+    console.log("modList Data:", this.modList); //삭제해도됨
   },
 };
 </script>
