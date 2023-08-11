@@ -511,7 +511,7 @@ app.post("/recommend-movies", async (req, res) => {
 
     const [rows, fields] = await dbPool
       .promise()
-      .query(query, [selectedGenres]);
+      .query(query, [JSON.stringify(selectedGenres)]);
 
     // 선택된 영화들의 id값 배열
     const selectedMovieIds = rows.map((row) => row.movieid);
@@ -546,11 +546,11 @@ app.post("/recommend-movies", async (req, res) => {
     const moviePosters = await Promise.all(movieDetailsPromises);
     // console.log를 사용하여 데이터 확인
     console.log("포스터엔드포인트에서 받은 장르값:", selectedGenres);
-    console.log("포스터엔드포인트에서 생성한 포스터url:", posterUrl);
+    console.log("선택된 영화들의 id값 배열", selectedMovieIds);
     console.log("포스터엔드포인트에서 생성한 4개 랜덤영화 뽑기 쿼리", query);
-    console.log("포스터엔드포인트에서 뽑아온 4개 랜덤영화id", movieid);
+    console.log("포스터엔드포인트에서 뽑아온 4개 랜덤영화 정보", moviePosters);
 
-    res.status(200).json(movieDetails);
+    res.status(200).json(moviePosters);
   } catch (error) {
     console.error("Error recommending movies:", error);
     res
