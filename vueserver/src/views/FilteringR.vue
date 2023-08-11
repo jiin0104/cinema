@@ -479,8 +479,15 @@ export default {
           // selectedGenres: this.selectarray.join(","),
           selectedGenres: selectedGenres,
         });
+
+        const posterId = await axios.post("/find-poster", {
+          selectedGenres: selectedGenres,
+        });
+
+
         // 필요한 작업 수행
         console.log(response); // 성공한 경우 응답 확인
+        console.log(posterId); // 성공한 경우 응답 확인
         // 결과 페이지로 이동
         this.$router.push({
           path: "/FinalFilter",
