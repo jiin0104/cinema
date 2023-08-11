@@ -9,7 +9,7 @@
 
           <div
             v-for="(rec, index) in recList"
-            :key="rec.MOVIE_NUM"
+            :key="rec.movieid"
             style="margin: auto"
           >
             <div
@@ -24,16 +24,16 @@
             >
               <v-layout>
                 <v-card>
-                  <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
+                  <v-img :src="rec.posterUrl" height="250px" width="220px" />
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{}}</div>
+                      <div class="headline">{{ movieid }}</div>
                     </div>
                   </div>
 
                   <div class="detail">
-                    <button @click="openModal()">상세보기</button>
+                    <button @click="openModal(rec)">상세보기</button>
                   </div>
                 </v-card>
               </v-layout>
@@ -49,7 +49,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="selectedMovie.MOVIE_POSTER"
+                      :src="selectedMovie.posterUrl"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -62,7 +62,7 @@
                       height: 50px;
                     "
                   >
-                    {{ selectedMovie.MOVIE_TITLE }}
+                    {{ movieid }}
                   </div>
                 </div>
                 <div class="modalcontent" v-if="modList2[0]">
@@ -149,6 +149,15 @@
 import axios from "axios";
 
 export default {
+  el: "#app",
+  data() {
+    return {
+      logo: "logo.png",
+      selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
+      recList: [], //영화 리스트
+      modList2: [], //모달 리스트
+    };
+  },
   mounted() {
     // 서버로부터 moviePosters 데이터를 받아오기 위한 API 호출
     this.fetchMoviePosters();
@@ -156,15 +165,53 @@ export default {
   methods: {
     async fetchMoviePosters() {
       try {
-        const response = await axios.post("/recommend-movies", {
-        });
-        // 서버로부터 받은 데이터를 변수에 저장
-        this.moviePosters = response.data;
+        // 서버로부터 moviePosters 데이터 가져오기
+        const response = await axios.get("/recommend-movies");
+        const moviePosters = response.data;
+
+        // moviePosters 데이터를 recList배열에 채워넣기
+        this.recList = moviePosters;
       } catch (error) {
         console.error("Error fetching movie posters:", error);
       }
     },
+    async pageLink() {
+      //클릭시 메인으로 이동
+      this.$router.push({ path: "/" });
+    },
+    async URLink() {
+      //내가 추천받은 목록 페이지로 이동
+      this.$router.push({ path: "/UserRecommend" });
+    },
 
+    async openModal(rec) {
+      // 모달창 띄우기
+      this.selectedMovie = {
+        ...rec,
+        movieid: rec.movieid,
+        posterUrl: rec.posterUrl,
+      };
+      // 선택한 영화 정보(영화 코드와 포스터 URL로 불러옴) selectedMovie에 저장
+      await this.Get_Modal_Info(); // 모달 내용 가져오기
+    },
+  },
+  async close_toggle() {
+    //모달 닫기
+    this.selectedMovie = null;
+  },
+  async Get_Movie_List() {
+    //추천 영화 리스트 파라미터값 가져오는 함수
+    this.recList = await this.$api("/api/recList", {
+      param: [this.MOVIE_NUM],
+    });
+  },
+  async Get_Modal_Info() {
+    //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
+    console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
+    this.modList2 = await this.$api("/api/modList2", {
+      param: [this.selectedMovie.MOVIE_NUM],
+    });
+    console.log("modList2 Data:", this.modList2); //삭제해도됨
   },
 };
 </script>
