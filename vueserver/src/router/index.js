@@ -25,9 +25,9 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
-    meta: {
-      roles: [false],
-    },
+    // meta: {
+    //   roles: [false],
+    // },
   },
   {
     path: "/FilteringR",
@@ -129,7 +129,11 @@ router.beforeEach((to, from, next) => {
   let roleStatus = store.state.isLogin; // 현재 로그인 상태를 가져옴
 
   // 특정 라우터에 대한 경로 및 권한 확인
-  if (to.meta.roles && !to.meta.roles.includes(roleStatus) && to.path === "/login") {
+  if (
+    to.meta.roles &&
+    !to.meta.roles.includes(roleStatus) &&
+    to.path === "/login"
+  ) {
     // 특정 라우터에 대한 알림 표시
     Swal.fire({
       icon: "warning",
@@ -158,6 +162,5 @@ router.beforeEach((to, from, next) => {
     next(); // 권한이 맞으면 그대로 페이지로 이동
   }
 });
-
 
 export default router;

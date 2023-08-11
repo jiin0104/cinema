@@ -145,7 +145,29 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
+
+export default {
+  mounted() {
+    // 서버로부터 moviePosters 데이터를 받아오기 위한 API 호출
+    this.fetchMoviePosters();
+  },
+  methods: {
+    async fetchMoviePosters() {
+      try {
+        const response = await axios.post("/recommend-movies", {
+        });
+        // 서버로부터 받은 데이터를 변수에 저장
+        this.moviePosters = response.data;
+      } catch (error) {
+        console.error("Error fetching movie posters:", error);
+      }
+    },
+
+  },
+};
+</script>
 
 <style>
 @import "../css/recommend.css";
