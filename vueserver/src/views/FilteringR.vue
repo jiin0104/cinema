@@ -605,7 +605,7 @@ export default {
           path: "/FinalFilter",
         });
       } catch (error) {
-        console.error("Error fetching and processing movies:", error);
+        console.error("필러링R뷰오류 fetching and processing movies:", error);
         // 에러 처리
       }
     },

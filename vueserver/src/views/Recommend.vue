@@ -247,7 +247,7 @@ export default {
       console.log(this.modList[2]);
       console.log(this.modList[3]);
     } catch (error) {
-      console.error("Error fetching movie details:", error);
+      console.error("리커맨드뷰에러fetching movie details:", error);
     }
   },
 };

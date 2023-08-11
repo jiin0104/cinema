@@ -545,14 +545,14 @@ app.post("/recommend-movies", async (req, res) => {
     const query = `
       SELECT movieid
       FROM movies_db
-      WHERE JSON_CONTAINS(movieinfo->'$.genres', ?)
+      WHERE JSON_CONTAINS(movieinfo->'$.genre_ids', ?)
       ORDER BY RAND()
       LIMIT 4;
     `;
 
     const [rows, fields] = await dbPool
       .promise()
-      .query(query, [selectedGenres]);
+      .query(query, [JSON.stringify(selectedGenres)]);
 
     // 선택된 영화들의 id값 배열
     const selectedMovieIds = rows.map((row) => row.movieid);
@@ -612,7 +612,7 @@ app.post("/recommend-movies", async (req, res) => {
 
     res.status(200).json(movieDetails);
   } catch (error) {
-    console.error("Error recommending movies:", error);
+    console.error("리커맨드-무비엔드포인트에러", error);
     res
       .status(500)
       .json({ error: "An error occurred while recommending movies" });
