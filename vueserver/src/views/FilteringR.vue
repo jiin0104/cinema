@@ -219,28 +219,56 @@
             <button type="button" class="button5">
               <img :src="select1" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text">{{ this.selectarray[0] }}</div>
+            <div class="r-text" v-if="this.selectarray[0] == 'man.png'">남자</div>
+            <div class="r-text" v-else-if="this.selectarray[0] == 'woman.png'">여자</div>
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select2" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text">{{ this.selectarray[1] }}</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age0.png'">10대 미만</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age1.png'">10대</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age2.png'">20대</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age3.png'">30대</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age4.png'">40대</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age5.png'">50대</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age6.png'">60대</div>
+            <div class="r-text" v-if="this.selectarray[1] == 'age7.png'">70대 이상</div>
+            
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select3" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text">{{ this.selectarray[2] }}</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre1.png'">애니메이션</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre2.png'">액션</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre3.png'">로맨스</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre4.png'">코미디</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre5.png'">SF</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre6.png'">판타지</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre7.png'">스릴러</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre8.png'">다큐멘터리</div>
+            <div class="r-text" v-if="this.selectarray[2] == 'genre9.png'">전쟁</div>
+
           </div>
 
           <div class="buttonlocation5">
             <button type="button" class="button5">
               <img :src="select4" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text">{{ this.selectarray[3] }}</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'love.png'">사랑중이에요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'sad.png'">우울해요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'crying.png'">이별했어요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'thinking.png'">고민있어요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'smiling.png'">행복해요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'musical-note.png'">심심해요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'plane.png'">떠나고 싶어요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'angry.png'">화나요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'cat.png'">힐링이 필요해요</div>
+            <div class="r-text" v-if="this.selectarray[3] == 'tongue.png'">배고파요</div>
+
           </div>
           <br /><br />
           <div class="filterselected" style="text-align: center">
@@ -479,14 +507,14 @@ export default {
           selectedGenres: selectedGenres,
         });
 
-        const poster = await axios.post("/recommend-movies", {
-          selectedGenres: selectedGenres,
-        });
+        // const poster = await axios.post("/recommend-movies", {
+        //   selectedGenres: selectedGenres,
+        // });
 
 
         // 필요한 작업 수행
         console.log(response); // 성공한 경우 응답 확인
-        console.log(poster); // 성공한 경우 응답 확인
+        // console.log(poster); // 성공한 경우 응답 확인
         // 결과 페이지로 이동
         this.$router.push({
           path: "/FinalFilter",
@@ -500,25 +528,25 @@ export default {
     // 장르 이름을 장르 ID로 매핑
     mapGenreNameToId(genreName) {
       const genreMap = {
-        애니메이션: 16,
-        액션: 28,
-        로맨스: 10749,
-        코미디: 35,
-        SF: 878,
-        판타지: 14,
-        스릴러: 53,
-        다큐멘터리: 99,
-        전쟁: 10752,
-        사랑중이에요: 18,
-        우울해요: 10751,
-        이별했어요: 18,
-        고민있어요: 36,
-        행복해요: 10402,
-        심심해요: 35,
-        떠나고싶어요: 12,
-        화나요: 80,
-        힐링이필요해요: 10770,
-        배고파요: 9648,
+        'genre1.png': 16,
+        'genre2.png': 28,
+        'genre3.png': 10749,
+        'genre4.png': 35,
+        'genre5.png': 878,
+        'genre6.png': 14,
+        'genre7.png': 53,
+        'genre8.png': 99,
+        'genre9.png': 10752,
+        'love.png': 18,
+        'sad.png': 10751,
+        'crying.png': 18,
+        'thinking.png': 36,
+        'smiling.png': 10402,
+        'musical-note.png': 35,
+        'plane.png': 12,
+        'angry.png': 80,
+        'cat.png': 10770,
+        'tongue.png': 9648,
       };
       return genreMap[genreName] || null;
     },
