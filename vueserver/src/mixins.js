@@ -10,7 +10,7 @@ axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 export default {
   methods: {
     // url을 받고, data를 파라미터로 주고 받음.$api의 3 번쨰 인자로 메소드를 받도록하고 post를 기본값으로 함.
-      //추가로 이제 post말고도 get도 그냥 쓸 수 있음.
+    //추가로 이제 post말고도 get도 그냥 쓸 수 있음.
     async $api(url, data, method = "post") {
       // url을 받고, data를 파라미터로 주고 받음
       try {
@@ -25,6 +25,13 @@ export default {
         console.log(e); // 일단 console.log로 에러 표현
         throw e; // 에러를 다시 던져서 상위 컴포넌트에서 처리하도록 함
       }
+    },
+    $base64(file) {
+      return new Promise((resolve) => {
+        var a = new FileReader();
+        a.onload = (e) => resolve(e.target.result);
+        a.readAsDataURL(file);
+      });
     },
   },
 };

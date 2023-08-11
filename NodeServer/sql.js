@@ -24,6 +24,9 @@ module.exports = {
     MOVIE_NUM = ?`,
   },
   getmain: {
-    query: `select * from movies_db`
-  }
+    query: `select * from movies_db`,
+  },
+  emojipath: {
+    query: `SELECT json_extract(emoji, '$.emoji1','$.emoji2', '$.emoji3','$.emoji4') FROM recommend`,
+  },
 };
