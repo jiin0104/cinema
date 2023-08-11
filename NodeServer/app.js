@@ -455,12 +455,6 @@ app.post("/fetch-movies", async (req, res) => {
 
     const movies = response.data.results;
     // 가져온 영화 정보를 db에 저장
-    // for (const movie of movies) {
-    //   const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
-    //   const [rows, fields] = await dbPool
-    //     .promise()
-    //     .query("INSERT INTO jsontest (movie_info) VALUES (?)", [[movieInfo]]);
-    // }
     for (const movie of movies) {
       const movieId = movie.id; // 영화의 고유 id
       const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
@@ -482,8 +476,8 @@ app.post("/fetch-movies", async (req, res) => {
     }
 
     // console.log를 사용하여 데이터 확인
-    console.log("Selected genres:", selectedGenres);
-    console.log(apiUrl);
+    // console.log("Selected genres:", selectedGenres);
+    // console.log(apiUrl);
 
     res.json({ message: "Movies fetched and processed." });
   } catch (error) {
@@ -545,10 +539,10 @@ app.post("/recommend-movies", async (req, res) => {
     //추천된 영화의 상세 정보 배열
     const moviePosters = await Promise.all(movieDetailsPromises);
     // console.log를 사용하여 데이터 확인
-    console.log("Selected genres:", selectedGenres);
-    console.log(apiUrl);
-    console.log(query);
-    console.log("Movie Posters:", moviePosters);
+    // console.log("Selected genres:", selectedGenres);
+    // console.log(apiUrl);
+    // console.log(query);
+    // console.log("Movie Posters:", moviePosters);
 
     //recommend테이블에 영화4개 정보 넣기
     // moviePosters 배열을 JSON 형태로 변환
@@ -563,8 +557,11 @@ app.post("/recommend-movies", async (req, res) => {
     const movieIdsData = JSON.stringify(movieIds);
     // recommend 테이블에 데이터 삽입
     const updateQuery = `UPDATE recommend SET movieid = ? WHERE RC_NUM = ?;`;
-
     await dbPool.promise().query(updateQuery, [movieIdsData, rcNum]);
+
+    // console.log를 사용하여 데이터 확인
+    console.log("rcMoviesData제이슨 변환 확인", rcMoviesData);
+    console.log("movieIdsData제이슨 변환 확인", movieIdsData);
 
     res.status(200).json(movieDetails);
   } catch (error) {
