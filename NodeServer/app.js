@@ -465,11 +465,26 @@ app.post("/fetch-movies", async (req, res) => {
       const movieId = movie.id; // 영화의 고유 id
       const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
 
-      // movies_db 테이블에 영화 정보 추가
-      const query = "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
-      const [rows, fields] = await dbPool
+      // movies_db 테이블에 해당 movieId가 이미 존재하는지 확인하는 쿼리문
+      const duplicateCheckQuery =
+        "SELECT COUNT(*) as count FROM movies_db WHERE movieid = ?";
+      const [duplicateCheckRows] = await dbPool
         .promise()
-        .query(query, [movieId, movieInfo]);
+        .query(duplicateCheckQuery, [movieId]);
+      const isDuplicate = duplicateCheckRows[0].count > 0;
+
+      if (!isDuplicate) {
+        // movies_db 테이블에 영화 정보 추가
+        const insertQuery =
+          "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
+        await dbPool.promise().query(insertQuery, [movieId, movieInfo]);
+      }
+
+      // // movies_db 테이블에 영화 정보 추가
+      // const query = "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
+      // const [rows, fields] = await dbPool
+      //   .promise()
+      //   .query(query, [movieId, movieInfo]);
     }
 
     // console.log를 사용하여 데이터 확인
