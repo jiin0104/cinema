@@ -31,7 +31,7 @@
           <div style="display: grid; position: relative; left: 100px">
             <div class="buttonlocation1">
               <button type="button" class="button3" @click="age0">
-                어린이
+                10대-
               </button>
               <div>
                 <button type="button" class="button3" @click="age1">
@@ -86,12 +86,7 @@
         <div class="select">
           <br />
           <div class="buttonlocation3">
-            <button
-              type="button"
-              class="button4"
-              style="font-size: 27px"
-              @click="genre1"
-            >
+            <button type="button" class="button4" style="font-size: 27px" @click="genre1">
               애니메이션
             </button>
             <div>
@@ -129,20 +124,10 @@
               </button>
             </div>
             <div>
-              <button
-                type="button"
-                class="button4"
-                style="font-size: 27px"
-                @click="genre8"
-              >
+              <button type="button" class="button4" style="font-size: 27px" @click="genre8">
                 다큐멘터리
               </button>
-              <button
-                type="button"
-                class="button4"
-                @click="genre9"
-                style="font-size: 27px"
-              >
+              <button type="button" class="button4" @click="genre9" style="font-size: 27px">
                 전쟁
               </button>
             </div>
@@ -259,35 +244,21 @@
           </div>
           <br /><br />
           <div class="filterselected" style="text-align: center">
-            <v-btn
-              type="button"
-              id="filtercancel"
-              variant="tonal"
-              @click="filtercancel"
-              style="
+            <v-btn type="button" id="filtercancel" variant="tonal" @click="filtercancel" style="
                 color: white;
                 background-color: rgb(255, 57, 57);
                 height: 50px;
                 width: 125px;
                 font-size: 30px;
                 margin-right: 10%;
-              "
-              >처음으로</v-btn
-            >
-            <v-btn
-              type="button"
-              id="filterconfirm"
-              variant="tonal"
-              @click="filterconfirm"
-              style="
+              ">처음으로</v-btn>
+            <v-btn type="button" id="filterconfirm" variant="tonal" @click="filterconfirm" style="
                 color: white;
                 background-color: rgb(57, 60, 255);
                 height: 50px;
                 width: 125px;
                 font-size: 30px;
-              "
-              >확인</v-btn
-            >
+              ">확인</v-btn>
           </div>
         </div>
       </div>
@@ -323,6 +294,15 @@ export default {
       select4: "4.png",
       type: "A",
       selectarray: [],
+      e1: "",
+      e2: "",
+      e3: "",
+      e4: "",
+      ne1: "",
+      ne2: "",
+      ne3: "",
+      ne4: "",
+      userNo: this.$store.state.userNo,
     };
   },
   methods: {
@@ -456,6 +436,32 @@ export default {
     },
     // 필터 확인 버튼 클릭 시 처리
     async filterconfirm() {
+      const formData = {
+        e1: this.selectarray[0],
+        e2: this.selectarray[1],
+        e3: this.selectarray[2],
+        e4: this.selectarray[3],
+        ne1: "emoji1",
+        ne2: "emoji2",
+        ne3: "emoji3",
+        ne4: "emoji4",
+        userNo: this.userNo
+      };
+
+      axios.post('/rcinsert', formData)
+        .then(response => {
+          if (response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert('등록에 실패했습니다.');
+            console.log(formData);
+          }
+        })
+        .catch(error => {
+          console.error('등록 실패', error);
+          alert('등록 실패. 확인 후 다시 시도해 주세요');
+        });
+
       // 선택한 장르 정보 가져오기
       const selectedGenres = this.selectarray
         .map((genre) => {
@@ -476,9 +482,9 @@ export default {
         // 필요한 작업 수행
         console.log(response); // 성공한 경우 응답 확인
         // 결과 페이지로 이동
-        // this.$router.push({
-        //   path: "/FinalFilter",
-        // });
+        this.$router.push({
+          path: "/FinalFilter",
+        });
       } catch (error) {
         console.error("Error fetching and processing movies:", error);
         // 에러 처리
