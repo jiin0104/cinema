@@ -523,16 +523,23 @@ app.post("/recommend-movies", async (req, res) => {
       recommendedMovies.push(row.movieid);
     }
 
-    // 추천된 영화의 id값을 TMDB API를 호출하여 영화 정보와 포스터 URL을 가져오는 작업 수행
-    // 이 부분은 TMDB API 사용 방법에 따라 구현되어야 합니다.
-
     // 이후 recommendedMovies에 TMDB API에서 가져온 영화 정보를 추가하는 작업을 수행해주세요.
 
-    //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
+    // 추천된 영화의 id값을 TMDB API를 호출하여 영화 정보와 포스터 URL을 가져오는 작업
     const apiKey = "49ba50092811928efb84febb9d68823f";
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${selectedGenres.join(
-      ","
-    )}&api_key=${apiKey}`;
+    const baseApiUrl = "https://api.themoviedb.org/3/movie/";
+
+    const movieDetailsPromises = recommendedMovies.map(async (movieId) => {
+      const apiUrl = `${baseApiUrl}${movieId}?api_key=${apiKey}`;
+
+      try {
+        const response = await axios.get(apiUrl);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching movie details from TMDB:", error);
+        return null;
+      }
+    });
 
     const options = {
       method: "GET",
@@ -543,21 +550,19 @@ app.post("/recommend-movies", async (req, res) => {
       },
     };
 
+    //추천된 영화의 상세 정보 배열
+    const movieDetails = await Promise.all(movieDetailsPromises);
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
     console.log(apiUrl);
     console.log(query);
 
-    res.json({ recommendedMovies });
+    res.status(200).json(movieDetails);
   } catch (error) {
-    console.error(
-      "Error fetching and processing recommended movies:",
-      error.message
-    );
-    res.status(500).json({
-      error:
-        "An error occurred while fetching and processing recommended movies.",
-    });
+    console.error("Error recommending movies:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while recommending movies" });
   }
 });
 
