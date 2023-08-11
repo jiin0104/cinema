@@ -495,7 +495,7 @@ app.post("/fetch-movies", async (req, res) => {
 });
 
 //db에 저장된 포스터패스를 TMDB api이용해서 url받고 프론트로 쏴줌
-app.post("/find-poster", async (req, res) => {
+app.post("/recommend-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
     const selectedGenres = req.body.selectedGenres;
