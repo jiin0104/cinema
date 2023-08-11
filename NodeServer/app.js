@@ -479,12 +479,6 @@ app.post("/fetch-movies", async (req, res) => {
           "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
         await dbPool.promise().query(insertQuery, [movieId, movieInfo]);
       }
-
-      // // movies_db 테이블에 영화 정보 추가
-      // const query = "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
-      // const [rows, fields] = await dbPool
-      //   .promise()
-      //   .query(query, [movieId, movieInfo]);
     }
 
     // console.log를 사용하여 데이터 확인
