@@ -504,14 +504,14 @@ app.post("/recommend-movies", async (req, res) => {
     const query = `
       SELECT movieid
       FROM movies_db
-      WHERE JSON_CONTAINS(movieinfo->'$.genre_ids', ?)
+      WHERE JSON_CONTAINS(movieinfo->'$.genres', ?)
       ORDER BY RAND()
       LIMIT 4;
     `;
 
     const [rows, fields] = await dbPool
       .promise()
-      .query(query, [JSON.stringify(selectedGenres)]);
+      .query(query, [selectedGenres]);
 
     // 선택된 영화들의 id값 배열
     const selectedMovieIds = rows.map((row) => row.movieid);
@@ -520,10 +520,10 @@ app.post("/recommend-movies", async (req, res) => {
     const apiKey = "49ba50092811928efb84febb9d68823f";
     const baseImageUrl = "https://image.tmdb.org/t/p/";
     const posterSize = "w500"; // 원하는 이미지 크기
-    //랜덤으로 뽑아온 4개 영화id로 영화 json정보 뽑아오기
+
     const movieDetailsPromises = selectedMovieIds.map(async (movieId) => {
       const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
-      //뽑아온 json에서 이미지뽑기
+
       try {
         const response = await axios.get(apiUrl);
         const movieData = response.data;
@@ -545,12 +545,12 @@ app.post("/recommend-movies", async (req, res) => {
     //추천된 영화의 상세 정보 배열
     const moviePosters = await Promise.all(movieDetailsPromises);
     // console.log를 사용하여 데이터 확인
-    console.log("포스터엔드포인트에서 받은 장르값:", selectedGenres);
-    console.log("선택된 영화들의 id값 배열", selectedMovieIds);
-    console.log("포스터엔드포인트에서 생성한 4개 랜덤영화 뽑기 쿼리", query);
-    console.log("포스터엔드포인트에서 뽑아온 4개 랜덤영화 정보", moviePosters);
+    console.log("Selected genres:", selectedGenres);
+    console.log(apiUrl);
+    console.log(query);
+    console.log("Movie Posters:", moviePosters);
 
-    res.status(200).json(moviePosters);
+    res.status(200).json(movieDetails);
   } catch (error) {
     console.error("Error recommending movies:", error);
     res
