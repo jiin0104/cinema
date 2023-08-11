@@ -308,125 +308,125 @@ export default {
   methods: {
     //1차 필터
     female() {
-      this.selectarray.push("여성");
+      this.selectarray.push("woman.png");
       return (this.type = "B"), this.selectarray, console.log(this.selectarray);
     },
     male() {
-      this.selectarray.push("남성");
+      this.selectarray.push("man.png");
       return (this.type = "B"), this.selectarray, console.log(this.selectarray);
     },
 
     //2차 필터
     age0() {
-      this.selectarray.push("10대미만");
+      this.selectarray.push("age0.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age1() {
-      this.selectarray.push("10대");
+      this.selectarray.push("age1.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age2() {
-      this.selectarray.push("20대");
+      this.selectarray.push("age2.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age3() {
-      this.selectarray.push("30대");
+      this.selectarray.push("age3.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age4() {
-      this.selectarray.push("40대");
+      this.selectarray.push("age4.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age5() {
-      this.selectarray.push("50대");
+      this.selectarray.push("age5.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age6() {
-      this.selectarray.push("60대");
+      this.selectarray.push("age6.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
     age7() {
-      this.selectarray.push("70대이상");
+      this.selectarray.push("age7.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
 
     //3차 필터
     genre1() {
-      this.selectarray.push("애니메이션"); //"genres":[{"id":16,"name":"Animation"}]
+      this.selectarray.push("genre1.png"); //"genres":[{"id":16,"name":"Animation"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre2() {
-      this.selectarray.push("액션"); //"genres":[{"id":28,"name":"Action"}]
+      this.selectarray.push("genre2.png"); //"genres":[{"id":28,"name":"Action"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre3() {
-      this.selectarray.push("로맨스"); //"genres":[{"id":10749,"name":"Romance"}]
+      this.selectarray.push("genre3.png"); //"genres":[{"id":10749,"name":"Romance"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre4() {
-      this.selectarray.push("코미디"); //"genres":[{"id":35,"name":"Comedy"}]
+      this.selectarray.push("genre4.png"); //"genres":[{"id":35,"name":"Comedy"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre5() {
-      this.selectarray.push("SF"); //"genres":[ {"id":878,"name":"Science Fiction"}]
+      this.selectarray.push("genre5.png"); //"genres":[ {"id":878,"name":"Science Fiction"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre6() {
-      this.selectarray.push("판타지"); //"genres":[{"id":14,"name":"Fantasy"}]
+      this.selectarray.push("genre6.png"); //"genres":[{"id":14,"name":"Fantasy"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre7() {
-      this.selectarray.push("스릴러"); //"genres":[{"id":53,"name":"Thriller"}]
+      this.selectarray.push("genre7.png"); //"genres":[{"id":53,"name":"Thriller"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre8() {
-      this.selectarray.push("다큐멘터리"); //"genres":[{"id":99,"name":"Documentary"}]
+      this.selectarray.push("genre8.png"); //"genres":[{"id":99,"name":"Documentary"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
     genre9() {
-      this.selectarray.push("전쟁"); //"genres":[{"id":10752,"name":"War"}]
+      this.selectarray.push("genre9.png"); //"genres":[{"id":10752,"name":"War"}]
       return (this.type = "D"), this.selectarray, console.log(this.selectarray);
     },
 
     //4차 필터
     feel1() {
-      this.selectarray.push("사랑중이에요"); //"genres":[{"id":18,"name":"Drama"}]
+      this.selectarray.push("love.png"); //"genres":[{"id":18,"name":"Drama"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel2() {
-      this.selectarray.push("우울해요"); //"genres":[{"id":10751,"name":"Family"}]
+      this.selectarray.push("sad.png"); //"genres":[{"id":10751,"name":"Family"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel3() {
-      this.selectarray.push("이별했어요"); //"genres":[{"id":18,"name":"Drama"}]
+      this.selectarray.push("cry.png"); //"genres":[{"id":18,"name":"Drama"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel4() {
-      this.selectarray.push("고민있어요"); //"genres":[{"id":36,"name":"History"}]
+      this.selectarray.push("thinking.png"); //"genres":[{"id":36,"name":"History"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel5() {
-      this.selectarray.push("행복해요"); //"genres":[{"id":10402,"name":"Music"}]
+      this.selectarray.push("smiling.png"); //"genres":[{"id":10402,"name":"Music"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel6() {
-      this.selectarray.push("심심해요"); //"genres":[ {"id":35,"name":"Comedy"}]
+      this.selectarray.push("musical-note.png"); //"genres":[ {"id":35,"name":"Comedy"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel7() {
-      this.selectarray.push("떠나고싶어요"); //"genres":[{"id":12,"name":"Adventure"}]
+      this.selectarray.push("plane.png"); //"genres":[{"id":12,"name":"Adventure"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel8() {
-      this.selectarray.push("화나요"); //"genres":[{"id":80,"name":"Crime"}]
+      this.selectarray.push("angry.png"); //"genres":[{"id":80,"name":"Crime"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel9() {
-      this.selectarray.push("힐링이필요해요"); //"genres":[{"id":10770,"name":"TV Movie"}]
+      this.selectarray.push("cat.png"); //"genres":[{"id":10770,"name":"TV Movie"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel10() {
-      this.selectarray.push("배고파요"); //"genres":[{"id":9648,"name":"Mystery"}]
+      this.selectarray.push("tongue.png"); //"genres":[{"id":9648,"name":"Mystery"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
 
