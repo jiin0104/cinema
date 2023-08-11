@@ -435,15 +435,8 @@ app.post("/fetch-movies", async (req, res) => {
   try {
     // FilteringR.vue에서 전달한 데이터 받기
     const selectedGenres = req.body.selectedGenres;
-    // const { selectedGenres } = req.body;
-    // const selectedGenres = req.query;
     //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
     const apiKey = "49ba50092811928efb84febb9d68823f";
-    //문자열로 받아온  selectedGenres를 배열로 변환, 문자열이 아니면 그대로 사용.
-    // const genreQueryString = Array.isArray(selectedGenres)
-    //   ? selectedGenres.join(",")
-    //   : selectedGenres || ""; // undefined인 경우 빈 문자열로 설정
-
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${selectedGenres.join(
       ","
     )}&api_key=${apiKey}`;
@@ -462,32 +455,35 @@ app.post("/fetch-movies", async (req, res) => {
 
     const movies = response.data.results;
     // 가져온 영화 정보를 db에 저장
-    // movie_info 객체에 id 추가
-    // const movieInfo = {
-    //   id: movieInfo.id,
-    // };
     // for (const movie of movies) {
-    //   // const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
     //   const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
     //   const [rows, fields] = await dbPool
     //     .promise()
-    //     .query("INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)", [
-    //       movieInfo.id,
-    //       JSON.stringify(movieInfo),
-    //     ]);
+    //     .query("INSERT INTO jsontest (movie_info) VALUES (?)", [[movieInfo]]);
     // }
     for (const movie of movies) {
-      // const movieNum = movie.id; // 혹은 다른 유니크한 값을 사용
+      const movieId = movie.id; // 영화의 고유 id
       const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
-      const [rows, fields] = await dbPool
+
+      // movies_db 테이블에 해당 movieId가 이미 존재하는지 확인하는 쿼리문
+      const duplicateCheckQuery =
+        "SELECT COUNT(*) as count FROM movies_db WHERE movieid = ?";
+      const [duplicateCheckRows] = await dbPool
         .promise()
-        .query("INSERT INTO jsontest (movie_info) VALUES (?)", [[movieInfo]]);
+        .query(duplicateCheckQuery, [movieId]);
+      const isDuplicate = duplicateCheckRows[0].count > 0;
+
+      if (!isDuplicate) {
+        // movies_db 테이블에 영화 정보 추가
+        const insertQuery =
+          "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
+        await dbPool.promise().query(insertQuery, [movieId, movieInfo]);
+      }
     }
 
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
     console.log(apiUrl);
-    console.log(req.query.selectedGenres);
 
     res.json({ message: "Movies fetched and processed." });
   } catch (error) {
