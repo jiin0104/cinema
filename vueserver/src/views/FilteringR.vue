@@ -479,7 +479,7 @@ export default {
           selectedGenres: selectedGenres,
         });
 
-        const poster = await axios.post("recommend-movies", {
+        const poster = await axios.post("/recommend-movies", {
           selectedGenres: selectedGenres,
         });
 
