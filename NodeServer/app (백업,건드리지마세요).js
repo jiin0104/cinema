@@ -32,7 +32,7 @@ app.use(express.json());
 
 
 
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth.js');
 // const movieRouter = require('./routes/movie');
 // const mypageRouter = require('./routes/mypage');
 // const userRouter = require('./routes/user');

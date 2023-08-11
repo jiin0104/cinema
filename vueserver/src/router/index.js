@@ -136,7 +136,7 @@ router.beforeEach((to, from, next) => {
       title: "이미 로그인 상태입니다.",
       confirmButtonText: "확인",
     }).then(() => {
-      next({ path: "/" }); // 알림을 표시하고 나면 페이지로 이동
+      next({ path: "/" }); // 승인을 클릭하면 메인 페이지로 이동
     });
   } else if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
     // 나머지 라우터에 대한 권한 확인
