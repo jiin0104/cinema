@@ -513,49 +513,42 @@ app.post("/recommend-movies", async (req, res) => {
       .promise()
       .query(query, [selectedGenres]);
 
-    // TODO: 해당 장르에 맞는 영화 데이터를 랜덤하게 가져오는 로직 작성
+    // 선택된 영화들의 id값 배열
+    const selectedMovieIds = rows.map((row) => row.movieid);
 
-    const recommendedMovies = [
-      // TODO: 추천 영화 데이터를 구성하는 로직 작성
-    ];
-
-    for (const row of rows) {
-      recommendedMovies.push(row.movieid);
-    }
-
-    // 이후 recommendedMovies에 TMDB API에서 가져온 영화 정보를 추가하는 작업을 수행해주세요.
-
-    // 추천된 영화의 id값을 TMDB API를 호출하여 영화 정보와 포스터 URL을 가져오는 작업
+    // 각 영화의 포스터 URL 가져오기
     const apiKey = "49ba50092811928efb84febb9d68823f";
-    const baseApiUrl = "https://api.themoviedb.org/3/movie/";
+    const baseImageUrl = "https://image.tmdb.org/t/p/";
+    const posterSize = "w500"; // 원하는 이미지 크기
 
-    const movieDetailsPromises = recommendedMovies.map(async (movieId) => {
-      const apiUrl = `${baseApiUrl}${movieId}?api_key=${apiKey}`;
+    const movieDetailsPromises = selectedMovieIds.map(async (movieId) => {
+      const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
 
       try {
         const response = await axios.get(apiUrl);
-        return response.data;
+        const movieData = response.data;
+
+        // 영화 포스터 이미지 URL 생성
+        const posterPath = movieData.poster_path;
+        const posterUrl = `${baseImageUrl}${posterSize}${posterPath}`;
+
+        return {
+          movieid: movieId,
+          posterUrl: posterUrl,
+        };
       } catch (error) {
         console.error("Error fetching movie details from TMDB:", error);
         return null;
       }
     });
 
-    const options = {
-      method: "GET",
-      url: apiUrl,
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-    };
-
     //추천된 영화의 상세 정보 배열
-    const movieDetails = await Promise.all(movieDetailsPromises);
+    const moviePosters = await Promise.all(movieDetailsPromises);
     // console.log를 사용하여 데이터 확인
     console.log("Selected genres:", selectedGenres);
     console.log(apiUrl);
     console.log(query);
+    console.log("Movie Posters:", moviePosters);
 
     res.status(200).json(movieDetails);
   } catch (error) {
