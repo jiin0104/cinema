@@ -7,42 +7,52 @@
             {{ userinfo.USER_NICKNAME }} 님이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
-          <div
-            class="ulist"
-            v-for="(rec, index) in recList"
-            :key="rec.MOVIE_NUM"
-            style="margin: auto"
-          >
+          <div>
             <div
-              v-if="index < 4"
-              style="
-                position: relative;
-                left: 140px;
-                margin: 5px;
-                display: inline-block;
-                float: left;
-              "
+              class="emo"
+              style="width: 400px; height: 100px; position: relative; top: 20px"
             >
-              <v-layout>
-                <v-card height="150px" width="90px">
-                  <v-img
-                    :src="rec.MOVIE_POSTER"
-                    height="120px"
-                    width="90px"
-                    @click="openModal(rec)"
-                  />
-                  <div class="r_title">
-                    <div>
-                      <button class="headline" @click="openModal(rec)">
-                        {{ rec.MOVIE_TITLE }}
-                      </button>
+              <!--추후 필터링 선택한 이미지를 배열로 뽑아와야함-->
+              <img style="width: 100px; height: 100px" :src="imagePath" />
+              <img style="width: 100px; height: 100px" :src="imagePath" />
+              <img style="width: 100px; height: 100px" :src="imagePath" />
+              <img style="width: 100px; height: 100px" :src="imagePath" />
+            </div>
+            <div
+              class="ulist"
+              v-for="(rec, index) in recList"
+              :key="rec.MOVIE_NUM"
+            >
+              <div
+                v-if="index < 4"
+                style="
+                  position: relative;
+                  left: 400px;
+                  bottom: 100px;
+                  margin: 5px;
+                  float: left;
+                "
+              >
+                <v-layout>
+                  <v-card height="150px" width="90px">
+                    <v-img
+                      :src="rec.MOVIE_POSTER"
+                      height="120px"
+                      width="90px"
+                      @click="openModal(rec)"
+                    />
+                    <div class="r_title">
+                      <div>
+                        <button class="headline" @click="openModal(rec)">
+                          {{ rec.MOVIE_TITLE }}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </v-card>
-              </v-layout>
+                  </v-card>
+                </v-layout>
+              </div>
             </div>
           </div>
-
           <!--카드 끝-->
 
           <!--모달창-->
@@ -121,6 +131,9 @@
                 height: 50px;
                 width: 210px;
                 margin: 20px;
+                position: relative;
+                top: 300px;
+                right: 400px;
               "
               @click="pageLink"
             >
@@ -147,6 +160,7 @@ export default {
       selectedMovie: null, //선택한 영화 정보 초기화(모달창 눌렀다 닫았을때마다 초기화 되야함)
       recList: [], //추천받은 영화 목록
       modList2: [], //클릭한 영화에 대한 모달창
+      imagePath: "cat.png",
     };
   },
   created() {
