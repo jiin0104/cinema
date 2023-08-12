@@ -28,7 +28,7 @@
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ movieid }}</div>
+                      <div class="headline">{{ rec.movieid }}</div>
                     </div>
                   </div>
 
@@ -169,12 +169,12 @@ export default {
         const response = await axios.post("/recommend-movies");
         const moviePosters = response.data;
 
+        // moviePosters 데이터를 recList배열에 채워넣기
+        this.recList = moviePosters;
+
         //콘솔로 데이터 확인
         console.log("서버가 보내준 4개영화 배열확인", moviePosters);
         console.log("reclist에 데이터 들어갔는지 확인", this.recList);
-
-        // moviePosters 데이터를 recList배열에 채워넣기
-        this.recList = moviePosters;
       } catch (error) {
         console.error("Error fetching movie posters:", error);
       }

@@ -589,7 +589,7 @@ app.post("/recommend-movies", async (req, res) => {
     // console.log("Selected genres:", selectedGenres);
     // console.log(apiUrl);
     // console.log(query);
-    // console.log("Movie Posters:", moviePosters);
+    console.log("Movie Posters:", moviePosters);
 
     // recommend 테이블에 영화 4개 정보 넣기
     // moviePosters 배열을 JSON 형태로 변환

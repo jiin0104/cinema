@@ -124,8 +124,8 @@ const router = createRouter({
 // 유저 접근 권한 설정
 router.beforeEach((to, from, next) => {
   let roleStatus = store.state.isLogin; // 현재 로그인 상태를 가져옴
-    // 라우터에 대한 권한 확인
-if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
+  // 라우터에 대한 권한 확인
+  if (to.meta.roles && !to.meta.roles.includes(roleStatus)) {
     Swal.fire({
       icon: "warning",
       title: "로그인이 필요합니다.",
