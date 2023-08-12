@@ -591,20 +591,17 @@ app.post("/recommend-movies", async (req, res) => {
     // console.log(query);
     // console.log("Movie Posters:", moviePosters);
 
-    //recommend테이블에 영화4개 정보 넣기
+    // recommend 테이블에 영화 4개 정보 넣기
     // moviePosters 배열을 JSON 형태로 변환
     const rcMoviesData = JSON.stringify(moviePosters);
-    // recommend 테이블에 데이터 삽입
-    const insertQuery = `INSERT INTO recommend (USER_NUM, RC_MOVIES) VALUES (?, ?);`;
-    await dbPool.promise().query(insertQuery, [userNum, rcMoviesData]);
-
     // 추천된 영화의 영화 ID 값들을 추출하여 배열 생성
     const movieIds = moviePosters.map((poster) => poster.movieid);
     // movieIds 배열을 JSON 형태로 변환
     const movieIdsData = JSON.stringify(movieIds);
+
     // recommend 테이블에 데이터 삽입
-    const updateQuery = `UPDATE recommend SET movieid = ? WHERE RC_NUM = ?;`;
-    await dbPool.promise().query(updateQuery, [movieIdsData, rcNum]);
+    const insertQuery = `INSERT INTO recommend (RC_MOVIES, movieid) VALUES (?, ?)`;
+    await dbPool.promise().query(insertQuery, [rcMoviesData, movieIdsData]);
 
     // console.log를 사용하여 데이터 확인
     console.log("rcMoviesData제이슨 변환 확인", rcMoviesData);
