@@ -604,10 +604,10 @@ app.post("/recommend-movies", async (req, res) => {
     await dbPool.promise().query(insertQuery, [rcMoviesData, movieIdsData]);
 
     // console.log를 사용하여 데이터 확인
-    console.log("rcMoviesData제이슨 변환 확인", rcMoviesData);
-    console.log("movieIdsData제이슨 변환 확인", movieIdsData);
+    // console.log("rcMoviesData제이슨 변환 확인", rcMoviesData);
+    // console.log("movieIdsData제이슨 변환 확인", movieIdsData);
 
-    res.status(200).json(movieDetails);
+    res.status(200).json(moviePosters);
   } catch (error) {
     console.error("리커맨드-무비엔드포인트에러", error);
     res
