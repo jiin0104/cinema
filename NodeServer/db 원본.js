@@ -2,10 +2,10 @@ const mysql = require("mysql2");
 
 //연결하는 db
 const dbPool = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  password: "@k41292001",
-  database: "cinema",
+  host: "43.201.30.169",
+  user: "wavecinema",
+  password: "zipwave02",
+  database: "wavecinema",
   connectionLimit: 100, //연결할 수 있는 최대 수 100
 });
 
