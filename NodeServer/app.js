@@ -607,6 +607,7 @@ app.post("/recommend-movies", async (req, res) => {
     // console.log("rcMoviesData제이슨 변환 확인", rcMoviesData);
     // console.log("movieIdsData제이슨 변환 확인", movieIdsData);
 
+    //응답으로 moviePosters배열 보내줌.
     res.status(200).json(moviePosters);
   } catch (error) {
     console.error("리커맨드-무비엔드포인트에러", error);

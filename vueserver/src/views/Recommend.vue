@@ -166,11 +166,12 @@ export default {
     async fetchMoviePosters() {
       try {
         // 서버로부터 moviePosters 데이터 가져오기
-        const response = await axios.get("/recommend-movies");
+        const response = await axios.post("/recommend-movies");
         const moviePosters = response.data;
 
         //콘솔로 데이터 확인
         console.log("서버가 보내준 4개영화 배열확인", moviePosters);
+        console.log("reclist에 데이터 들어갔는지 확인", this.recList);
 
         // moviePosters 데이터를 recList배열에 채워넣기
         this.recList = moviePosters;
