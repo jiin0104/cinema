@@ -286,7 +286,7 @@ export default {
       };
 
 
-      axios.post('/mypage_update', formData)//서브밋한 값들을 받아서 서버에 전달.
+      axios.post('/mypage/mypage_update', formData)//서브밋한 값들을 받아서 서버에 전달.
         .then(response => {
           if (response.data.message) {
 
@@ -311,7 +311,7 @@ export default {
         return;
       }
 
-      axios.post('/checkEmail', { email })
+      axios.post('/auth/checkEmail', { email })
         .then(response => {
           if (response.data.exists) {
             alert("이미 존재하는 이메일입니다.");
@@ -333,7 +333,7 @@ export default {
         return;
       }
 
-      axios.post('/checkNickname', { nickname })
+      axios.post('/auth/checkNickname', { nickname })
         .then(response => {
           if (response.data.exists) {
             alert("이미 존재하는 닉네임입니다.");

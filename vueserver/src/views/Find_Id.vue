@@ -33,8 +33,8 @@
                     " @click="findId()"
                     value="확인"
                   >
-                    
-                  
+
+
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default {
     async findId() {
       // 서버에 아이디 찾기 요청 보내기
       try {
-        const response = await axios.post("/Find_Id", {
+        const response = await axios.post("/auth/Find_Id", {
           phoneNumber: this.phoneNumber,
         });
         const { id } = response.data;

@@ -194,7 +194,7 @@ export default {
 
 
 
-    
+
     // validPassword(password) {// 비밀번호 형식 유효성 검사, 4~12자리, 숫자,대문자,소문자,특수문자 다 넣어야함
     //   var re3 = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~?!@#$%^&*_-]).{4,12}$/
     //   return re3.test(password);
@@ -247,7 +247,7 @@ export default {
       };
 
 
-      axios.post('/signup', formData)//서브밋한 값들을 받아서 서버에 전달.
+      axios.post('/auth/signup', formData)//서브밋한 값들을 받아서 서버에 전달.
         .then(response => {
           if (response.data.message) {
             alert(response.data.message);
@@ -271,7 +271,7 @@ export default {
         return;
       }
 
-      axios.post('/checkEmail', { email })
+      axios.post('/auth/checkEmail', { email })
         .then(response => {
           if (response.data.exists) {
             alert("이미 존재하는 이메일입니다.");
@@ -293,7 +293,7 @@ export default {
         return;
       }
 
-      axios.post('/checkNickname', { nickname })
+      axios.post('/auth/checkNickname', { nickname })
         .then(response => {
           if (response.data.exists) {
             alert("이미 존재하는 닉네임입니다.");

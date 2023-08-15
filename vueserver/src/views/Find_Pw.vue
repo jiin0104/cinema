@@ -40,7 +40,7 @@
               <input id="pass" type="password" class="findinput" data-type="password" v-model="userInputVerificationCode" />
             </div>
                 </div>
-                
+
                 <div style="margin-left: 365px">
                   <v-btn
                     class="findinfotext"
@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       phoneNumber: "",
-      
+
       errorMessage: "", // 경고 메시지를 담을 변수
       email: "",
       password: "",
@@ -87,7 +87,7 @@ export default {
       console.log(phoneNumber);
       // 서버로의 API 요청
       axios
-        .post("/checkPhoneNumber", { phoneNumber })
+        .post("/auth/checkPhoneNumber", { phoneNumber })
         .then((response) => {
           const exists = response.data.exists;
           console.log(exists);
@@ -116,7 +116,7 @@ export default {
       if (String(this.verificationCode) === String(this.userInputVerificationCode)) {
         try {
           // 서버에 비밀번호를 요청하는 API 호출
-          const response = await axios.post("/Find_PW", {
+          const response = await axios.post("/auth/Find_PW", {
             phoneNumber: this.phoneNumber,
           });
           console.log(this.phoneNumber);
@@ -136,7 +136,7 @@ export default {
         alert("인증번호를 확인해 주세요!");
       }
     },
-    
+
   },
 }
 </script>

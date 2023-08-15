@@ -18,7 +18,7 @@
                     v-model="passwordCheck" />
                 </div>
 
-                
+
 
                 <div>
                   <input type="submit"
@@ -63,11 +63,11 @@ export default {
 
 
   methods: {
-    //빈칸 있을시 나타나는 오류메세지 
+    //빈칸 있을시 나타나는 오류메세지
     checkForm(e) {
       e.preventDefault();
       this.errors = [];
-      
+
       if (!this.password) {
         this.errors.push("비밀번호는 4~12자리를 입력해주세요");
       } else if (!this.validPassword(this.password)) {
@@ -85,7 +85,7 @@ export default {
       }
     },
 
-    
+
 
 
     // 비밀번호 형식 유효성 검사
@@ -108,16 +108,16 @@ export default {
 
     //입력한 값들 서브밋
     submitForm() {
-      
+
       console.log(this.$route.params.pw);
       const formData = {
-        
+
         password: this.password,
         stpw: this.$route.params.pw,
       };
 
       //서브밋한 값들을 받아서 서버에 전달.
-      axios.post('/pw_update', formData)
+      axios.post('/auth/pw_update', formData)
         .then(response => {
           if (response.data.message) {
             alert(response.data.message);

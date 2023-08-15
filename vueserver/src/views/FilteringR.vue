@@ -562,7 +562,7 @@ export default {
       };
 
       axios
-        .post("/rcinsert", formData)
+        .post("/mypage/rcinsert", formData)
         .then((response) => {
           if (response.data.message) {
             alert(response.data.message);
