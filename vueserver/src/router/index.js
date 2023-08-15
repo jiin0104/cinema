@@ -67,17 +67,11 @@ const routes = [
     path: "/Find_Id",
     name: "Find_Id",
     component: Find_Id,
-    meta: {
-      roles: [true],
-    },
   },
   {
     path: "/Find_Pw",
     name: "Find_Pw",
     component: Find_Pw,
-    meta: {
-      roles: [true],
-    },
   },
   {
     path: "/Find_Result_Id:id",

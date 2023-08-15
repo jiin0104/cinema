@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     image(img) {
-      return `https://image.tmdb.org/t/p/w300${img}`;
+      return ;
     },
     async getmain() {
       //슬라이드 정보 가져오는 api
