@@ -447,7 +447,7 @@ app.post("/Find_PW", async (req, res) => {
   }
 });
 
-// 정보 수정 API 엔드포인트
+// 비밀변호 수정 API 엔드포인트
 app.post("/pw_update", (req, res) => {
   //db연결을 사용해서 작업
   dbPool.getConnection((err, connection) => {
