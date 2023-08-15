@@ -34,13 +34,11 @@ app.use(express.json());
 
 const authRouter = require('./routes/auth.js');
 // const movieRouter = require('./routes/movie');
-// const mypageRouter = require('./routes/mypage');
-// const userRouter = require('./routes/user');
+const mypageRouter = require('./routes/mypage');
 
 app.use('/auth', authRouter);
 // app.use('/movie', movieRouter);
-// app.use('/mypage', mypageRouter);
-// app.use('/user', userRouter);
+app.use('/mypage', mypageRouter);
 
 //라우터 목록
 // 예시 const mypageRouter = require('./Routers/mypage');
