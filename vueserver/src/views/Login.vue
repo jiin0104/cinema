@@ -68,7 +68,7 @@ export default {
     // 로그인 함수
     login() {
       axios({
-        url: "/login",
+        url: "/auth/login",
         method: 'POST',
         data: {
           // post 방식으로 서버에 유저 입력 데이터 전송
