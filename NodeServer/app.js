@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const dbPool = require("./db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
-const axios = require("axios");
 
 //익스프레스 객체
 const app = express();

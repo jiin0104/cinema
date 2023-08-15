@@ -1,9 +1,5 @@
 const express = require("express");
-const axios = require("axios");
 const router = express.Router();
-const dbPool = require("../db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
-const bcrypt = require("bcrypt"); // 단방향 암호화
-const crypto = require("crypto");
 
 //이모지 불러오기 -- 라우터 쪼개야됨
 router.post("/upload/:type/:fileName", async (request, res) => {

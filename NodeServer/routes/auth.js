@@ -4,7 +4,6 @@ const router = express.Router();
 const dbPool = require("../db.js"); //db가 필요한 작업에서 끌어다 쓸 변수 정의.
 const bcrypt = require("bcrypt"); // 단방향 암호화
 const crypto = require("crypto");
-let sql = require("../sql.js");
 
 // 회원 가입 API 엔드포인트
 router.post("/signup", (req, res) => {
