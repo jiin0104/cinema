@@ -588,24 +588,12 @@ export default {
       console.log("selectedGenres:", selectedGenres);
 
       try {
-        // API 요청 보내기
-        const response = await axios.post("/fetch-movies", {
-          selectedGenres: selectedGenres,
-        });
-
-        const poster = await axios.post("/recommend-movies", {
-          selectedGenres: selectedGenres,
-        });
-
-        // 필요한 작업 수행
-        console.log(response); // 성공한 경우 응답 확인
-        console.log(poster); // 성공한 경우 응답 확인
         // 결과 페이지로 이동
         this.$router.push({
           path: "/FinalFilter",
         });
       } catch (error) {
-        console.error("필러링R뷰오류 fetching and processing movies:", error);
+        console.error(error);
         // 에러 처리
       }
     },
