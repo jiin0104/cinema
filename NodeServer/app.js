@@ -94,7 +94,7 @@ app.post("/api/:alias", async (request, res) => {
   }
 });
 
-//이모지 불러오기 -- 라우터 쪼개야됨
+// -- 라우터 쪼개야됨
 app.post("/upload/:type/:fileName", async (request, res) => {
   let { fileName } = request.params;
   const dir = `${__dirname}/upload/`;
