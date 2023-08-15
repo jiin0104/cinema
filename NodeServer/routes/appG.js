@@ -33,3 +33,20 @@ fs.watchFile(__dirname + "/sql.js", (curr, prev) => {
     delete require.cache[require.resolve("./sql.js")];
     sql = require("./sql.js");
   });
+
+
+// req 객체 생성, DB 연동
+const req = {
+  async db(alias, param = [], where = "") {
+    return new Promise((resolve, reject) =>
+      dbPool.query(sql[alias].query + where, param, (error, rows) => {
+        if (error) {
+          if (error.code != "ER_DUP_ENTRY") console.log(error);
+          resolve({
+            error,
+          });
+        } else resolve(rows);
+      })
+    );
+  },
+};
