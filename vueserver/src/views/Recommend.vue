@@ -28,7 +28,9 @@
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ rec.movieid }}</div>
+                      <div class="headline">
+                        {{ "영화 제목이 들어가야 됨" }}
+                      </div>
                     </div>
                   </div>
 
@@ -62,7 +64,7 @@
                       height: 50px;
                     "
                   >
-                    {{ movieid }}
+                    {{ "영화 제목이 들어가야됨" }}
                   </div>
                 </div>
                 <div class="modalcontent" v-if="modList[0]">
@@ -79,6 +81,7 @@
               <div>
                 <div style="margin: 10px">
                   <form>
+                    <!-- 시간되면 하기  -->
                     한줄리뷰
                     <div class="review">
                       {{ modList.USER_ID }} : {{ modList.REVIEW_COMMENT }}
@@ -146,8 +149,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   el: "#app",
   data() {
@@ -158,27 +159,7 @@ export default {
       modList: [], //모달 리스트채워넣기
     };
   },
-  mounted() {
-    // 서버로부터 moviePosters 데이터를 받아오기 위한 API 호출
-    this.fetchMoviePosters();
-  },
   methods: {
-    async fetchMoviePosters() {
-      try {
-        // 서버로부터 moviePosters 데이터 가져오기
-        const response = await axios.post("/recommend-movies");
-        const moviePosters = response.data;
-
-        // moviePosters 데이터를 recList배열에 채워넣기
-        this.recList = moviePosters;
-
-        //콘솔로 데이터 확인
-        console.log("서버가 보내준 4개영화 배열확인", moviePosters);
-        console.log("reclist에 데이터 들어갔는지 확인", this.recList);
-      } catch (error) {
-        console.error("Error fetching movie posters:", error);
-      }
-    },
     async pageLink() {
       //클릭시 메인으로 이동
       this.$router.push({ path: "/" });
@@ -207,50 +188,7 @@ export default {
     //모달 닫기
     this.selectedMovie = null;
   },
-  async Get_Modal_Info() {
-    try {
-      const apiKey = "49ba50092811928efb84febb9d68823f";
-      const movieId = this.selectedMovie.movieid;
-
-      // 영화 상세 정보 요청
-      const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
-      const detailsResponse = await axios.get(detailsUrl);
-      const movieDetails = detailsResponse.data;
-
-      //콘솔로 데이터 확인
-      console.log(movieDetails);
-
-      // 감독 및 주연 배우 정보 요청
-      const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
-      const creditsResponse = await axios.get(creditsUrl);
-      const creditsData = creditsResponse.data;
-
-      //콘솔로 데이터 확인
-      console.log(creditsData);
-
-      // 필요한 정보 추출 후 modList에 저장
-      this.modList[0] = {
-        GENRE: movieDetails.genres.map((genre) => genre.name).join(", "),
-        MOVIE_RELEASE: movieDetails.release_date,
-        MOVIE_DIRECTOR: creditsData.crew.find(
-          (member) => member.job === "Director"
-        ).name,
-        MOVIE_ACTORS: {
-          actor1: creditsData.cast[0].name,
-          actor2: creditsData.cast[1].name,
-        },
-        MOVIE_SCORE: movieDetails.vote_average,
-      };
-
-      //콘솔로 데이터 확인
-      console.log(this.modList[0]);
-      console.log(this.modList[1]);
-      console.log(this.modList[2]);
-      console.log(this.modList[3]);
-    } catch (error) {
-      console.error("리커맨드뷰에러fetching movie details:", error);
-    }
-  },
+  async Get_Modal_Info() {},
 };
 </script>
 
