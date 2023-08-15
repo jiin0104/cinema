@@ -94,7 +94,7 @@ app.post("/api/:alias", async (request, res) => {
   }
 });
 
-//이모지 불러오기
+//이모지 불러오기 -- 라우터 쪼개야됨
 app.post("/upload/:type/:fileName", async (request, res) => {
   let { fileName } = request.params;
   const dir = `${__dirname}/upload/`;
@@ -126,7 +126,7 @@ app.post("/upload/:type/:fileName", async (request, res) => {
     }
   });
 });
-//이모지 뷰쪽으로 보내기
+//이모지 뷰쪽으로 보내기  -- 라우터 쪼개야됨
 app.get("/download/:fileName", (request, res) => {
   const { fileName } = request.params;
   const filepath = `${__dirname}/uploads/${fileName}`;
@@ -477,145 +477,6 @@ app.post("/pw_update", (req, res) => {
   });
 });
 
-//TMDB api 이용해서 db에 영화 json데이터 넣기
-app.post("/fetch-movies", async (req, res) => {
-  try {
-    // FilteringR.vue에서 전달한 데이터 받기
-    const selectedGenres = req.body.selectedGenres;
-    //받아온 데이터를 api에 적용해서 영화 json데이터 url 만들기
-    const apiKey = "49ba50092811928efb84febb9d68823f";
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=vote_count.desc&with_genres=${selectedGenres.join(
-      ","
-    )}&api_key=${apiKey}`;
-
-    const options = {
-      method: "GET",
-      url: apiUrl,
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-    };
-
-    //url에서 받아온 json데이터
-    const response = await axios.request(options);
-
-    const movies = response.data.results;
-    // 가져온 영화 정보를 db에 저장
-    for (const movie of movies) {
-      const movieId = movie.id; // 영화의 고유 id
-      const movieInfo = JSON.stringify(movie); // JSON 데이터를 문자열로 변환
-
-      // movies_db 테이블에 해당 movieId가 이미 존재하는지 확인하는 쿼리문
-      const duplicateCheckQuery =
-        "SELECT COUNT(*) as count FROM movies_db WHERE movieid = ?";
-      const [duplicateCheckRows] = await dbPool
-        .promise()
-        .query(duplicateCheckQuery, [movieId]);
-      const isDuplicate = duplicateCheckRows[0].count > 0;
-
-      if (!isDuplicate) {
-        // movies_db 테이블에 영화 정보 추가
-        const insertQuery =
-          "INSERT INTO movies_db (movieid, movieinfo) VALUES (?, ?)";
-        await dbPool.promise().query(insertQuery, [movieId, movieInfo]);
-      }
-    }
-
-    // console.log를 사용하여 데이터 확인
-    // console.log("Selected genres:", selectedGenres);
-    // console.log(apiUrl);
-
-    res.json({ message: "Movies fetched and processed." });
-  } catch (error) {
-    console.error("Error fetching and processing movies:", error.message);
-    res.status(500).json({
-      error: "An error occurred while fetching and processing movies.",
-    });
-  }
-});
-
-//db에 저장된 포스터패스를 TMDB api이용해서 url받고 프론트로 쏴줌
-app.post("/recommend-movies", async (req, res) => {
-  try {
-    // FilteringR.vue에서 전달한 데이터 받기
-    const selectedGenres = req.body.selectedGenres;
-
-    // db에서 해당 장르에 맞는 영화를 랜덤하게 4개 선택
-    const query = `
-      SELECT movieid
-      FROM movies_db
-      WHERE JSON_CONTAINS(movieinfo->'$.genre_ids', ?)
-      ORDER BY RAND()
-      LIMIT 4;
-    `;
-
-    const [rows, fields] = await dbPool
-      .promise()
-      .query(query, [JSON.stringify(selectedGenres)]);
-
-    // 선택된 영화들의 id값 배열
-    const selectedMovieIds = rows.map((row) => row.movieid);
-
-    // 각 영화의 포스터 URL 가져오기
-    const apiKey = "49ba50092811928efb84febb9d68823f";
-    const baseImageUrl = "https://image.tmdb.org/t/p/";
-    const posterSize = "w500"; // 원하는 이미지 크기
-
-    const movieDetailsPromises = selectedMovieIds.map(async (movieId) => {
-      const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
-
-      try {
-        const response = await axios.get(apiUrl);
-        const movieData = response.data;
-
-        // 영화 포스터 이미지 URL 생성
-        const posterPath = movieData.poster_path;
-        const posterUrl = `${baseImageUrl}${posterSize}${posterPath}`;
-
-        return {
-          movieid: movieId,
-          posterUrl: posterUrl,
-        };
-      } catch (error) {
-        console.error("Error fetching movie details from TMDB:", error);
-        return null;
-      }
-    });
-
-    //추천된 영화의 상세 정보 배열
-    const moviePosters = await Promise.all(movieDetailsPromises);
-    // console.log를 사용하여 데이터 확인
-    // console.log("Selected genres:", selectedGenres);
-    // console.log(apiUrl);
-    // console.log(query);
-    console.log("Movie Posters:", moviePosters);
-
-    // recommend 테이블에 영화 4개 정보 넣기
-    // moviePosters 배열을 JSON 형태로 변환
-    const rcMoviesData = JSON.stringify(moviePosters);
-    // 추천된 영화의 영화 ID 값들을 추출하여 배열 생성
-    const movieIds = moviePosters.map((poster) => poster.movieid);
-    // movieIds 배열을 JSON 형태로 변환
-    const movieIdsData = JSON.stringify(movieIds);
-
-    // recommend 테이블에 데이터 삽입
-    const insertQuery = `INSERT INTO recommend (RC_MOVIES, movieid) VALUES (?, ?)`;
-    await dbPool.promise().query(insertQuery, [rcMoviesData, movieIdsData]);
-
-    // console.log를 사용하여 데이터 확인
-    // console.log("rcMoviesData제이슨 변환 확인", rcMoviesData);
-    // console.log("movieIdsData제이슨 변환 확인", movieIdsData);
-
-    //응답으로 moviePosters배열 보내줌.
-    res.status(200).json(moviePosters);
-  } catch (error) {
-    console.error("리커맨드-무비엔드포인트에러", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while recommending movies" });
-  }
-});
 
 // 다른 라우트 및 설정 등 추가
 
