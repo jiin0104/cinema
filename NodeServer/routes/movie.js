@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt"); // 단방향 암호화
 const crypto = require("crypto");
 
 //이모지 불러오기 -- 라우터 쪼개야됨
-app.post("/upload/:type/:fileName", async (request, res) => {
+router.post("/upload/:type/:fileName", async (request, res) => {
   let { fileName } = request.params;
   const dir = `${__dirname}/upload/`;
   const file = `${dir}/${fileName}`;
@@ -38,7 +38,7 @@ app.post("/upload/:type/:fileName", async (request, res) => {
   });
 });
 //이모지 뷰쪽으로 보내기  -- 라우터 쪼개야됨
-app.get("/download/:fileName", (request, res) => {
+router.get("/download/:fileName", (request, res) => {
   const { fileName } = request.params;
   const filepath = `${__dirname}/uploads/${fileName}`;
   res.header(
