@@ -2,9 +2,9 @@ module.exports = {
   userin: {
     query: `SELECT * from user where USER_ID=?`,
   },
-  // recList: {
-  //   query: `SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_NUM FROM movies_db`,
-  // },
+  recList: {
+    query: `SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_NUM FROM movies`,
+  },
   modList: {
     query: `SELECT * FROM movies WHERE MOVIE_NUM=2`,
   },
@@ -24,9 +24,6 @@ module.exports = {
     MOVIE_NUM = ?`,
   },
   getmain: {
-    query: `select * from movies_db`,
-  },
-  emojipath: {
-    query: `SELECT json_extract(emoji, '$.emoji1','$.emoji2', '$.emoji3','$.emoji4') FROM recommend`,
+    query: `select MOVIE_POSTER from movies_now`,
   },
 };

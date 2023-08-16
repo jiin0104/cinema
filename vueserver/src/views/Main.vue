@@ -28,8 +28,7 @@
             v-for="(po, index) in slides"
             :key="po"
             :virtualIndex="index"
-            ><img
-              :src="image(po.movie_info)"
+            ><img :src="`/download/${po.MOVIE_POSTER}`"
           /></swiper-slide>
         </swiper>
         <p class="append-buttons">
@@ -69,14 +68,11 @@ export default {
     this.getmain();
   },
   methods: {
-    image(img) {
-      return ;
-    },
     async getmain() {
       //슬라이드 정보 가져오는 api
       this.slides = await this.$api("/api/getmain", {});
       console.log(this.slides);
-      console.log()
+      console.log();
     },
     pageLink() {
       //필터링 페이지로 이동
