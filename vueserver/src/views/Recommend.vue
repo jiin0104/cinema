@@ -16,7 +16,7 @@
               v-if="index < 4"
               style="
                 position: relative;
-                left: 140px;
+                left: 45px;
                 margin: 5px;
                 display: inline-block;
                 float: left;
@@ -25,9 +25,9 @@
               <v-layout>
                 <v-card>
                   <v-img
-                    :src="`/download/poster/${rec.MOVIE_POSTER}`"
-                    height="250px"
-                    width="220px"
+                    :src="`/download/${rec.MOVIE_POSTER}`"
+                    height="300px"
+                    width="270px"
                   />
 
                   <div class="r_title">
@@ -53,7 +53,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="selectedMovie.MOVIE_POSTER"
+                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
                       height="200px"
                       width="170px"
                     ></v-img>
