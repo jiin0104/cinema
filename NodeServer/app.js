@@ -120,6 +120,19 @@ app.get("/download/:fileName", (request, res) => {
   else fs.createReadStream(filepath).pipe(res);
 });
 
+app.get("/download2/:fileName", (request, res) => {
+  const { fileName } = request.params;
+  const filepath = `${__dirname}/public/${fileName}`;
+  res.header(
+    "Content-Type",
+    `image/${fileName.substring(fileName.lastIndexOf("."))}`
+  );
+  if (!fs.existsSync(filepath))
+    res.send(404, {
+      error: "Can not found file.",
+    });
+  else fs.createReadStream(filepath).pipe(res);
+});
 //=================================================================================================================//
 //=================================================================================================================//
 //=================================================================================================================//
