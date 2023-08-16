@@ -24,7 +24,11 @@
             >
               <v-layout>
                 <v-card>
-                  <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
+                  <v-img
+                    :src="`/download/poster/${rec.MOVIE_POSTER}`"
+                    height="250px"
+                    width="220px"
+                  />
 
                   <div class="r_title">
                     <div>
@@ -180,6 +184,7 @@ export default {
       console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제해도됨
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
       //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
+      console.log("Image URL:", `/download/poster/${rec.MOVIE_POSTER}`);
       await this.Get_Modal_Info(); //모달 내용 가져오기
     },
     close_toggle() {
