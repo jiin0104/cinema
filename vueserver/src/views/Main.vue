@@ -7,34 +7,40 @@
         <button class="click" @click="pageLink">click !</button>
       </div>
       <br /><br /><br />
-      <div class="infotext">지금 상영중인 추천 영화</div>
-      <!--이미지슬라이더-->
-      <div>
-        <swiper
-          :modules="modules"
-          :slidesPerView="4"
-          :centeredSlides="false"
-          :spaceBetween="30"
-          :autoplay="{
+      <div v-if="!this.$store.state.isLogin">
+        <div class="infotext">지금 상영중인 추천 영화</div>
+        <!--이미지슬라이더-->
+        <div>
+          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
             delay: 2000,
             disableOnInteraction: false,
-          }"
-          :navigation="true"
-          :virtual="true"
-          class="mySwiper"
-          @swiper="setSwiperRef"
-        >
-          <swiper-slide
-            v-for="(po, index) in slides"
-            :key="po"
-            :virtualIndex="index"
-            ><img :src="`/download/${po.MOVIE_POSTER}`"
-          /></swiper-slide>
-        </swiper>
-        <p class="append-buttons">
-          <button @click="prepend()" class="prepend-2-slides"></button>
-        </p>
+          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
+            <swiper-slide v-for="(po, index) in slides" :key="po" :virtualIndex="index"><img
+                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          </swiper>
+          <p class="append-buttons">
+            <button @click="prepend()" class="prepend-2-slides"></button>
+          </p>
+        </div>
       </div>
+
+      <div v-else-if="this.$store.state.isLogin">
+        <div class="infotext">내가 관심있는 장르 영화</div>
+        <!--이미지슬라이더-->
+        <div>
+          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
+            delay: 2000,
+            disableOnInteraction: false,
+          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
+            <swiper-slide v-for="(po, index) in slides2" :key="po" :virtualIndex="index"><img
+                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          </swiper>
+          <p class="append-buttons">
+            <button @click="prepend()" class="prepend-2-slides"></button>
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -60,17 +66,24 @@ export default {
     return {
       logo: "logo.png",
       slides: [],
+      slides2: [],
     };
   },
 
   created() {
     //페이지 로딩 되자마자 메인 슬라이드 정보 가져오는 함수 호출
     this.getmain();
+    this.getmain2();
   },
   methods: {
     async getmain() {
       //슬라이드 정보 가져오는 api
       this.slides = await this.$api("/api/getmain", {});
+      console.log(this.slides);
+      console.log();
+    },
+    async getmain2(){
+      this.slides2 = await this.$api("/api/getmain2", {param: [this.$store.state.userId, this.$store.state.userId, this.$store.state.userId, this.$store.state.userId]});
       console.log(this.slides);
       console.log();
     },
