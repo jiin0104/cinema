@@ -13,6 +13,9 @@ router.post("/filtervalues", async (request, res) => {
     console.log(selectGenres);
     console.log(emojiFileNames);
 
+    // 데이터베이스 연결 생성
+    const connection = await dbPool.promise();
+
     //선택한 장르를 이용하기 위해서 장르를 or이용해서 매칭
     const genresQuery = selectGenres
       .map(
@@ -23,13 +26,17 @@ router.post("/filtervalues", async (request, res) => {
 
     //무비즈 테이블에서 필터에 맞는 랜덤 4개 영화 무비넘 뽑기
     const query = `SELECT MOVIE_NUM FROM movies WHERE ${genresQuery} ORDER BY RAND() LIMIT 4`;
-    const [filteredMovies] = await dbPool.execute(query);
+    const [filteredMovies] = await connection.query(query);
+
     //뽑아온 4개의 영화의 무비넘들
     const selectedMovieNums = filteredMovies.map((movie) => movie.MOVIE_NUM);
+
     // 추출한 MOVIE_NUM 배열을 JSON 형식으로 변환
     const selectedMovieNumsJSON = JSON.stringify(selectedMovieNums);
+
     // 이미지 파일명 배열을 JSON 형식으로 변환
     const emojiFileNamesJSON = JSON.stringify(emojiFileNames);
+
     // recommend 테이블에 데이터 삽입
     const insertQuery = `
     INSERT INTO recommend (USER_NUM, MOVIES_NUM, EMOJI)
@@ -37,7 +44,8 @@ router.post("/filtervalues", async (request, res) => {
   `;
     const values = [formData.userNo, selectedMovieNumsJSON, emojiFileNamesJSON];
 
-    await dbPool.execute(insertQuery, values);
+    // 쿼리 실행 후 연결 닫기
+    await connection.query(insertQuery, values);
 
     // 응답 보내기
     res.json({ selectedMovieNumsJSON });
