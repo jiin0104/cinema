@@ -22,6 +22,20 @@
             <button @click="prepend()" class="prepend-2-slides"></button>
           </p>
         </div>
+        <div class="infotext">인기 영화</div>
+        <!--이미지슬라이더-->
+        <div>
+          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
+            delay: 2000,
+            disableOnInteraction: false,
+          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
+            <swiper-slide v-for="(po, index) in slides3" :key="po" :virtualIndex="index"><img
+                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          </swiper>
+          <p class="append-buttons">
+            <button @click="prepend()" class="prepend-2-slides"></button>
+          </p>
+        </div>
       </div>
 
       <div v-else-if="this.$store.state.isLogin">
@@ -33,6 +47,20 @@
             disableOnInteraction: false,
           }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
             <swiper-slide v-for="(po, index) in slides2" :key="po" :virtualIndex="index"><img
+                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          </swiper>
+          <p class="append-buttons">
+            <button @click="prepend()" class="prepend-2-slides"></button>
+          </p>
+        </div>
+        <div class="infotext">인기 영화</div>
+        <!--이미지슬라이더-->
+        <div>
+          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
+            delay: 2000,
+            disableOnInteraction: false,
+          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
+            <swiper-slide v-for="(po, index) in slides3" :key="po" :virtualIndex="index"><img
                 :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
           </swiper>
           <p class="append-buttons">
@@ -67,6 +95,7 @@ export default {
       logo: "logo.png",
       slides: [],
       slides2: [],
+      slides3: [],
     };
   },
 
@@ -74,6 +103,7 @@ export default {
     //페이지 로딩 되자마자 메인 슬라이드 정보 가져오는 함수 호출
     this.getmain();
     this.getmain2();
+    this.getmain3();
   },
   methods: {
     async getmain() {
@@ -84,7 +114,13 @@ export default {
     },
     async getmain2(){
       this.slides2 = await this.$api("/api/getmain2", {param: [this.$store.state.userId, this.$store.state.userId, this.$store.state.userId, this.$store.state.userId]});
-      console.log(this.slides);
+      console.log(this.slides2);
+      console.log();
+    },
+    async getmain3() {
+      //슬라이드 정보 가져오는 api
+      this.slides3 = await this.$api("/api/getmain3", {});
+      console.log(this.slides3);
       console.log();
     },
     pageLink() {
