@@ -30,6 +30,9 @@ module.exports = {
 
 
   emojipath: {
-    query: `SELECT json_extract(emoji, '$.emoji1','$.emoji2', '$.emoji3','$.emoji4') FROM recommend`,
+    query: `SELECT json_extract(emoji, '$.emoji1','$.emoji2', '$.emoji3','$.emoji4') FROM recommend where USER_NUM = (select USER_NUM from user where USER_ID = ?)`,
+  },
+  emojipath2: {
+    query: `SELECT * FROM recommend where USER_NUM = (select USER_NUM from user where USER_ID = ?)`,
   },
 };

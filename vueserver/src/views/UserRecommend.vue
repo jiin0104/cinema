@@ -7,16 +7,16 @@
             {{ userinfo.USER_NICKNAME }} 님이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
-          <div>
+          <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
             <div
               class="emo"
               style="width: 400px; height: 100px; position: relative; top: 20px"
             >
               <!--추후 필터링 선택한 이미지를 배열로 뽑아와야함-->
-              <img style="width: 100px; height: 100px" :src="imagePath" />
-              <img style="width: 100px; height: 100px" :src="imagePath" />
-              <img style="width: 100px; height: 100px" :src="imagePath" />
-              <img style="width: 100px; height: 100px" :src="imagePath" />
+              <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI.emoji1}`" />
+              <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI.emoji2}`" />
+              <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI.emoji3}`" />
+              <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI.emoji4}`" />
             </div>
             <div
               class="ulist"
@@ -161,10 +161,12 @@ export default {
       recList: [], //추천받은 영화 목록
       modList2: [], //클릭한 영화에 대한 모달창
       imagePath: "cat.png",
+      getemoji: [],
     };
   },
   created() {
     this.Get_user(); //페이지 보여지자마자 사용자 정보 가져오기
+    this.getemo();
   },
   mounted() {
     this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
@@ -203,6 +205,13 @@ export default {
         param: [this.selectedMovie.MOVIE_NUM],
       });
       console.log("modList2 Data:", this.modList2);
+    },
+    
+    async getemo() {
+      
+      this.getemoji = await this.$api("/api/emojipath2", {param: [this.$store.state.userId]});
+      console.log(this.getemoji);
+      
     },
   },
 };
