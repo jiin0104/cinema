@@ -36,7 +36,7 @@
                 <v-layout>
                   <v-card height="150px" width="90px">
                     <v-img
-                      :src="`/download/${rec.MOVIE_POSTER}`"
+                      :src="rec.MOVIE_POSTER"
                       height="120px"
                       width="90px"
                       @click="openModal(rec)"
@@ -62,7 +62,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      :src="selectedMovie.MOVIE_POSTER"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -79,11 +79,14 @@
                   </div>
                 </div>
                 <div class="modalcontent" v-if="modList2[0]">
-                  <p>장르: {{ modList2[0].GENRE1 }},{{ modList2[0].GENRE2 }}</p>
-                  <p>개봉일: {{ modList2[0].FORMATTED_RELEASE }}</p>
+                  <p>장르: {{ modList2[0].GENRE }}</p>
+                  <p>개봉일: {{ modList2[0].MOVIE_RELEASE }}</p>
                   <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
-                  <p>주연: {{ modList2[0].MOVIE_ACTORS }},</p>
-                  <p>평점: {{ modList2[0].MOVIE_SCORE }}/100</p>
+                  <p>
+                    주연: {{ modList2[0].MOVIE_ACTORS.actor1 }},
+                    {{ modList2[0].MOVIE_ACTORS.actor2 }}
+                  </p>
+                  <p>평점: {{ modList2[0].MOVIE_SCORE }}</p>
                 </div>
               </div>
               <div>
