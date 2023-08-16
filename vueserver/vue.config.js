@@ -26,7 +26,15 @@ module.exports = defineConfig({
       '^/download': {
         target,
         changeOrigin: true,
-      }
+      },
+      '^/poster': {
+        target,
+        changeOrigin: true,
+      },
+      '^/backimage': {
+        target,
+        changeOrigin: true,
+      },
     },
   },
 })
