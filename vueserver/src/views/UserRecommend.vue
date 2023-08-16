@@ -2,15 +2,16 @@
   <div>
     <div class="background">
       <form class="bg2" @submit.prevent="">
-        <div class="logtitle">
+        <div class="userretitle">
           <div class="Recommendtitle">
             {{ userinfo.USER_NICKNAME }} 님이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
+          <div style="overflow:auto; width:1500px; height:700px;">
           <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
             <div
               class="emo"
-              style="width: 400px; height: 100px; position: relative; top: 20px"
+              style="width: 400px; height: auto; position: relative; top: 20px"
             >
               <!--추후 필터링 선택한 이미지를 배열로 뽑아와야함-->
               <img
@@ -65,6 +66,7 @@
               </div>
             </div>
           </div>
+        </div>
           <!--카드 끝-->
 
           <!--모달창-->

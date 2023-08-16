@@ -5,11 +5,12 @@
   border-radius: 1em;
 }
 
-.logtitle {
+.userretitle {
   width: 1500px;
   height: 800px;
   background-color: #ffffff5b;
   border-radius: 1em;
+  margin: 0 auto;
 }
 
 .Recommendtitle {
