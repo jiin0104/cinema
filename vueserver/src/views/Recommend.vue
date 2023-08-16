@@ -9,7 +9,7 @@
 
           <div
             v-for="(rec, index) in recList"
-            :key="rec.movieid"
+            :key="rec.MOVIE_NUM"
             style="margin: auto"
           >
             <div
@@ -24,13 +24,11 @@
             >
               <v-layout>
                 <v-card>
-                  <v-img :src="rec.posterUrl" height="250px" width="220px" />
+                  <v-img :src="rec.MOVIE_POSTER" height="250px" width="220px" />
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">
-                        {{ "영화 제목이 들어가야 됨" }}
-                      </div>
+                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
                     </div>
                   </div>
 
@@ -51,7 +49,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="selectedMovie.posterUrl"
+                      :src="selectedMovie.MOVIE_POSTER"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -64,29 +62,25 @@
                       height: 50px;
                     "
                   >
-                    {{ "영화 제목이 들어가야됨" }}
+                    {{ selectedMovie.MOVIE_TITLE }}
                   </div>
                 </div>
-                <div class="modalcontent" v-if="modList[0]">
-                  <p>장르: {{ modList[0].GENRE }}</p>
-                  <p>개봉일: {{ modList[0].MOVIE_RELEASE }}</p>
-                  <p>감독: {{ modList[0].MOVIE_DIRECTOR }}</p>
-                  <p>
-                    주연: {{ modList[0].MOVIE_ACTORS.actor1 }},
-                    {{ modList[0].MOVIE_ACTORS.actor2 }}
-                  </p>
-                  <p>평점: {{ modList[0].MOVIE_SCORE }}</p>
+                <div class="modalcontent" v-if="modList2[0]">
+                  <p>장르: {{ modList2[0].GENRE1 }},{{ modList2[0].GENRE2 }}</p>
+                  <p>개봉일: {{ modList2[0].FORMATTED_RELEASE }}</p>
+                  <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
+                  <p>주연: {{ modList2[0].MOVIE_ACTORS }}</p>
+                  <p>평점: {{ modList2[0].MOVIE_SCORE }}/100</p>
                 </div>
               </div>
               <div>
                 <div style="margin: 10px">
                   <form>
-                    <!-- 시간되면 하기  -->
                     한줄리뷰
                     <div class="review">
-                      {{ modList.USER_ID }} : {{ modList.REVIEW_COMMENT }}
+                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
                       <br />
-                      {{ modList.USER_ID }} : {{ modList.REVIEW_COMMENT }}
+                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
                     </div>
                   </form>
                   <button
@@ -149,6 +143,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   el: "#app",
   data() {
@@ -156,11 +152,20 @@ export default {
       logo: "logo.png",
       selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
       recList: [], //영화 리스트
-      modList: [], //모달 리스트채워넣기
+      modList2: [], //모달 리스트
     };
   },
+  mounted() {
+    //페이지가 실행되자마자 영화 리스트 데이터 보여주기
+    this.Get_Movie_List();
+  },
+  created() {
+    //영화코드=쿼리의 영화코드
+    this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
+  },
+
   methods: {
-    async pageLink() {
+    pageLink() {
       //클릭시 메인으로 이동
       this.$router.push({ path: "/" });
     },
@@ -170,29 +175,107 @@ export default {
     },
 
     async openModal(rec) {
-      // 모달창 띄우기
-      this.selectedMovie = {
-        ...rec,
-        movieid: rec.movieid,
-        posterUrl: rec.posterUrl,
-      };
+      //모달창 띄우기
+      console.log("Clicked Movie Object:", rec); //삭제해도됨
+      console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제해도됨
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
+      //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
+      await this.Get_Modal_Info(); //모달 내용 가져오기
+    },
+    close_toggle() {
+      //모달 닫기
+      this.selectedMovie = null;
+    },
+    async Get_Movie_List() {
+      //추천 영화 리스트 파라미터값 가져오는 함수
+      this.recList = await this.$api("/api/recList", {
+        param: [this.MOVIE_NUM],
+      });
+    },
+    async Get_Modal_Info() {
+      //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
+      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE_NUM],
+      });
+      console.log("modList2 Data:", this.modList2); //삭제해도됨
+    },
 
-      //콘솔로 데이터확인
-      console.log(this.selectedMovie);
+    async getRecommendedMovies() {
+      try {
+        const response = await axios.post("/recommend-movies", {
+          selectedGenres: this.selectarray,
+        });
 
-      // 선택한 영화 정보(영화 코드와 포스터 URL로 불러옴) selectedMovie에 저장
-      await this.Get_Modal_Info(); // 모달 내용 가져오기
+        const recommendedMovies = response.data.recommendedMovies;
+
+        // TODO: 추천 영화 데이터를 Vue 컴포넌트의 데이터에 저장하는 로직 작성
+        // this.recommendedMovies = recommendedMovies;
+      } catch (error) {
+        console.error("Error fetching recommended movies:", error.message);
+      }
     },
   },
-  async close_toggle() {
-    //모달 닫기
-    this.selectedMovie = null;
-  },
-  async Get_Modal_Info() {},
 };
 </script>
 
 <style>
 @import "../css/recommend.css";
 
+.modal {
+  background-color: #fff;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 22px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+.review {
+  font-size: 18px;
+  border: 1px solid #c8bdbd;
+  border-radius: 5px;
+  background-color: #ffa9a9;
+  padding: 5px;
+}
+
+.r_title {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 30px;
+  text-align: center;
+  margin: 10px;
+}
+
+.detail {
+  font-family: "Black Han Sans", sans-serif;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 23px;
+  background-color: #3742fa;
+  color: white;
+  width: 150px;
+  height: 30px;
+}
+
+.v-img__img--contain {
+  object-fit: fill;
+}
+
+.modalcontent {
+  font-size: 22px;
+  border: 1px solid #c8bdbd;
+  border-radius: 5px;
+  background-color: #ffa9a9;
+  margin-top: 5px;
+  padding: 5px;
+  width: 475px;
+  height: 170px;
+}
 </style>
