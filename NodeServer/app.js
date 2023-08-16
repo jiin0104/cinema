@@ -114,7 +114,7 @@ app.get("/download/:fileName", (request, res) => {
     `image/${fileName.substring(fileName.lastIndexOf("."))}`
   );
   if (!fs.existsSync(filepath))
-    res.send(404, {
+    res.status(404).send({
       error: "Can not found file.",
     });
   else fs.createReadStream(filepath).pipe(res);

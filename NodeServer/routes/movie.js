@@ -46,9 +46,6 @@ router.post("/filtervalues", async (request, res) => {
 
     // 쿼리 실행 후 연결 닫기
     await connection.query(insertQuery, values);
-
-    // 응답 보내기
-    res.json({ selectedMovieNumsJSON });
   } catch (error) {
     console.error("무언가 문제가 있다", error);
     res.status(500).send({
