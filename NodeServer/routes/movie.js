@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-//이모지 불러오기 -- 라우터 쪼개야됨
+//이모지 불러오기
 router.post("/upload/:type/:fileName", async (request, res) => {
   let { fileName } = request.params;
   const dir = `${__dirname}/upload/`;
@@ -33,7 +33,7 @@ router.post("/upload/:type/:fileName", async (request, res) => {
     }
   });
 });
-//이모지 뷰쪽으로 보내기  -- 라우터 쪼개야됨
+//이모지 뷰쪽으로 보내기
 router.get("/download/:fileName", (request, res) => {
   const { fileName } = request.params;
   const filepath = `${__dirname}/uploads/${fileName}`;
