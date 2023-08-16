@@ -107,18 +107,19 @@ export default {
   },
   methods: {
     async getmain() {
-      //슬라이드 정보 가져오는 api
+      // 현재 상영중인 영화
       this.slides = await this.$api("/api/getmain", {});
       console.log(this.slides);
       console.log();
     },
+     // 회원가입시 선택한 장르 영화
     async getmain2(){
       this.slides2 = await this.$api("/api/getmain2", {param: [this.$store.state.userId, this.$store.state.userId, this.$store.state.userId, this.$store.state.userId]});
       console.log(this.slides2);
       console.log();
     },
     async getmain3() {
-      //슬라이드 정보 가져오는 api
+      // 일반 인기영화
       this.slides3 = await this.$api("/api/getmain3", {});
       console.log(this.slides3);
       console.log();
