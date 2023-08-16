@@ -549,50 +549,43 @@ export default {
     },
     // 필터 확인 버튼 클릭 시 처리
     async filterconfirm() {
+      // 선택한 장르 가져오기
+      const selectedGenres = this.selectarray
+        .map((genre) => {
+          const genreId = this.mapGenreNameToId(genre); // 각 장르 이미지 문자열을 장르이름 문자열로 변환
+          return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
+        })
+        .filter((genreId) => genreId !== undefined); // undefined 값 제거
+
       const formData = {
         e1: this.selectarray[0],
         e2: this.selectarray[1],
         e3: this.selectarray[2],
         e4: this.selectarray[3],
-        ne1: "emoji1",
-        ne2: "emoji2",
-        ne3: "emoji3",
-        ne4: "emoji4",
+        selectedGenres: selectedGenres,
         userNo: this.userNo,
       };
 
-      axios
-        .post("/mypage/rcinsert", formData)
-        .then((response) => {
-          if (response.data.message) {
-            alert(response.data.message);
-          } else {
-            alert("등록에 실패했습니다.");
-            console.log(formData);
-          }
-        })
-        .catch((error) => {
-          console.error("등록 실패", error);
-          alert("등록 실패. 확인 후 다시 시도해 주세요");
-        });
-
-      // 선택한 성별,나이,장르 정보 가져오기
-      const selectedGenres = this.selectarray.map((genre) => {
-        const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
-        return genreId;
-      });
-      // const selectedGenres = this.selectarray
-      //   .map((genre) => {
-      //     const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
-      //     return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
-      //   })
-      //   .filter((genreId) => genreId !== undefined); // undefined 값 제거
-
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
       console.log("selectedGenres:", selectedGenres);
+      console.log("폼데이터", formData);
 
       try {
         //라우터의 movie.js로 선택한 장르 값들 보내주기
+        axios
+          .post("/movie/filtervalues", formData)
+          .then((response) => {
+            if (response.data.message) {
+              alert(response.data.message);
+            } else {
+              alert("등록에 실패했습니다.");
+              console.log(formData);
+            }
+          })
+          .catch((error) => {
+            console.error("등록 실패", error);
+            alert("등록 실패. 확인 후 다시 시도해 주세요");
+          });
 
         // 결과 페이지로 이동
         this.$router.push({
@@ -603,8 +596,6 @@ export default {
         // 에러 처리
       }
     },
-
-    //성별,나이 뭐 선택했는지
 
     // 장르 이름을 장르 ID로 매핑
     mapGenreNameToId(genreName) {
@@ -623,7 +614,7 @@ export default {
         "crying.png": "드라마",
         "thinking.png": "미스터리",
         "smiling.png": "가족",
-        "musical-note.png": 35,
+        "musical-note.png": "음악",
         "plane.png": "모험",
         "angry.png": "스릴러",
         "cat.png": "전쟁",
