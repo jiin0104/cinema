@@ -576,18 +576,24 @@ export default {
           alert("등록 실패. 확인 후 다시 시도해 주세요");
         });
 
-      // 선택한 장르 정보 가져오기
-      const selectedGenres = this.selectarray
-        .map((genre) => {
-          const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
-          return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
-        })
-        .filter((genreId) => genreId !== undefined); // undefined 값 제거
+      // 선택한 성별,나이,장르 정보 가져오기
+      const selectedGenres = this.selectarray.map((genre) => {
+        const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+        return genreId;
+      });
+      // const selectedGenres = this.selectarray
+      //   .map((genre) => {
+      //     const genreId = this.mapGenreNameToId(genre); // 각 장르 이름을 ID로 변환
+      //     return genreId !== null ? genreId : undefined; // null이 아닌 경우에만 반환
+      //   })
+      //   .filter((genreId) => genreId !== undefined); // undefined 값 제거
 
       //매핑된 장르id가 제대로 배열에 들어갔는지 확인
       console.log("selectedGenres:", selectedGenres);
 
       try {
+        //라우터의 movie.js로 선택한 장르 값들 보내주기
+
         // 결과 페이지로 이동
         this.$router.push({
           path: "/FinalFilter",
@@ -598,28 +604,30 @@ export default {
       }
     },
 
+    //성별,나이 뭐 선택했는지
+
     // 장르 이름을 장르 ID로 매핑
     mapGenreNameToId(genreName) {
       const genreMap = {
-        "genre1.png": 16,
-        "genre2.png": 28,
-        "genre3.png": 10749,
-        "genre4.png": 35,
-        "genre5.png": 878,
-        "genre6.png": 14,
-        "genre7.png": 53,
-        "genre8.png": 99,
-        "genre9.png": 10752,
-        "love.png": 18,
-        "sad.png": 10751,
-        "crying.png": 18,
-        "thinking.png": 36,
-        "smiling.png": 10402,
+        "genre1.png": "애니메이션",
+        "genre2.png": "액션",
+        "genre3.png": "로맨스",
+        "genre4.png": "코미디",
+        "genre5.png": "SF",
+        "genre6.png": "판타지",
+        "genre7.png": "스릴러",
+        "genre8.png": "다큐멘터리",
+        "genre9.png": "전쟁",
+        "love.png": "로맨스",
+        "sad.png": "범죄",
+        "crying.png": "드라마",
+        "thinking.png": "미스터리",
+        "smiling.png": "가족",
         "musical-note.png": 35,
-        "plane.png": 12,
-        "angry.png": 80,
-        "cat.png": 10770,
-        "tongue.png": 9648,
+        "plane.png": "모험",
+        "angry.png": "스릴러",
+        "cat.png": "전쟁",
+        "tongue.png": "역사",
       };
       return genreMap[genreName] || null;
     },
