@@ -16,19 +16,19 @@
               <!--추후 필터링 선택한 이미지를 배열로 뽑아와야함-->
               <img
                 style="width: 100px; height: 100px"
-                :src="`/download2/${i.EMOJI.emoji1}`"
+                :src="`/download2/${i.EMOJI[0]}`"
               />
               <img
                 style="width: 100px; height: 100px"
-                :src="`/download2/${i.EMOJI.emoji2}`"
+                :src="`/download2/${i.EMOJI[1]}`"
               />
               <img
                 style="width: 100px; height: 100px"
-                :src="`/download2/${i.EMOJI.emoji3}`"
+                :src="`/download2/${i.EMOJI[2]}`"
               />
               <img
                 style="width: 100px; height: 100px"
-                :src="`/download2/${i.EMOJI.emoji4}`"
+                :src="`/download2/${i.EMOJI[3]}`"
               />
             </div>
             <div
