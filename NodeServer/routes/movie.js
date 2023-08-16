@@ -1,70 +1,52 @@
 const express = require("express");
 const router = express.Router();
+const dbPool = require("../db");
+const mysql = require("mysql2/promise"); // MySQL2 Promise 래퍼
 
 //FilterR.vue에서 받은 장르값을 movies 테이블에 적용 시켜서 뽑아오고,뽑아온 영화 4개를 recommend테이블에 넣어주고, Recommend.vue로 보내주기
 router.post("/filtervalues", async (request, res) => {
   try {
     const formData = request.body; // 클라이언트에서 보낸 데이터 받아오기
+    const selectGenres = formData.selectedGenres; // 선택한 장르 배열
+    const emojiFileNames = [formData.e1, formData.e2, formData.e3, formData.e4]; // 이미지 파일명 4개
     console.log(formData);
-    // TODO: formData를 이용해서 원하는 로직 수행 (예: 데이터베이스 쿼리 실행 등)
+    console.log(selectGenres);
+    console.log(emojiFileNames);
+
+    //선택한 장르를 이용하기 위해서 장르를 or이용해서 매칭
+    const genresQuery = selectGenres
+      .map(
+        (genre) =>
+          `GENRE1 = '${genre}' OR GENRE2 = '${genre}' OR GENRE3 = '${genre}' OR GENRE4 = '${genre}'`
+      )
+      .join(" OR ");
+
+    //무비즈 테이블에서 필터에 맞는 랜덤 4개 영화 무비넘 뽑기
+    const query = `SELECT MOVIE_NUM FROM movies WHERE ${genresQuery} ORDER BY RAND() LIMIT 4`;
+    const [filteredMovies] = await dbPool.execute(query);
+    //뽑아온 4개의 영화의 무비넘들
+    const selectedMovieNums = filteredMovies.map((movie) => movie.MOVIE_NUM);
+    // 추출한 MOVIE_NUM 배열을 JSON 형식으로 변환
+    const selectedMovieNumsJSON = JSON.stringify(selectedMovieNums);
+    // 이미지 파일명 배열을 JSON 형식으로 변환
+    const emojiFileNamesJSON = JSON.stringify(emojiFileNames);
+    // recommend 테이블에 데이터 삽입
+    const insertQuery = `
+    INSERT INTO recommend (USER_NUM, MOVIES_NUM, EMOJI)
+    VALUES (?, ?, ?)
+  `;
+    const values = [formData.userNo, selectedMovieNumsJSON, emojiFileNamesJSON];
+
+    await dbPool.execute(insertQuery, values);
 
     // 응답 보내기
-    res.status(200).send({
-      message: "데이터 처리 성공",
-    });
+    res.json({ selectedMovieNumsJSON });
   } catch (error) {
-    console.error("데이터 처리 실패", error);
+    console.error("무언가 문제가 있다", error);
     res.status(500).send({
-      message: "데이터 처리 실패",
+      message: "무언가 문제가 있다",
     });
   }
-});
-
-//이모지 불러오기
-router.post("/upload/:type/:fileName", async (request, res) => {
-  let { fileName } = request.params;
-  const dir = `${__dirname}/upload/`;
-  const file = `${dir}/${fileName}`;
-  if (!request.body.data)
-    return fs.unlink(file, async (err) =>
-      res.send({
-        err,
-      })
-    );
-  const data = request.body.data.slice(
-    request.body.data.indexOf(";base64,") + 8
-  );
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-  fs.writeFile(file, data, "base64", async (error) => {
-    await req.db("accommodations", [
-      {
-        //type: type,
-        path: fileName,
-      },
-    ]);
-
-    if (error) {
-      res.send({
-        error,
-      });
-    } else {
-      res.send("ok");
-    }
-  });
-});
-//이모지 뷰쪽으로 보내기
-router.get("/download/:fileName", (request, res) => {
-  const { fileName } = request.params;
-  const filepath = `${__dirname}/uploads/${fileName}`;
-  res.header(
-    "Content-Type",
-    `image/${fileName.substring(fileName.lastIndexOf("."))}`
-  );
-  if (!fs.existsSync(filepath))
-    res.send(404, {
-      error: "Can not found file.",
-    });
-  else fs.createReadStream(filepath).pipe(res);
 });
 
 module.exports = router;

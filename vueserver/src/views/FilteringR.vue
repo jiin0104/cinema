@@ -411,10 +411,6 @@ export default {
       e2: "",
       e3: "",
       e4: "",
-      ne1: "",
-      ne2: "",
-      ne3: "",
-      ne4: "",
       userNo: this.$store.state.userNo,
     };
   },
