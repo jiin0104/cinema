@@ -7,7 +7,7 @@
             {{ userinfo.USER_NICKNAME }} 님이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
-          <div style="overflow:auto; width:1500px; height:700px;">
+          <div style="overflow:auto; width:1500px; height:600px;">
           <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
             <div
               class="emo"
