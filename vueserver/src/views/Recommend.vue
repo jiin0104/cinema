@@ -147,8 +147,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   el: "#app",
   data() {
@@ -204,21 +202,6 @@ export default {
         param: [this.selectedMovie.MOVIE_NUM],
       });
       console.log("modList2 Data:", this.modList2); //삭제해도됨
-    },
-
-    async getRecommendedMovies() {
-      try {
-        const response = await axios.post("/recommend-movies", {
-          selectedGenres: this.selectarray,
-        });
-
-        const recommendedMovies = response.data.recommendedMovies;
-
-        // TODO: 추천 영화 데이터를 Vue 컴포넌트의 데이터에 저장하는 로직 작성
-        // this.recommendedMovies = recommendedMovies;
-      } catch (error) {
-        console.error("Error fetching recommended movies:", error.message);
-      }
     },
   },
 };
