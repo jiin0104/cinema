@@ -27,6 +27,7 @@
                       top: 30px;
                       left: 195px;
                     "
+                    @click="gologin"
                   >
                     로그인
                   </v-btn>
@@ -63,6 +64,11 @@ export default {
     console.log('받은 id:', this.$route.params.id);
     
   },
+  methods: {
+    gologin(){
+      this.$router.push({path: "/login"})
+    }
+  }
 };
 </script>
 

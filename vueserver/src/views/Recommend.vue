@@ -110,7 +110,7 @@
           </div>
           <!--모달창 끝-->
 
-          <div class="rec">
+          <div class="recorec">
             <v-btn
               class="infotext"
               variant="tonal"
