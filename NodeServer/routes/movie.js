@@ -39,7 +39,7 @@ router.post("/filtervalues", async (request, res) => {
 
     // recommend 테이블에 데이터 삽입
     const insertQuery = `
-    INSERT INTO recommend (USER_NUM, MOVIES_NUM, EMOJI)
+    INSERT INTO recommend (USER_NUM, MOVIE_NUM, EMOJI)
     VALUES (?, ?, ?)
   `;
     const values = [formData.userNo, selectedMovieNumsJSON, emojiFileNamesJSON];
