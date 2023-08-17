@@ -16,13 +16,13 @@ router.post("/filtervalues", async (request, res) => {
     // 데이터베이스 연결 생성
     const connection = await dbPool.promise();
 
-    //선택한 장르를 이용하기 위해서 장르를 or이용해서 매칭
+    //선택한 장르를 이용하기 위해서 장르를 and이용해서 매칭
     const genresQuery = selectGenres
       .map(
         (genre) =>
-          `GENRE1 = '${genre}' OR GENRE2 = '${genre}' OR GENRE3 = '${genre}' OR GENRE4 = '${genre}'`
+          `GENRE1 = '${genre}' and GENRE2 = '${genre}' and GENRE3 = '${genre}' and GENRE4 = '${genre}'`
       )
-      .join(" OR ");
+      .join(" AND ");
 
     //무비즈 테이블에서 필터에 맞는 랜덤 4개 영화 무비넘 뽑기
     const query = `SELECT MOVIE_NUM FROM movies WHERE ${genresQuery} ORDER BY RAND() LIMIT 4`;
