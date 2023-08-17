@@ -9,7 +9,7 @@
               <div style="margin-top: 45px; font-size: 25px">
                 <div class="findid" v-if="id !== ''">
                   당신의 아이디는<br />{{ getMaskedUsername }} <br />입니다
-                  
+
                 </div>
                 <div class="findid" v-else>
                   가입되 아이디 없음
@@ -27,7 +27,6 @@
                       top: 30px;
                       left: 195px;
                     "
-                    @click="gologin"
                   >
                     로그인
                   </v-btn>
@@ -47,7 +46,7 @@ export default {
     return {
       id: '', // id 값을 저장할 변수
       showPartial: false,
-      
+
 
     };
   },
@@ -62,13 +61,8 @@ export default {
   mounted() {
     this.id = this.$route.params.id;
     console.log('받은 id:', this.$route.params.id);
-    
+
   },
-  methods: {
-    gologin(){
-      this.$router.push({path: "/login"})
-    }
-  }
 };
 </script>
 
