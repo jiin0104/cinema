@@ -32,17 +32,24 @@ router.post("/filtervalues", async (request, res) => {
     const selectedMovieNums = filteredMovies.map((movie) => movie.MOVIE_NUM);
 
     // 추출한 MOVIE_NUM 배열을 JSON 형식으로 변환
-    const selectedMovieNumsJSON = JSON.stringify(selectedMovieNums);
+    // const selectedMovieNumsJSON = JSON.stringify(selectedMovieNums);
 
     // 이미지 파일명 배열을 JSON 형식으로 변환
     const emojiFileNamesJSON = JSON.stringify(emojiFileNames);
 
     // recommend 테이블에 데이터 삽입
     const insertQuery = `
-    INSERT INTO recommend (USER_NUM, MOVIE_NUM, EMOJI)
-    VALUES (?, ?, ?)
+    INSERT INTO recommend (USER_NUM, MOVIE_NUM1, MOVIE_NUM2, MOVIE_NUM3, MOVIE_NUM4, EMOJI)
+    VALUES (?, ?, ?, ?, ?, ?)
   `;
-    const values = [formData.userNo, selectedMovieNumsJSON, emojiFileNamesJSON];
+    const values = [
+      formData.userNo,
+      selectedMovieNums[0],
+      selectedMovieNums[1],
+      selectedMovieNums[2],
+      selectedMovieNums[3],
+      emojiFileNamesJSON,
+    ];
 
     // 쿼리 실행 후 연결 닫기
     await connection.query(insertQuery, values);
