@@ -38,13 +38,15 @@ module.exports = {
     query: `SELECT * FROM recommend where USER_NUM = (select USER_NUM from user where USER_ID = ?)`,
   },
   recList: {
-    query: `SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_NUM
-    FROM movies
-    WHERE MOVIE_NUM IN (
-      SELECT
-        JSON_UNQUOTE(JSON_EXTRACT(MOVIE_NUM, '$[0]')) AS movie_id
-      FROM recommend
-      WHERE RC_NUM = 47
-    );`, //임으로 RC_NUM지정해서 불러오는지 확인해봄.
+    query: `SELECT m.MOVIE_TITLE, m.MOVIE_POSTER, m.MOVIE_NUM
+    FROM movies m
+    JOIN recommend r ON r.RC_NUM = 30
+    JOIN JSON_TABLE(
+      r.MOVIE_NUM,
+      '$[*]'
+      COLUMNS (
+        movie_id INT PATH '$'
+      )
+    ) jt ON m.MOVIE_NUM = jt.movie_id;`, //임으로 RC_NUM지정해서 불러오는지 확인해봄.
   },
 };
