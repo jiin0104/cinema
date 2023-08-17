@@ -28,51 +28,31 @@
         <!--2차 선택창-->
         <div class="select">
           <br />
-          <div style="display: grid; position: relative; left: 100px">
+          <div style="display: grid; position: relative; left: 25px; top: 40px;">
             <div class="buttonlocation1">
-              <button type="button" class="button3" @click="age0">10대-</button>
+              <button type="button" class="button3" @click="age0">
+                <img :src="ageimage1" style="width: 150px; height: 150px;">
+              </button>
               <div>
                 <button type="button" class="button3" @click="age1">
-                  10대
+                  <img :src="ageimage2" style="width: 150px; height: 150px;">
                 </button>
               </div>
             </div>
             <div class="buttonlocation1">
               <div>
                 <button type="button" class="button3" @click="age2">
-                  20대
+                  <img :src="ageimage3" style="width: 150px; height: 150px;">
                 </button>
               </div>
               <div>
                 <button type="button" class="button3" @click="age3">
-                  30대
+                  <img :src="ageimage4" style="width: 150px; height: 150px;">
                 </button>
               </div>
             </div>
-            <div class="buttonlocation1">
-              <div>
-                <button type="button" class="button3" @click="age4">
-                  40대
-                </button>
-              </div>
-              <div>
-                <button type="button" class="button3" @click="age5">
-                  50대
-                </button>
-              </div>
-            </div>
-            <div class="buttonlocation1">
-              <div>
-                <button type="button" class="button3" @click="age6">
-                  60대
-                </button>
-              </div>
-              <div>
-                <button type="button" class="button3" @click="age7">
-                  70대+
-                </button>
-              </div>
-            </div>
+            
+            
           </div>
         </div>
       </div>
@@ -87,61 +67,60 @@
             <button
               type="button"
               class="button4"
-              style="font-size: 27px"
               @click="genre1"
             >
-              애니메이션
+            <img :src="genreimage1" style="width: 130px; height: 130px;">
             </button>
             <div>
               <button type="button" class="button4" @click="genre2">
-                액션
+                <img :src="genreimage2" style="width: 130px; height: 130px;">
               </button>
             </div>
           </div>
           <div class="buttonlocation3">
             <div>
               <button type="button" class="button4" @click="genre3">
-                로맨스
+                <img :src="genreimage3" style="width: 130px; height: 130px;">
               </button>
             </div>
             <div>
               <button type="button" class="button4" @click="genre4">
-                코미디
+                <img :src="genreimage4" style="width: 130px; height: 130px;">
               </button>
             </div>
           </div>
           <div class="buttonlocation3">
             <div>
-              <button type="button" class="button4" @click="genre5">SF</button>
+              <button type="button" class="button4" @click="genre5">
+                <img :src="genreimage5" style="width: 130px; height: 130px;">
+              </button>
             </div>
             <div>
               <button type="button" class="button4" @click="genre6">
-                판타지
+                <img :src="genreimage6" style="width: 130px; height: 130px;">
               </button>
             </div>
           </div>
           <div class="buttonlocation3">
             <div>
               <button type="button" class="button4" @click="genre7">
-                스릴러
+                <img :src="genreimage7" style="width: 130px; height: 130px;">
               </button>
             </div>
             <div>
               <button
                 type="button"
                 class="button4"
-                style="font-size: 27px"
                 @click="genre8"
               >
-                다큐멘터리
+              <img :src="genreimage8" style="width: 130px; height: 130px;">
               </button>
               <button
                 type="button"
                 class="button4"
                 @click="genre9"
-                style="font-size: 27px"
               >
-                전쟁
+              <img :src="genreimage9" style="width: 130px; height: 130px;">
               </button>
             </div>
           </div>
@@ -244,29 +223,17 @@
             <button type="button" class="button5">
               <img :src="select2" style="width: 70px; height: 70px" />
             </button>
-            <div class="r-text" v-if="this.selectarray[1] == 'age0.png'">
-              10대 미만
-            </div>
             <div class="r-text" v-if="this.selectarray[1] == 'age1.png'">
-              10대
+              20대 미만
             </div>
             <div class="r-text" v-if="this.selectarray[1] == 'age2.png'">
-              20대
+              20대 이상 40대 미만
             </div>
             <div class="r-text" v-if="this.selectarray[1] == 'age3.png'">
-              30대
+              40대 이상 60대 미만
             </div>
             <div class="r-text" v-if="this.selectarray[1] == 'age4.png'">
-              40대
-            </div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age5.png'">
-              50대
-            </div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age6.png'">
-              60대
-            </div>
-            <div class="r-text" v-if="this.selectarray[1] == 'age7.png'">
-              70대 이상
+              60대 이상
             </div>
           </div>
 
@@ -391,6 +358,10 @@ export default {
     return {
       buttonImage1: "woman.png",
       buttonImage2: "man.png",
+      ageimage1: "age1.png",
+      ageimage2: "age2.png",
+      ageimage3: "age3.png",
+      ageimage4: "age4.png",
       emoji1: "love.png",
       emoji2: "sad.png",
       emoji3: "crying.png",
@@ -405,6 +376,15 @@ export default {
       select2: "2.png",
       select3: "3.png",
       select4: "4.png",
+      genreimage1: "genre1.png",
+      genreimage2: "genre2.png",
+      genreimage3: "genre3.png",
+      genreimage4: "genre4.png",
+      genreimage5: "genre5.png",
+      genreimage6: "genre6.png",
+      genreimage7: "genre7.png",
+      genreimage8: "genre8.png",
+      genreimage9: "genre9.png",
       type: "A",
       selectarray: [],
       e1: "",
@@ -427,35 +407,19 @@ export default {
 
     //2차 필터
     age0() {
-      this.selectarray.push("age0.png");
-      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
-    },
-    age1() {
       this.selectarray.push("age1.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
-    age2() {
+    age1() {
       this.selectarray.push("age2.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
-    age3() {
+    age2() {
       this.selectarray.push("age3.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
-    age4() {
+    age3() {
       this.selectarray.push("age4.png");
-      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
-    },
-    age5() {
-      this.selectarray.push("age5.png");
-      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
-    },
-    age6() {
-      this.selectarray.push("age6.png");
-      return (this.type = "C"), this.selectarray, console.log(this.selectarray);
-    },
-    age7() {
-      this.selectarray.push("age7.png");
       return (this.type = "C"), this.selectarray, console.log(this.selectarray);
     },
 
