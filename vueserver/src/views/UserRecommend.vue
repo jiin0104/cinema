@@ -43,14 +43,8 @@
                 ">
                   <v-layout>
                     <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER2}`" height="120px" width="90px" @click="openModal(rec)" />
-                      <div class="r_title">
-                        <div>
-                          <button class="headline" @click="openModal(rec)">
-                            {{ i.MOVIE_TITLE2 }}
-                          </button>
-                        </div>
-                      </div>
+                      <v-img :src="`/download/${i.POSTER2}`" height="100%" width="100%" @click="openModal(rec)" />
+                      
                     </v-card>
                   </v-layout>
                   
@@ -67,14 +61,8 @@
                 ">
                   <v-layout>
                     <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER3}`" height="120px" width="90px" @click="openModal(rec)" />
-                      <div class="r_title">
-                        <div>
-                          <button class="headline" @click="openModal(rec)">
-                            {{ i.MOVIE_TITLE3 }}
-                          </button>
-                        </div>
-                      </div>
+                      <v-img :src="`/download/${i.POSTER3}`" height="100%" width="100%" @click="openModal(rec)" />
+                      
                     </v-card>
                   </v-layout>
                   
@@ -91,14 +79,8 @@
                 ">
                   <v-layout>
                     <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER4}`" height="120px" width="90px" @click="openModal(rec)" />
-                      <div class="ur_title">
-                        <div>
-                          <button class="headline" @click="openModal(rec)">
-                            {{ i.MOVIE_TITLE4 }}
-                          </button>
-                        </div>
-                      </div>
+                      <v-img :src="`/download/${i.POSTER4}`" height="100%" width="100%" @click="openModal(rec)" />
+                      
                     </v-card>
                   </v-layout>
                   
