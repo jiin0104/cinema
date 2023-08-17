@@ -54,7 +54,7 @@
                       width="90px"
                       @click="openModal(rec)"
                     />
-                    <div class="r_title">
+                    <div class="ur_title">
                       <div>
                         <button class="headline" @click="openModal(rec)">
                           {{ rec.MOVIE_TITLE }}

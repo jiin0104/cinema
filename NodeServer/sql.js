@@ -40,7 +40,7 @@ module.exports = {
   recList: {
     query: `SELECT m.MOVIE_TITLE, m.MOVIE_POSTER, m.MOVIE_NUM
     FROM movies m
-    JOIN recommend r ON r.RC_NUM = 30
+    JOIN recommend r ON r.RC_NUM = 61
     JOIN JSON_TABLE(
       r.MOVIE_NUM,
       '$[*]'

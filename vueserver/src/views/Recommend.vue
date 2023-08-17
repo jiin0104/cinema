@@ -2,42 +2,38 @@
   <div>
     <div class="background">
       <form class="bg2" @submit.prevent="">
-        <div class="logtitle">
+        <div class="rectitle">
           <div class="formtitle">당신에게 추천드리는 영화예요!</div>
 
           <!--카드-->
 
-          <div
-            v-for="(rec, index) in recList"
-            :key="rec.MOVIE_NUM"
-            style="margin: auto"
-          >
-            <div
-              v-if="index < 4"
-              style="
+          <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM" style="margin-left: 145px;">
+            <div v-if="index < 4" style="
                 position: relative;
                 left: 45px;
                 margin: 5px;
                 display: inline-block;
                 float: left;
-              "
-            >
+              ">
               <v-layout>
-                <v-card>
-                  <v-img
-                    :src="`/download/${rec.MOVIE_POSTER}`"
-                    height="300px"
-                    width="270px"
-                  />
+                <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
+                  <v-img :src="`/download/${rec.MOVIE_POSTER}`" height="300px" width="270px" />
 
                   <div class="r_title">
                     <div>
                       <div class="headline">{{ rec.MOVIE_TITLE }}</div>
                     </div>
                   </div>
-
-                  <div class="detail">
-                    <button @click="openModal(rec)">상세보기</button>
+                  <div class="recbtn">
+                    <v-btn class="infotext" variant="tonal" style="
+                color: white;
+                background-color: #3742fa;
+                width: 150px;
+                height: 30px;
+                margin: 60px;
+              " @click="openModal(rec)">
+                      상세보기
+                    </v-btn>
                   </div>
                 </v-card>
               </v-layout>
@@ -52,20 +48,14 @@
               <div style="align-items: center; margin: 10px">
                 <div>
                   <div style="position: relative; left: 150px">
-                    <v-img
-                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
-                      height="200px"
-                      width="170px"
-                    ></v-img>
+                    <v-img :src="`/download/${selectedMovie.MOVIE_POSTER}`" height="200px" width="170px"></v-img>
                   </div>
-                  <div
-                    style="
+                  <div style="
                       font-size: 35px;
                       text-align: center;
                       width: 500px;
                       height: 50px;
-                    "
-                  >
+                    ">
                     {{ selectedMovie.MOVIE_TITLE }}
                   </div>
                 </div>
@@ -87,10 +77,7 @@
                       {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
                     </div>
                   </form>
-                  <button
-                    type="button"
-                    @click="close_toggle()"
-                    style="
+                  <button type="button" @click="close_toggle()" style="
                       color: white;
                       background-color: rgb(57, 103, 255);
                       height: 40px;
@@ -100,8 +87,7 @@
                       float: right;
                       margin-right: 5px;
                       margin-top: 5px;
-                    "
-                  >
+                    ">
                     닫기
                   </button>
                 </div>
@@ -111,32 +97,22 @@
           <!--모달창 끝-->
 
           <div class="recorec">
-            <v-btn
-              class="infotext"
-              variant="tonal"
-              style="
+            <v-btn class="infotext" variant="tonal" style="
                 color: white;
                 background-color: #3742fa;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
-              "
-              @click="pageLink"
-            >
+              " @click="pageLink">
               다시 추천받기
             </v-btn>
-            <v-btn
-              class="infotext"
-              variant="tonal"
-              style="
+            <v-btn class="infotext" variant="tonal" style="
                 color: white;
                 background-color: #3742fa;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
-              "
-              @click="URLink"
-            >
+              " @click="URLink">
               추천받은 목록보기
             </v-btn>
           </div>
@@ -209,61 +185,4 @@ export default {
 
 <style>
 @import "../css/recommend.css";
-
-.modal {
-  background-color: #fff;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 22px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  z-index: 1000;
-}
-
-.review {
-  font-size: 18px;
-  border: 1px solid #c8bdbd;
-  border-radius: 5px;
-  background-color: #ffa9a9;
-  padding: 5px;
-}
-
-.r_title {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
-  text-align: center;
-  margin: 10px;
-}
-
-.detail {
-  font-family: "Black Han Sans", sans-serif;
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  font-size: 23px;
-  background-color: #3742fa;
-  color: white;
-  width: 150px;
-  height: 30px;
-}
-
-.v-img__img--contain {
-  object-fit: fill;
-}
-
-.modalcontent {
-  font-size: 22px;
-  border: 1px solid #c8bdbd;
-  border-radius: 5px;
-  background-color: #ffa9a9;
-  margin-top: 5px;
-  padding: 5px;
-  width: 475px;
-  height: 170px;
-}
 </style>

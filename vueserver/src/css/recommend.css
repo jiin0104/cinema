@@ -5,17 +5,26 @@
   border-radius: 1em;
 }
 
+.rectitle {
+  width: 1500px;
+  height: 800px;
+  background-color: #ffffff5b;
+  margin: 0 auto;
+  border-radius: 1em;
+}
+
 .formtitle {
   color: white;
   font-family: "Black Han Sans", sans-serif;
   font-size: 50px;
   text-align: center;
+  padding-top: 40px; padding-bottom: 40px;
 }
 
 .recorec {
   display: inline-block;
   position: relative;
-  top: 20%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -35,6 +44,10 @@
   z-index: 1000;
 }
 
+.recbtn {
+  bottom: -30px; position: absolute;
+}
+
 .review {
   font-size: 18px;
   border: 1px solid #c8bdbd;
@@ -45,9 +58,12 @@
 
 .r_title {
   font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
-  margin: 10px;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  word-break: break-word;
+  padding-top: 20px;
 }
 
 .detail {
