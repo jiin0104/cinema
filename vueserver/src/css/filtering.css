@@ -47,8 +47,8 @@
 .buttonlocation3 {
   display: inline;
   position: relative;
-  left: 10px;
-  top: 40px;
+  left: 25px;
+  top: 50px;
 }
 
 .buttonlocation4 {
@@ -59,7 +59,7 @@
 
 .buttonlocation5 {
   position: relative;
-  left: 120px;
+  left: 40px;
   display: flex;
 }
 
@@ -81,25 +81,19 @@
 
 /* 2차 선택창 */
 .button3 {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
-  width: 120px;
-  height: 120px;
-  background-color: #4acfd2;
-  border-radius: 60px;
-  margin: 8px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin: 50px;
   float: left;
 }
 
 /* 3차 장르 선택창 */
 .button4 {
-  font-family: "Black Han Sans", sans-serif;
-  font-size: 30px;
-  width: 120px;
-  height: 120px;
-  background-color: #e22baf;
-  border-radius: 60px;
-  margin: 18px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin: 20px;
   float: left;
 }
 
