@@ -32,7 +32,18 @@ module.exports = {
   },
 
   emojipath: {
-    query: `SELECT json_extract(emoji, '$.emoji1','$.emoji2', '$.emoji3','$.emoji4') FROM recommend where USER_NUM = (select USER_NUM from user where USER_ID = ?)`,
+    query: `SELECT r.*, 
+    m1.MOVIE_TITLE AS MOVIE_TITLE1, m1.MOVIE_BACKIMAGE AS BACKIMAGE1, m1.MOVIE_POSTER AS POSTER1,
+    m2.MOVIE_TITLE AS MOVIE_TITLE2, m2.MOVIE_BACKIMAGE AS BACKIMAGE2, m2.MOVIE_POSTER AS POSTER2,
+    m3.MOVIE_TITLE AS MOVIE_TITLE3, m3.MOVIE_BACKIMAGE AS BACKIMAGE3, m3.MOVIE_POSTER AS POSTER3,
+    m4.MOVIE_TITLE AS MOVIE_TITLE4, m4.MOVIE_BACKIMAGE AS BACKIMAGE4, m4.MOVIE_POSTER AS POSTER4
+FROM recommend r
+LEFT JOIN movies m1 ON r.MOVIE_NUM1 = m1.MOVIE_NUM
+LEFT JOIN movies m2 ON r.MOVIE_NUM2 = m2.MOVIE_NUM
+LEFT JOIN movies m3 ON r.MOVIE_NUM3 = m3.MOVIE_NUM
+LEFT JOIN movies m4 ON r.MOVIE_NUM4 = m4.MOVIE_NUM
+where USER_NUM = (select USER_NUM from user where USER_ID = ?)
+order by RC_NUM desc limit 1;`,
   },
   emojipath2: {
     query: `SELECT r.*, 
