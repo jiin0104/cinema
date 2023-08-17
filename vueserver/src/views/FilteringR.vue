@@ -507,7 +507,7 @@ export default {
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel3() {
-      this.selectarray.push("cry.png"); //"genres":[{"id":18,"name":"Drama"}]
+      this.selectarray.push("crying.png"); //"genres":[{"id":18,"name":"Drama"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel4() {
