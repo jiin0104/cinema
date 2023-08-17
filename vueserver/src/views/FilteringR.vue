@@ -557,7 +557,7 @@ export default {
       }
     },
 
-    // 장르 이름을 장르 ID로 매핑
+    // 이미지파일을 장르명로 매핑
     mapGenreNameToId(genreName) {
       const genreMap = {
         "genre1.png": "애니메이션",
@@ -577,7 +577,7 @@ export default {
         "musical-note.png": "음악",
         "plane.png": "모험",
         "angry.png": "스릴러",
-        "cat.png": "전쟁",
+        "cat.png": "가족",
         "tongue.png": "역사",
       };
       return genreMap[genreName] || null;
