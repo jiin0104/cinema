@@ -16,23 +16,34 @@ router.post("/filtervalues", async (request, res) => {
     // 데이터베이스 연결 생성
     const connection = await dbPool.promise();
 
-    //선택한 장르를 이용하기 위해서 장르를 and,or이용해서 매칭
-    const genresQuery = selectGenres
-      .map(
-        (genre) =>
-          `GENRE1 = '${genre}' OR GENRE2 = '${genre}' OR GENRE3 = '${genre}' OR GENRE4 = '${genre}'`
-      )
-      .join(" AND ");
+    // 1차적으로 첫 번째 장르를 이용한 필터링
+    const firstGenreQuery = `
+     SELECT MOVIE_NUM FROM movies WHERE
+     GENRE1 = ? OR GENRE2 = ? OR GENRE3 = ? OR GENRE4 = ?
+   `;
+    const [firstFilteredMovies] = await connection.query(firstGenreQuery, [
+      selectGenres[0],
+      selectGenres[0],
+      selectGenres[0],
+      selectGenres[0],
+    ]);
 
-    //무비즈 테이블에서 필터에 맞는 랜덤 4개 영화 무비넘 뽑기
-    const query = `SELECT MOVIE_NUM FROM movies WHERE ${genresQuery} ORDER BY RAND() LIMIT 4`;
-    const [filteredMovies] = await connection.query(query);
+    // 2차적으로 두 번째 장르를 이용한 필터링
+    const secondGenreQuery = `
+      SELECT MOVIE_NUM FROM movies WHERE
+      (GENRE1 = ? OR GENRE2 = ? OR GENRE3 = ? OR GENRE4 = ?) AND
+      MOVIE_NUM IN (?)  ORDER BY RAND() LIMIT 4
+    `;
+    const [filteredMovies] = await connection.query(secondGenreQuery, [
+      selectGenres[1],
+      selectGenres[1],
+      selectGenres[1],
+      selectGenres[1],
+      firstFilteredMovies.map((movie) => movie.MOVIE_NUM),
+    ]);
 
-    //뽑아온 4개의 영화의 무비넘들
+    // 선택된 4개 영화의 무비넘들
     const selectedMovieNums = filteredMovies.map((movie) => movie.MOVIE_NUM);
-
-    // 추출한 MOVIE_NUM 배열을 JSON 형식으로 변환
-    // const selectedMovieNumsJSON = JSON.stringify(selectedMovieNums);
 
     // 이미지 파일명 배열을 JSON 형식으로 변환
     const emojiFileNamesJSON = JSON.stringify(emojiFileNames);
