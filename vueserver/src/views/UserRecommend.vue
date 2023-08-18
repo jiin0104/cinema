@@ -7,86 +7,76 @@
             {{ userinfo.USER_NICKNAME }} 님이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
-          <div style="overflow:auto; width:1500px; height:550px; padding-left: 340px;">
+          <div
+            style="
+              overflow: auto;
+              width: 1500px;
+              height: 550px;
+              padding-left: 340px;
+            "
+          >
             <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
-              <div class="emo" style="width: 400px; height: auto; position: relative; top: 20px">
+              <div
+                class="emo"
+                style="
+                  width: 400px;
+                  height: auto;
+                  position: relative;
+                  top: 20px;
+                "
+              >
                 <!--추후 필터링 선택한 이미지를 배열로 뽑아와야함-->
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[0]}`" />
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[1]}`" />
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[2]}`" />
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[3]}`" />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[0]}`"
+                />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[1]}`"
+                />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[2]}`"
+                />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[3]}`"
+                />
               </div>
-              <div class="ulist" >
-                <div style="
-                  position: relative;
-                  left: 400px;
-                  bottom: 100px;
-                  margin: 5px;
-                  float: left;
-                ">
+              <div
+                class="ulist"
+                v-for="(rec, index) in recList"
+                :key="rec.MOVIE_NUM"
+              >
+                <div
+                  v-if="index < 4"
+                  style="
+                    position: relative;
+                    left: 400px;
+                    bottom: 100px;
+                    margin: 5px;
+                    float: left;
+                  "
+                >
                   <v-layout>
                     <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER1}`" height="100%" width="100%" @click="openModal(rec)" />
-                      
+                      <v-img
+                        :src="`/download/${rec.MOVIE_POSTER}`"
+                        height="120px"
+                        width="90px"
+                        @click="openModal(rec)"
+                      />
+                      <div class="r_title">
+                        <div>
+                          <button class="headline" @click="openModal(rec)">
+                            {{ rec.MOVIE_TITLE }}
+                          </button>
+                        </div>
+                      </div>
                     </v-card>
                   </v-layout>
                 </div>
               </div>
-              
-              <div class="ulist" >
-                <div style="
-                  position: relative;
-                  left: 400px;
-                  bottom: 100px;
-                  margin: 5px;
-                  float: left;
-                ">
-                  <v-layout>
-                    <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER2}`" height="100%" width="100%" @click="openModal(rec)" />
-                      
-                    </v-card>
-                  </v-layout>
-                  
-                </div>
-              </div>
-
-              <div class="ulist" >
-                <div style="
-                  position: relative;
-                  left: 400px;
-                  bottom: 100px;
-                  margin: 5px;
-                  float: left;
-                ">
-                  <v-layout>
-                    <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER3}`" height="100%" width="100%" @click="openModal(rec)" />
-                      
-                    </v-card>
-                  </v-layout>
-                  
-                </div>
-              </div>
-
-              <div class="ulist" >
-                <div style="
-                  position: relative;
-                  left: 400px;
-                  bottom: 100px;
-                  margin: 5px;
-                  float: left;
-                ">
-                  <v-layout>
-                    <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${i.POSTER4}`" height="100%" width="100%" @click="openModal(rec)" />
-                      
-                    </v-card>
-                  </v-layout>
-                  
-                </div>
-              </div>
-
             </div>
           </div>
           <!--카드 끝-->
@@ -97,14 +87,20 @@
               <div style="align-items: center; margin: 10px">
                 <div>
                   <div style="position: relative; left: 150px">
-                    <v-img :src="`/download/${selectedMovie.MOVIE_POSTER}`" height="200px" width="170px"></v-img>
+                    <v-img
+                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      height="200px"
+                      width="170px"
+                    ></v-img>
                   </div>
-                  <div style="
+                  <div
+                    style="
                       font-size: 35px;
                       text-align: center;
                       width: 500px;
                       height: 50px;
-                    ">
+                    "
+                  >
                     {{ selectedMovie.MOVIE_TITLE }}
                   </div>
                 </div>
@@ -126,7 +122,10 @@
                       {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
                     </div>
                   </form>
-                  <button type="button" @click="close_toggle()" style="
+                  <button
+                    type="button"
+                    @click="close_toggle()"
+                    style="
                       color: white;
                       background-color: rgb(57, 103, 255);
                       height: 40px;
@@ -136,7 +135,8 @@
                       float: right;
                       margin-right: 5px;
                       margin-top: 5px;
-                    ">
+                    "
+                  >
                     닫기
                   </button>
                 </div>
@@ -145,7 +145,10 @@
           </div>
           <!--모달창 끝-->
           <div class="rec">
-            <v-btn class="infotext" variant="tonal" style="
+            <v-btn
+              class="infotext"
+              variant="tonal"
+              style="
                 color: white;
                 background-color: #3742fa;
                 height: 50px;
@@ -154,7 +157,9 @@
                 position: relative;
                 top: 300px;
                 right: 400px;
-              " @click="pageLink">
+              "
+              @click="pageLink"
+            >
               다시 추천받기
             </v-btn>
           </div>
