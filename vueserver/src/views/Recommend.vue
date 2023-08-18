@@ -7,28 +7,17 @@
 
           <!--카드-->
 
-          <div
-            v-for="(rec, index) in recList"
-            :key="rec.MOVIE_NUM"
-            style="margin-left: 145px;"
-          >
-            <div
-              v-if="index < 4"
-              style="
+          <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM" style="margin-left: 145px;">
+            <div v-if="index < 4" style="
                 position: relative;
                 left: 45px;
                 margin: 5px;
                 display: inline-block;
                 float: left;
-              "
-            >
+              ">
               <v-layout>
                 <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
-                  <v-img
-                    :src="`/download/${rec.MOVIE_POSTER}`"
-                    height="300px"
-                    width="270px"
-                  />
+                  <v-img :src="`/download/${rec.MOVIE_POSTER}`" height="300px" width="270px" />
 
                   <div class="r_title">
                     <div>
@@ -87,9 +76,9 @@
                       {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
                     </div>
                   </form>
-                  <button type="button" @click="close_toggle()" style="
+                  <v-btn class="infotext" @click="close_toggle()" variant="tonal" style="
                       color: white;
-                      background-color: rgb(57, 103, 255);
+                      background-color: #3742fa;
                       height: 40px;
                       width: 70px;
                       font-size: 23px;
@@ -97,9 +86,8 @@
                       float: right;
                       margin-right: 5px;
                       margin-top: 5px;
-                    ">
-                    닫기
-                  </button>
+                     ">닫기
+                  </v-btn>
                 </div>
               </div>
             </div>
