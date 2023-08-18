@@ -178,7 +178,7 @@ export default {
     async Get_Movie_List() {
       //추천 영화 리스트 파라미터값 가져오는 함수
       this.recList = await this.$api("/api/recList", {
-        param: [this.MOVIE_NUM],
+        param: [this.$store.state.userId],
       });
     },
     async Get_Modal_Info() {

@@ -59,15 +59,17 @@ LEFT JOIN movies m4 ON r.MOVIE_NUM4 = m4.MOVIE_NUM
 where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
   },
   recList: {
-    query: `SELECT m.MOVIE_TITLE, m.MOVIE_POSTER, m.MOVIE_NUM
+    query: `SELECT m.MOVIE_TITLE, m.MOVIE_POSTER, m.MOVIE_NUM, r.RC_NUM, r.USER_NUM
     FROM movies m
-    JOIN recommend r ON r.RC_NUM = 131
+    JOIN recommend r ON r.RC_NUM
     JOIN JSON_TABLE(
       r.MOVIE_NUM,
       '$[*]'
       COLUMNS (
         movie_id INT PATH '$'
       )
-    ) jt ON m.MOVIE_NUM = jt.movie_id;`, //임으로 RC_NUM지정해서 불러오는지 확인해봄.
+    ) jt ON m.MOVIE_NUM = jt.movie_id
+    where USER_NUM = (select USER_NUM from user where USER_ID = ?) and 
+    RC_NUM = (select RC_NUM from recommend order by RC_NUM desc limit 1);`, //임으로 RC_NUM지정해서 불러오는지 확인해봄.
   },
 };
