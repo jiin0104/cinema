@@ -7,120 +7,32 @@
 
           <!--카드-->
 
-          <div style="margin-left: 145px;">
-            <div v-for="(i, index) in emojipath" :key="i" :virtualIndex="index" style="
+          <div
+            v-for="(rec, index) in recList"
+            :key="rec.MOVIE_NUM"
+            style="margin-left: 145px;"
+          >
+            <div
+              v-if="index < 4"
+              style="
                 position: relative;
                 left: 45px;
                 margin: 5px;
                 display: inline-block;
                 float: left;
-              ">
+              "
+            >
               <v-layout>
                 <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
-                  <v-img :src="`/download/${i.POSTER1}`" height="300px" width="270px" />
+                  <v-img
+                    :src="`/download/${rec.MOVIE_POSTER}`"
+                    height="300px"
+                    width="270px"
+                  />
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ i.MOVIE_TITLE1 }}</div>
-                    </div>
-                  </div>
-                  <div class="recbtn">
-                    <v-btn class="infotext" variant="tonal" style="
-                color: white;
-                background-color: #3742fa;
-                width: 150px;
-                height: 30px;
-                margin: 60px;
-              " @click="openModal(rec)">
-                      상세보기
-                    </v-btn>
-                  </div>
-                </v-card>
-              </v-layout> 
-            </div>
-          </div>
-
-          <div style="margin-left: 145px;">
-            <div v-for="(i, index) in emojipath" :key="i" :virtualIndex="index" style="
-                position: relative;
-                left: 45px;
-                margin: 5px;
-                display: inline-block;
-                float: left;
-              ">
-              <v-layout>
-                <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
-                  <v-img :src="`/download/${i.POSTER2}`" height="300px" width="270px" />
-
-                  <div class="r_title">
-                    <div>
-                      <div class="headline">{{ i.MOVIE_TITLE2 }}</div>
-                    </div>
-                  </div>
-                  <div class="recbtn">
-                    <v-btn class="infotext" variant="tonal" style="
-                color: white;
-                background-color: #3742fa;
-                width: 150px;
-                height: 30px;
-                margin: 60px;
-              " @click="openModal(rec)">
-                      상세보기
-                    </v-btn>
-                  </div>
-                </v-card>
-              </v-layout>
-            </div>
-          </div>
-
-          <div style="margin-left: 145px;">
-            <div v-for="(i, index) in emojipath" :key="i" :virtualIndex="index" style="
-                position: relative;
-                left: 45px;
-                margin: 5px;
-                display: inline-block;
-                float: left;
-              ">
-              <v-layout>
-                <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
-                  <v-img :src="`/download/${i.POSTER3}`" height="300px" width="270px" />
-
-                  <div class="r_title">
-                    <div>
-                      <div class="headline">{{ i.MOVIE_TITLE3 }}</div>
-                    </div>
-                  </div>
-                  <div class="recbtn">
-                    <v-btn class="infotext" variant="tonal" style="
-                color: white;
-                background-color: #3742fa;
-                width: 150px;
-                height: 30px;
-                margin: 60px;
-              " @click="openModal(rec)">
-                      상세보기
-                    </v-btn>
-                  </div>
-                </v-card>
-              </v-layout>
-            </div>
-          </div>
-
-          <div style="margin-left: 145px;">
-            <div v-for="(i, index) in emojipath" :key="i" :virtualIndex="index" style="
-                position: relative;
-                left: 45px;
-                margin: 5px;
-                display: inline-block;
-                float: left;
-              ">
-              <v-layout>
-                <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
-                  <v-img :src="`/download/${i.POSTER4}`" height="300px" width="270px" />
-
-                  <div class="r_title">
-                    <div>
-                      <div class="headline">{{ i.MOVIE_TITLE4 }}</div>
+                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
                     </div>
                   </div>
                   <div class="recbtn">
@@ -229,7 +141,6 @@ export default {
       selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
       recList: [], //영화 리스트
       modList2: [], //모달 리스트
-      emojipath: [],
     };
   },
   mounted() {
@@ -266,11 +177,9 @@ export default {
     },
     async Get_Movie_List() {
       //추천 영화 리스트 파라미터값 가져오는 함수
-      this.emojipath = await this.$api("/api/emojipath", {
-        param: [this.$store.state.userId],
-
+      this.recList = await this.$api("/api/recList", {
+        param: [this.MOVIE_NUM],
       });
-      console.log(this.emojipath);
     },
     async Get_Modal_Info() {
       //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수

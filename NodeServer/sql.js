@@ -61,7 +61,7 @@ where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
   recList: {
     query: `SELECT m.MOVIE_TITLE, m.MOVIE_POSTER, m.MOVIE_NUM
     FROM movies m
-    JOIN recommend r ON r.RC_NUM = 61
+    JOIN recommend r ON r.RC_NUM = 131
     JOIN JSON_TABLE(
       r.MOVIE_NUM,
       '$[*]'
