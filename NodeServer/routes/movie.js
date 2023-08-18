@@ -53,7 +53,7 @@ router.post("/filtervalues", async (request, res) => {
     // recommend 테이블에 데이터 삽입
     const insertQuery = `
     INSERT INTO recommend (USER_NUM, MOVIE_NUM1, MOVIE_NUM2, MOVIE_NUM3, MOVIE_NUM4, EMOJI, MOVIE_NUM)
-    VALUES (?, ?, ?, ?, ?, ?,)
+    VALUES (?, ?, ?, ?, ?, ?,?)
   `;
     const values = [
       formData.userNo,
