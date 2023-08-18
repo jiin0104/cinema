@@ -11,12 +11,26 @@
         <div class="infotext">지금 상영중인 추천 영화</div>
         <!--이미지슬라이더-->
         <div>
-          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
-            delay: 2000,
-            disableOnInteraction: false,
-          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
-            <swiper-slide v-for="(po, index) in slides" :key="po" :virtualIndex="index"><img
-                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          <swiper
+            :modules="modules"
+            :slidesPerView="4"
+            :centeredSlides="false"
+            :spaceBetween="30"
+            :autoplay="{
+              delay: 2000,
+              disableOnInteraction: false,
+            }"
+            :navigation="true"
+            :virtual="true"
+            class="mySwiper"
+            @swiper="setSwiperRef"
+          >
+            <swiper-slide
+              v-for="(po, index) in slides"
+              :key="po"
+              :virtualIndex="index"
+              ><img :src="`/download/${po.MOVIE_POSTER}`"
+            /></swiper-slide>
           </swiper>
           <p class="append-buttons">
             <button @click="prepend()" class="prepend-2-slides"></button>
@@ -25,12 +39,26 @@
         <div class="infotext">인기 영화</div>
         <!--이미지슬라이더-->
         <div>
-          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
-            delay: 2000,
-            disableOnInteraction: false,
-          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
-            <swiper-slide v-for="(po, index) in slides3" :key="po" :virtualIndex="index"><img
-                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          <swiper
+            :modules="modules"
+            :slidesPerView="4"
+            :centeredSlides="false"
+            :spaceBetween="30"
+            :autoplay="{
+              delay: 2000,
+              disableOnInteraction: false,
+            }"
+            :navigation="true"
+            :virtual="true"
+            class="mySwiper"
+            @swiper="setSwiperRef"
+          >
+            <swiper-slide
+              v-for="(po, index) in slides3"
+              :key="po"
+              :virtualIndex="index"
+              ><img :src="`/download/${po.MOVIE_POSTER}`"
+            /></swiper-slide>
           </swiper>
           <p class="append-buttons">
             <button @click="prepend()" class="prepend-2-slides"></button>
@@ -42,12 +70,26 @@
         <div class="infotext">내가 관심있는 장르 영화</div>
         <!--이미지슬라이더-->
         <div>
-          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
-            delay: 2000,
-            disableOnInteraction: false,
-          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
-            <swiper-slide v-for="(po, index) in slides2" :key="po" :virtualIndex="index"><img
-                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          <swiper
+            :modules="modules"
+            :slidesPerView="4"
+            :centeredSlides="false"
+            :spaceBetween="30"
+            :autoplay="{
+              delay: 2000,
+              disableOnInteraction: false,
+            }"
+            :navigation="true"
+            :virtual="true"
+            class="mySwiper"
+            @swiper="setSwiperRef"
+          >
+            <swiper-slide
+              v-for="(po, index) in slides2"
+              :key="po"
+              :virtualIndex="index"
+              ><img :src="`/download/${po.MOVIE_POSTER}`"
+            /></swiper-slide>
           </swiper>
           <p class="append-buttons">
             <button @click="prepend()" class="prepend-2-slides"></button>
@@ -56,19 +98,32 @@
         <div class="infotext">인기 영화</div>
         <!--이미지슬라이더-->
         <div>
-          <swiper :modules="modules" :slidesPerView="4" :centeredSlides="false" :spaceBetween="30" :autoplay="{
-            delay: 2000,
-            disableOnInteraction: false,
-          }" :navigation="true" :virtual="true" class="mySwiper" @swiper="setSwiperRef">
-            <swiper-slide v-for="(po, index) in slides3" :key="po" :virtualIndex="index"><img
-                :src="`/download/${po.MOVIE_POSTER}`" /></swiper-slide>
+          <swiper
+            :modules="modules"
+            :slidesPerView="4"
+            :centeredSlides="false"
+            :spaceBetween="30"
+            :autoplay="{
+              delay: 2000,
+              disableOnInteraction: false,
+            }"
+            :navigation="true"
+            :virtual="true"
+            class="mySwiper"
+            @swiper="setSwiperRef"
+          >
+            <swiper-slide
+              v-for="(po, index) in slides3"
+              :key="po"
+              :virtualIndex="index"
+              ><img :src="`/download/${po.MOVIE_POSTER}`"
+            /></swiper-slide>
           </swiper>
           <p class="append-buttons">
             <button @click="prepend()" class="prepend-2-slides"></button>
           </p>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -112,12 +167,56 @@ export default {
       console.log(this.slides);
       console.log();
     },
-     // 회원가입시 선택한 장르 영화
-    async getmain2(){
-      this.slides2 = await this.$api("/api/getmain2", {param: [this.$store.state.userId, this.$store.state.userId, this.$store.state.userId, this.$store.state.userId]});
+    // 회원가입시 선택한 장르 영화
+    async getmain2() {
+      this.slides2 = await this.$api("/api/getmain2", {
+        param: [
+          this.$store.state.userId,
+          this.$store.state.userId,
+          this.$store.state.userId,
+          this.$store.state.userId,
+        ],
+      });
       console.log(this.slides2);
       console.log();
     },
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    async getmain21() {
+      const hasRecommendations = await this.checkRecommendations(); // 추천 목록의 유무 확인
+
+      if (hasRecommendations) {
+        // 추천 목록이 있는 경우: 최근 추천 목록 가져오기
+        this.slides2 = await this.getRecentRecommendations();
+      } else {
+        // 추천 목록이 없는 경우: 회원가입시 선택한 장르 영화 가져오기
+        this.slides2 = await this.getDefaultGenreMovies();
+      }
+    },
+    async checkRecommendations() {
+      const response = await this.$api("/api/checkRecommendations", {
+        userId: this.$store.state.userId,
+      });
+      return response.hasRecommendations; // 서버에서 받아온 결과를 반환
+    },
+    // 추천 목록이 있는 경우, 최근 추천 목록 가져오기
+    async getRecentRecommendations() {
+      const response = await this.$api("/api/getRecentRecommendations", {
+        userId: this.$store.state.userId,
+      });
+      return response.recommendations; // 서버에서 받아온 추천 목록을 반환
+    },
+    // 추천 목록이 없는 경우, 회원가입시 선택한 장르 영화 가져오기
+    async getDefaultGenreMovies() {
+      const response = await this.$api("/api/getDefaultGenreMovies", {
+        userId: this.$store.state.userId,
+      });
+      return response.genreMovies; // 서버에서 받아온 장르 영화 목록을 반환
+    },
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
     async getmain3() {
       // 일반 인기영화
       this.slides3 = await this.$api("/api/getmain3", {});
