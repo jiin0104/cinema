@@ -94,7 +94,9 @@
           </div>
           <!--모달창 끝-->
 
-          <div class="recorec">
+
+        </div>
+        <div class="recorec">
             <v-btn class="infotext" variant="tonal" style="
                 color: white;
                 background-color: #3742fa;
@@ -114,7 +116,6 @@
               추천받은 목록보기
             </v-btn>
           </div>
-        </div>
       </form>
     </div>
   </div>
