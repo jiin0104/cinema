@@ -33,3 +33,8 @@
   font-size: 20px;
   margin: 0;
 }
+
+.rectext {
+  width: 358px; margin-top: 20px; resize: none;
+  border: 2px solid rgb(213, 194, 194); border-radius: 0.5em; padding: 10px;
+}
