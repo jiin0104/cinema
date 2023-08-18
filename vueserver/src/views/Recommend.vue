@@ -110,7 +110,8 @@
                       border-radius: 8px;
                       float: right;
                       margin-right: 5px;
-                      margin-top: 5px;
+                      margin-top: 15px;
+                      margin-bottom: 20px;
                      ">닫기
                   </v-btn>
                 </div>
