@@ -197,6 +197,7 @@ export default {
     async checkRecommendations() {
       const response = await this.$api("/api/checkRecommendations", {
         userId: this.$store.state.userId,
+        //select * from recommend join user on recommend.USER_NUM = user.USER_NUM where recommend.USER_NUM = ?
       });
       return response.hasRecommendations; // 서버에서 받아온 결과를 반환
     },

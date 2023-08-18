@@ -26,8 +26,14 @@
                 <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[2]}`" />
                 <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[3]}`" />
               </div>
-              <div class="ulist" v-for="(rec, index) in recList" :key="rec.MOVIE_NUM">
-                <div v-if="index < 4" style="
+              <div
+                class="ulist"
+                v-for="(rec2, index) in recList2"
+                :key="rec2.MOVIE_NUM"
+              >
+                <div
+                  v-if="index < 4"
+                  style="
                     position: relative;
                     left: 400px;
                     bottom: 100px;
@@ -36,11 +42,16 @@
                   ">
                   <v-layout>
                     <v-card height="150px" width="90px">
-                      <v-img :src="`/download/${rec.MOVIE_POSTER}`" height="100%" width="100%" @click="openModal(rec)" />
+                      <v-img
+                        :src="`/download/${rec.MOVIE_POSTER}`"
+                        height="120px"
+                        width="90px"
+                        @click="openModal(rec)"
+                      />
                       <div class="r_title">
                         <div>
-                          <button class="headline" @click="openModal(rec)">
-                            {{ rec.MOVIE_TITLE }}
+                          <button class="headline" @click="openModal(rec2)">
+                            {{ rec2.MOVIE_TITLE }}
                           </button>
                         </div>
                       </div>
@@ -141,7 +152,7 @@ export default {
       userinfo: {}, //로그인한 사용자 정보
       logo: "logo.png",
       selectedMovie: null, //선택한 영화 정보 초기화(모달창 눌렀다 닫았을때마다 초기화 되야함)
-      recList: [], //추천받은 영화 목록
+      recList2: [], //추천받은 영화 목록
       modList2: [], //클릭한 영화에 대한 모달창
       imagePath: "cat.png",
       getemoji: [],
@@ -152,7 +163,7 @@ export default {
     this.getemo();
   },
   mounted() {
-    this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
+    this.Get_RecList2(); //추천받은 영화 목록 가져오는 함수 실행
   },
   methods: {
     pageLink() {
@@ -164,37 +175,30 @@ export default {
       });
       this.userinfo = userinfo[0];
     },
-    async Get_RecList() {
+    async Get_RecList2() {
       //추천받은 목록 파라미터값으로 가져오는 함수
-      this.recList = await this.$api("/api/recList", {
+      this.recList2 = await this.$api("/api/recList2", {
         param: [this.$store.state.userId],
       });
+      console.log(this.recList2);
     },
-    async openModal(rec) {
+    async openModal(rec2) {
       //모달 열기
-      console.log("Clicked Movie Object:", rec); //삭제가능
-      console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제가능
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
-      await this.Get_Modal_Info();
+      this.selectedMovie = { ...rec2, MOVIE_NUM: rec2.MOVIE_NUM };
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE_NUM],
+      });
     },
     close_toggle() {
       //모달 닫기
       this.selectedMovie = null;
-    },
-    async Get_Modal_Info() {
-      //모달에 표시할 영화 정보 가져오기
-      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM);
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE_NUM],
-      });
-      console.log("modList2 Data:", this.modList2);
     },
 
     async getemo() {
       this.getemoji = await this.$api("/api/emojipath2", {
         param: [this.$store.state.userId],
       });
-      console.log(this.getemoji);
+      //console.log(this.getemoji);
     },
   },
 };

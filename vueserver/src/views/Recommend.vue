@@ -7,17 +7,30 @@
 
           <!--카드-->
 
-          <div v-for="(rec, index) in recList" :key="rec.MOVIE_NUM" style="margin-left: 145px;">
-            <div v-if="index < 4" style="
+          <div
+            v-for="(rec, index) in recList"
+            :key="rec.MOVIE_NUM"
+            style="margin-left: 145px"
+          >
+            <div
+              v-if="index < 4"
+              style="
                 position: relative;
                 left: 45px;
                 margin: 5px;
                 display: inline-block;
                 float: left;
-              ">
+              "
+            >
               <v-layout>
-                <v-card style="max-width: 270px; max-height: 450px; height: 450px;">
-                  <v-img :src="`/download/${rec.MOVIE_POSTER}`" height="300px" width="270px" />
+                <v-card
+                  style="max-width: 270px; max-height: 450px; height: 450px"
+                >
+                  <v-img
+                    :src="`/download/${rec.MOVIE_POSTER}`"
+                    height="300px"
+                    width="270px"
+                  />
 
                   <div class="r_title">
                     <div>
@@ -25,13 +38,18 @@
                     </div>
                   </div>
                   <div class="recbtn">
-                    <v-btn class="infotext" variant="tonal" style="
-                color: white;
-                background-color: #3742fa;
-                width: 150px;
-                height: 30px;
-                margin: 60px;
-              " @click="openModal(rec)">
+                    <v-btn
+                      class="infotext"
+                      variant="tonal"
+                      style="
+                        color: white;
+                        background-color: #3742fa;
+                        width: 150px;
+                        height: 30px;
+                        margin: 60px;
+                      "
+                      @click="openModal(rec)"
+                    >
                       상세보기
                     </v-btn>
                   </div>
@@ -47,9 +65,14 @@
               <div style="align-items: center; margin: 10px">
                 <div>
                   <div style="position: relative; left: 150px">
-                    <v-img :src="`/download/${selectedMovie.MOVIE_POSTER}`" height="200px" width="170px"></v-img>
+                    <v-img
+                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      height="200px"
+                      width="170px"
+                    ></v-img>
                   </div>
-                  <div style="
+                  <div
+                    style="
                       font-size: 35px;
                       text-align: center;
                     ">
@@ -74,7 +97,11 @@
                       {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
                     </div>
                   </form>
-                  <v-btn class="infotext" @click="close_toggle()" variant="tonal" style="
+                  <v-btn
+                    class="infotext"
+                    @click="close_toggle()"
+                    variant="tonal"
+                    style="
                       color: white;
                       background-color: #3742fa;
                       height: 40px;
@@ -83,8 +110,7 @@
                       border-radius: 8px;
                       float: right;
                       margin-right: 5px;
-                      margin-top: 15px;
-                      margin-bottom: 20px;
+                      margin-top: 5px;
                      ">닫기
                   </v-btn>
                 </div>
@@ -92,29 +118,37 @@
             </div>
           </div>
           <!--모달창 끝-->
-
-
         </div>
         <div class="recorec">
-            <v-btn class="infotext" variant="tonal" style="
-                color: white;
-                background-color: #3742fa;
-                height: 50px;
-                width: 210px;
-                margin: 20px;
-              " @click="pageLink">
-              다시 추천받기
-            </v-btn>
-            <v-btn class="infotext" variant="tonal" style="
-                color: white;
-                background-color: #3742fa;
-                height: 50px;
-                width: 210px;
-                margin: 20px;
-              " @click="URLink">
-              추천받은 목록보기
-            </v-btn>
-          </div>
+          <v-btn
+            class="infotext"
+            variant="tonal"
+            style="
+              color: white;
+              background-color: #3742fa;
+              height: 50px;
+              width: 210px;
+              margin: 20px;
+            "
+            @click="pageLink"
+          >
+            다시 추천받기
+          </v-btn>
+          <v-btn
+            class="infotext"
+            variant="tonal"
+            style="
+              color: white;
+              background-color: #3742fa;
+              height: 50px;
+              width: 210px;
+              margin: 20px;
+            "
+            @click="URLink"
+          >
+            추천받은 목록보기
+          </v-btn>
+        </div>
       </form>
     </div>
   </div>
@@ -152,12 +186,11 @@ export default {
 
     async openModal(rec) {
       //모달창 띄우기
-      console.log("Clicked Movie Object:", rec); //삭제해도됨
-      console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제해도됨
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
       //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
-      console.log("Image URL:", `/download/poster/${rec.MOVIE_POSTER}`);
-      await this.Get_Modal_Info(); //모달 내용 가져오기
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE_NUM],
+      });
     },
     close_toggle() {
       //모달 닫기
@@ -168,14 +201,6 @@ export default {
       this.recList = await this.$api("/api/recList", {
         param: [this.$store.state.userId],
       });
-    },
-    async Get_Modal_Info() {
-      //그 영화 눌렀을때 그에 맞는 모달 정보 가져오는 함수
-      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM); //삭제해도됨
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE_NUM],
-      });
-      console.log("modList2 Data:", this.modList2); //삭제해도됨
     },
   },
 };
