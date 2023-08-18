@@ -192,7 +192,7 @@ export default {
     this.getemo();
   },
   mounted() {
-    this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
+    this.Get_RecList2(); //추천받은 영화 목록 가져오는 함수 실행
   },
   methods: {
     pageLink() {
@@ -204,37 +204,30 @@ export default {
       });
       this.userinfo = userinfo[0];
     },
-    async Get_RecList() {
+    async Get_RecList2() {
       //추천받은 목록 파라미터값으로 가져오는 함수
       this.recList2 = await this.$api("/api/recList2", {
         param: [this.$store.state.userId],
       });
+      console.log(this.recList2);
     },
     async openModal(rec2) {
       //모달 열기
-      console.log("Clicked Movie Object:", rec2); //삭제가능
-      console.log("Clicked Movie Number:", rec2.MOVIE_NUM); //삭제가능
       this.selectedMovie = { ...rec2, MOVIE_NUM: rec2.MOVIE_NUM };
-      await this.Get_Modal_Info();
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE_NUM],
+      });
     },
     close_toggle() {
       //모달 닫기
       this.selectedMovie = null;
-    },
-    async Get_Modal_Info() {
-      //모달에 표시할 영화 정보 가져오기
-      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM);
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE_NUM],
-      });
-      console.log("modList2 Data:", this.modList2);
     },
 
     async getemo() {
       this.getemoji = await this.$api("/api/emojipath2", {
         param: [this.$store.state.userId],
       });
-      console.log(this.getemoji);
+      //console.log(this.getemoji);
     },
   },
 };
