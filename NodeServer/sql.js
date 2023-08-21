@@ -95,7 +95,7 @@ where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
     r.USER_NUM = (SELECT USER_NUM FROM user WHERE USER_ID = ?);
 `,
   },
-  recList3: {
+  UserRList: {
     query: `SELECT    
     r.RC_NUM, 
     JSON_ARRAYAGG(m.MOVIE_POSTER) as POSTER,
@@ -115,6 +115,6 @@ where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
     ) jt ON m.MOVIE_NUM = jt.movie_id
   WHERE
   r.USER_NUM = (SELECT USER_NUM FROM user WHERE USER_ID = ?) group by r.RC_NUM;   
-`
-  }
+`,
+  },
 };

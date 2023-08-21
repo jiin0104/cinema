@@ -15,70 +15,74 @@
               padding-left: 340px;
             "
           >
-          <div style="display: inline-block;">
-            <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
+            <div style="display: inline-block">
               <div
-                class="emo"
-                style="
-                  width: 400px;
-                  height: auto;
-                  position: relative;
-                  top: 20px;
-                "
+                v-for="(i, index) in getemoji"
+                :key="i"
+                :virtualIndex="index"
               >
-                <!-- 추후 필터링 선택한 이미지를 배열로 뽑아와야함 -->
-                <img
-                  style="width: 100px; height: 100px"
-                  :src="`/download2/${i.EMOJI[0]}`"
-                />
-                <img
-                  style="width: 100px; height: 100px"
-                  :src="`/download2/${i.EMOJI[1]}`"
-                />
-                <img
-                  style="width: 100px; height: 100px"
-                  :src="`/download2/${i.EMOJI[2]}`"
-                />
-                <img
-                  style="width: 100px; height: 100px"
-                  :src="`/download2/${i.EMOJI[3]}`"
-                />
+                <div
+                  class="emo"
+                  style="
+                    width: 400px;
+                    height: auto;
+                    position: relative;
+                    top: 20px;
+                  "
+                >
+                  <!-- 추후 필터링 선택한 이미지를 배열로 뽑아와야함 -->
+                  <img
+                    style="width: 100px; height: 100px"
+                    :src="`/download2/${i.EMOJI[0]}`"
+                  />
+                  <img
+                    style="width: 100px; height: 100px"
+                    :src="`/download2/${i.EMOJI[1]}`"
+                  />
+                  <img
+                    style="width: 100px; height: 100px"
+                    :src="`/download2/${i.EMOJI[2]}`"
+                  />
+                  <img
+                    style="width: 100px; height: 100px"
+                    :src="`/download2/${i.EMOJI[3]}`"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div style="display: inline-block;">
-            <div v-for="(rec, ind) in recList" :key="rec" :virtualIndex="ind" >
-              <div
-                style="
-                  position: relative;
-                  top: 20px;
-                  margin: 3px;
-                  height: auto;
-                "
-              >
-                <img
-                  :src="`/download/${rec.POSTER[0]}`"
-                  style="height: 100px; width: 100px"
-                  @click="openModal(rec)"
-                />
-                <img
-                  :src="`/download/${rec.POSTER[1]}`"
-                  style="height: 100px; width: 100px"
-                  @click="openModal1(rec)"
-                />
-                <img
-                  :src="`/download/${rec.POSTER[2]}`"
-                  style="height: 100px; width: 100px"
-                  @click="openModal2(rec)"
-                />
-                <img
-                  :src="`/download/${rec.POSTER[3]}`"
-                  style="height: 100px; width: 100px"
-                  @click="openModal3(rec)"
-                />
+            <div style="display: inline-block">
+              <div v-for="(us, ind) in UserRList" :key="us" :virtualIndex="ind">
+                <div
+                  style="
+                    position: relative;
+                    top: 20px;
+                    margin: 3px;
+                    height: auto;
+                  "
+                >
+                  <img
+                    :src="`/download/${us.POSTER[0]}`"
+                    style="height: 100px; width: 100px"
+                    @click="openModal(us, 0)"
+                  />
+                  <img
+                    :src="`/download/${us.POSTER[1]}`"
+                    style="height: 100px; width: 100px"
+                    @click="openModal(us, 1)"
+                  />
+                  <img
+                    :src="`/download/${us.POSTER[2]}`"
+                    style="height: 100px; width: 100px"
+                    @click="openModal(us, 2)"
+                  />
+                  <img
+                    :src="`/download/${us.POSTER[3]}`"
+                    style="height: 100px; width: 100px"
+                    @click="openModal(us, 3)"
+                  />
+                </div>
               </div>
             </div>
-          </div>
           </div>
           <!--카드 끝-->
 
@@ -102,7 +106,7 @@
                   <p>장르: {{ modList2[0].GENRE1 }},{{ modList2[0].GENRE2 }}</p>
                   <p>개봉일: {{ modList2[0].FORMATTED_RELEASE }}</p>
                   <p>감독: {{ modList2[0].MOVIE_DIRECTOR }}</p>
-                  <p>주연: {{ modList2[0].MOVIE_ACTORS }},</p>
+                  <p>주연: {{ modList2[0].MOVIE_ACTORS }}</p>
                   <p>평점: {{ modList2[0].MOVIE_SCORE }}/100</p>
                 </div>
               </div>
@@ -201,7 +205,7 @@ export default {
       userinfo: {}, //로그인한 사용자 정보
       logo: "logo.png",
       selectedMovie: null, //선택한 영화 정보 초기화(모달창 눌렀다 닫았을때마다 초기화 되야함)
-      recList: [], //추천받은 영화 목록
+      UserRList: [], //추천받은 영화 목록
       modList2: [], //클릭한 영화에 대한 모달창
       getemoji: [],
     };
@@ -209,7 +213,7 @@ export default {
   created() {
     this.Get_user(); //페이지 보여지자마자 사용자 정보 가져오기
     this.getemo();
-    this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
+    this.Get_UserRList(); //추천받은 영화 목록 가져오는 함수 실행
   },
   mounted() {},
   methods: {
@@ -222,44 +226,20 @@ export default {
       });
       this.userinfo = userinfo[0];
     },
-    async Get_RecList() {
+    async Get_UserRList() {
       //추천받은 목록 파라미터값으로 가져오는 함수
-      this.recList = await this.$api("/api/recList3", {
+      this.UserRList = await this.$api("/api/UserRList", {
         param: [this.$store.state.userId],
       });
-      console.log("reclist:", this.recList);
+      console.log("UserRList:", this.UserRList);
     },
-    async openModal(rec) {
+    async openModal(rec, index) {
       //모달 열기
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
       this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE[0]],
+        param: [this.selectedMovie.MOVIE[index]],
       });
-      console.log("modList2 : ", this.modList2)
-    },
-    async openModal1(rec) {
-      //모달 열기
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE[1]],
-      });
-      console.log("modList2 : ", this.modList2)
-    },
-    async openModal2(rec) {
-      //모달 열기
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE[2]],
-      });
-      console.log("modList2 : ", this.modList2)
-    },
-    async openModal3(rec) {
-      //모달 열기
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE[3]],
-      });
-      console.log("modList2 : ", this.modList2)
+      console.log("modList2 : ", this.modList2);
     },
     close_toggle() {
       //모달 닫기
