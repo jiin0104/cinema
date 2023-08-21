@@ -7,26 +7,75 @@
             {{ userinfo.USER_NICKNAME }} 님이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
-          <div style="overflow: auto; width: 1500px; height: 550px; padding-left: 340px;">
+          <div
+            style="
+              overflow: auto;
+              width: 1500px;
+              height: 550px;
+              padding-left: 340px;
+            "
+          >
             <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
-              <div class="emo" style="width: 400px; height: auto; position: relative; top: 20px;">
+              <div
+                class="emo"
+                style="
+                  width: 400px;
+                  height: auto;
+                  position: relative;
+                  top: 20px;
+                "
+              >
                 <!-- 추후 필터링 선택한 이미지를 배열로 뽑아와야함 -->
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[0]}`" />
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[1]}`" />
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[2]}`" />
-                <img style="width: 100px; height: 100px" :src="`/download2/${i.EMOJI[3]}`" />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[0]}`"
+                />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[1]}`"
+                />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[2]}`"
+                />
+                <img
+                  style="width: 100px; height: 100px"
+                  :src="`/download2/${i.EMOJI[3]}`"
+                />
               </div>
             </div>
 
             <div v-for="(j, ind) in recList" :key="j" :virtualIndex="ind">
-              <div style="position: relative; left: 400px; bottom: 100px; margin: 5px; float: left;">
-                <img :src="`/download/${j.POSTER[0]}`" style="height:100px; width:100px" @click="openModal(rec)" />
-                <img :src="`/download/${j.POSTER[1]}`" style="height:100px; width:100px" @click="openModal(rec)" />
-                <img :src="`/download/${j.POSTER[2]}`" style="height:100px; width:100px" @click="openModal(rec)" />
-                <img :src="`/download/${j.POSTER[3]}`" style="height:100px; width:100px" @click="openModal(rec)" />
+              <div
+                style="
+                  position: relative;
+                  left: 400px;
+                  bottom: 1680px;
+                  margin: 3px;
+                "
+              >
+                <img
+                  :src="`/download/${j.POSTER[0]}`"
+                  style="height: 100px; width: 100px"
+                  @click="openModal(rec)"
+                />
+                <img
+                  :src="`/download/${j.POSTER[1]}`"
+                  style="height: 100px; width: 100px"
+                  @click="openModal(rec)"
+                />
+                <img
+                  :src="`/download/${j.POSTER[2]}`"
+                  style="height: 100px; width: 100px"
+                  @click="openModal(rec)"
+                />
+                <img
+                  :src="`/download/${j.POSTER[3]}`"
+                  style="height: 100px; width: 100px"
+                  @click="openModal(rec)"
+                />
               </div>
             </div>
-
           </div>
           <!--카드 끝-->
 
@@ -36,7 +85,11 @@
               <div style="align-items: center; margin: 10px">
                 <div>
                   <div style="position: relative; left: 150px">
-                    <v-img :src="`/download/${selectedMovie.MOVIE_POSTER}`" height="200px" width="170px"></v-img>
+                    <v-img
+                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      height="200px"
+                      width="170px"
+                    ></v-img>
                   </div>
                   <div style="font-size: 35px; text-align: center">
                     {{ selectedMovie.MOVIE_TITLE }}
@@ -62,20 +115,34 @@
                   </form>
                   <form>
                     <p>
-                      <textarea class="rectext" placeholder="리뷰를 작성해주세요.(30자 이내)" name="" id="" maxlength="30"></textarea>
-                      <v-btn @click="login" class="infotext" variant="tonal" style="
+                      <textarea
+                        class="rectext"
+                        placeholder="리뷰를 작성해주세요.(30자 이내)"
+                        name=""
+                        id=""
+                        maxlength="30"
+                      ></textarea>
+                      <v-btn
+                        @click="login"
+                        class="infotext"
+                        variant="tonal"
+                        style="
                           color: white;
                           background-color: rgb(57, 103, 255);
                           height: 88px;
                           width: 105px;
                           left: 10px;
                           bottom: 38px;
-                        ">
+                        "
+                      >
                         등록
                       </v-btn>
                     </p>
                   </form>
-                  <v-btn class="infotext" variant="tonal" style="
+                  <v-btn
+                    class="infotext"
+                    variant="tonal"
+                    style="
                       color: white;
                       background-color: rgb(57, 103, 255);
                       height: 40px;
@@ -86,7 +153,9 @@
                       margin-right: 5px;
                       margin-bottom: 20px;
                       margin-top: -15px;
-                    " @click="close_toggle()">닫기
+                    "
+                    @click="close_toggle()"
+                    >닫기
                   </v-btn>
                 </div>
               </div>
@@ -94,7 +163,10 @@
           </div>
           <!--모달창 끝-->
           <div class="rec">
-            <v-btn class="infotext" variant="tonal" style="
+            <v-btn
+              class="infotext"
+              variant="tonal"
+              style="
                 color: white;
                 background-color: #3742fa;
                 height: 50px;
@@ -103,7 +175,9 @@
                 position: relative;
                 top: 300px;
                 right: 400px;
-              " @click="pageLink">
+              "
+              @click="pageLink"
+            >
               다시 추천받기
             </v-btn>
           </div>
@@ -136,9 +210,7 @@ export default {
     this.getemo();
     this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     pageLink() {
       this.$router.push({ path: "/" }); //다시추천받기 버튼 클릭시 메인으로 이동
