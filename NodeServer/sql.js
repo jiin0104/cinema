@@ -116,6 +116,6 @@ where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
 `,
   },
   getDefaultGenreMovies: {
-    query: `SELECT u.USER_NUM, u.GENRE, m.* FROM user u JOIN movies m on u.GENRE = m.GENRE1 where USER_NUM = 21 limit 20;`,
+    query: `SELECT u.USER_NUM, u.GENRE, m.* FROM user u JOIN movies m on u.GENRE = m.GENRE1 where USER_NUM = ? limit 20;`,
   },
 };
