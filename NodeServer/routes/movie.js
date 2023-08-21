@@ -122,7 +122,7 @@ router.post("/filtervalues", async (request, res) => {
 });
 
 router.post("/writeComment", async (request, res) => {
-  서버에 저장하는 로직과 서버에서 받는 로직,vue로 쏴주는 로직
+  //서버에 저장하는 로직과 서버에서 받는 로직,vue로 쏴주는 로직
 });
 
 module.exports = router;
