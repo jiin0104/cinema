@@ -15,6 +15,7 @@
               padding-left: 340px;
             "
           >
+          <div style="display: inline-block;">
             <div v-for="(i, index) in getemoji" :key="i" :virtualIndex="index">
               <div
                 class="emo"
@@ -44,38 +45,40 @@
                 />
               </div>
             </div>
-
-            <div v-for="(j, ind) in recList" :key="j" :virtualIndex="ind">
+          </div>
+          <div style="display: inline-block;">
+            <div v-for="(rec, ind) in recList" :key="rec" :virtualIndex="ind" >
               <div
                 style="
                   position: relative;
-                  left: 400px;
-                  bottom: 1680px;
+                  top: 20px;
                   margin: 3px;
+                  height: auto;
                 "
               >
                 <img
-                  :src="`/download/${j.POSTER[0]}`"
+                  :src="`/download/${rec.POSTER[0]}`"
                   style="height: 100px; width: 100px"
                   @click="openModal(rec)"
                 />
                 <img
-                  :src="`/download/${j.POSTER[1]}`"
+                  :src="`/download/${rec.POSTER[1]}`"
                   style="height: 100px; width: 100px"
                   @click="openModal(rec)"
                 />
                 <img
-                  :src="`/download/${j.POSTER[2]}`"
+                  :src="`/download/${rec.POSTER[2]}`"
                   style="height: 100px; width: 100px"
                   @click="openModal(rec)"
                 />
                 <img
-                  :src="`/download/${j.POSTER[3]}`"
+                  :src="`/download/${rec.POSTER[3]}`"
                   style="height: 100px; width: 100px"
                   @click="openModal(rec)"
                 />
               </div>
             </div>
+          </div>
           </div>
           <!--카드 끝-->
 
@@ -229,9 +232,9 @@ export default {
     },
     async openModal(rec) {
       //모달 열기
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
       this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE_NUM],
+        param: [this.selectedMovie.MOVIE[0]],
       });
     },
     close_toggle() {
