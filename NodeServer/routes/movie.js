@@ -7,6 +7,7 @@ const mysql = require("mysql2/promise"); // MySQL2 Promise 래퍼
 router.post("/filtervalues", async (request, res) => {
   try {
     const formData = request.body; // 클라이언트에서 보낸 데이터 받아오기
+    const imageNames = [formData.e1, formData.e2]; //선택된 성별,연령대 이미지 파일명
     const selectGenres = formData.selectedGenres; // 선택한 장르 배열
     const emojiFileNames = [formData.e1, formData.e2, formData.e3, formData.e4]; // 이미지 파일명 4개
     console.log(formData);
@@ -64,6 +65,51 @@ router.post("/filtervalues", async (request, res) => {
       emojiFileNamesJSON,
       selectedMovieNumsJSON,
     ];
+
+    // 이미지 파일명에 따라 컬럼 업데이트
+    for (const imageName of imageNames) {
+      switch (imageName) {
+        case "woman.png":
+          await connection.query(
+            "UPDATE movies SET WOMAN = WOMAN + 1 WHERE MOVIE_NUM IN (?)",
+            [selectedMovieNums]
+          );
+          break;
+        case "man.png":
+          await connection.query(
+            "UPDATE movies SET MAN = MAN + 1 WHERE MOVIE_NUM IN (?)",
+            [selectedMovieNums]
+          );
+          break;
+        case "age1.png":
+          await connection.query(
+            "UPDATE movies SET TEENAGE = TEENAGE + 1 WHERE MOVIE_NUM IN (?)",
+            [selectedMovieNums]
+          );
+          break;
+        case "age2.png":
+          await connection.query(
+            "UPDATE movies SET YOUTH = YOUTH + 1 WHERE MOVIE_NUM IN (?)",
+            [selectedMovieNums]
+          );
+          break;
+        case "age3.png":
+          await connection.query(
+            "UPDATE movies SET SENIOR = SENIOR + 1 WHERE MOVIE_NUM IN (?)",
+            [selectedMovieNums]
+          );
+          break;
+        case "age4.png":
+          await connection.query(
+            "UPDATE movies SET OLDER = OLDER + 1 WHERE MOVIE_NUM IN (?)",
+            [selectedMovieNums]
+          );
+          break;
+        default:
+          // 이미지 파일명이 매칭되지 않을 경우 처리
+          break;
+      }
+    }
 
     // 쿼리 실행 후 연결 닫기
     await connection.query(insertQuery, values);
