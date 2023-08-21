@@ -1,0 +1,44 @@
+.formlistB {
+  height: 400px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 1em;
+}
+
+.userretitleB {
+  width: 1500px;
+  height: 800px;
+  background-color: #ffffff5b;
+  border-radius: 1em;
+  margin: 0 auto;
+}
+
+.RecommendtitleB {
+  color: white;
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 50px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.recB {
+  display: inline-block;
+  position: relative;
+  top: -30%;
+  left: 75%;
+  transform: translate(-40%, -50%);
+}
+
+.ur_titleB {
+  font-size: 20px;
+  margin: 0;
+}
+
+.rectextB {
+  width: 358px;
+  margin-top: 20px;
+  resize: none;
+  border: 2px solid rgb(213, 194, 194);
+  border-radius: 0.5em;
+  padding: 10px;
+}
