@@ -235,16 +235,28 @@ export default {
       console.log("UserRList:", this.UserRList);
     },
     async openModal(rec, index) {
+      //첫 번쨰 방법
       //모달 열기
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
       // 선택된 영화의 리뷰 정보를 가져오는 로직
-      await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
+      for (const movieId of this.selectedMovie.MOVIE_NUM) {
+        await this.fetchMovieReviews(movieId);
+      }
 
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE[index]],
       });
       console.log("modList2 : ", this.modList2);
     },
+
+    // async openModal(rec, index) {
+    //   //두 번째 방법
+    //   // 모달 열기
+    //   this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
+    //   // 선택된 영화의 리뷰 정보를 가져오는 로직
+    //   await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
+    // },
+
     close_toggle() {
       //모달 닫기
       this.selectedMovie = null;
@@ -277,6 +289,7 @@ export default {
         });
     },
     async fetchMovieReviews(movieId) {
+      //첫 번째 방법
       try {
         // 서버로부터 영화에 대한 리뷰 정보를 가져오는 API 호출
         const response = await axios.get(`/api/movieReviews/${movieId}`);
@@ -285,6 +298,21 @@ export default {
         console.error("리뷰 정보를 가져오는 중 오류:", error);
       }
     },
+
+    //     async fetchMovieReviews(movieIds) {
+    //       //두 번쨰 방법
+    //       try {
+    //         const requests = movieIds.map((movieId) =>
+    //           axios.get(`/api/movieReviews/${movieId}`)
+    //         );
+    //         const responses = await axios.all(requests);
+    //         this.movieReviews = responses.map((response) => response.data);
+    //       } catch (error) {
+    //         console.error("리뷰 정보를 가져오는 중 오류:", error);
+    //       }
+    //     },
+    //   },
+    // };
   },
 };
 </script>
