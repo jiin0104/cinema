@@ -212,9 +212,7 @@ export default {
     this.getemo();
     this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     pageLink() {
       this.$router.push({ path: "/" }); //다시추천받기 버튼 클릭시 메인으로 이동
@@ -227,7 +225,7 @@ export default {
     },
     async Get_RecList() {
       //추천받은 목록 파라미터값으로 가져오는 함수
-      this.recList = await this.$api("/api/recList", {
+      this.recList = await this.$api("/api/recList2", {
         param: [this.$store.state.userId],
       });
       console.log("reclist:", this.recList);
