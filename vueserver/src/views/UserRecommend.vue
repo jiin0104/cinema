@@ -84,7 +84,9 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="`/download/${modList2[0].MOVIE_POSTER}`"
+                      :src="`/download/${
+                        modList2[0] && modList2[0].MOVIE_POSTER
+                      }`"
                       height="200px"
                       width="170px"
                     ></v-img>
