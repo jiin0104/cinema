@@ -110,7 +110,7 @@
                     <div class="review">
                       <div
                         v-for="review in movieReviews"
-                        :key="review.REVIEW_ID"
+                        :key="review.REVIEW_NUM"
                       >
                         {{ review.USER_NICKNAME }} : {{ review.REVIEW_COMMENT }}
                         <br />

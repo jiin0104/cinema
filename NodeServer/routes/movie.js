@@ -160,11 +160,14 @@ router.get("/movieReviews/:movieId", async (req, res) => {
   try {
     const movieId = req.params.movieId;
 
-    // TODO: movieId를 기반으로 리뷰 정보를 데이터베이스에서 가져오는 쿼리 작성
-    // 예시) const reviews = await dbPool.query("SELECT * FROM reviews WHERE movieId = ?", [movieId]);
+    //movieId를 기반으로 리뷰 정보를 데이터베이스에서 가져오는 쿼리
+    const reviews = await dbPool.query(
+      "SELECT * FROM reviews WHERE movieId = ?",
+      [movieId]
+    );
 
-    // TODO: 가져온 리뷰 정보를 클라이언트로 응답
-    // res.status(200).json(reviews);
+    //가져온 리뷰 정보를 클라이언트로 응답
+    res.status(200).json(reviews);
   } catch (error) {
     console.error("리뷰 정보를 가져오는 중 오류:", error);
     res
