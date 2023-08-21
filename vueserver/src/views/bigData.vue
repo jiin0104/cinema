@@ -136,37 +136,32 @@
 </template>
 
 <script>
-import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3000"; // 프록시 서버
-axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
-axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-
 export default {
+  el: "#app",
   data() {
     return {
       logo: "logo.png",
-      selectedMovie: null, //선택한 영화 정보 초기화(모달창 눌렀다 닫았을때마다 초기화 되야함)
-      recList: [], //추천받은 영화 목록
-      modList2: [], //클릭한 영화에 대한 모달창
+      selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
+      recList: [], //영화 리스트
+      modList2: [], //모달 리스트
     };
   },
-  created() {
-    this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
+  mounted() {
+    //페이지가 실행되자마자 영화 리스트 데이터 보여주기
+
   },
-  mounted() {},
+  created() {
+    this.Get_Movie_List();
+    //영화코드=쿼리의 영화코드
+    this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
+  },
   methods: {
-    async Get_RecList() {
-      //추천받은 목록 파라미터값으로 가져오는 함수
-      this.recList = await this.$api("/api/UserRList", {
-        param: [this.$store.state.userId],
-      });
-      console.log("reclist:", this.recList);
-    },
     async openModal(rec) {
-      //모달 열기
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
+      //모달창 띄우기
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
+      //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
       this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE[0]],
+        param: [this.selectedMovie.MOVIE_NUM],
       });
     },
     close_toggle() {
