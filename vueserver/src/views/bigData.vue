@@ -2,8 +2,8 @@
   <div>
     <div class="background">
       <form class="bg2" @submit.prevent="">
-        <div class="userretitle">
-          <div class="Recommendtitle">
+        <div class="userretitleB">
+          <div class="RecommendtitleB">
             많은 사람들이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
@@ -88,7 +88,7 @@
                   <form>
                     <p>
                       <textarea
-                        class="rectext"
+                        class="rectextB"
                         placeholder="리뷰를 작성해주세요.(30자 이내)"
                         name=""
                         id=""
@@ -134,7 +134,7 @@
             </div>
           </div>
           <!--모달창 끝-->
-          <div class="rec">
+          <div class="recB">
             <v-btn
               class="infotext"
               variant="tonal"
@@ -222,5 +222,5 @@ export default {
 </script>
 
 <style>
-@import "../css/userecommend.css";
+@import "../css/bigData.css";
 </style>

@@ -117,6 +117,7 @@
                     <p>
                       <textarea
                         class="rectext"
+                        v-model="comment"
                         placeholder="리뷰를 작성해주세요.(30자 이내)"
                         name=""
                         id=""
@@ -133,6 +134,7 @@
                           left: 10px;
                           bottom: 38px;
                         "
+                        @click="cbtn()"
                       >
                         등록
                       </v-btn>
@@ -201,6 +203,7 @@ export default {
       UserRList: [], //추천받은 영화 목록
       modList2: [], //클릭한 영화에 대한 모달창
       getemoji: [],
+      comment: "", //리뷰 코멘트
     };
   },
   created() {
@@ -244,6 +247,16 @@ export default {
         param: [this.$store.state.userId],
       });
       console.log(this.getemoji);
+    },
+
+    cbtn() {
+      axios({
+        url: "/writeComment",
+        method: "post",
+        data: {
+          comment: this.comment,
+        },
+      }).then;
     },
   },
 };
