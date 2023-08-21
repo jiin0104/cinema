@@ -207,6 +207,7 @@ export default {
         userId: this.$store.state.userId,
       });
       return response.recommendations; // 서버에서 받아온 추천 목록을 반환
+      //SELECT r.MOVIE_NUM, r.RC_NUM, m.*, r.USER_NUM FROM movies m join recommend r on r.MOVIE_NUM  join json_table(r.movie_num, '$[*]' columns(movie_id int path '$'))jt on m.movie_num = jt.movie_id where r.USER_NUM = 20 order by r.RC_NUM DESC limit 4;
     },
     // 추천 목록이 없는 경우, 회원가입시 선택한 장르 영화 가져오기
     async getDefaultGenreMovies() {
@@ -215,6 +216,7 @@ export default {
       });
       return response.genreMovies; // 서버에서 받아온 장르 영화 목록을 반환
     },
+    //SELECT u.USER_NUM, u.GENRE, m.* FROM user u JOIN movies m on u.GENRE = m.GENRE1 where USER_NUM = 20 limit 4;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
