@@ -13,6 +13,7 @@ import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import mypage from "../views/MyPage.vue";
 import mypage_update from "../views/Mypage_Update.vue";
+import bigData from "../views/bigData.vue";
 //#endregion
 
 const routes = [
@@ -95,6 +96,14 @@ const routes = [
     path: "/mypage_update",
     name: "mypage_update",
     component: mypage_update,
+    meta: {
+      roles: [true],
+    },
+  },
+  {
+    path: "/bigData",
+    name: "bigData",
+    component: bigData,
     meta: {
       roles: [true],
     },
