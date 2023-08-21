@@ -29,7 +29,7 @@
           ></v-list-item>
           <v-list-item
             @click="$router.push('/bigData')"
-            prepend-icon="mdi-thumb-up"
+            prepend-icon="mdi-crown"
             title="많이 추천받은 영화"
             value="bigdata"
           ></v-list-item>

@@ -126,7 +126,6 @@
                         maxlength="30"
                       ></textarea>
                       <v-btn
-                        @click="login"
                         class="infotext"
                         variant="tonal"
                         style="
