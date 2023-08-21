@@ -216,10 +216,7 @@ export default {
     this.getemo();
     this.Get_UserRList(); //추천받은 영화 목록 가져오는 함수 실행
   },
-  mounted() {
-    // 영화별 리뷰 정보를 가져오는 메소드 호출
-    this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
-  },
+  mounted() {},
   methods: {
     pageLink() {
       this.$router.push({ path: "/" }); //다시추천받기 버튼 클릭시 메인으로 이동
@@ -241,7 +238,7 @@ export default {
       //모달 열기
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
       // 선택된 영화의 리뷰 정보를 가져오는 로직
-      // await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
+      await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
 
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE[index]],
