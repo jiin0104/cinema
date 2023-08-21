@@ -201,7 +201,6 @@ export default {
       selectedMovie: null, //선택한 영화 정보 초기화(모달창 눌렀다 닫았을때마다 초기화 되야함)
       recList: [], //추천받은 영화 목록
       modList2: [], //클릭한 영화에 대한 모달창
-
       getemoji: [],
     };
   },
@@ -230,22 +229,14 @@ export default {
     },
     async openModal(rec) {
       //모달 열기
-      console.log("Clicked Movie Object:", rec); //삭제가능
-      console.log("Clicked Movie Number:", rec.MOVIE_NUM); //삭제가능
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
-      await this.Get_Modal_Info();
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE_NUM],
+      });
     },
     close_toggle() {
       //모달 닫기
       this.selectedMovie = null;
-    },
-    async Get_Modal_Info() {
-      //모달에 표시할 영화 정보 가져오기
-      console.log("Selected Movie Number:", this.selectedMovie.MOVIE_NUM);
-      this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE_NUM],
-      });
-      console.log("modList2 Data:", this.modList2);
     },
 
     async getemo() {
