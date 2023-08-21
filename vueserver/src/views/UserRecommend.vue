@@ -64,17 +64,17 @@
                 <img
                   :src="`/download/${rec.POSTER[1]}`"
                   style="height: 100px; width: 100px"
-                  @click="openModal(rec)"
+                  @click="openModal1(rec)"
                 />
                 <img
                   :src="`/download/${rec.POSTER[2]}`"
                   style="height: 100px; width: 100px"
-                  @click="openModal(rec)"
+                  @click="openModal2(rec)"
                 />
                 <img
                   :src="`/download/${rec.POSTER[3]}`"
                   style="height: 100px; width: 100px"
-                  @click="openModal(rec)"
+                  @click="openModal3(rec)"
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      :src="`/download/${modList2[0].MOVIE_POSTER}`"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -236,6 +236,31 @@ export default {
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE[0]],
       });
+      console.log("modList2 : ", this.modList2)
+    },
+    async openModal1(rec) {
+      //모달 열기
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE[1]],
+      });
+      console.log("modList2 : ", this.modList2)
+    },
+    async openModal2(rec) {
+      //모달 열기
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE[2]],
+      });
+      console.log("modList2 : ", this.modList2)
+    },
+    async openModal3(rec) {
+      //모달 열기
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
+      this.modList2 = await this.$api("/api/modList2", {
+        param: [this.selectedMovie.MOVIE[3]],
+      });
+      console.log("modList2 : ", this.modList2)
     },
     close_toggle() {
       //모달 닫기
