@@ -269,16 +269,34 @@ export default {
       console.log(this.getemoji);
     },
     //모달창에서 '등록'버튼을 누르면 리뷰내용과 유저,영화정보를 서버로 보내주는 메소드.
+    // cbtn() {
+    //   axios({
+    //     url: "/writeComment",
+    //     method: "post",
+    //     data: {
+    //       comment: this.comment, // 작성한 코멘트
+    //       selectedMovie: this.selectedMovie, // 오픈 모달에서 만든 selectedMovie 객체 활용
+    //       userinfo: this.userinfo, //겟유저에서 만든 userinfo 객체 활용
+    //     },
+    //   })
+    //     .then((response) => {
+    //       // 성공적으로 리뷰를 등록한 후에 수행할 작업
+    //       console.log(response.data.message); // 서버 응답 메시지 출력 등
+    //     })
+    //     .catch((error) => {
+    //       // 요청이 실패한 경우 처리
+    //       console.error("리뷰 등록 중 오류:", error);
+    //     });
+    // },
+
+    //모달창에서 '등록'버튼을 누르면 리뷰내용과 유저,영화정보를 서버로 보내주는 메소드.
     cbtn() {
-      axios({
-        url: "/writeComment",
-        method: "post",
-        data: {
+      axios
+        .post("/writeComment", {
           comment: this.comment, // 작성한 코멘트
           selectedMovie: this.selectedMovie, // 오픈 모달에서 만든 selectedMovie 객체 활용
           userinfo: this.userinfo, //겟유저에서 만든 userinfo 객체 활용
-        },
-      })
+        })
         .then((response) => {
           // 성공적으로 리뷰를 등록한 후에 수행할 작업
           console.log(response.data.message); // 서버 응답 메시지 출력 등
@@ -288,14 +306,21 @@ export default {
           console.error("리뷰 등록 중 오류:", error);
         });
     },
+
     async fetchMovieReviews(movieId) {
       //첫 번째 방법
       try {
         // 서버로부터 영화에 대한 리뷰 정보를 가져오는 API 호출
-        const response = await axios.get(`/api/movieReviews/${movieId}`);
+        const response = await axios.get(`/movieReviews/${movieId}`);
         this.movieReviews = response.data;
       } catch (error) {
-        console.error("리뷰 정보를 가져오는 중 오류:", error);
+        // 데이터가 없을 경우에 대한 처리를 추가
+        if (error.response && error.response.status === 404) {
+          console.warn("해당 영화의 리뷰 정보가 존재하지 않습니다.");
+          this.movieReviews = []; // 리뷰 정보를 빈 배열로 초기화
+        } else {
+          console.error("리뷰 정보를 가져오는 중 오류:", error);
+        }
       }
     },
 
