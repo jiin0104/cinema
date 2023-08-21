@@ -7,7 +7,7 @@ const dbPool = mysql.createPool({
   password: "zipwave02",
   database: "wavecinema",
   waitForConnections: true,
-  connectionLimit: 100, //연결할 수 있는 최대 수 100
+  // connectionLimit: 100, //연결할 수 있는 최대 수 100
   queueLimit: 0,
 });
 
