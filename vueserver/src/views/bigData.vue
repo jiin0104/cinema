@@ -194,7 +194,7 @@ export default {
     },
     async Get_RecList() {
       //추천받은 목록 파라미터값으로 가져오는 함수
-      this.recList = await this.$api("/api/recList3", {
+      this.recList = await this.$api("/api/UserRList", {
         param: [this.$store.state.userId],
       });
       console.log("reclist:", this.recList);
