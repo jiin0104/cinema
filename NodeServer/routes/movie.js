@@ -110,9 +110,9 @@ router.post("/filtervalues", async (request, res) => {
           break;
       }
     }
-
     // 쿼리 실행 후 연결 닫기
     await connection.query(insertQuery, values);
+    connection.end();
   } catch (error) {
     console.error("무언가 문제가 있다", error);
     res.status(500).send({
@@ -121,8 +121,56 @@ router.post("/filtervalues", async (request, res) => {
   }
 });
 
+//리뷰 저장로직
 router.post("/writeComment", async (request, res) => {
-  //서버에 저장하는 로직과 서버에서 받는 로직,vue로 쏴주는 로직
+  try {
+    //모달창에서 데이터를 받기
+    const formData = request.body; // 클라이언트에서 보낸 데이터 받기
+    console.log(formData.comment); // 리뷰 코멘트
+    console.log(formData.selectedMovie); //선택된 영화 정보
+    console.log(formData.userinfo); // 사용자 정보
+
+    //리뷰테이블 쿼리생성
+    const insertReviewQuery = `
+      INSERT INTO review (USER_NICKNAME, MOVIE_NUM, REVIEW_COMMENT)
+      VALUES (?, ?, ?)
+    `;
+    const values = [
+      formData.userinfo.USER_NICKNAME, // 유저 닉네임
+      formData.selectedMovie.MOVIE_NUM, // 영화 코드
+      formData.comment, // 리뷰 코멘트
+    ];
+    // 데이터베이스 연결 생성
+    const connection = await dbPool.promise();
+    //데이터 넣기
+    await connection.query(insertReviewQuery, values);
+
+    //서버에서 REVIEW 정보를 받는 로직
+
+    // 쿼리 실행 후 연결 닫기
+    connection.end();
+  } catch (error) {
+    console.error("리뷰 저장 중 오류:", error);
+    res.status(500).json({ message: "서버 오류로 리뷰 저장에 실패했습니다." });
+  }
+});
+
+// 영화별 리뷰 정보 가져오기
+router.get("/movieReviews/:movieId", async (req, res) => {
+  try {
+    const movieId = req.params.movieId;
+
+    // TODO: movieId를 기반으로 리뷰 정보를 데이터베이스에서 가져오는 쿼리 작성
+    // 예시) const reviews = await dbPool.query("SELECT * FROM reviews WHERE movieId = ?", [movieId]);
+
+    // TODO: 가져온 리뷰 정보를 클라이언트로 응답
+    // res.status(200).json(reviews);
+  } catch (error) {
+    console.error("리뷰 정보를 가져오는 중 오류:", error);
+    res
+      .status(500)
+      .json({ error: "리뷰 정보를 가져오는 중 오류가 발생했습니다." });
+  }
 });
 
 module.exports = router;
