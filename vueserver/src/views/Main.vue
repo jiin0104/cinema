@@ -8,8 +8,8 @@
       </div>
       <br /><br /><br />
       <div v-if="!this.$store.state.isLogin">
-        <div class="infotext">지금 상영중인 추천 영화</div>
-        <!--이미지슬라이더-->
+        <!--로그인 안했을때-->
+        <div class="infotext">지금 상영중인 영화</div>
         <div>
           <swiper
             :modules="modules"
@@ -37,7 +37,6 @@
           </p>
         </div>
         <div class="infotext">인기 영화</div>
-        <!--이미지슬라이더-->
         <div>
           <swiper
             :modules="modules"
@@ -65,10 +64,9 @@
           </p>
         </div>
       </div>
-
+      <!--로그인 했을때, 추천받은게 없는 경우, 회원가입시 내가 선택한 장르와 비슷한 영화-->
       <div v-else-if="this.$store.state.isLogin">
-        <div class="infotext">내가 관심있는 장르 영화</div>
-        <!--이미지슬라이더-->
+        <div class="infotext">내가 좋아할만한 영화</div>
         <div>
           <swiper
             :modules="modules"
@@ -96,7 +94,6 @@
           </p>
         </div>
         <div class="infotext">인기 영화</div>
-        <!--이미지슬라이더-->
         <div>
           <swiper
             :modules="modules"
@@ -148,36 +145,33 @@ export default {
   data() {
     return {
       logo: "logo.png",
-      slides: [],
-      slides2: [],
-      slides3: [],
+      slides: [], //지금 상영중인 영화 슬라이드
+      slides2: [], //로그인시, 추천목록 없는경우, 회원가입시 선택한 장르 영화 슬라이드
+      slides3: [], //인기 영화 슬라이드
     };
   },
 
   created() {
     //페이지 로딩 되자마자 메인 슬라이드 정보 가져오는 함수 호출
-    this.getmain();
-    this.getmain2();
-    this.getmain3();
+    this.getmain(); //지금 상영중인 영화 함수 호출
+    this.getmain2(); //로그인시, 추천목록 없는경우, 회원가입시 선택한 장르 영화 함수 호출
+    this.getmain3(); //인기 영화 함수 호출
   },
   methods: {
     async getmain() {
-      // 현재 상영중인 영화
+      // 지금 상영중인 영화 함수
       this.slides = await this.$api("/api/getmain", {});
       console.log(this.slides);
       console.log();
     },
-    // 회원가입시 선택한 장르 영화
+
+    //이 함수는 밑의 로직 완성되면 없앨 함수!!!!!!!!!!(지금 임의로 쓰는중)
     async getmain2() {
-      this.slides2 = await this.$api("/api/getmain2", {
-        param: [
-          this.$store.state.userId,
-          this.$store.state.userId,
-          this.$store.state.userId,
-          this.$store.state.userId,
-        ],
+      // 회원가입시 선택한 장르 영화 함수
+      this.slides2 = await this.$api("/api/getDefaultGenreMovies", {
+        param: [this.$store.state.userId],
       });
-      console.log(this.slides2);
+      console.log("회원가입시 선택한 장르와 비슷한 영화:", this.slides2);
       console.log();
     },
 
@@ -221,7 +215,7 @@ export default {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async getmain3() {
-      // 일반 인기영화
+      //인기 영화 가져오는 함수
       this.slides3 = await this.$api("/api/getmain3", {});
       console.log(this.slides3);
       console.log();
