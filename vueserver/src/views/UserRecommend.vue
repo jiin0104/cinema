@@ -16,70 +16,61 @@
             "
           >
             <div style="display: inline-block">
-              <div
-                v-for="(i, index) in getemoji"
-                :key="i"
-                :virtualIndex="index"
-              >
+              <div style="display: inline-block">
                 <div
-                  class="emo"
-                  style="
-                    width: 400px;
-                    height: auto;
-                    position: relative;
-                    top: 20px;
-                  "
+                  v-for="(i, index) in getemoji"
+                  :key="i"
+                  :virtualIndex="index"
                 >
-                  <!-- 추후 필터링 선택한 이미지를 배열로 뽑아와야함 -->
-                  <img
-                    style="width: 100px; height: 100px"
-                    :src="`/download2/${i.EMOJI[0]}`"
-                  />
-                  <img
-                    style="width: 100px; height: 100px"
-                    :src="`/download2/${i.EMOJI[1]}`"
-                  />
-                  <img
-                    style="width: 100px; height: 100px"
-                    :src="`/download2/${i.EMOJI[2]}`"
-                  />
-                  <img
-                    style="width: 100px; height: 100px"
-                    :src="`/download2/${i.EMOJI[3]}`"
-                  />
+                  <div class="emo" style="width: 400px; height: auto">
+                    <!-- 추후 필터링 선택한 이미지를 배열로 뽑아와야함 -->
+                    <img
+                      style="width: 100px; height: 100px"
+                      :src="`/download2/${i.EMOJI[0]}`"
+                    />
+                    <img
+                      style="width: 100px; height: 100px"
+                      :src="`/download2/${i.EMOJI[1]}`"
+                    />
+                    <img
+                      style="width: 100px; height: 100px"
+                      :src="`/download2/${i.EMOJI[2]}`"
+                    />
+                    <img
+                      style="width: 100px; height: 100px"
+                      :src="`/download2/${i.EMOJI[3]}`"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div style="display: inline-block">
-              <div v-for="(us, ind) in UserRList" :key="us" :virtualIndex="ind">
+              <div style="display: inline-block">
                 <div
-                  style="
-                    position: relative;
-                    top: 20px;
-                    margin: 3px;
-                    height: auto;
-                  "
+                  v-for="(us, ind) in UserRList"
+                  :key="us"
+                  :virtualIndex="ind"
                 >
-                  <img
-                    :src="`/download/${us.POSTER[0]}`"
-                    style="height: 100px; width: 100px"
-                    @click="openModal(us, 0)"
-                  />
-                  <img
-                    :src="`/download/${us.POSTER[1]}`"
-                    style="height: 100px; width: 100px"
-                    @click="openModal(us, 1)"
-                  />
-                  <img
-                    :src="`/download/${us.POSTER[2]}`"
-                    style="height: 100px; width: 100px"
-                    @click="openModal(us, 2)"
-                  />
-                  <img
-                    :src="`/download/${us.POSTER[3]}`"
-                    style="height: 100px; width: 100px"
-                    @click="openModal(us, 3)"
-                  />
+                  <div style="height: auto; margin-left: 15px">
+                    <img
+                      :src="`/download/${us.POSTER[0]}`"
+                      style="height: 100px; width: 100px; margin-right: 5px"
+                      @click="openModal(us, 0)"
+                    />
+                    <img
+                      :src="`/download/${us.POSTER[1]}`"
+                      style="height: 100px; width: 100px; margin-right: 5px"
+                      @click="openModal(us, 1)"
+                    />
+                    <img
+                      :src="`/download/${us.POSTER[2]}`"
+                      style="height: 100px; width: 100px; margin-right: 5px"
+                      @click="openModal(us, 2)"
+                    />
+                    <img
+                      :src="`/download/${us.POSTER[3]}`"
+                      style="height: 100px; width: 100px; margin-right: 5px"
+                      @click="openModal(us, 3)"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
