@@ -1,81 +1,80 @@
 .mybackground {
-  background-size: cover;
-  background-image: url("../assets/main.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 900px;
-  margin: 0;
+	background-size: cover;
+	background-image: url("../assets/main.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 900px;
+	margin: 0;
 }
 
 .mytitle {
-    width: 900px;
-    min-height: 800px;
-    background-color: #ffffff5b;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1em;
-  }
-  
-  .myform {
-    min-height: 400px;
-    margin: 0 auto;
-    
-    border-radius: 1em;
-  }
-  
-  .myform1 {
-    width: 500px;
-    min-height: 650px;
-    background-color: #c8bdbd;
-    margin: 0 auto;
-    padding: 15px;
-    border-radius: 1em;
-  }
-  
-  span {
-    font-family: 'Black Han Sans', sans-serif;
-    font-weight: 100;
-  }
-  
-  ul {
-    list-style:none;
-  }
-  
-  .myfield {
-    font-size: 17px;
-  }
-  
-  
-  #addallow {
-    
-      align-items: center;
-      border-radius: 4px;
-      display: inline-grid;
-      grid-template-areas: "prepend content append";
-      grid-template-columns: max-content auto max-content;
-      font-weight: 500;
-      justify-content: center;
-      letter-spacing: 0.0892857143em;
-      line-height: normal;
-      max-width: 100%;
-      outline: none;
-      position: relative;
-      text-decoration: none;
-      text-indent: 0.0892857143em;
-      text-transform: uppercase;
-      transition-property: box-shadow, transform, opacity, background;
-      transition-duration: 0.28s;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-      vertical-align: middle;
-      flex-shrink: 0;
-      border-color: rgba(var(--v-border-color), var(--v-border-opacity));
-      border-style: solid;
-      border-width: 0;
-      font-family: 'Black Han Sans', sans-serif;
-    
-  }
+	width: 900px;
+	min-height: 800px;
+	background-color: #ffffff5b;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 1em;
+}
+
+.myform {
+	min-height: 400px;
+	margin: 0 auto;
+
+	border-radius: 1em;
+}
+
+.myform1 {
+	width: 500px;
+	min-height: 650px;
+	background-color: #c8bdbd;
+	margin: 0 auto;
+	padding: 15px;
+	border-radius: 1em;
+}
+
+span {
+	font-family: "Black Han Sans", sans-serif;
+	font-size: 27px;
+}
+
+ul {
+	list-style: none;
+}
+
+.myfield {
+	font-size: 17px;
+	position: relative;
+	left: 70px;
+}
+
+#addallow {
+	align-items: center;
+	border-radius: 4px;
+	display: inline-grid;
+	grid-template-areas: "prepend content append";
+	grid-template-columns: max-content auto max-content;
+	font-weight: 500;
+	justify-content: center;
+	letter-spacing: 0.0892857143em;
+	line-height: normal;
+	max-width: 100%;
+	outline: none;
+	position: relative;
+	text-decoration: none;
+	text-indent: 0.0892857143em;
+	text-transform: uppercase;
+	transition-property: box-shadow, transform, opacity, background;
+	transition-duration: 0.28s;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	vertical-align: middle;
+	flex-shrink: 0;
+	border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+	border-style: solid;
+	border-width: 0;
+	font-family: "Black Han Sans", sans-serif;
+}
