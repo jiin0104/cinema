@@ -168,9 +168,10 @@ export default {
   },
   mounted() {
     //페이지가 실행되자마자 영화 리스트 데이터 보여주기
-    this.Get_Movie_List();
+    
   },
   created() {
+    this.Get_Movie_List();
     //영화코드=쿼리의 영화코드
     this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
   },

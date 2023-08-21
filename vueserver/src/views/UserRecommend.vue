@@ -210,9 +210,10 @@ export default {
   created() {
     this.Get_user(); //페이지 보여지자마자 사용자 정보 가져오기
     this.getemo();
+    this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
   },
   mounted() {
-    this.Get_RecList(); //추천받은 영화 목록 가져오는 함수 실행
+    
   },
   methods: {
     pageLink() {
