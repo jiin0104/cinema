@@ -46,7 +46,7 @@ module.exports = {
       WHERE u.USER_ID = ?
       ORDER BY RC_NUM DESC
       LIMIT 1
-    ) aa ON mm.genre1 = aa.genre1;`,
+    ) aa ON mm.genre1 = aa.genre1 ORDER BY RAND();`,
   },
 
   //Main.vue 인기영화. 추후 더보기-많이 추천받은 영화에 쓴 api로 수정해야함!!!
