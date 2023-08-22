@@ -37,7 +37,7 @@ module.exports = {
                 movie_id INT PATH '$'
               )
             ) jt ON m.MOVIE_NUM = jt.movie_id
-            where USER_NUM = 17 order by RC_NUM desc limit 1) aa
+            where USER_NUM = 18 order by RC_NUM desc limit 1) aa
         where mm.genre1=aa.genre1;`,
   },
 

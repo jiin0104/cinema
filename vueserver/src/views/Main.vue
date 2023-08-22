@@ -161,22 +161,23 @@ export default {
     async getmain() {
       // 지금 상영중인 영화 함수
       this.slides = await this.$api("/api/getmain", {});
-      console.log(this.slides);
+      console.log("지금 상영중인 영화 함수", this.slides);
     },
 
     //이 함수는 밑의 로직 완성되면 없앨 함수!!!!!!!!!!(지금 임의로 쓰는중)
-    async getmain2() {
-      // 회원가입시 선택한 장르 영화 함수
-      this.slides2 = await this.$api("/api/getDefaultGenreMovies", {
-        param: [this.$store.state.userId],
-      });
-      console.log("회원가입시 선택한 장르와 비슷한 영화:", this.slides2);
-    },
+    // async getmain2() {
+    //   // 회원가입시 선택한 장르 영화 함수
+    //   this.slides2 = await this.$api("/api/getDefaultGenreMovies", {
+    //     param: [this.$store.state.userId],
+    //   });
+    //   console.log("회원가입시 선택한 장르와 비슷한 영화:", this.slides2);
+    // },
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    async getmain21() {
+    async getmain2() {
       const hasRecommendations = await this.checkRecommendations(); // 추천 목록의 유무 확인
+      console.log("hasRecommendations확인", hasRecommendations);
 
       if (hasRecommendations) {
         // 추천 목록이 있는 경우: 최근 추천 목록 가져오기
@@ -186,28 +187,33 @@ export default {
         this.slides2 = await this.getDefaultGenreMovies();
       }
     },
+
+    // 추천 목록의 유무 확인
     async checkRecommendations() {
-      const response = await this.$api("/api/checkRecommendations", {
+      let response = await this.$api("/api/checkRecommendations", {
         userId: this.$store.state.userId,
       });
-      return response.hasRecommendations; // 서버에서 받아온 결과를 반환
+      console.log("checkRecommendations의 응답", response);
+      return response; // 서버에서 받아온 결과를 반환
     },
+
     // 추천 목록이 있는 경우, 최근 추천 목록과 비슷한 장르 영화 가져오기
     async getRecentRecommendations() {
-      const response = await this.$api("/api/getRecentRecommendations", {
+      let response = await this.$api("/api/getRecentRecommendations", {
         userId: this.$store.state.userId,
       });
-
-      return response.recommendations; // 서버에서 받아온 추천 목록을 반환
+      console.log("getRecentRecommendations의 응답", response);
+      return response; // 서버에서 받아온 추천 목록을 반환
       //select MOVIE_POSTER from movies mm , (SELECT m.genre1 FROM movies m JOIN recommend r ON r.RC_NUM JOIN JSON_TABLE(r.MOVIE_NUM,'$[*]'COLUMNS (movie_id INT PATH '$')) jt ON m.MOVIE_NUM = jt.movie_id where USER_NUM = 17 order by RC_NUM desc limit 1) aa where mm.genre1=aa.genre1;
     },
+
     // 추천 목록이 없는 경우, 회원가입시 선택한 장르 영화 가져오기
     async getDefaultGenreMovies() {
-      const response = await this.$api("/api/getDefaultGenreMovies", {
+      let response = await this.$api("/api/getDefaultGenreMovies", {
         userId: this.$store.state.userId,
       });
-
-      return response.genreMovies; // 서버에서 받아온 장르 영화 목록을 반환
+      console.log(" getDefaultGenreMovies의 응답", response);
+      return response; // 서버에서 받아온 장르 영화 목록을 반환
     },
     //SELECT u.USER_NUM, u.GENRE, m.* FROM user u JOIN movies m on u.GENRE = m.GENRE1 where USER_NUM = ? limit 4;
 
