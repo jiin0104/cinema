@@ -177,7 +177,7 @@ export default {
 
     async getmain2() {
       const hasRecommendations = await this.checkRecommendations(); // 추천 목록의 유무 확인
-      console.log("hasRecommendations확인", hasRecommendations);
+      console.log("함수소환hasRecommendations확인:", hasRecommendations);
 
       if (hasRecommendations) {
         // 추천 목록이 있는 경우: 최근 추천 목록 가져오기
@@ -191,37 +191,35 @@ export default {
     // 추천 목록의 유무 확인
     async checkRecommendations() {
       let response = await this.$api("/api/checkRecommendations", {
-        userId: this.$store.state.userId,
+        param: [this.$store.state.userId],
       });
-      console.log("checkRecommendations의 응답", response);
+      console.log("목록유무checkRecommendations의 응답", response);
       return response; // 서버에서 받아온 결과를 반환
     },
 
     // 추천 목록이 있는 경우, 최근 추천 목록과 비슷한 장르 영화 가져오기
     async getRecentRecommendations() {
       let response = await this.$api("/api/getRecentRecommendations", {
-        userId: this.$store.state.userId,
+        param: [this.$store.state.userId],
       });
-      console.log("getRecentRecommendations의 응답", response);
+      console.log("추천목록있을때getRecentRecommendations의 응답", response);
       return response; // 서버에서 받아온 추천 목록을 반환
-      //select MOVIE_POSTER from movies mm , (SELECT m.genre1 FROM movies m JOIN recommend r ON r.RC_NUM JOIN JSON_TABLE(r.MOVIE_NUM,'$[*]'COLUMNS (movie_id INT PATH '$')) jt ON m.MOVIE_NUM = jt.movie_id where USER_NUM = 17 order by RC_NUM desc limit 1) aa where mm.genre1=aa.genre1;
     },
 
     // 추천 목록이 없는 경우, 회원가입시 선택한 장르 영화 가져오기
     async getDefaultGenreMovies() {
       let response = await this.$api("/api/getDefaultGenreMovies", {
-        userId: this.$store.state.userId,
+        param: [this.$store.state.userId],
       });
-      console.log(" getDefaultGenreMovies의 응답", response);
+      console.log("추천목록없을때getDefaultGenreMovies의 응답", response);
       return response; // 서버에서 받아온 장르 영화 목록을 반환
     },
-    //SELECT u.USER_NUM, u.GENRE, m.* FROM user u JOIN movies m on u.GENRE = m.GENRE1 where USER_NUM = ? limit 4;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async getmain3() {
       //인기 영화 가져오는 함수/////////////////////////////수정중!!더보기-많이추천받은영화 완성되면 그 api가져올것
-      this.slides3 = await this.$api("/api/getRecentRecommendations", {});
+      this.slides3 = await this.$api("/api/getmain3", {});
       console.log("인기영화 불러오기: ", this.slides3);
     },
     pageLink() {
