@@ -43,11 +43,11 @@
                       class="infotext"
                       variant="tonal"
                       style="
-                        color: white;
-                        background-color: #3742fa;
-                        width: 150px;
-                        height: 30px;
-                        margin: 60px;
+                      color: white;
+                      background-color: #3742fa;
+                      width: 150px;
+                      height: 30px;
+                      margin: 60px;
                       "
                       @click="openModal(rec)"
                     >
@@ -93,9 +93,10 @@
                   <form>
                     한줄리뷰
                     <div class="review">
-                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
-                      <br />
-                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
+                      <div v-for="review in movieReviews" :key="review.REVIEW_NUM">
+                        {{ review.USER_NICKNAME }} : {{ review.REVIEW_COMMENT }}
+                        <br />
+                      </div>
                     </div>
                   </form>
                   <v-btn
@@ -165,6 +166,7 @@ export default {
       selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
       recList: [], //영화 리스트
       modList2: [], //모달 리스트
+      movieReviews: [],
     };
   },
   mounted() {
@@ -191,6 +193,7 @@ export default {
       //모달창 띄우기
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
       //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
+      await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE_NUM],
       });
@@ -205,6 +208,12 @@ export default {
         param: [this.$store.state.userId],
       });
       console.log("recList : ", this.recList);
+    },
+    async fetchMovieReviews(movieId) {
+      //첫 번째 방법
+      this.movieReviews = await this.$api("/api/review", {
+        param: [movieId]
+      })
     },
   },
 };
