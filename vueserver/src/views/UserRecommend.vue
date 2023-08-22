@@ -81,7 +81,7 @@
                         maxlength="30"></textarea>
                       <v-btn class="infotext" variant="tonal" style="
                           color: white;
-                          background-color: rgb(57, 103, 255);
+                          background-color: black;
                           height: 88px;
                           width: 105px;
                           left: 10px;
@@ -93,7 +93,7 @@
                   </form>
                   <v-btn class="infotext" variant="tonal" style="
                       color: white;
-                      background-color: rgb(57, 103, 255);
+                      background-color: black;
                       height: 40px;
                       width: 70px;
                       font-size: 23px;
@@ -112,7 +112,7 @@
           <div class="rec">
             <v-btn class="infotext" variant="tonal" style="
                 color: white;
-                background-color: #3742fa;
+                background-color: black;
                 height: 50px;
                 width: 210px;
                 margin: 20px;
