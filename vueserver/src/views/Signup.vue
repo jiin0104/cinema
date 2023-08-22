@@ -58,20 +58,20 @@
 
               <div class="field2">
                 <span label for="age">연령대</span><br />
-                <label><input class="age" id="age0" type="radio" value="10대 미만" name="age" v-model="age">&nbsp;10대 미만</label>&nbsp;
-                <label><input class="age" id="age1" type="radio" value="10대" name="age" v-model="age">&nbsp;10대</label>&nbsp;
-                <label><input class="age" id="age2" type="radio" value="20대" name="age"  v-model="age" checked>&nbsp;20대</label>&nbsp;
-                <label><input class="age" id="age3" type="radio" value="30대" name="age" v-model="age">&nbsp;30대</label>&nbsp;<br>
-                <label><input class="age" id="age4" type="radio" value="40대" name="age" v-model="age">&nbsp;40대</label>&nbsp;
-                <label><input class="age" id="age5" type="radio" value="50대" name="age" v-model="age">&nbsp;50대</label>&nbsp;
-                <label><input class="age" id="age6" type="radio" value="60대" name="age" v-model="age">&nbsp;60대</label>&nbsp;
-                <label><input class="age" id="age7" type="radio" value="70대" name="age" v-model="age">&nbsp;70대 이상</label><br><br>
+                <label><input class="age" id="age0" type="radio" value="teenage" name="age" v-model="age">&nbsp;10대 미만</label>&nbsp;
+                <label><input class="age" id="age1" type="radio" value="teenage" name="age" v-model="age">&nbsp;10대</label>&nbsp;
+                <label><input class="age" id="age2" type="radio" value="youth" name="age"  v-model="age" checked>&nbsp;20대</label>&nbsp;
+                <label><input class="age" id="age3" type="radio" value="youth" name="age" v-model="age">&nbsp;30대</label>&nbsp;<br>
+                <label><input class="age" id="age4" type="radio" value="senior" name="age" v-model="age">&nbsp;40대</label>&nbsp;
+                <label><input class="age" id="age5" type="radio" value="senior" name="age" v-model="age">&nbsp;50대</label>&nbsp;
+                <label><input class="age" id="age6" type="radio" value="older" name="age" v-model="age">&nbsp;60대</label>&nbsp;
+                <label><input class="age" id="age7" type="radio" value="older" name="age" v-model="age">&nbsp;70대 이상</label><br><br>
               </div>
 
               <div class="field2">
                 <span label for="sex">성별</span><br>
-                <label><input class="sex" id="sex1" type="radio" value="M" name="sex" v-model="sex" checked>&nbsp;남자</label>&nbsp;
-                <label><input class="sex" id="sex2" type="radio" value="F" name="sex" v-model="sex">&nbsp;여자</label><br><br>
+                <label><input class="sex" id="sex1" type="radio" value="MAN" name="sex" v-model="sex" checked>&nbsp;남자</label>&nbsp;
+                <label><input class="sex" id="sex2" type="radio" value="WOMAN" name="sex" v-model="sex">&nbsp;여자</label><br><br>
               </div>
 
               <div class="field2">
