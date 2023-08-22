@@ -46,11 +46,20 @@ module.exports = {
     ) aa ON mm.genre1 = aa.genre1 ORDER BY RAND();`,
   },
 
-  //Main.vue 인기영화. 추후 더보기-많이 추천받은 영화에 쓴 api로 수정해야함!!!
-  //   + 로그인 하지 않은 상태에서는 무비스코어에 따라 내림차순으로 20개 뽑아오기.(이건 아마 메소드 나눠야될듯)
-
+  //   + 로그인 하지 않은 상태에서는 무비스코어에 따라 내림차순으로 20개 뽑아오기.
   getmain3: {
     query: `select MOVIE_POSTER from movies order by MOVIE_SCORE DESC;`,
+  },
+
+  //Main.vue 많이 추천받은 영화
+  countDESC: {
+    query: `SELECT *
+  FROM (
+    SELECT *
+    FROM movies
+    ORDER BY man DESC
+  ) AS sorted_movies
+  ORDER BY youth DESC limit 20;`,
   },
 
   //Recommend.vue 필터링한 결과
