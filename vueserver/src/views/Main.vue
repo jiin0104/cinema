@@ -182,10 +182,14 @@ export default {
       if (hasRecommendations) {
         // 추천 목록이 있는 경우: 최근 추천 목록 가져오기
         this.slides2 = await this.getRecentRecommendations();
-      } else {
+      } else if (hasRecommendations === null) {
         // 추천 목록이 없는 경우: 회원가입시 선택한 장르 영화 가져오기
         this.slides2 = await this.getDefaultGenreMovies();
-      }
+      } else
+        (error) => {
+          // 에러 처리
+          console.error("에러");
+        };
     },
 
     // 추천 목록의 유무 확인
