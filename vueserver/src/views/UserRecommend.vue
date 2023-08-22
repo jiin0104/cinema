@@ -292,7 +292,7 @@ export default {
     //모달창에서 '등록'버튼을 누르면 리뷰내용과 유저,영화정보를 서버로 보내주는 메소드.
     cbtn() {
       axios
-        .post("/writeComment", {
+        .post("/movie/writeComment", {
           comment: this.comment, // 작성한 코멘트
           selectedMovie: this.selectedMovie.MOVIE_NUM, // 오픈 모달에서 만든 selectedMovie 객체 활용
           userinfo: this.userinfo.USER_NICKNAME, //겟유저에서 만든 userinfo 객체 활용
