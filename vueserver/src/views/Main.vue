@@ -218,6 +218,8 @@ export default {
       this.slides3 = await this.$api("/api/getmain3", {});
       console.log("인기영화 불러오기: ", this.slides3);
     },
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     pageLink() {
       //필터링 페이지로 이동
       this.$router.push({ path: "FilteringR" });
