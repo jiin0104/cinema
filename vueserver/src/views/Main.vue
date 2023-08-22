@@ -36,7 +36,7 @@
             <button @click="prepend()" class="prepend-2-slides"></button>
           </p>
         </div>
-        <div class="infotext">인기 영화</div>
+        <div class="infotext">평점 좋은 영화</div>
         <div>
           <swiper
             :modules="modules"
@@ -93,7 +93,9 @@
             <button @click="prepend()" class="prepend-2-slides"></button>
           </p>
         </div>
-        <div class="infotext">많이 추천받은 영화</div>
+        <div class="infotext">
+          나랑 비슷한 취향을 가진 사람이 많이 추천받은 영화
+        </div>
         <div>
           <swiper
             :modules="modules"
