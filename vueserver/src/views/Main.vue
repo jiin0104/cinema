@@ -176,20 +176,23 @@ export default {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async getmain2() {
-      const hasRecommendations = await this.checkRecommendations(); // 추천 목록의 유무 확인
-      console.log("함수소환hasRecommendations확인:", hasRecommendations);
+      try {
+        const hasRecommendations = await this.checkRecommendations(); // 추천 목록의 유무 확인
+        console.log("함수소환hasRecommendations확인:", hasRecommendations);
 
-      if (hasRecommendations) {
-        // 추천 목록이 있는 경우: 최근 추천 목록 가져오기
-        this.slides2 = await this.getRecentRecommendations();
-      } else if (hasRecommendations === null) {
-        // 추천 목록이 없는 경우: 회원가입시 선택한 장르 영화 가져오기
-        this.slides2 = await this.getDefaultGenreMovies();
-      } else
-        (error) => {
-          // 에러 처리
-          console.error("에러");
-        };
+        if (hasRecommendations) {
+          // 추천 목록이 있는 경우: 최근 추천 목록 가져오기
+          this.slides2 = await this.getRecentRecommendations();
+        } else if (hasRecommendations === false) {
+          // 추천 목록이 없는 경우: 회원가입시 선택한 장르 영화 가져오기
+          this.slides2 = await this.getDefaultGenreMovies();
+        } else {
+          console.log("말이 안되는데?");
+        }
+      } catch (error) {
+        // 에러 처리
+        console.error("에러:", error);
+      }
     },
 
     // 추천 목록의 유무 확인
