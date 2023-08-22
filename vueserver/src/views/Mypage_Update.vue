@@ -23,7 +23,7 @@
                 <input type="text" class="nickname" id="nickname" role="textbox" placeholder="닉네임을 입력해 주세요."
                   name="nickname" v-model="nickname" />
                 <v-btn id="crosscheck" @click="validateNickname" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 75px;">중복
+                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 110px;">중복
                   확인</v-btn><br /><br />
               </div>
 
@@ -52,7 +52,7 @@
                 <input type="text" class="zonecode" id="zonecode" placeholder="우편번호" role="textbox" v-model="zonecode"
                   readonly />
                 <v-btn @click="openPostcode" id="postcode" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 105px;">우편번호
+                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 150px;">우편번호
                   찾기</v-btn><br />
                 <input type="text" class="roadAddress" placeholder="주소" role="textbox" v-model="roadAddress" readonly
                   style="width: 67%;" /><br>
