@@ -164,15 +164,6 @@ export default {
       console.log("지금 상영중인 영화 함수", this.slides);
     },
 
-    //이 함수는 밑의 로직 완성되면 없앨 함수!!!!!!!!!!(지금 임의로 쓰는중)
-    // async getmain2() {
-    //   // 회원가입시 선택한 장르 영화 함수
-    //   this.slides2 = await this.$api("/api/getDefaultGenreMovies", {
-    //     param: [this.$store.state.userId],
-    //   });
-    //   console.log("회원가입시 선택한 장르와 비슷한 영화:", this.slides2);
-    // },
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async getmain2() {

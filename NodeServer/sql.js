@@ -6,7 +6,9 @@ module.exports = {
 
   //Main.vue 로그인 안했을때, 지금 상영중인 영화 보여주기
   getmain: {
-    query: `select * from movies_now`,
+    query: `SELECT *
+    FROM movies_now
+    ORDER BY RAND();`,
   },
 
   //Main.vue 로그인 했을때, 추천 목록 유무 확인
@@ -17,14 +19,9 @@ module.exports = {
     WHERE recommend.USER_NUM = (SELECT USER_NUM FROM user WHERE USER_ID = ?);`,
   },
 
-  //Main.vue 로그인 했을때, 추천 목록이 없다면 회원가입시 선택한 장르 영화 불러오기(추후 삭제. 현재 임의로 쓰는중)
-  getmain2: {
-    query: `select * from movies where GENRE1 = (select GENRE from user where USER_ID = ?) or GENRE2 = (select GENRE from user where USER_ID = ?) or GENRE3 = (select GENRE from user where USER_ID = ?) or GENRE4 = (select GENRE from user where USER_ID = ?)`,
-  },
-
   //Main.vue 로그인한 유저가 추천받은 리스트가 없다면, 회원가입시 선택한 장르의 영화 불러오기
   getDefaultGenreMovies: {
-    query: `select * from movies where GENRE1 = (select GENRE from user where USER_ID = ?)`,
+    query: `select * from movies where GENRE1 = (select GENRE from user where USER_ID = ?) ORDER BY RAND();`,
   },
 
   //Main.vue 로그인한 유저가 추천받은 리스트가 있다면, 추천받은 리스트중 가장 최근 추천받은 영화와 비슷한 장르의 영화들 불러오기
