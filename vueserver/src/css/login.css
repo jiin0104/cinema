@@ -28,8 +28,8 @@ ul {
 }
 
 .form2 {
-  width: 500px;
-  height: 200px;
+  width: 430px;
+  height: 100px;
   margin: 0 auto;
   padding: 15px;
 }
@@ -101,7 +101,7 @@ ul {
 }
 
 #addallow2 {
-  
+
   align-items: center;
   border-radius: 4px;
   display: inline-grid;

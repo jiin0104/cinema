@@ -6,7 +6,7 @@
           <div class="formtitle">로그인 후 추천받은 목록을 기록해보세요!</div>
           <div class="form">
             <div class="form1">
-              <div style="margin-top: 6px;">
+
                 <div class="inputid">
                   <span class="label">아이디</span>
                   <input v-model="userId" class="input" type="email" name="username" placeholder="이메일을 입력하세요" required />
@@ -18,11 +18,11 @@
                 </div>
                 <div style="margin-left: 365px;">
                   <v-btn type="submit" @click="login" class="infotext" variant="tonal"
-                    style="color: white; background-color: rgb(57, 103, 255); height: 160px; width: 105px;">
+                    style="color: white; background-color: rgb(57, 103, 255); height: 170px; width: 105px;">
                     로그인
                   </v-btn>
                 </div>
-              </div>
+
             </div>
             <div class="form2">
               <v-btn class="infotext" variant="text" style="color: white;" @click="$router.push('/find_id')">
