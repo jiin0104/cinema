@@ -20,21 +20,17 @@
                 </div>
 
                 <div style="margin-left: 365px">
-                  <input type="submit"
-                  id="addallow2"
-                    class="button"
-                    variant="tonal"
-                    style="
-                      color: white;
-                      background-color: rgb(57, 103, 255);
-                      height: 50px;
-                      width: 80px;
-                      margin-top: 23px;
-                    " @click="findId()"
-                    value="확인"
-                  >
-
-
+                  <v-btn class="infotext" variant="tonal" style="
+                          color: white;
+                          background-color: rgb(57, 103, 255);
+                          height: 50px;
+                          width: 80px;
+                          left: 8px;
+                          bottom: 38px;
+                          margin-top: 60px;
+                          " @click="findId()">
+                        등록
+                      </v-btn>
                 </div>
               </div>
             </div>

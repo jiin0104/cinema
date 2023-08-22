@@ -12,7 +12,7 @@
                 <span label for="email">이메일(아이디)</span><br>
                 <input id="email" class="email" type="text" role="textbox" placeholder="이메일을 입력해 주세요." name="email" v-model="email" />
                 <v-btn type="button" id="crosscheck" @click="validateEmail" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 35px; width: 87px;">중복 확인</v-btn>
+                  style="color: white; background-color: rgb(57, 103, 255); height: 35px; width: 110px;">중복 확인</v-btn>
                 <br /><br />
               </div>
 
@@ -21,7 +21,7 @@
                 <input type="text" class="nickname" id="nickname" role="textbox" placeholder="닉네임을 입력해 주세요." name="nickname"
                   v-model="nickname" />
                 <v-btn id="crosscheck" @click="validateNickname" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 35px; width: 87px;">중복
+                  style="color: white; background-color: rgb(57, 103, 255); height: 35px; width: 110px;">중복
                   확인</v-btn><br /><br />
               </div>
 
@@ -49,7 +49,7 @@
                 <span label for="address">주소</span><br />
                 <input type="text" class="zonecode" id="zonecode" placeholder="우편번호" role="textbox" v-model="zonecode" readonly />
                 <v-btn @click="openPostcode" id="postcode" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 33px; width: 120px;">우편번호 찾기</v-btn><br />
+                  style="color: white; background-color: rgb(57, 103, 255); height: 33px; width: 160px;">우편번호 찾기</v-btn><br />
                 <input type="text" class="roadAddress" placeholder="주소" role="textbox" v-model="roadAddress" readonly
                   style="width: 67%;" /><br>
                 <input type="text" class="detailAddress" id="addressdetail" placeholder="상세주소" role="textbox" v-model="detailAddress"
