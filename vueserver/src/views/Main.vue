@@ -93,7 +93,7 @@
             <button @click="prepend()" class="prepend-2-slides"></button>
           </p>
         </div>
-        <div class="infotext">인기 영화</div>
+        <div class="infotext">많이 추천받은 영화</div>
         <div>
           <swiper
             :modules="modules"

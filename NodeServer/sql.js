@@ -47,6 +47,8 @@ module.exports = {
   },
 
   //Main.vue 인기영화. 추후 더보기-많이 추천받은 영화에 쓴 api로 수정해야함!!!
+  //   + 로그인 하지 않은 상태에서는 무비스코어에 따라 내림차순으로 20개 뽑아오기.(이건 아마 메소드 나눠야될듯)
+
   getmain3: {
     query: `select * from movies`,
   },
