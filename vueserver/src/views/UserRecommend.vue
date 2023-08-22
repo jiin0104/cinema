@@ -258,24 +258,14 @@ export default {
           title: "리뷰가 등록되었습니다."
         });
         this.comment = "";
+        this.close_toggle();
       }
     },
     async fetchMovieReviews(movieId) {
       //첫 번째 방법
-      try {
-        // 서버로부터 영화에 대한 리뷰 정보를 가져오는 API 호출
-        const response = await axios.get(`/movie/movieReviews/${movieId}`);
-        this.movieReviews = response.data;
-        console.log("영화리뷰:", response);
-      } catch (error) {
-        // 데이터가 없을 경우에 대한 처리를 추가
-        if (error.response && error.response.status === 404) {
-          console.warn("해당 영화의 리뷰 정보가 존재하지 않습니다.");
-          this.movieReviews = []; // 리뷰 정보를 빈 배열로 초기화
-        } else {
-          console.error("리뷰 정보를 가져오는 중 오류:", error);
-        }
-      }
+      this.movieReviews = await this.$api("/api/review", {
+        param: [movieId]
+      })
     },
 
     //     async fetchMovieReviews(movieIds) {
