@@ -46,9 +46,9 @@ module.exports = {
     ) aa ON mm.genre1 = aa.genre1 ORDER BY RAND();`,
   },
 
-  //   + 로그인 하지 않은 상태에서는 무비스코어에 따라 내림차순으로 20개 뽑아오기.
-  getmain3: {
-    query: `select MOVIE_POSTER from movies order by MOVIE_SCORE DESC;`,
+  //Main.vue 로그인 하지 않은 상태에서는 무비스코어에 따라 내림차순으로 20개 뽑아오기.
+  popularMovie: {
+    query: `select MOVIE_POSTER from movies order by MOVIE_SCORE DESC limit 20;`,
   },
 
   //Main.vue 많이 추천받은 영화
