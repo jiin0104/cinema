@@ -124,7 +124,7 @@
                         v-model="comment"
                         placeholder="리뷰를 작성해주세요.(30자 이내)"
                         name=""
-                        id=""
+                        id="Rtext"
                         maxlength="30"
                       ></textarea>
                       <v-btn
@@ -309,6 +309,7 @@ export default {
       console.log("서버로 보내주는 정보1", this.comment);
       console.log("서버로 보내주는 정보2", this.selectedMovie.MOVIE_NUM);
       console.log("서버로 보내주는 정보3", this.userinfo.USER_NICKNAME);
+      this.comment="";
     },
 
     async fetchMovieReviews(movieId) {

@@ -158,8 +158,7 @@ router.get("/movieReviews", async (req, res) => {
 
     //movieId를 기반으로 리뷰 정보를 데이터베이스에서 가져오는 쿼리
     const reviews = await dbPool.query(
-      "SELECT * FROM reviews WHERE movieId = ?",
-      [movieId]
+      "SELECT * FROM reviews WHERE MOVIE_NUM = ?"
     );
     console.log("리뷰정보", reviews);
 
