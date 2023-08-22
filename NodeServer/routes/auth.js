@@ -76,7 +76,6 @@ router.post("/login", function (request, response) {
         function (error, results, fields) {
           // bcrypt 암호화 된 비밀번호 검증
           const same = bcrypt.compareSync(loginUser.userPw, results[0].USER_PW);
-          console.log(results);
           if (same) {
             // ID에 저장된 pw 값과 입력한 pw값이 동일한 경우
             return response.status(200).json({

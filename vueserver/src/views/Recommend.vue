@@ -44,7 +44,7 @@
                       variant="tonal"
                       style="
                       color: white;
-                      background-color: #3742fa;
+                      background-color: black;
                       width: 150px;
                       height: 30px;
                       margin: 60px;
@@ -105,7 +105,7 @@
                     variant="tonal"
                     style="
                       color: white;
-                      background-color: #3742fa;
+                      background-color: black;
                       height: 40px;
                       width: 70px;
                       font-size: 23px;
@@ -128,7 +128,7 @@
             variant="tonal"
             style="
               color: white;
-              background-color: #3742fa;
+              background-color: black;
               height: 50px;
               width: 210px;
               margin: 20px;
@@ -142,7 +142,7 @@
             variant="tonal"
             style="
               color: white;
-              background-color: #3742fa;
+              background-color: black;
               height: 50px;
               width: 210px;
               margin: 20px;
@@ -171,7 +171,7 @@ export default {
   },
   mounted() {
     //페이지가 실행되자마자 영화 리스트 데이터 보여주기
-    
+
   },
   created() {
     this.Get_Movie_List();
