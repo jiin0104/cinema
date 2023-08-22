@@ -112,7 +112,6 @@ router.post("/filtervalues", async (request, res) => {
     }
     // 쿼리 실행 후 연결 닫기
     await connection.query(insertQuery, values);
-    connection.end();
   } catch (error) {
     console.error("무언가 문제가 있다", error);
     res.status(500).send({
@@ -126,9 +125,10 @@ router.post("/writeComment", async (request, res) => {
   try {
     //모달창에서 데이터를 받기
     const formData = request.body; // 클라이언트에서 보낸 데이터 받기
+    console.log(formData);
     console.log(formData.comment); // 리뷰 코멘트
-    console.log(formData.selectedMovie); //선택된 영화 정보
-    console.log(formData.userinfo); // 사용자 정보
+    console.log(formData.selectedMovie.MOVIE_NUM); //선택된 영화 정보
+    console.log(formData.userinfo.USER_NICKNAME); // 사용자 정보
 
     //리뷰테이블 쿼리생성
     const insertReviewQuery = `
@@ -159,12 +159,14 @@ router.post("/writeComment", async (request, res) => {
 router.get("/movieReviews/:movieId", async (req, res) => {
   try {
     const movieId = req.params.movieId;
+    console.log("영화번호", movieId);
 
     //movieId를 기반으로 리뷰 정보를 데이터베이스에서 가져오는 쿼리
     const reviews = await dbPool.query(
       "SELECT * FROM reviews WHERE movieId = ?",
       [movieId]
     );
+    console.log("리뷰정보", reviews);
 
     //가져온 리뷰 정보를 클라이언트로 응답
     res.status(200).json(reviews);

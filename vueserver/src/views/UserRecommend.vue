@@ -294,8 +294,8 @@ export default {
       axios
         .post("/writeComment", {
           comment: this.comment, // 작성한 코멘트
-          selectedMovie: this.selectedMovie, // 오픈 모달에서 만든 selectedMovie 객체 활용
-          userinfo: this.userinfo, //겟유저에서 만든 userinfo 객체 활용
+          selectedMovie: this.selectedMovie.MOVIE_NUM, // 오픈 모달에서 만든 selectedMovie 객체 활용
+          userinfo: this.userinfo.USER_NICKNAME, //겟유저에서 만든 userinfo 객체 활용
         })
         .then((response) => {
           // 성공적으로 리뷰를 등록한 후에 수행할 작업
@@ -305,6 +305,9 @@ export default {
           // 요청이 실패한 경우 처리
           console.error("리뷰 등록 중 오류:", error);
         });
+      console.log("서버로 보내주는 정보1", this.comment);
+      console.log("서버로 보내주는 정보2", this.selectedMovie.MOVIE_NUM);
+      console.log("서버로 보내주는 정보3", this.userinfo.USER_NICKNAME);
     },
 
     async fetchMovieReviews(movieId) {
@@ -313,6 +316,7 @@ export default {
         // 서버로부터 영화에 대한 리뷰 정보를 가져오는 API 호출
         const response = await axios.get(`/movieReviews/${movieId}`);
         this.movieReviews = response.data;
+        console.log("영화리뷰:", response);
       } catch (error) {
         // 데이터가 없을 경우에 대한 처리를 추가
         if (error.response && error.response.status === 404) {
