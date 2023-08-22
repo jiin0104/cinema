@@ -215,7 +215,7 @@ export default {
 
     async getmain3() {
       //인기 영화 가져오는 함수/////////////////////////////수정중!!더보기-많이추천받은영화 완성되면 그 api가져올것
-      this.slides3 = await this.$api("/api/getmain3", {});
+      this.slides3 = await this.$api("/api/popularMovie", {});
       console.log("인기영화 불러오기: ", this.slides3);
     },
 
