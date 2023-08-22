@@ -11,7 +11,10 @@ module.exports = {
 
   //Main.vue 로그인 했을때, 추천 목록 유무 확인
   checkRecommendations: {
-    query: `select * from recommend join user on recommend.USER_NUM = user.USER_NUM where recommend.USER_NUM = ?`,
+    query: `SELECT *
+    FROM recommend
+    JOIN user ON recommend.USER_NUM = user.USER_NUM
+    WHERE recommend.USER_NUM = (SELECT USER_NUM FROM user WHERE USER_ID = ?);`,
   },
 
   //Main.vue 로그인 했을때, 추천 목록이 없다면 회원가입시 선택한 장르 영화 불러오기(추후 삭제. 현재 임의로 쓰는중)
@@ -26,19 +29,24 @@ module.exports = {
 
   //Main.vue 로그인한 유저가 추천받은 리스트가 있다면, 추천받은 리스트중 가장 최근 추천받은 영화와 비슷한 장르의 영화들 불러오기
   getRecentRecommendations: {
-    query: `select MOVIE_POSTER from movies mm , (
-        SELECT m.genre1
-            FROM movies m
-            JOIN recommend r ON r.RC_NUM
-            JOIN JSON_TABLE(
-              r.MOVIE_NUM,
-              '$[*]'
-              COLUMNS (
-                movie_id INT PATH '$'
-              )
-            ) jt ON m.MOVIE_NUM = jt.movie_id
-            where USER_NUM = 18 order by RC_NUM desc limit 1) aa
-        where mm.genre1=aa.genre1;`,
+    query: `SELECT MOVIE_POSTER
+    FROM movies mm
+    JOIN (
+      SELECT m.genre1
+      FROM movies m
+      JOIN recommend r ON r.RC_NUM
+      JOIN JSON_TABLE(
+        r.MOVIE_NUM,
+        '$[*]'
+        COLUMNS (
+          movie_id INT PATH '$'
+        )
+      ) jt ON m.MOVIE_NUM = jt.movie_id
+      JOIN user u ON r.USER_NUM = u.USER_NUM
+      WHERE u.USER_ID = ?
+      ORDER BY RC_NUM DESC
+      LIMIT 1
+    ) aa ON mm.genre1 = aa.genre1;`,
   },
 
   //Main.vue 인기영화. 추후 더보기-많이 추천받은 영화에 쓴 api로 수정해야함!!!
@@ -78,10 +86,7 @@ module.exports = {
     WHERE
       MOVIE_NUM = ?`,
   },
-  review: {
-    query: `select r.USER_NICKNAME, r.REVIEW_COMMENT, m.MOVIE_NUM
-    from movies m, review r where m.MOVIE_NUM = r.MOVIE_NUM and r.MOVIE_NUM = ? ORDER BY RAND() LIMIT 5`
-  },
+
   //Userrecommend.vue 유저가 추천받은 리스트 불러오기
   UserRList: {
     query: `SELECT    
@@ -134,5 +139,10 @@ LEFT JOIN movies m2 ON r.MOVIE_NUM2 = m2.MOVIE_NUM
 LEFT JOIN movies m3 ON r.MOVIE_NUM3 = m3.MOVIE_NUM
 LEFT JOIN movies m4 ON r.MOVIE_NUM4 = m4.MOVIE_NUM
 where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
+  },
+  //UserRecommend.vue 리뷰
+  review: {
+    query: `select r.USER_NICKNAME, r.REVIEW_COMMENT, m.MOVIE_NUM
+    from movies m, review r where m.MOVIE_NUM = r.MOVIE_NUM and r.MOVIE_NUM = ? ORDER BY RAND() LIMIT 5`,
   },
 };
