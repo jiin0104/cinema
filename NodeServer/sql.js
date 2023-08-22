@@ -67,7 +67,7 @@ where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
         movie_id INT PATH '$'
       )
     ) jt ON m.MOVIE_NUM = jt.movie_id
-    where USER_NUM = (select USER_NUM from user where USER_ID = 'test@1234.net') order by RC_NUM desc limit 4;`,
+    where USER_NUM = (select USER_NUM from user where USER_ID = ?) order by RC_NUM desc limit 4;`,
   },
   //   recList2: {
   //     query: `SELECT
