@@ -78,7 +78,10 @@ module.exports = {
     WHERE
       MOVIE_NUM = ?`,
   },
-
+  review: {
+    query: `select r.USER_NICKNAME, r.REVIEW_COMMENT, m.MOVIE_NUM
+    from movies m, review r where m.MOVIE_NUM = r.MOVIE_NUM and r.MOVIE_NUM = ? ORDER BY RAND() LIMIT 5`
+  },
   //Userrecommend.vue 유저가 추천받은 리스트 불러오기
   UserRList: {
     query: `SELECT    
