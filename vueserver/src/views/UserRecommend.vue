@@ -237,14 +237,15 @@ export default {
     async openModal(rec, index) {
       //첫 번쨰 방법
       //모달 열기
-      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
+      this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE[index] };
       // 선택된 영화의 리뷰 정보를 가져오는 로직
-      for (const movieId of this.selectedMovie.MOVIE_NUM) {
-        await this.fetchMovieReviews(movieId);
-      }
+      await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
 
+      // this.modList2 = await this.$api("/api/modList2", {
+      //   param: [this.selectedMovie.MOVIE[index]],
+      // });
       this.modList2 = await this.$api("/api/modList2", {
-        param: [this.selectedMovie.MOVIE[index]],
+        param: [this.selectedMovie.MOVIE_NUM],
       });
       console.log("modList2 : ", this.modList2);
     },
@@ -292,7 +293,7 @@ export default {
     //모달창에서 '등록'버튼을 누르면 리뷰내용과 유저,영화정보를 서버로 보내주는 메소드.
     cbtn() {
       axios
-        .post("/movie/writeComment", {
+        .post("/api/writeComment", {
           comment: this.comment, // 작성한 코멘트
           selectedMovie: this.selectedMovie.MOVIE_NUM, // 오픈 모달에서 만든 selectedMovie 객체 활용
           userinfo: this.userinfo.USER_NICKNAME, //겟유저에서 만든 userinfo 객체 활용
