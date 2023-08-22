@@ -9,7 +9,8 @@
 
           <div
             v-for="(rec, index) in recList"
-            :key="rec.MOVIE_NUM"
+            :key="rec"
+            :virtualIndex="index"
             style="margin-left: 145px"
           >
             <div
@@ -27,14 +28,14 @@
                   style="max-width: 270px; max-height: 450px; height: 450px"
                 >
                   <v-img
-                    :src="`/download/${rec.MOVIE_POSTER}`"
+                    :src="`/download/${rec.POSTER}`"
                     height="300px"
                     width="270px"
                   />
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
+                      <div class="headline">{{ rec.TITLE }}</div>
                     </div>
                   </div>
                   <div class="recbtn">
@@ -66,7 +67,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      :src="`/download/${selectedMovie.POSTER}`"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -203,6 +204,7 @@ export default {
       this.recList = await this.$api("/api/recList", {
         param: [this.$store.state.userId],
       });
+      console.log("recList : ", this.recList);
     },
   },
 };
