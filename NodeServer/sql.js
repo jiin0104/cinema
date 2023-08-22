@@ -50,7 +50,7 @@ module.exports = {
   //   + 로그인 하지 않은 상태에서는 무비스코어에 따라 내림차순으로 20개 뽑아오기.(이건 아마 메소드 나눠야될듯)
 
   getmain3: {
-    query: `select * from movies`,
+    query: `select MOVIE_POSTER from movies order by MOVIE_SCORE DESC;`,
   },
 
   //Recommend.vue 필터링한 결과
