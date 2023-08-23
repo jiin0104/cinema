@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const dbPool = require("../db");
 const mysql = require("mysql2/promise"); // MySQL2 Promise 래퍼
+const sql = require("../sql");
 
 //FilterR.vue에서 받은 장르값을 movies 테이블에 적용 시켜서 뽑아오고,뽑아온 영화 4개를 recommend테이블에 넣어주고, Recommend.vue로 보내주기
 router.post("/filtervalues", async (request, res) => {
@@ -170,6 +171,48 @@ router.get("/movieReviews", async (req, res) => {
     res
       .status(500)
       .json({ error: "리뷰 정보를 가져오는 중 오류가 발생했습니다." });
+  }
+});
+
+//vue한테 사용자 성별,연령대 정보 받고 영화 필터링해서 응답해주기
+router.post("/UserInfoRECmovie", async (req, res) => {
+  const { gender, ageGroup } = req.body; //vue한테 받아온 성별,연령대 정보.
+
+  // 데이터베이스 연결 생성
+  const connection = await dbPool.promise();
+
+  try {
+    //영화 카운터로 내림차순해서 가져오는 쿼리사용
+    const query = `
+  SELECT *
+  FROM (
+    SELECT *
+    FROM movies
+    WHERE ${gender === "MAN" ? "MAN" : "WOMAN"} > 0
+    ORDER BY ${gender === "MAN" ? "MAN" : "WOMAN"} DESC
+    LIMIT 20
+  ) AS gender_sorted
+  ORDER BY
+    CASE
+      WHEN '${ageGroup}' = 'TEENAGE' THEN TEENAGE
+      WHEN '${ageGroup}' = 'YOUTH' THEN YOUTH
+      WHEN '${ageGroup}' = 'SENIOR' THEN SENIOR
+      WHEN '${ageGroup}' = 'OLDER' THEN OLDER
+    END DESC;
+`;
+
+    connection.query(query, [gender, ageGroup], (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("쿼리적용실패");
+      } else {
+        // 클라이언트로 영화 정보 전송
+        res.status(200).json(results);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("UserInfoRECmovie엔드포인트에 문제가 있음");
   }
 });
 
