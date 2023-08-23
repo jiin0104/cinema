@@ -16,6 +16,7 @@
                 </div>
                 <div>
                   <v-btn
+                    @click="$router.push('/login')"
                     class="infotext"
                     variant="tonal"
                     style="
