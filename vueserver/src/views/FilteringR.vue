@@ -51,8 +51,8 @@
                 </button>
               </div>
             </div>
-            
-            
+
+
           </div>
         </div>
       </div>
@@ -194,7 +194,7 @@
               <button type="button" class="button5" @click="feel10">
                 <img :src="emoji10" style="width: 90px; height: 90px" />
               </button>
-              <div class="s-text">배고파요</div>
+              <div class="s-text">배우고<br />싶어요</div>
             </div>
           </div>
         </div>
@@ -304,8 +304,8 @@
             <div class="r-text" v-if="this.selectarray[3] == 'cat.png'">
               힐링이 필요해요
             </div>
-            <div class="r-text" v-if="this.selectarray[3] == 'tongue.png'">
-              배고파요
+            <div class="r-text" v-if="this.selectarray[3] == 'book.png'">
+              배우고 싶어요
             </div>
           </div>
           <br /><br />
@@ -371,7 +371,7 @@ export default {
       emoji7: "plane.png",
       emoji8: "angry.png",
       emoji9: "cat.png",
-      emoji10: "tongue.png",
+      emoji10: "book.png",
       select1: "1.png",
       select2: "2.png",
       select3: "3.png",
@@ -499,7 +499,7 @@ export default {
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
     feel10() {
-      this.selectarray.push("tongue.png"); //"genres":[{"id":9648,"name":"Mystery"}]
+      this.selectarray.push("book.png"); //"genres":[{"id":9648,"name":"Mystery"}]
       return (this.type = "E"), this.selectarray, console.log(this.selectarray);
     },
 
@@ -578,7 +578,7 @@ export default {
         "plane.png": "모험",
         "angry.png": "스릴러",
         "cat.png": "가족",
-        "tongue.png": "역사",
+        "book.png": "역사",
       };
       return genreMap[genreName] || null;
     },
