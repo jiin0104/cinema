@@ -36,14 +36,14 @@
                   style="max-width: 270px; max-height: 450px; height: 450px; margin-bottom: 30px;"
                 >
                   <v-img
-                    :src="`/download/${rec.MOVIE_POSTER}`"
+                    :src="`/download/${rec.POSTER}`"
                     height="300px"
                     width="270px"
                   />
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
+                      <div class="headline">{{ rec.TITLE }}</div>
                     </div>
                   </div>
                   <div class="recbtn">
@@ -76,7 +76,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
+                      :src="`/download/${selectedMovie.POSTER}`"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -102,9 +102,10 @@
                   <form>
                     한줄리뷰
                     <div class="review">
-                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
-                      <br />
-                      {{ modList2.USER_ID }} : {{ modList2.REVIEW_COMMENT }}
+                      <div v-for="review in movieReviews" :key="review.REVIEW_NUM">
+                        {{ review.USER_NICKNAME }} : {{ review.REVIEW_COMMENT }}
+                        <br />
+                      </div>
                     </div>
                   </form>
                   <v-btn
