@@ -115,7 +115,7 @@ module.exports = {
       )
     ) jt ON m.MOVIE_NUM = jt.movie_id
   WHERE
-  r.USER_NUM = (SELECT USER_NUM FROM user WHERE USER_ID = ?) group by r.RC_NUM;   
+  r.USER_NUM = (SELECT USER_NUM FROM user WHERE USER_ID = ?) group by r.RC_NUM order by r.RC_NUM desc limit 10;   
 `,
   },
 
@@ -146,7 +146,7 @@ LEFT JOIN movies m1 ON r.MOVIE_NUM1 = m1.MOVIE_NUM
 LEFT JOIN movies m2 ON r.MOVIE_NUM2 = m2.MOVIE_NUM
 LEFT JOIN movies m3 ON r.MOVIE_NUM3 = m3.MOVIE_NUM
 LEFT JOIN movies m4 ON r.MOVIE_NUM4 = m4.MOVIE_NUM
-where USER_NUM = (select USER_NUM from user where USER_ID = ?);`,
+where USER_NUM = (select USER_NUM from user where USER_ID = ?) order by RC_NUM desc limit 10;`,
   },
   //UserRecommend.vue 리뷰
   review: {
