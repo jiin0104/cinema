@@ -125,33 +125,22 @@ router.post("/writeComment", async (request, res) => {
   try {
     //모달창에서 데이터를 받기
     const formData = request.body; // 클라이언트에서 보낸 데이터 받기
+    // console.log(formData);
+    // console.log(formData.comment); // 리뷰 코멘트
+    // console.log(formData.selectedMovie); //선택된 영화 정보
+    // console.log(formData.userinfo); // 사용자 정보
 
     //리뷰테이블 쿼리생성
     const insertReviewQuery = `
       INSERT INTO review (USER_NICKNAME, MOVIE_NUM, REVIEW_COMMENT)
       VALUES (?, ?, ?)
     `;
-    const checkDuplicateNicknameSql =
-    "SELECT * FROM user WHERE USER_NICKNAME = ?";
 
     const values = [
       formData.userinfo, // 유저 닉네임
       formData.selectedMovie, // 영화 코드
       formData.comment, // 리뷰 코멘트
     ];
-
-    dbPool.query(checkDuplicateNicknameSql, [formData.userinfo], (error, results) => {
-      if(error) {
-        console.error("닉네임 중복 확인 에러:", error);
-        return res
-          .status(500)
-          .json({ error: "닉네임 중복 확인에 실패했습니다." });
-      }
-      if (results.length > 0) {
-        return res.json({ exists: true });
-      }
-    });
-
     // 데이터베이스 연결 생성
     const connection = await dbPool.promise();
     //데이터 넣기

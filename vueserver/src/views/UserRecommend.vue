@@ -215,9 +215,6 @@ export default {
             userinfo: this.userinfo.USER_NICKNAME, //겟유저에서 만든 userinfo 객체 활용
           })
           .then((response) => {
-            if (response.data.exists) {
-              alert("리뷰를 이미 등록하셨습니다.");
-            }
             // 성공적으로 리뷰를 등록한 후에 수행할 작업
             console.log(response.data.message); // 서버 응답 메시지 출력 등
           })
