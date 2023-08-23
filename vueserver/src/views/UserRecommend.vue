@@ -115,10 +115,11 @@
                 background-color: black;
                 height: 50px;
                 width: 210px;
-                margin: 20px;
+                margin-top: 60px;
                 position: relative;
-                top: 300px;
-                right: 400px;
+                top:  50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
               " @click="pageLink">
               다시 추천받기
             </v-btn>
