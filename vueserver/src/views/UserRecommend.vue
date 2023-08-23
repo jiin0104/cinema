@@ -188,14 +188,6 @@ export default {
       console.log("modList2 : ", this.modList2);
     },
 
-    // async openModal(rec, index) {
-    //   //두 번째 방법
-    //   // 모달 열기
-    //   this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE };
-    //   // 선택된 영화의 리뷰 정보를 가져오는 로직
-    //   await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
-    // },
-
     close_toggle() {
       //모달 닫기
       this.selectedMovie = null;
@@ -207,26 +199,6 @@ export default {
       });
       console.log(this.getemoji);
     },
-    //모달창에서 '등록'버튼을 누르면 리뷰내용과 유저,영화정보를 서버로 보내주는 메소드.
-    // cbtn() {
-    //   axios({
-    //     url: "/writeComment",
-    //     method: "post",
-    //     data: {
-    //       comment: this.comment, // 작성한 코멘트
-    //       selectedMovie: this.selectedMovie, // 오픈 모달에서 만든 selectedMovie 객체 활용
-    //       userinfo: this.userinfo, //겟유저에서 만든 userinfo 객체 활용
-    //     },
-    //   })
-    //     .then((response) => {
-    //       // 성공적으로 리뷰를 등록한 후에 수행할 작업
-    //       console.log(response.data.message); // 서버 응답 메시지 출력 등
-    //     })
-    //     .catch((error) => {
-    //       // 요청이 실패한 경우 처리
-    //       console.error("리뷰 등록 중 오류:", error);
-    //     });
-    // },
 
     //모달창에서 '등록'버튼을 누르면 리뷰내용과 유저,영화정보를 서버로 보내주는 메소드.
     cbtn() {
@@ -243,6 +215,9 @@ export default {
             userinfo: this.userinfo.USER_NICKNAME, //겟유저에서 만든 userinfo 객체 활용
           })
           .then((response) => {
+            if (response.data.exists) {
+              alert("리뷰를 이미 등록하셨습니다.");
+            }
             // 성공적으로 리뷰를 등록한 후에 수행할 작업
             console.log(response.data.message); // 서버 응답 메시지 출력 등
           })
@@ -267,21 +242,6 @@ export default {
         param: [movieId]
       })
     },
-
-    //     async fetchMovieReviews(movieIds) {
-    //       //두 번쨰 방법
-    //       try {
-    //         const requests = movieIds.map((movieId) =>
-    //           axios.get(`/api/movieReviews/${movieId}`)
-    //         );
-    //         const responses = await axios.all(requests);
-    //         this.movieReviews = responses.map((response) => response.data);
-    //       } catch (error) {
-    //         console.error("리뷰 정보를 가져오는 중 오류:", error);
-    //       }
-    //     },
-    //   },
-    // };
   },
 };
 </script>
