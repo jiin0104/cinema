@@ -4,7 +4,7 @@
       <form class="bg2" @submit.prevent="">
         <div class="userretitleB">
           <div class="RecommendtitleB">
-            많은 사람들이 추천받은 영화 목록이에요!
+            나와 비슷한 성향의 사람들이 추천받은 영화 목록이에요!
           </div>
           <!-- 추천된 영화 목록을 반복해서 표시 -->
           <div
@@ -18,7 +18,7 @@
 
           <div
             v-for="(rec, index) in recList"
-            :key="rec.MOVIE_NUM"
+            :key="rec"
             style="margin-left: 145px"
           >
             <div
@@ -36,14 +36,14 @@
                   style="max-width: 270px; max-height: 450px; height: 450px; margin-bottom: 30px;"
                 >
                   <v-img
-                    :src="`/download/${rec.POSTER}`"
+                    :src="`/download/${rec.MOVIE_POSTER}`"
                     height="300px"
                     width="270px"
                   />
 
                   <div class="r_title">
                     <div>
-                      <div class="headline">{{ rec.TITLE }}</div>
+                      <div class="headline">{{ rec.MOVIE_TITLE }}</div>
                     </div>
                   </div>
                   <div class="recbtn">
@@ -76,7 +76,7 @@
                 <div>
                   <div style="position: relative; left: 150px">
                     <v-img
-                      :src="`/download/${selectedMovie.POSTER}`"
+                      :src="`/download/${selectedMovie.MOVIE_POSTER}`"
                       height="200px"
                       width="170px"
                     ></v-img>
@@ -137,6 +137,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   el: "#app",
   data() {
@@ -145,14 +146,15 @@ export default {
       selectedMovie: null, //클릭한 영화 정보가 selectedMocie에 저장. 영화마다 띄워지는 모달내용이 다르므로 처음엔 초기화 시킴
       recList: [], //영화 리스트
       modList2: [], //모달 리스트
+      movieReviews: [],
     };
   },
   mounted() {
     //페이지가 실행되자마자 영화 리스트 데이터 보여주기
 
   },
-  created() {
-    this.Get_Movie_List();
+  async created() {
+    await this.Get_Movie_List();
     //영화코드=쿼리의 영화코드
     this.MOVIE_NUM = this.$route.query.MOVIE_NUM;
   },
@@ -161,6 +163,7 @@ export default {
       //모달창 띄우기
       this.selectedMovie = { ...rec, MOVIE_NUM: rec.MOVIE_NUM };
       //선택한 영화 정보(영화 코드로 불러옴) selectedMovie에 저장
+      await this.fetchMovieReviews(this.selectedMovie.MOVIE_NUM);
       this.modList2 = await this.$api("/api/modList2", {
         param: [this.selectedMovie.MOVIE_NUM],
       });
@@ -171,9 +174,32 @@ export default {
     },
     async Get_Movie_List() {
       //추천 영화 리스트 파라미터값 가져오는 함수
-      this.recList = await this.$api("/api/recList", {
+      this.recList = await this.$api("/api/usersexage", {
         param: [this.$store.state.userId],
       });
+      const userGender = this.recList[0].SEX; // 사용자 성별 정보
+        const userAgeGroup = this.recList[0].USER_AGE; // 사용자 연령대 정보
+        console.log("사용자 성별 정보=", userGender);
+        console.log("사용자 연령대 정보=", userAgeGroup);
+
+        try {
+          // 2. 서버로 사용자 정보 보내고 추천 영화 정보 받아오기
+          const response = await axios.post("/movie/UserInfoRECmovie", {
+            gender: userGender,
+            ageGroup: userAgeGroup,
+          });
+          console.log("서버에서 받은 리스폰스", response);
+          this.recList = response.data; // 서버에서 받아온 영화 정보를 슬라이드에 설정
+          console.log("사용자 정보로 추천 받은 영화= ", this.recList);
+        } catch (error) {
+          console.error("겟메인3 에러:", error);
+        }
+    },
+    async fetchMovieReviews(movieId) {
+      //첫 번째 방법
+      this.movieReviews = await this.$api("/api/review", {
+        param: [movieId]
+      })
     },
   },
 };

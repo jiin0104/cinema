@@ -234,11 +234,11 @@ export default {
         // 로그인한 상태: 로그인한 사람의 성별과 연령대에서 가장 많이 추천 받은 영화 불러오기
 
         //1.db에서 로그인한 사용자의 성별,연령대 가져오기.
-        let user_sex_age = await this.$api("/api/usersexage", {
+        this.slides3 = await this.$api("/api/usersexage", {
           param: [this.$store.state.userId],
         });
-        const userGender = user_sex_age[0].SEX; // 사용자 성별 정보
-        const userAgeGroup = user_sex_age[0].USER_AGE; // 사용자 연령대 정보
+        const userGender = this.slides3[0].SEX; // 사용자 성별 정보
+        const userAgeGroup = this.slides3[0].USER_AGE; // 사용자 연령대 정보
         console.log("사용자 성별 정보=", userGender);
         console.log("사용자 연령대 정보=", userAgeGroup);
 
