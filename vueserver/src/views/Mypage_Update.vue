@@ -17,13 +17,14 @@
                                     확인</v-btn>
                                 <br /><br />
                             </div> -->
-
+            <div class="upfield">
+              <div class="upfield1">
               <div class="field2" id="sign">
                 <span label for="nickname">닉네임</span><br />
                 <input type="text" class="nickname" id="nickname" role="textbox" placeholder="닉네임을 입력해 주세요."
                   name="nickname" v-model="nickname" />
                 <v-btn id="crosscheck" @click="validateNickname" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 110px;">중복
+                  style="color: white; background-color: black; height: 30px; width: 110px;">중복
                   확인</v-btn><br /><br />
               </div>
 
@@ -52,30 +53,12 @@
                 <input type="text" class="zonecode" id="zonecode" placeholder="우편번호" role="textbox" v-model="zonecode"
                   readonly />
                 <v-btn @click="openPostcode" id="postcode" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); height: 30px; width: 150px;">우편번호
+                  style="color: white; background-color: black; height: 30px; width: 150px;">우편번호
                   찾기</v-btn><br />
                 <input type="text" class="roadAddress" placeholder="주소" role="textbox" v-model="roadAddress" readonly
                   style="width: 67%;" /><br>
                 <input type="text" class="detailAddress" id="addressdetail" placeholder="상세주소" role="textbox"
                   v-model="detailAddress" style="width: 67%;" /><br /><br>
-              </div>
-
-              <div class="field2">
-                <span label for="age">연령대</span><br />
-                <label><input class="age" id="age0" type="radio" value="TEENAGE" name="age" v-model="age">&nbsp;20대 미만</label>&nbsp;
-                
-                <label><input class="age" id="age2" type="radio" value="YOUTH" name="age"  v-model="age" checked>&nbsp;20대 이상 30대 미만</label>&nbsp;
-                <br>
-                <label><input class="age" id="age4" type="radio" value="SENIOR" name="age" v-model="age">&nbsp;40대 이상 50대 미만</label>&nbsp;
-                
-                <label><input class="age" id="age6" type="radio" value="OLDER" name="age" v-model="age">&nbsp;60대 이상</label>&nbsp;<br><br>
-              </div>
-
-              <div class="field2">
-                <span label for="sex">성별</span><br>
-                <label><input class="sex" id="sex1" type="radio" value="M" name="sex" v-model="sex"
-                    checked>남</label>&nbsp;
-                <label><input class="sex" id="sex2" type="radio" value="F" name="sex" v-model="sex">여</label><br><br>
               </div>
 
               <div class="field2">
@@ -99,7 +82,7 @@
                 <label><input class="genre" id="genre9" type="radio" value="전쟁" name="genre"
                     v-model="genre">전쟁</label><br><br>
               </div>
-
+            </div>
               <p v-if="errors.length">
 
 
@@ -110,9 +93,18 @@
               </p>
 
               <div style="position: relative; text-align: center;" class="signUp">
-                <input type="submit" id="addallow" value="수정" variant="tonal"
-                  style="color: white; background-color: rgb(57, 103, 255); min-height: 30px; min-width: 75px;">
+                <v-btn class="infotext" variant="tonal" style="
+                color: white;
+                background-color: black;
+                height: 50px;
+                width: 210px;
+                margin-top: 20px;
+                position: relative;
+              " @click="mypage_update">
+              수정
+            </v-btn>
               </div>
+            </div>
             </div>
           </div>
         </div>

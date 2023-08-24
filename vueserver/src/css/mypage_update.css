@@ -50,6 +50,14 @@
   .zonecode, .roadAddress, .detailAddress {
     margin-bottom: 10px;
   }
+
+  .upfield {
+    padding: 30px;
+  }
+
+  .upfield1 {
+    margin-left: 10px;
+  }
   
   #addallow {
     

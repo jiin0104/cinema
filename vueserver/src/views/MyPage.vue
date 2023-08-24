@@ -7,7 +7,7 @@
         <div class="myform1">
           <div class="contact-text">
             <div class="title">내 정보</div>
-
+          <div class="myfield0">
             <div class="myfield" id="my">
               <span label for="email">이메일(아이디)</span>
               {{ userinfo.USER_ID }}
@@ -34,37 +34,22 @@
             </div>
 
             <div class="myfield">
-              <span label for="age">연령대</span>
-              {{ userinfo.USER_AGE }}
-              <br /><br />
-            </div>
-
-            <div class="myfield">
-              <span label for="sex">성별</span>
-              {{ userinfo.SEX }}
-              <br /><br />
-            </div>
-
-            <div class="myfield">
               <span label for="genre">선호하는 장르</span>
               {{ userinfo.GENRE }}
               <br /><br />
             </div>
-
+          </div>
             <div style="position: relative; text-align: center" class="myUp">
-              <input
-                type="button"
-                id="addallow"
-                value="수정하기"
-                variant="tonal"
-                @click="mypage_update"
-                style="
-                  color: white;
-                  background-color: rgb(57, 103, 255);
-                  min-height: 30px;
-                  min-width: 75px;
-                "
-              />
+              <v-btn class="infotext" variant="tonal" style="
+                color: white;
+                background-color: black;
+                height: 50px;
+                width: 210px;
+                margin-top: 60px;
+                position: relative;
+              " @click="mypage_update">
+              수정하기
+            </v-btn>
             </div>
           </div>
         </div>

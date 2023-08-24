@@ -34,6 +34,9 @@
   border-radius: 1em;
 }
 
+.title {
+  margin-top: 25px;
+}
 
 ul {
   list-style: none;
@@ -41,6 +44,11 @@ ul {
 
 .myfield {
   font-size: 17px;
+}
+
+.myfield0 {
+  padding: 50px;
+  margin-left: 50px;
 }
 
 #addallow {
