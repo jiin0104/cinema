@@ -9,32 +9,32 @@
             <div class="title">내 정보</div>
           <div class="myfield0">
             <div class="myfield" id="my">
-              <span label for="email">이메일(아이디)</span>
+              <span label for="email">이메일(아이디) : </span>
               {{ userinfo.USER_ID }}
               <br /><br />
             </div>
 
             <div class="myfield" id="my">
-              <span label for="nickname">닉네임</span>
+              <span label for="nickname">닉네임 : </span>
               {{ userinfo.USER_NICKNAME }}
               <br /><br />
             </div>
 
             <div class="myfield tel-number">
-              <span label for="phone">휴대전화</span>
+              <span label for="phone">휴대전화 : </span>
               {{ userinfo.USER_TEL }}
               <br /><br />
             </div>
 
             <div class="myfield">
-              <span label for="address">주소</span>
+              <span label for="address">주소 : </span>
               {{ userinfo.USER_ADDRESS1 }}&nbsp;
               {{ userinfo.USER_ADDRESS2 }}
               <br /><br />
             </div>
 
             <div class="myfield">
-              <span label for="genre">선호하는 장르</span>
+              <span label for="genre">선호하는 장르 : </span>
               {{ userinfo.GENRE }}
               <br /><br />
             </div>
