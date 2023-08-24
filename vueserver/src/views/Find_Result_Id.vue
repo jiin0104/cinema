@@ -8,7 +8,7 @@
             <div class="findidform">
               <div style="margin-top: 45px; font-size: 25px">
                 <div class="findid" v-if="id !== ''">
-                  당신의 아이디는<br />{{ getMaskedUsername }} <br />입니다
+                  당신의 아이디는<br />{{ id }} <br />입니다
 
                 </div>
                 <div class="findid" v-else>
@@ -47,22 +47,12 @@ export default {
     return {
       id: '', // id 값을 저장할 변수
       showPartial: false,
-
-
     };
   },
   computed: {
-    getMaskedUsername() {
-      // 아이디를 일부만 '*'로 가려주는 로직을 작성
-      const lengthToShow = 11; // 보여질 아이디 길이 (예: 처음 3글자만 보여주기)
-      const maskedCharacters = '*'.repeat(this.id.length - lengthToShow);
-      return maskedCharacters + this.id.slice(-lengthToShow);
-    },
   },
   mounted() {
     this.id = this.$route.params.id;
-    console.log('받은 id:', this.$route.params.id);
-
   },
 };
 </script>
