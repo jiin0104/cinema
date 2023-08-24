@@ -137,7 +137,7 @@ import "swiper/css/virtual";
 
 // 스와이퍼 핵심모듈 물러오기
 import { Autoplay, Pagination, Navigation, Virtual } from "swiper/modules";
-
+require('events').EventEmitter.defaultMaxListeners = 15;
 export default {
   name: "",
   components: {
