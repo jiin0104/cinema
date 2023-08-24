@@ -51,15 +51,9 @@ module.exports = {
     query: `select MOVIE_POSTER from movies order by MOVIE_SCORE DESC limit 20;`,
   },
 
-  //Main.vue 많이 추천받은 영화
-  countDESC: {
-    query: `SELECT *
-  FROM (
-    SELECT *
-    FROM movies
-    ORDER BY man DESC
-  ) AS sorted_movies
-  ORDER BY youth DESC limit 20;`,
+  //로그인한 유저의 성별,연령대 가져오기.
+  usersexage: {
+    query: `SELECT SEX, USER_AGE from user where USER_ID=?`,
   },
 
   //Recommend.vue 필터링한 결과

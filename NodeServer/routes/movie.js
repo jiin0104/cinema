@@ -173,4 +173,64 @@ router.get("/movieReviews", async (req, res) => {
   }
 });
 
+//vue한테 사용자 성별,연령대 정보 받고 영화 필터링해서 응답해주기
+router.post("/UserInfoRECmovie", async (req, res) => {
+  const { gender, ageGroup } = req.body; //vue한테 받아온 성별,연령대 정보.
+  console.log("gender의 값", gender);
+  console.log("ageGroup의 값", ageGroup);
+
+  // 데이터베이스 연결 생성
+  console.log("Database connection successful");
+  const connection = await dbPool.promise();
+
+  try {
+    // 영화 카운터로 내림차순해서 가져오는 쿼리사용
+    const query = `
+    SELECT *
+    FROM (
+      SELECT *
+      FROM movies
+      WHERE ${gender === "MAN" ? "MAN" : "WOMAN"} > 0
+      ORDER BY ${gender === "MAN" ? "MAN" : "WOMAN"} DESC
+      LIMIT 20
+    ) AS gender_sorted
+    ORDER BY
+      CASE
+        WHEN '${ageGroup}' = 'TEENAGE' THEN gender_sorted.TEENAGE
+        WHEN '${ageGroup}' = 'YOUTH' THEN gender_sorted.YOUTH
+        WHEN '${ageGroup}' = 'SENIOR' THEN gender_sorted.SENIOR
+        WHEN '${ageGroup}' = 'OLDER' THEN gender_sorted.OLDER
+      END DESC;
+    `;
+
+    console.log("쿼리가 제대로 작성되나?:", query);
+
+    try {
+      const [results, fields] = await connection.execute(query, [
+        gender === "MAN" ? "MAN" : "WOMAN",
+        gender === "MAN" ? "MAN" : "WOMAN",
+        ageGroup,
+        ageGroup,
+        ageGroup,
+        ageGroup,
+      ]);
+
+      if (results) {
+        // 클라이언트로 영화 정보 전송
+        // console.log("클라이언트로 보내주는 영화20개", results);
+        res.status(200).json(results);
+      } else {
+        console.log("결과 없음");
+        res.status(404).send("결과 없음");
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("쿼리적용실패");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("UserInfoRECmovie엔드포인트에 문제가 있음");
+  }
+});
+
 module.exports = router;
