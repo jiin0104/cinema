@@ -176,11 +176,11 @@ router.get("/movieReviews", async (req, res) => {
 //vue한테 사용자 성별,연령대 정보 받고 영화 필터링해서 응답해주기
 router.post("/UserInfoRECmovie", async (req, res) => {
   const { gender, ageGroup } = req.body; //vue한테 받아온 성별,연령대 정보.
-  console.log("gender의 값", gender);
-  console.log("ageGroup의 값", ageGroup);
+  // console.log("gender의 값", gender);
+  // console.log("ageGroup의 값", ageGroup);
 
   // 데이터베이스 연결 생성
-  console.log("Database connection successful");
+  // console.log("Database connection successful");
   const connection = await dbPool.promise();
 
   try {
@@ -203,7 +203,7 @@ router.post("/UserInfoRECmovie", async (req, res) => {
       END DESC;
     `;
 
-    console.log("쿼리가 제대로 작성되나?:", query);
+    // console.log("쿼리가 제대로 작성되나?:", query);
 
     try {
       const [results, fields] = await connection.execute(query, [
