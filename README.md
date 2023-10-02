@@ -11,9 +11,9 @@
 <br>
    
 ## 개요
-<li>프로젝트 이름: Wave Cinema</li>
-<li>기간: 2023.07.25-2023.08.25(약 한달)</li>
-<li>인원: frontend 2명, backend 3명</li>
+* 프로젝트 이름: Wave Cinema
+* 기간: 2023.07.25-2023.08.25(약 한달)
+* 인원: frontend 2명, backend 3명
 <br>
 <br>
 
