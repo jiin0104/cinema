@@ -11,7 +11,8 @@
 3. [개발환경](#개발환경)
 4. [설계](#설계)
 5. [미리보기](#미리보기)
-6. [시연](#시연)   
+6. [시연](#시연)
+7. [실행](#실행)
 <br>
 <br>
    
@@ -45,13 +46,22 @@
 <br>
 
 ## 설계
+### Wireframe
+<img src="https://github.com/jiin0104/cinema/assets/122608411/939b5d47-a211-42e7-95b5-e30dc41cb741" width="700" height="500">
+
 ### E-R Diagram
 <img src="https://github.com/jiin0104/cinema/assets/122608411/1f03cb85-11cd-4007-85c3-f6dd2c3fccb8" width="700" height="500">
 
 ### Usecase Diagram
 <img src="https://github.com/jiin0104/cinema/assets/122608411/f3afd7c1-2c6f-4af3-b48c-f329485ca3f7" width="700" height="500">
+
+### 요구사항 정의서
+<img src="https://github.com/jiin0104/cinema/assets/122608411/86f35d21-bc66-431c-9c0b-6f74881fbbe2" width="700" height="500">
+
 <br>
 <br>
+<br>
+
 
 ## 미리보기
 ### Main
@@ -94,10 +104,9 @@
 |나와 성별,연령대가 같은 사람이 추천받은 영화|
 |:---:|
 |<img src="https://github.com/jiin0104/cinema/assets/122608411/a09d2805-3786-474c-8338-6582dbf88e5e" width="400" height="300">|
-
-
 <br>
 <br>
+
 
 ## 시연
 ### Main & Filtering & Recommend
@@ -107,3 +116,15 @@
 <br>
 <br>
 
+## 실행
+### front
+
+    cd vueserver
+    npm install
+    npm run serve
+
+### back
+
+    cd Nodeback
+    npm install
+    node app.js
